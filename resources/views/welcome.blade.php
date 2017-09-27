@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Hello BSSE 6th Batch!
+                    Hello BSSE 6th Batch! Get ready
                 </div>
 
                 <div class="links">
