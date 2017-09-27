@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Hello BSSE 6th Batch!
                 </div>
 
                 <div class="links">
