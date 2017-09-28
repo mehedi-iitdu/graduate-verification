@@ -10,6 +10,8 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
+        <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
+
         <!-- Styles -->
         <style>
             html, body {
@@ -79,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Hello BSSE 6th Batch! Get ready
+                    Hello BSSE 6th Batch! Get ready.
                 </div>
 
                 <div class="links">
