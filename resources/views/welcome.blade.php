@@ -81,7 +81,8 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Hello BSSE 6th Batch! Get ready.
+                    Hello BSSE 6th Batch! Get ready. We are coming and testing.
+
                 </div>
 
                 <div class="links">
