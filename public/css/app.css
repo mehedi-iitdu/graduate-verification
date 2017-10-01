@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@charset "UTF-8";
 
 /*!
@@ -8348,5 +8349,78 @@ button.close {
   .hidden-print {
     display: none !important;
   }
+=======
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);/* Sidebar navigation */
+
+.sidebar {
+  position: fixed;
+  top: 51px;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 0 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  /* Scrollable contents if viewport is shorter than content. */
+  border-right: 1px solid #eee;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.sidebar .nav {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.sidebar .nav .nav-item {
+  width: 100%;
+}
+
+.sidebar .nav .nav-item .nav-link {
+  border-radius: 0;
+  padding: 15px 20px;
+}
+
+.sidebar .nav-item + .nav-item {
+  margin-left: 0;
+}
+
+/* Placeholders */
+
+.placeholders {
+  padding-bottom: 3rem;
+}
+
+.placeholder img {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+body {
+  padding-top: 5rem;
+  background: #fff;
+}
+
+.main-body {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.jumbotron {
+  background: #f8f9fa !important;
+}
+
+.navbar {
+  -webkit-box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
+}
+
+.sign-up {
+  padding: 0 40px;
+}
+
+.sign-up .sign-up-form {
+  margin-top: 30px;
+>>>>>>> dev
 }
 
