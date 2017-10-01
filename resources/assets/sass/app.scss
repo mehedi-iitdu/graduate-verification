@@ -5,5 +5,10 @@
 // Variables
 @import "variables";
 
-// Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+// // Bootstrap 3.3.7
+// @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+// Bootstrap 4.0 beta
+// @import "~bootstrap/scss/bootstrap";
+
+@import "custom";
