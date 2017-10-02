@@ -7,10 +7,19 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 
+//For bootstrap 3.3.7
+// try {
+//     window.$ = window.jQuery = require('jquery');
+
+//     require('bootstrap-sass');
+// } catch (e) {}
+
+//For bootstrap 4.0 beta
 try {
     window.$ = window.jQuery = require('jquery');
+    window.Popper = require('popper.js').default;
 
-    require('bootstrap-sass');
+    require('bootstrap');
 } catch (e) {}
 
 /**
