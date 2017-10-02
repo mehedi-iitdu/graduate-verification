@@ -1,9 +1,15 @@
+@import "dashboard";
+
 body {
   padding-top: 5rem;
+  background: #fff;
 }
 .main-body {
   padding: 3rem 1.5rem;
   text-align: center;
+}
+.jumbotron{
+	background: #f8f9fa !important;
 }
 .navbar{
 	box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.10);
