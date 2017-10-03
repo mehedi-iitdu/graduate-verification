@@ -101,7 +101,7 @@
                   </div>
                   <div class="form-group col-md-3">
                     <button type="submit" class="btn btn-success">Search</button>
-                    <button type="submit" class="btn btn-primary">Add user</button>
+                    <a href="manage_users_create" type="btn" class="btn btn-primary">Add User</a>
                   </div>
                 </div>
             </form>
