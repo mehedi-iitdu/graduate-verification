@@ -7,7 +7,7 @@
         <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a class="nav-link active" href="#">Manage Users</a>
+              <a class="nav-link active" href="manage_users_view">Manage Users</a>
             </li>
             <li class="nav-item">
               <div class="dropdown show">
@@ -64,7 +64,7 @@
         </nav>
 
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-          <h2 style="margin-bottom: 40px" class="d-none d-sm-block">Manage Users</h2>
+          <h2 style="margin-bottom: 40px" class="d-none d-sm-block">Manage Users - Add User</h2>
 
           <div class="jumbotron">
             <form>
