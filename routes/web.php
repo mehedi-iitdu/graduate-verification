@@ -28,3 +28,7 @@ Route::get('/dashboard/manage_users_view', function(){
 	return view('user_dashboard.manage_users_view');
 });
 
+Route::get('/manage_results', function (){
+    return view('manage_results');
+});
+
