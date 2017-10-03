@@ -11,8 +11,20 @@
 |
 */
 
-Route::get('/', 'PagesController@index');
+/*Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/signup', 'PagesController@signUp');
-Route::get('/login', 'PagesController@login');
-Route::get('/dashboard', 'DashboardController@index');
+Route::get('/login', 'PagesController@login');*/
+
+Route::get('/', function(){
+	return view('dashboard');
+});
+
+Route::get('/dashboard/manage_users_create', function(){
+	return view('user_dashboard.manage_users_create');
+});
+
+Route::get('/dashboard/manage_users_view', function(){
+	return view('user_dashboard.manage_users_view');
+});
+
