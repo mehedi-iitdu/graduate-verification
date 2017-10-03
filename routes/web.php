@@ -28,13 +28,10 @@ Route::get('/dashboard/manage_users_view', function(){
 	return view('user_dashboard.manage_users_view');
 });
 
-Route::get('/manage_results', function (){
-    return view('manage_results');
-});
-Route::get('/dashboard/manage_course_create', function(){
-	return view('user_dashboard.manage_course_create');
+Route::get('/dashboard/manage_courses_create', function(){
+    return view('user_dashboard.manage_courses_create');
 });
 
-Route::get('/dashboard/manage_course_view', function(){
-	return view('user_dashboard.manage_course_view');
+Route::get('/dashboard/manage_courses_view', function(){
+    return view('user_dashboard.manage_courses_view');
 });
