@@ -62,3 +62,9 @@ Route::get('/dashboard/manage_university_create', function(){
 Route::get('/dashboard/manage_university_view', function(){
     return view('user_dashboard.manage_university_view');
 });
+
+
+Route::auth();
+
+Route::get('user/activation/{token}','Auth\RegisterController@userActivation');
+
