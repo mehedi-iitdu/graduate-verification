@@ -29,11 +29,10 @@ Route::get('/dashboard/manage_users_view', function(){
 	return view('user_dashboard.manage_users_view');
 });
 
-<<<<<<< HEAD
 Route::get('/dashboard/manage_result/add_result', function(){
 	return view('user_dashboard.manage_result/add_result');
 });
-=======
+
 Route::get('/dashboard/manage_courses_create', function(){
     return view('user_dashboard.manage_courses_create');
 });
@@ -53,9 +52,7 @@ Route::get('/dashboard/manage_verification_view', function(){
 Route::get('/dashboard/manage_verification_verify', function(){
 	return view('user_dashboard.manage_verification_verify');
 });
-<<<<<<< HEAD
->>>>>>> dev
-=======
+
 
 Route::get('/dashboard/manage_university_create', function(){
     return view('user_dashboard.manage_university_create');
@@ -64,5 +61,3 @@ Route::get('/dashboard/manage_university_create', function(){
 Route::get('/dashboard/manage_university_view', function(){
     return view('user_dashboard.manage_university_view');
 });
-
->>>>>>> dev
