@@ -18,6 +18,7 @@ Route::get('/login', 'PagesController@login');*/
 
 Route::get('/', function(){
 	return view('dashboard');
+	
 });
 
 Route::get('/dashboard/manage_users_create', function(){
