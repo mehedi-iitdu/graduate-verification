@@ -56,7 +56,7 @@
         </a>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="#">Add Result</a>
+          <a class="dropdown-item" href="manage_add_result">Add Result</a>
           <a class="dropdown-item" href="#">Edit</a>
         </div>
       </div>
