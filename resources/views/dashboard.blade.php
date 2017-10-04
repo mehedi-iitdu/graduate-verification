@@ -30,7 +30,7 @@
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   <a class="dropdown-item" href="#">Semester</a>
-                  <a class="dropdown-item" href="#">Course</a>
+                  <a class="nav-link" href="/dashboard/manage_courses_view">Manage Courses</a>
                 </div>
               </div>
             </li>
@@ -42,7 +42,7 @@
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <a class="dropdown-item" href="#">Add Result</a>
+                  <a class="dropdown-item" href="/dashboard/manage_result/add_result">Add Result</a>
                   <a class="dropdown-item" href="#">Edit</a>
                 </div>
               </div>
