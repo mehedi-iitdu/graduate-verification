@@ -35,3 +35,15 @@ Route::get('/dashboard/manage_courses_create', function(){
 Route::get('/dashboard/manage_courses_view', function(){
     return view('user_dashboard.manage_courses_view');
 });
+
+Route::get('/dashboard/manage_verification_request', function(){
+	return view('user_dashboard.manage_verification_request');
+});
+
+Route::get('/dashboard/manage_verification_view', function(){
+	return view('user_dashboard.manage_verification_view');
+});
+
+Route::get('/dashboard/manage_verification_verify', function(){
+	return view('user_dashboard.manage_verification_verify');
+});
