@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('mobile_no');
             $table->integer('role_id');
+            $table->boolean('active');
+            $table->string('activation_code');
             $table->timestamps();
         });
     }
