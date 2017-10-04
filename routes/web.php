@@ -18,6 +18,7 @@ Route::get('/login', 'PagesController@login');*/
 
 Route::get('/', function(){
 	return view('dashboard');
+	
 });
 
 Route::get('/dashboard/manage_users_create', function(){
@@ -28,6 +29,28 @@ Route::get('/dashboard/manage_users_view', function(){
 	return view('user_dashboard.manage_users_view');
 });
 
+<<<<<<< HEAD
 Route::get('/dashboard/manage_result/add_result', function(){
 	return view('user_dashboard.manage_result/add_result');
 });
+=======
+Route::get('/dashboard/manage_courses_create', function(){
+    return view('user_dashboard.manage_courses_create');
+});
+
+Route::get('/dashboard/manage_courses_view', function(){
+    return view('user_dashboard.manage_courses_view');
+});
+
+Route::get('/dashboard/manage_verification_request', function(){
+	return view('user_dashboard.manage_verification_request');
+});
+
+Route::get('/dashboard/manage_verification_view', function(){
+	return view('user_dashboard.manage_verification_view');
+});
+
+Route::get('/dashboard/manage_verification_verify', function(){
+	return view('user_dashboard.manage_verification_verify');
+});
+>>>>>>> dev
