@@ -48,3 +48,12 @@ Route::get('/dashboard/manage_verification_view', function(){
 Route::get('/dashboard/manage_verification_verify', function(){
 	return view('user_dashboard.manage_verification_verify');
 });
+
+Route::get('/dashboard/manage_university_create', function(){
+    return view('user_dashboard.manage_university_create');
+});
+
+Route::get('/dashboard/manage_university_view', function(){
+    return view('user_dashboard.manage_university_view');
+});
+
