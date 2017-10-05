@@ -11,15 +11,15 @@
 |
 */
 
-/*Route::get('/', 'PagesController@index');
-Route::get('/about', 'PagesController@about');
+/*Route::get('/', 'PagesController@index');*/
+/*Route::get('/about', 'PagesController@about');
 Route::get('/signup', 'PagesController@signUp');
 Route::get('/login', 'PagesController@login');*/
 
 Route::get('/', function(){
 	return view('dashboard');
-	
 });
+
 
 Route::get('/dashboard/manage_users_create', function(){
 	return view('user_dashboard.manage_users_create');
@@ -65,6 +65,9 @@ Route::get('/dashboard/manage_university_view', function(){
 
 
 Route::auth();
-
+Route::get('logout', 'Auth\LoginController@logout');
 Route::get('user/activation/{token}','Auth\RegisterController@userActivation');
 
+Route::get('student', ['uses' => 'StudentController@index', 'as' => 'student.index']);
+Route::get('register', ['uses' => 'RegisterController@index', 'as' => 'register.index']);
+Route::get('UGC', ['uses' => 'UGCController@index', 'as' => 'ugc.index']);
