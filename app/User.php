@@ -35,4 +35,23 @@ class User extends Authenticatable
     }
 
 
+    public function hasRole($role){
+        return $this->role->role_name == $role;
+    }
+
+    public function isUGC(){
+        return $this->role->role_name == 'UGC';
+    }
+
+    public function isRegister(){
+        return $this->role->role_name == 'Register';
+    }
+
+    public function isStudent(){
+        return $this->role->role_name == 'Student';
+    }
+
+
+
+
 }
