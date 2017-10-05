@@ -15,11 +15,7 @@
     </head>
     <body>
     	@include('inc.navbar')
-<<<<<<< HEAD
-        
-=======
         @include('inc.side_navbar')
->>>>>>> dev
         <div class="container">
         	@yield('content')
         </div>
