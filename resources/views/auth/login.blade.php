@@ -14,10 +14,28 @@
         <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
     </head>
     <body>
-    	@include('inc.navbar')
-        @include('inc.side_navbar')
-        <div class="container">
-        	@yield('content')
+    	
+        <div class="jumbotron col-md-6">
+            <div class="sign-up">
+                <h1>Login</h1>
+                <form class="sign-up-form">
+                    <div class="form-group">
+                        <label class="form-control-label" for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter Email">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Enter Password">
+                    </div>
+
+                    <div class="form-group">
+                        <label><input type="checkbox" name="remember"> Remember Me</label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <div class="pull-right"><a href="password/reset" class="btn btn-link">Forgot password?</a></div>
+            </div>
         </div>
 
         {{-- cdn js --}}
