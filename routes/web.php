@@ -25,7 +25,7 @@ Route::get('/login', 'PagesController@login');*/
 });*/
 
 Route::get('/', function(){
-	return view('dashboard');
+	return view('welcome');
 });
 
 Route::prefix('dashboard')-> group(function (){
