@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Role;
 
 class User extends Authenticatable
 {
@@ -14,8 +15,10 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+    protected $table = 'users';
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'last_name', 'email', 'password',
     ];
 
     /**
@@ -26,4 +29,29 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
+
+
+    public function hasRole($role){
+        return $this->role->role_name == $role;
+    }
+
+    public function isUGC(){
+        return $this->role->role_name == 'UGC';
+    }
+
+    public function isRegister(){
+        return $this->role->role_name == 'Register';
+    }
+
+    public function isStudent(){
+        return $this->role->role_name == 'Student';
+    }
+
+
+
+
 }

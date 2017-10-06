@@ -11,15 +11,23 @@
 |
 */
 
-/*Route::get('/', 'PagesController@index');
-Route::get('/about', 'PagesController@about');
+/*Route::get('/', 'PagesController@index');*/
+/*Route::get('/about', 'PagesController@about');
 Route::get('/signup', 'PagesController@signUp');
 Route::get('/login', 'PagesController@login');*/
 
+/*Route::get('/', function(){
+		Nexmo::message()->send([
+	    'to'   => '+8801521433075',
+	    'from' => 'OGVS',
+	    'text' => 'F**k you Joarder. F**k you IIT.'
+	]);
+});*/
+
 Route::get('/', function(){
 	return view('dashboard');
-	
 });
+
 
 Route::get('/dashboard/manage_users_create', function(){
 	return view('user_dashboard.manage_users_create');
@@ -54,6 +62,7 @@ Route::get('/dashboard/manage_verification_verify', function(){
 	return view('user_dashboard.manage_verification_verify');
 });
 
+
 Route::get('/dashboard/manage_university_create', function(){
     return view('user_dashboard.manage_university_create');
 });
@@ -61,3 +70,12 @@ Route::get('/dashboard/manage_university_create', function(){
 Route::get('/dashboard/manage_university_view', function(){
     return view('user_dashboard.manage_university_view');
 });
+
+
+Route::auth();
+Route::get('logout', 'Auth\LoginController@logout');
+Route::get('user/activation/{token}','Auth\RegisterController@userActivation');
+
+Route::get('student', ['uses' => 'StudentController@index', 'as' => 'student.index']);
+Route::get('register', ['uses' => 'RegisterController@index', 'as' => 'register.index']);
+Route::get('UGC', ['uses' => 'UGCController@index', 'as' => 'ugc.index']);
