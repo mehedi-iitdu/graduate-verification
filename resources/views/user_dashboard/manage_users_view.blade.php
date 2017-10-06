@@ -19,7 +19,7 @@
             <form>
               <div class="form-row">
                   <div class="form-group col-md-3">
-                    <select class="form-control" id="user_role">
+                    <select class="form-control mdb-select" id="user_role">
                       <option>Select User Role</option>
                       <option>DU</option>
                       <option>JU</option>
@@ -29,7 +29,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-3">
-                    <select class="form-control" id="user_role">
+                    <select class="form-control mdb-select" id="user_role">
                       <option>Select University</option>
                       <option>DU</option>
                       <option>JU</option>

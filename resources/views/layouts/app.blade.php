@@ -6,12 +6,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>OGVS</title>
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
         {{-- cdn css --}}
        {{--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"> --}}
 
         {{-- Compiled CSS --}}
         <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
+
+        {{-- MD Bootstrap CSS --}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css">
     </head>
     <body>
     	@include('inc.navbar')
@@ -27,5 +29,14 @@
 
         {{-- Compiled JS --}}
         <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
+        {{-- MD Bootstrap JS --}}
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
+
+        <script type="text/javascript">
+            // Material Select Initialization
+            $(document).ready(function() {
+               $('.mdb-select').material_select();
+             });
+        </script>
     </body>
 </html>
