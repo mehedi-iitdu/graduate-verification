@@ -35,8 +35,8 @@ class User extends Authenticatable
     }
 
 
-    public function hasRole($role){
-        return $this->role->role_name == $role;
+    public function hasRole($roles){
+        return in_array($this->role->role_name, $roles);
     }
 
     public function isUGC(){
