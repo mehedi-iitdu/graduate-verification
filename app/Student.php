@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\University;
 use App\Department;
 use App\Marks;
+use App\Verification;
 
 class Student extends Model
 {
@@ -21,6 +22,10 @@ class Student extends Model
 
     public function marks(){
     	return $this->hasMany(Marks::class);
+    }
+
+    public function verifications(){
+    	return $this->hasMany(Verification::class);
     }
         
 }
