@@ -11,6 +11,6 @@ class UGCController extends Controller
     }
 
     public function index(Request $request){
-    	return "UGC";
+    	return ".....UGC";
     }
 }
