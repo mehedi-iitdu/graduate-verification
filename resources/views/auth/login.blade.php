@@ -15,7 +15,7 @@
     </head>
     <body>
     	
-        <div class="jumbotron col-md-6">
+        <div class="jumbotron col-md-6" style="margin:auto">
             <div class="sign-up">
                 <h1>Login</h1>
                 <form class="sign-up-form" method="post">
