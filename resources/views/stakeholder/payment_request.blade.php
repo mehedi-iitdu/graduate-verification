@@ -8,71 +8,83 @@
           <h2 style="margin-bottom: 40px" class="d-none d-sm-block">Request to verify</h2>
 
           <div class="jumbotron">
-            <form>
+            <h3 for="Student" class="col-sm-6"><h3>Student Information</h3></label>
 
+            <div class="row">
+              <div for="name" class="col-sm-6">Name</div>
+              <div class="col-sm-6">Student's Name</div>
+            </div>
+
+            <div class="row">
+              <div for="name" class="col-sm-6">Date of Birth</div>
+              <div class="col-sm-6">Student Date of Birth</div>
+            </div>
+
+            <div class="row">
+              <div for="name" class="col-sm-6">University</div>
+              <div class="col-sm-6">Student's University</div>
+            </div>
+
+            <div class="row">
+              <div for="name" class="col-sm-6">Registartion Number</div>
+              <div class="col-sm-6">Student's Registration Number</div>
+            </div>
+
+            <div class="row">
+              <div for="name" class="col-sm-6">Email</div>
+              <div class="col-sm-6">Student's Email</div>
+            </div>
+                
+
+          </div>
+
+          <div class="jumbotron">
+            <form>
               <div class="form-group row">
                 <label for="stakeholder" class="col-sm-6 col-form-label"><h3>Stackholder Information</h3></label>
-                
-                <label for="Student" class="col-sm-6 col-form-label"><h3>Student Information</h3></label>
               </div>
 
               <div class="form-group row">
-                <label for="name" class="col-sm-2 col-form-label">Name</label>
-                <div class="col-sm-4">
+                <label for="name" class="col-sm-6 col-form-label">Name</label>
+                <div class="col-sm-6">
                   <input type="text" class="form-control" id="name" placeholder="Name">
                 </div>
-                <label for="university" class="col-sm-2 col-form-label">University</label>
-                <div class="col-sm-4">
-                  <input type="text" class="form-control" id="university" placeholder="Department Name">
+              </div>
+
+              <div class="form-group row">
+                <label for="organization" class="col-sm-6 col-form-label">University/Employer</label>
+                <div class="col-sm-6">
+                  <select class="form-control" id="university_name">
+                    <option selected="true" disabled="disabled">Select Stakeholder Type</option>
+                    <option>University Authority</option>
+                    <option>Organization Authority</option>
+                  </select>
                 </div>
               </div>
 
               <div class="form-group row">
-                <label for="organization" class="col-sm-2 col-form-label">Univ./Company</label>
-                <div class="col-sm-4">
-                  <input type="text" class="form-control" id="organization" placeholder="Name">
-                </div>
-                <label for="department" class="col-sm-2 col-form-label">Department</label>
-                <div class="col-sm-4">
-                  <input type="text" class="form-control" id="department" placeholder="Department Name">
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label for="designation" class="col-sm-2 col-form-label">Designation</label>
-                <div class="col-sm-4">
+                <label for="designation" class="col-sm-6 col-form-label">Designation</label>
+                <div class="col-sm-6">
                   <input type="text" class="form-control" id="designation" placeholder="Program Officer">
                 </div>
-                <label for="registartion" class="col-sm-2 col-form-label">Registartion</label>
-                <div class="col-sm-4">
-                  <input type="text" class="form-control" id="registartion" placeholder="Registartion Year">
-                </div>
               </div>
 
               <div class="form-group row">
-                <label for="email" class="col-sm-2 col-form-label">Email</label>
-                <div class="col-sm-4">
+                <label for="email" class="col-sm-6 col-form-label">Email</label>
+                <div class="col-sm-6">
                   <input type="text" class="form-control" id="email" placeholder="example@gmail.com">
                 </div>
-                <label for="name" class="col-sm-2 col-form-label">Name</label>
-                <div class="col-sm-4">
-                  <input type="text" class="form-control" id="name" placeholder="Name">
-                </div>
               </div>
 
               <div class="form-group row">
-                <label for="country" class="col-sm-2 col-form-label">Country</label>
-                <div class="col-sm-4">
+                <label for="country" class="col-sm-6 col-form-label">Country</label>
+                <div class="col-sm-6">
                   <input type="text" class="form-control" id="country" placeholder="Bangladesh">
-                </div>
-                <label for="email" class="col-sm-2 col-form-label">Email</label>
-                <div class="col-sm-4">
-                  <input type="text" class="form-control" id="email" placeholder="example@gmail.com">
                 </div>
               </div>
 
               <div class="form-group">
-                <div align="center">
+                <div align="right">
                   <button type="submit" class="btn btn-success">Request</button>
                 </div>
               </div>
