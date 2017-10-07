@@ -80,6 +80,9 @@ Route::get('add_user', ['uses' => 'Auth\RegisterController@showRegistrationForm'
 Route::post('add_user', 'Auth\RegisterController@register');
 Route::get('user/activation/{token}','Auth\RegisterController@userActivation');
 
+Route::post('role_based_info', 'RoleController@getRoleBasedInfo');
+Route::post('dipartment/list', ['uses' => 'DepartmentController@get_list', 'as' => 'department.list']);
+
 // Route::get('student', ['uses' => 'StudentController@index', 'as' => 'student.index']);
 // Route::get('register', ['uses' => 'RegisterController@index', 'as' => 'register.index']);
 // Route::get('UGC', ['uses' => 'UGCController@index', 'as' => 'ugc.index']);
@@ -90,4 +93,7 @@ Route::prefix('stakeholder')-> group(function (){
 		return view('stakeholder.student_search');
 	});
 
+	Route::get('payment_request', function(){
+			return view('stakeholder.payment_request');
+	});
 });
