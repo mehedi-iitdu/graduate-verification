@@ -30,7 +30,7 @@
               </div>
 
               <div class="form-group" align="center">
-                <button type="submit" class="btn btn-block btn-success col-md-3">Search</button>
+                <button id="user_search" class="btn btn-block btn-success col-md-3">Search</button>
               </div>
             </form>
           </div>
@@ -111,6 +111,18 @@
           $.ajaxSetup({
               headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
           });
+
+          $('#user_search').on('click', function (){
+
+              var role_name = $('#role_id option:selected').text();
+              var university_id = $('#university_id').val();
+              var department_id = $('#department_id').val();
+
+              $.post("{{ URL::route('user.list') }}",{role_name:role_name, university_id:university_id, department_id:department_id}, function(data){
+                  alert(data);
+              });
+          });
+
           $('#role_id').on('change', function(){
 
               var role_name = $('#role_id option:selected').text();

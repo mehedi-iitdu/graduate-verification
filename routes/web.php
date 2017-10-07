@@ -76,6 +76,7 @@ Route::get('user/activation/{token}','Auth\RegisterController@userActivation');
 
 Route::post('role_based_info',['uses' => 'RoleController@getRoleBasedInfo', 'as' => 'role_based_info'] );
 Route::post('dipartment/list', ['uses' => 'DepartmentController@get_list', 'as' => 'department.list']);
+Route::post('user/list',['uses' => 'UsersController@getUserList', 'as' => 'user.list'] );
 
 // Route::get('student', ['uses' => 'StudentController@index', 'as' => 'student.index']);
 // Route::get('register', ['uses' => 'RegisterController@index', 'as' => 'register.index']);
