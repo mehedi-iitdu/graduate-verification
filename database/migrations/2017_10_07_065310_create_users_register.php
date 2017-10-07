@@ -15,9 +15,9 @@ class CreateUsersRegister extends Migration
     {
         Schema::create('register', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id');
             $table->integer('university_id');
             $table->timestamps();
-            $table->integer('user_id');
         });
     }
 
