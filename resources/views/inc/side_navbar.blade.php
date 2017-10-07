@@ -3,7 +3,7 @@
 <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
   <ul class="nav nav-pills flex-column">
     <li class="nav-item">
-      <a class="nav-link active" href="manage_users_view">Manage Users</a>
+      <a class="nav-link active" href="/dashboard/manage_users_view">Manage Users</a>
     </li>
     <li class="nav-item">
       <div class="dropdown show">
@@ -12,7 +12,7 @@
         </a>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="manage_university_view">University</a>
+          <a class="dropdown-item" href="/dashboard/manage_university_view">University</a>
           <a class="dropdown-item" href="#">Department/Institute</a>
         </div>
       </div>
@@ -26,7 +26,7 @@
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <a class="dropdown-item" href="#">Semester</a>
-          <a class="dropdown-item" href="manage_courses_view">Course</a>
+          <a class="dropdown-item" href="/dashboard/manage_courses_view">Course</a>
         </div>
       </div>
     </li>
@@ -38,7 +38,7 @@
         </a>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="manage_add_result">Add Result</a>
+          <a class="dropdown-item" href="/dashboard/manage_add_result">Add Result</a>
           <a class="dropdown-item" href="#">Edit</a>
         </div>
       </div>
