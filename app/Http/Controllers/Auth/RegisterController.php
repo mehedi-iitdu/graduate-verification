@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use App\Role;
 use App\Registrar;
 use App\ProgramOffice;
@@ -23,7 +24,7 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+/*    use RegistersUsers;*/
 
     /**
      * Where to redirect users after registration.
@@ -75,6 +76,18 @@ class RegisterController extends Controller
         ]);
     }*/
 
+    public function showRegistrationForm()
+    {
+        $roles = Role::pluck('role_name', 'id');
+        foreach ($roles as $key => $role) {
+            if($role == "Student") {
+                unset($roles[$key]);
+            }
+        }
+
+        return view('user_dashboard.manage_users_create', ['roles' => $roles]);
+    }
+
     public function store_user(Request $request){
         
         Validator::make($request, [
@@ -116,6 +129,8 @@ class RegisterController extends Controller
 
             $program_office->save();
         }
+
+        return redirect()->route('add_user');
 
     }
 
