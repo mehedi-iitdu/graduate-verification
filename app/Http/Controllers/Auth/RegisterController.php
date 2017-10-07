@@ -174,4 +174,9 @@ class RegisterController extends Controller
             return 'no';
         }
     }
+
+    public function manageUsersView(Request $request) {
+        $roles = Role::pluck('role_name', 'id');
+        return view('user_dashboard.manage_users_view', ['roles' => $roles]);
+    }
 }
