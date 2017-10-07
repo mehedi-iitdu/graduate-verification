@@ -47,9 +47,13 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-md-2">{{ Form::label('role_id', 'Role') }}</div>
-                <div class="col-md-10">{{ Form::select('role_id', $roles, null, ['class' => 'form-control', 'required']) }}
+                <div class="col-md-10">{{ Form::select('role_id', $roles, null, ['class' => 'form-control', 'required', 'id' => 'role_id', 'placeholder' => 'Select Role']) }}
                 </div>
               </div>
+            </div>
+
+            <div id="role_info">
+              
             </div>
 
 
@@ -65,5 +69,33 @@
 @endsection
 
 @section('script')
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $.ajaxSetup({
+              headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
+          });
+        $('#role_id').on('change', function(){
 
+           var role_name = $('#role_id option:selected').text();
+           
+           $.post("role_based_info",{role_name:role_name}, function(data){
+             $('#role_info').html(data);
+
+
+             $('#university_id').on('change', function(){
+
+                var university_id = $(this).val();
+                
+                $.post("{{ URL::route('department.list') }}",{university_id:university_id}, function(data){
+                  $('#department_id').html(data);
+                })
+
+             });
+
+           })
+
+        });
+
+    });
+  </script>
 @endsection
