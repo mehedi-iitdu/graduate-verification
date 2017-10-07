@@ -9,7 +9,9 @@
           <h2 style="margin-bottom: 40px" class="d-none d-sm-block">Add User</h2>
 
           <div class="jumbotron">
-            <form>
+            {!! Form::open() !!}
+            {!! Form::close() !!}
+            <form method="post">
               <div class="form-group row">
                 <label for="name" class="col-sm-4 col-form-label">Name</label>
                 <div class="col-sm-8">
