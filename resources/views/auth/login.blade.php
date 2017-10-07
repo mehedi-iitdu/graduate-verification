@@ -18,14 +18,15 @@
         <div class="jumbotron col-md-6">
             <div class="sign-up">
                 <h1>Login</h1>
-                <form class="sign-up-form">
+                <form class="sign-up-form" method="post">
+                    {{ csrf_field() }}
                     <div class="form-group">
                         <label class="form-control-label" for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter Email">
+                        <input type="email" name="email" class="form-control" id="email" placeholder="Enter Email"> 
                     </div>
                     <div class="form-group">
                         <label class="form-control-label" for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Enter Password">
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password">
                     </div>
 
                     <div class="form-group">
