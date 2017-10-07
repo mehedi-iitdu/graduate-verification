@@ -6,6 +6,9 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Role;
+use App\Registrar;
+use App\ProgramOffice;
 
 class RegisterController extends Controller
 {
@@ -45,54 +48,92 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    /*protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:20',
+            'last_name' => 'required|string|max:20',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'mobile_no' => 'required|string|max:11|unique:users',
         ]);
     }
-
+*/
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    /*protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'mobile_no' => $data['mobile_no'],
+            
         ]);
-    }
+    }*/
 
-    protected function userActivation($token)
-    {
+    public function store_user(Request $request){
+        
+        Validator::make($request, [
+            'first_name' => 'required|string|max:20',
+            'last_name' => 'required|string|max:20',
+            'email' => 'required|string|email|max:255|unique:users',
+            'mobile_no' => 'required|string|max:11|unique:users',
+        ]);
+        
+        $role_name = Role::where('id', $request['id']);
 
-        $activation=User_activation::where('token',$token)->first();
+        $user = User::create([
+                'first_name' => $request['first_name'],
+                'last_name' => $request['last_name'],
+                'email' => $request['email'],
+                'mobile_no' => $request['mobile_no'],
+        ]);
+        
 
-        if($activation!=null){
-            $user=User::find($activation->user_id);
+        if($role_name == 'Registrar'){
+            Validator::make($request, [
+                'university_id' => 'required',
+            ]);
+            $registrar = new Registrar;
+            $registrar->university_id = $request['university_id'];
+            $registrar->user = $user;
 
-            if($user->is_activated==1){
-                Session::flash('success','your account is already activated');
-                return redirect()->to('login');
-            }
-
-            $user->is_activated=1;
-            $user->save();
-            User_activation::where('user_id',$user->id)->delete();
-
-            Session::flash('success',"Your account has been activated successfully.");
-            return redirect()->to('login');
-
+            $registrar->save();
         }
 
-        Session::flash('warning','Your token is invalid');
-        return redirect()->to('login');
+        else if($role_name == 'ProgramOffice'){
+            Validator::make($request, [
+                'department_id' => 'required',
+            ]);
+
+            $program_office = new ProgramOffice;
+            $program_office->department_id = $request['department_id'];
+            $program_office->user = $user;
+
+            $program_office->save();
+        }
+
+    }
+
+    protected function sendUserActivationMail($email)
+    {
+
+        $activation_code = rand(100000, 999999);
+        User_activation::updateOrCreate([
+            'user_id' => $user->id,
+            'activation_code' => $activation_code,
+        ]);
+
+
+        
+        /*$array=['name' => $user->, 'token' => $token];
+        Mail::to($user->email)->queue(new EmailVerification($array));*/
+
+        
     }
 
     public function checkEmail(Request $request){
