@@ -75,7 +75,7 @@ class RegisterController extends Controller
         ]);
     }*/
 
-    public function store_user(Request $request){
+    public function store_user(array $request){
         
         Validator::make($request, [
             'first_name' => 'required|string|max:20',
