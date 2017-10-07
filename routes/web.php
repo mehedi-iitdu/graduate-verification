@@ -50,10 +50,6 @@ Route::prefix('dashboard')-> group(function (){
 		return view('user_dashboard.manage_courses_view');
 	});
 
-	Route::get('manage_verification_request', function(){
-		return view('user_dashboard.manage_verification_request');
-	});
-
 	Route::get('manage_verification_view', function(){
 		return view('user_dashboard.manage_verification_view');
 	});
@@ -78,3 +74,11 @@ Route::get('user/activation/{token}','Auth\RegisterController@userActivation');
 Route::get('student', ['uses' => 'StudentController@index', 'as' => 'student.index']);
 Route::get('register', ['uses' => 'RegisterController@index', 'as' => 'register.index']);
 Route::get('UGC', ['uses' => 'UGCController@index', 'as' => 'ugc.index']);
+
+Route::prefix('stakeholder')-> group(function (){
+
+	Route::get('student_search', function(){
+		return view('stakeholder.student_search');
+	});
+
+});
