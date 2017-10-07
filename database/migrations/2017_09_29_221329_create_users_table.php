@@ -22,8 +22,6 @@ class CreateUsersTable extends Migration
             $table->string('mobile_no');
             $table->integer('role_id');
             $table->boolean('is_activated');
-            $table->integer('university_id');
-            $table->integer('department_id');
             $table->timestamps();
         });
     }
