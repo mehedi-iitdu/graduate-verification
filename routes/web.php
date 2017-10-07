@@ -55,10 +55,6 @@ Route::prefix('dashboard')-> group(function (){
 		return view('user_dashboard.manage_verification_view');
 	});
 
-	Route::get('manage_verification_request', function(){
-		return view('user_dashboard.manage_verification_request');
-	});
-
 	Route::get('manage_verification_verify', function(){
 		return view('user_dashboard.manage_verification_verify');
 	});
