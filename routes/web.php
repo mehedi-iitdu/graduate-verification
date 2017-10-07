@@ -77,7 +77,7 @@ Route::get('login', ['uses' => 'Auth\LoginController@showLoginForm', 'as' => 'lo
 Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout');
 Route::get('add_user', ['uses' => 'Auth\RegisterController@showRegistrationForm', 'as' => 'add_user']);
-Route::post('add_user', 'Auth\RegisterController@register');
+Route::post('store_user', ['uses' => 'Auth\RegisterController@store_user', 'as' => 'store_user']);
 Route::get('user/activation/{token}','Auth\RegisterController@userActivation');
 
 Route::post('role_based_info', 'RoleController@getRoleBasedInfo');
