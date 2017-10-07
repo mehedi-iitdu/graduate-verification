@@ -30,11 +30,11 @@
 
               <div class="form-group row">
                 <label for="name" class="col-sm-6 col-form-label">Student Date of Birth</label>
-                <div class='input-group date col-sm-6' id='birthdate'>
-                    <input type='text' class="form-control" placeholder="1971-12-16" />
-                    <span class="input-group-addon">
+                <div class='input-group date col-sm-6'>
+                    <input type='text' class="form-control" placeholder="1971-12-16" id='birthdate'/>
+                    <!-- <span class="input-group-addon">
                         <span class="fa fa-calendar-o red-icon"></span>
-                    </span>
+                    </span> -->
                 </div>
               </div>
 
@@ -66,23 +66,16 @@
 
 @endsection
 
-<!-- @section('script')
-  <script type="text/javascript">
-  
-  $( document ).ready(function() {
-    console.log( "ready!" );
-});
 
-    $(function () {
-                    $('#birthdate').datetimepicker();
-                });
+@section('script')
 
+<script type="text/javascript">
 
-$( "#birthdate" ).click(function() {
-  alert( "Handler for .click() called." );
-});
+  $(function () {
+    $('#birthdate').datepicker({});
+  });
 
   </script>
-@endsection
 
- -->
+
+@endsection
