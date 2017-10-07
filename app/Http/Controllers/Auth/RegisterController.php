@@ -27,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -79,7 +79,7 @@ class RegisterController extends Controller
 
             if($user->is_activated==1){
                 Session::flash('success','your account is already activated');
-                return redirect()->to('login');                
+                return redirect()->to('login');
             }
 
             $user->is_activated=1;
@@ -96,11 +96,11 @@ class RegisterController extends Controller
     }
 
     public function checkEmail(Request $request){
-        
+
         if($request->ajax()){
-            
+
             $user=User::where('email',$request->email)->first();
-            
+
             if(empty($user))
                 return 'yes';
 
