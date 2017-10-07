@@ -29,6 +29,7 @@
 
         {{-- Compiled JS --}}
         <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
+        
         {{-- MD Bootstrap JS --}}
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
 
