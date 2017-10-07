@@ -50,10 +50,6 @@ Route::prefix('dashboard')-> group(function (){
 		return view('user_dashboard.manage_courses_view');
 	});
 
-	Route::get('manage_verification_request', function(){
-		return view('user_dashboard.manage_verification_request');
-	});
-
 	Route::get('manage_verification_view', function(){
 		return view('user_dashboard.manage_verification_view');
 	});
@@ -83,5 +79,9 @@ Route::prefix('stakeholder')-> group(function (){
 
 	Route::get('student_search', function(){
 		return view('stakeholder.student_search');
+	});
+
+	Route::get('payment_request', function(){
+		return view('stakeholder.payment_request');
 	});
 });
