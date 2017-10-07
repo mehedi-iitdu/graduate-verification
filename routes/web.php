@@ -81,4 +81,7 @@ Route::prefix('stakeholder')-> group(function (){
 		return view('stakeholder.student_search');
 	});
 
+	Route::get('payment_request', function(){
+			return view('stakeholder.payment_request');
+	});
 });
