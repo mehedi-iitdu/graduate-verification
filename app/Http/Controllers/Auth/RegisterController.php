@@ -27,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -67,5 +67,44 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    protected function userActivation($token)
+    {
+
+        $activation=User_activation::where('token',$token)->first();
+
+        if($activation!=null){
+            $user=User::find($activation->user_id);
+
+            if($user->is_activated==1){
+                Session::flash('success','your account is already activated');
+                return redirect()->to('login');
+            }
+
+            $user->is_activated=1;
+            $user->save();
+            User_activation::where('user_id',$user->id)->delete();
+
+            Session::flash('success',"Your account has been activated successfully.");
+            return redirect()->to('login');
+
+        }
+
+        Session::flash('warning','Your token is invalid');
+        return redirect()->to('login');
+    }
+
+    public function checkEmail(Request $request){
+
+        if($request->ajax()){
+
+            $user=User::where('email',$request->email)->first();
+
+            if(empty($user))
+                return 'yes';
+
+            return 'no';
+        }
     }
 }
