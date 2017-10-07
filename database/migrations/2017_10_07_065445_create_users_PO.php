@@ -15,9 +15,9 @@ class CreateUsersPO extends Migration
     {
         Schema::create('po', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id');
             $table->integer('department_id');
             $table->timestamps();
-            $table->integer('user_id');
         });
     }
 
