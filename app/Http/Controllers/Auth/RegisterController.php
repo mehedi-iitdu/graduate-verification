@@ -122,11 +122,11 @@ class RegisterController extends Controller
     protected function sendUserActivationMail($email)
     {
 
-        $activation_code = rand(100000, 999999);
+        /*$activation_code = rand(100000, 999999);
         User_activation::updateOrCreate([
             'user_id' => $user->id,
             'activation_code' => $activation_code,
-        ]);
+        ]);*/
 
 
         
