@@ -36,9 +36,6 @@ Route::prefix('dashboard')-> group(function (){
 	});
 
 	Route::get('manage_users_view', ['uses' => 'Auth\RegisterController@manageUsersView', 'as' => 'manage_users_view']);
-Route::get('/dashboard/manage_result', function(){
-	return view('user_dashboard.manage_result');
-});
 
 	Route::get('manage_add_result', function(){
 		return view('user_dashboard.manage_add_result');
