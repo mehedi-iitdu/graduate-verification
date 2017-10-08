@@ -11,7 +11,7 @@
 
           <div class="form-row">
               <div class="form-group ml-auto col-md-3">
-                  <a href="/dashboard/manage_users_create" class="btn btn-block btn-primary">Add User</a>
+                  <a href="/add_user" class="btn btn-block btn-primary">Add User</a>
               </div>
           </div>
 
