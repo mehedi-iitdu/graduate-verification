@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use App\Role;
 use App\Registrar;
 use App\ProgramOffice;
+use App\User_activation;
+use Mail;
+use App\Mail\EmailVerification;
 
 class RegisterController extends Controller
 {
@@ -90,63 +93,71 @@ class RegisterController extends Controller
 
     public function store_user(Request $request){
         
-        Validator::make($request, [
+        $this->validate($request, [
             'first_name' => 'required|string|max:20',
             'last_name' => 'required|string|max:20',
             'email' => 'required|string|email|max:255|unique:users',
-            'mobile_no' => 'required|string|max:11|unique:users',
+            'mobile_no' => 'required|string|max:11',
+            'role_id' => 'required',
         ]);
         
-        $role_name = Role::where('id', $request['id']);
+        $role_name = Role::find($request->role_id)->role_name;
 
-        $user = User::create([
-                'first_name' => $request['first_name'],
-                'last_name' => $request['last_name'],
-                'email' => $request['email'],
-                'mobile_no' => $request['mobile_no'],
-        ]);
+        $user = new User;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->mobile_no = $request->mobile_no;
+        $user->role_id = $request->role_id;
+        $user->is_activated = false;
         
 
         if($role_name == 'Registrar'){
-            Validator::make($request, [
+            $this->validate($request, [
                 'university_id' => 'required',
             ]);
-            $registrar = new Registrar;
-            $registrar->university_id = $request['university_id'];
-            $registrar->user = $user;
 
+            $registrar = new Registrar;
+            $registrar->university_id = $request->university_id;
+            
+            $user->save();
+            $registrar->user_id = $user->id;
             $registrar->save();
         }
 
         else if($role_name == 'ProgramOffice'){
-            Validator::make($request, [
+            $this->validate($request, [
                 'department_id' => 'required',
             ]);
 
             $program_office = new ProgramOffice;
-            $program_office->department_id = $request['department_id'];
-            $program_office->user = $user;
-
+            $program_office->department_id = $request->department_id;
+            
+            $user->save();
+            $program_office->user_id = $user->id;
             $program_office->save();
         }
+        else{
+            $user->save();
+        }
+
+        $this->sendUserActivationMail($user);
 
         return redirect()->route('add_user');
 
     }
 
-    protected function sendUserActivationMail($email)
+    protected function sendUserActivationMail($user)
     {
 
-        /*$activation_code = rand(100000, 999999);
+        $activation_code = rand(100000, 999999);
         User_activation::updateOrCreate([
             'user_id' => $user->id,
-            'activation_code' => $activation_code,
-        ]);*/
-
-
+            'token' => $activation_code,
+        ]);
         
-        /*$array=['name' => $user->, 'token' => $token];
-        Mail::to($user->email)->queue(new EmailVerification($array));*/
+        $array=['name' => $user->first_name, 'token' => $activation_code];
+        Mail::to($user->email)->queue(new EmailVerification($array));
 
         
     }
