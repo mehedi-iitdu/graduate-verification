@@ -74,9 +74,13 @@
         $.ajaxSetup({
               headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
           });
+        
         $('#role_id').on('change', function(){
 
-           var role_name = $('#role_id option:selected').text();
+
+            var role_name = $('#role_id option:selected').text();
+
+            alert(role_name);
            
            $.post("role_based_info",{role_name:role_name}, function(data){
              $('#role_info').html(data);
