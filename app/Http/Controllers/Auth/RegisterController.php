@@ -6,6 +6,14 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use App\Role;
+use App\Registrar;
+use App\ProgramOffice;
+use App\User_activation;
+use Mail;
+use App\Mail\EmailVerification;
+use App\SMS\SMSManager;
 
 class RegisterController extends Controller
 {
@@ -20,14 +28,14 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+/*    use RegistersUsers;*/
 
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -45,66 +53,136 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    /*protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:20',
+            'last_name' => 'required|string|max:20',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'mobile_no' => 'required|string|max:11|unique:users',
         ]);
     }
-
+*/
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    /*protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'mobile_no' => $data['mobile_no'],
+            
         ]);
-    }
+    }*/
 
-    protected function userActivation($token)
+    public function showRegistrationForm()
     {
-
-        $activation=User_activation::where('token',$token)->first();
-
-        if($activation!=null){
-            $user=User::find($activation->user_id);
-
-            if($user->is_activated==1){
-                Session::flash('success','your account is already activated');
-                return redirect()->to('login');                
+        $roles = Role::pluck('role_name', 'id');
+        foreach ($roles as $key => $role) {
+            if($role == "Student") {
+                unset($roles[$key]);
             }
-
-            $user->is_activated=1;
-            $user->save();
-            User_activation::where('user_id',$user->id)->delete();
-
-            Session::flash('success',"Your account has been activated successfully.");
-            return redirect()->to('login');
-
         }
 
-        Session::flash('warning','Your token is invalid');
-        return redirect()->to('login');
+        return view('user_dashboard.manage_users_create', ['roles' => $roles]);
+    }
+
+    public function store_user(Request $request){
+        
+        $this->validate($request, [
+            'first_name' => 'required|string|max:20',
+            'last_name' => 'required|string|max:20',
+            'email' => 'required|string|email|max:255|unique:users',
+            'mobile_no' => 'required|string|max:11',
+            'role_id' => 'required',
+        ]);
+        
+        $role_name = Role::find($request->role_id)->role_name;
+
+        $user = new User;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->mobile_no = $request->mobile_no;
+        $user->role_id = $request->role_id;
+        $user->is_activated = false;
+        
+
+        if($role_name == 'Registrar'){
+            $this->validate($request, [
+                'university_id' => 'required',
+            ]);
+
+            $registrar = new Registrar;
+            $registrar->university_id = $request->university_id;
+            
+            $user->save();
+            $registrar->user_id = $user->id;
+            $registrar->save();
+        }
+
+        else if($role_name == 'ProgramOffice'){
+            $this->validate($request, [
+                'department_id' => 'required',
+            ]);
+
+            $program_office = new ProgramOffice;
+            $program_office->department_id = $request->department_id;
+            
+            $user->save();
+            $program_office->user_id = $user->id;
+            $program_office->save();
+        }
+        else{
+            $user->save();
+        }
+
+        $this->sendActivationCode($user);
+
+        flash('User successfully added!');
+
+        return redirect()->route('add_user');
+
+    }
+
+    protected function sendActivationCode($user)
+    {
+
+        $activation_code = rand(100000, 999999);
+        User_activation::updateOrCreate([
+            'user_id' => $user->id,
+            'token' => $activation_code,
+        ]);
+        
+        $array=['name' => $user->first_name, 'token' => $activation_code];
+        Mail::to($user->email)->queue(new EmailVerification($array));
+
+        $smsBody = 'Welcome, '.$user->first_name.' Your Activation code is'.$activation_code.'. Please activate your account http://127.0.0.1/user/activation. Thank You.';
+
+        $smsManager = new SMSManager();
+        $smsManager->sendSMS($user->mobile_no, $smsBody);        
     }
 
     public function checkEmail(Request $request){
-        
+
         if($request->ajax()){
-            
+
             $user=User::where('email',$request->email)->first();
-            
+
             if(empty($user))
                 return 'yes';
 
             return 'no';
         }
+    }
+
+    public function manageUsersView(Request $request) {
+        $roles = Role::pluck('role_name', 'id');
+        return view('user_dashboard.manage_users_view', ['roles' => $roles]);
     }
 }

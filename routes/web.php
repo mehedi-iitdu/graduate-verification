@@ -16,16 +16,9 @@
 Route::get('/signup', 'PagesController@signUp');
 Route::get('/login', 'PagesController@login');*/
 
-/*Route::get('/', function(){
-		Nexmo::message()->send([
-	    'to'   => '+8801521433075',
-	    'from' => 'OGVS',
-	    'text' => 'F**k you Joarder. F**k you IIT.'
-	]);
-});*/
 
 Route::get('/', function(){
-	return view('welcome');
+	return view('pages.home');
 });
 
 Route::prefix('dashboard')-> group(function (){
@@ -34,9 +27,7 @@ Route::prefix('dashboard')-> group(function (){
 		return view('user_dashboard.manage_users_create');
 	});
 
-	Route::get('manage_users_view', function(){
-		return view('user_dashboard.manage_users_view');
-	});
+	Route::get('manage_users_view', ['uses' => 'Auth\RegisterController@manageUsersView', 'as' => 'manage_users_view']);
 
 	Route::get('manage_add_result', function(){
 		return view('user_dashboard.manage_add_result');
@@ -65,15 +56,27 @@ Route::prefix('dashboard')-> group(function (){
 	Route::get('manage_university_view', function(){
 		return view('user_dashboard.manage_university_view');
 	});
+
+	Route::get('manage_department_view', function(){
+		return view('user_dashboard.manage_department_view');
+	});
 });
 
-Route::auth();
+// Route::auth();
+Route::get('login', ['uses' => 'Auth\LoginController@showLoginForm', 'as' => 'login']);
+Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout');
+Route::get('add_user', ['uses' => 'Auth\RegisterController@showRegistrationForm', 'as' => 'add_user']);
+Route::post('store_user', ['uses' => 'Auth\RegisterController@store_user', 'as' => 'store_user']);
 Route::get('user/activation/{token}','Auth\RegisterController@userActivation');
 
-Route::get('student', ['uses' => 'StudentController@index', 'as' => 'student.index']);
-Route::get('register', ['uses' => 'RegisterController@index', 'as' => 'register.index']);
-Route::get('UGC', ['uses' => 'UGCController@index', 'as' => 'ugc.index']);
+Route::post('role_based_info',['uses' => 'RoleController@getRoleBasedInfo', 'as' => 'role_based_info'] );
+Route::post('dipartment/list', ['uses' => 'DepartmentController@get_list', 'as' => 'department.list']);
+Route::post('user/list',['uses' => 'UsersController@getUserList', 'as' => 'user.list'] );
+
+// Route::get('student', ['uses' => 'StudentController@index', 'as' => 'student.index']);
+// Route::get('register', ['uses' => 'RegisterController@index', 'as' => 'register.index']);
+// Route::get('UGC', ['uses' => 'UGCController@index', 'as' => 'ugc.index']);
 
 Route::prefix('stakeholder')-> group(function (){
 

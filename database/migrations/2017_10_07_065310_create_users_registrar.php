@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersPO extends Migration
+class CreateUsersRegistrar extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateUsersPO extends Migration
      */
     public function up()
     {
-        Schema::create('po', function (Blueprint $table) {
+        Schema::create('registrar', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->integer('department_id');
+            $table->integer('university_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateUsersPO extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('po');
+        Schema::dropIfExists('registrar');
     }
 }
