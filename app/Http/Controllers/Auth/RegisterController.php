@@ -13,6 +13,7 @@ use App\ProgramOffice;
 use App\User_activation;
 use Mail;
 use App\Mail\EmailVerification;
+use App\SMS\SMSManager;
 
 class RegisterController extends Controller
 {
@@ -141,7 +142,7 @@ class RegisterController extends Controller
             $user->save();
         }
 
-        $this->sendUserActivationMail($user);
+        $this->sendActivationCode($user);
 
         flash('User successfully added!');
 
@@ -149,7 +150,7 @@ class RegisterController extends Controller
 
     }
 
-    protected function sendUserActivationMail($user)
+    protected function sendActivationCode($user)
     {
 
         $activation_code = rand(100000, 999999);
@@ -161,7 +162,10 @@ class RegisterController extends Controller
         $array=['name' => $user->first_name, 'token' => $activation_code];
         Mail::to($user->email)->queue(new EmailVerification($array));
 
-        
+        $smsBody = 'Welcome, '.$user->first_name.' Your Activation code is'.$activation_code.'. Please activate your account http://127.0.0.1/user/activation. Thank You.';
+
+        $smsManager = new SMSManager();
+        $smsManager->sendSMS($user->mobile_no, $smsBody);        
     }
 
     public function checkEmail(Request $request){

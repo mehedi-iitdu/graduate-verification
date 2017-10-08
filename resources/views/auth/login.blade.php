@@ -35,7 +35,7 @@
                     
                     <button type="submit" class="btn btn-primary">Login</button>
                 </form>
-                <div class="pull-right"><a href="password/reset" class="btn btn-link">Forgot password?</a></div>
+                <div class="pull-right"><a href="reset_password" class="btn btn-link">Forgot password?</a></div>
             </div>
         </div>
 
