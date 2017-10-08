@@ -68,7 +68,12 @@ Route::prefix('dashboard')-> group(function (){
 	Route::get('manage_department_view', function(){
 		return view('user_dashboard.manage_department_view');
 	});
+	Route::get('manage_add_department', function(){
+		return view('user_dashboard.manage_add_department');
+	});
+
 });
+
 
 // Route::auth();
 Route::get('login', ['uses' => 'Auth\LoginController@showLoginForm', 'as' => 'login']);
