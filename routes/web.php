@@ -16,14 +16,6 @@
 Route::get('/signup', 'PagesController@signUp');
 Route::get('/login', 'PagesController@login');*/
 
-/*Route::get('/', function(){
-		Nexmo::message()->send([
-	    'to'   => '+8801521433075',
-	    'from' => 'OGVS',
-	    'text' => 'F**k you Joarder. F**k you IIT.'
-	]);
-});*/
-
 
 Route::get('/', function(){
 	return view('pages.home');
