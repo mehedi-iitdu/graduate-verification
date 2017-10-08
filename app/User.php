@@ -17,26 +17,21 @@ class User extends Authenticatable
      */
 
     protected $table = 'users';
-    protected $fillable = [
-        'first_name', 'last_name', 'email', 'password',
-    ];
-
+    
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    
 
     public function role(){
         return $this->belongsTo(Role::class);
     }
 
 
-    public function hasRole($role){
-        return $this->role->role_name == $role;
+    public function hasRole($roles){
+        return in_array($this->role->role_name, $roles);
     }
 
     public function isUGC(){
