@@ -41,5 +41,8 @@
         {{-- <link rel="stylesheet" type="text/css" href="{{asset('js/app.js')}}"> --}}
 
         @yield('script')
+        <script>
+            $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+        </script>
     </body>
 </html>

@@ -3,10 +3,15 @@
 @section('content')
 
     <div class="container-fluid">
+
       <div class="row">
 
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
           <h2 style="margin-bottom: 40px" class="d-none d-sm-block">Add User</h2>
+
+          <div id="alert" class="text-center">
+            @include('flash::message')
+          </div>
 
           <div class="jumbotron">
             {!! Form::open(array('route' => 'store_user')) !!}
@@ -102,4 +107,5 @@
 
     });
   </script>
+
 @endsection
