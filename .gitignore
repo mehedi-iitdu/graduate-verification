@@ -1,6 +1,7 @@
 /node_modules
 /public/hot
 /public/storage
+/public/.htaccess
 /storage/*.key
 /vendor
 /.idea
@@ -11,11 +12,5 @@ npm-debug.log
 yarn-error.log
 
 \.vscode/
-public/js/ 
- 
-public/css/
-
-.phpintel
-
 
 /.phpintel
