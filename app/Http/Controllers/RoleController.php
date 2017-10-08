@@ -14,13 +14,13 @@ class RoleController extends Controller
     		if($request->role_name == "UGC"){
     			return $html; 
     		}
-    		if($request->role_name == "Register"){
+    		if($request->role_name == "Registrar"){
     			$universites = University::pluck('name', 'id');
     			return view('partials._dropdown', ['data' => $universites, 'id' => 'university_id', 'title' => 'University']);
     			
     		}
 
-    		if($request->role_name == "PO"){
+    		if($request->role_name == "ProgramOffice" || $request->role_name == "Student"){
     			$universites = University::pluck('name', 'id');
     			$university_selc = view('partials._dropdown', ['data' => $universites, 'id' => 'university_id', 'title' => 'University']);
     			$dept_selc = view('partials._dropdown', ['data' => [], 'id' => 'department_id', 'title' => 'Department']);
