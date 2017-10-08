@@ -29,8 +29,8 @@ Route::get('/dashboard/manage_users_view', function(){
 	return view('user_dashboard.manage_users_view');
 });
 
-Route::get('/dashboard/manage_result/add_result', function(){
-	return view('user_dashboard.manage_result/add_result');
+Route::get('/dashboard/manage_result', function(){
+	return view('user_dashboard.manage_result');
 });
 
 Route::get('/dashboard/manage_courses_create', function(){
@@ -60,3 +60,4 @@ Route::get('/dashboard/manage_university_create', function(){
 Route::get('/dashboard/manage_university_view', function(){
     return view('user_dashboard.manage_university_view');
 });
+
