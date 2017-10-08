@@ -2,6 +2,8 @@
 
 namespace App\SMS;
 
+use Nexmo\Laravel\Facade\Nexmo;
+
 class SMSManager
 {
 
