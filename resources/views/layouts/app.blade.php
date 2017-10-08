@@ -38,8 +38,6 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
         {{-- Compiled JS --}}
-        {{-- <link rel="stylesheet" type="text/css" href="{{asset('js/app.js')}}"> --}}
-
-        @yield('script')
+        <!-- <script type="text/javascript" src="{{asset('js/app.js')}}"></script> -->
     </body>
 </html>
