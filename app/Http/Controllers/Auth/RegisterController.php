@@ -153,10 +153,6 @@ class RegisterController extends Controller
         $activation_code = rand(100000, 999999);
         User_activation::updateOrCreate([
             'user_id' => $user->id,
-            'activation_code' => $activation_code,
-        ]);
-
-
             'token' => $activation_code,
         ]);
         
