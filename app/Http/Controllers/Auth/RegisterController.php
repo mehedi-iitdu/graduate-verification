@@ -153,15 +153,12 @@ class RegisterController extends Controller
         /*$activation_code = rand(100000, 999999);
         User_activation::updateOrCreate([
             'user_id' => $user->id,
-<<<<<<< HEAD
             'activation_code' => $activation_code,
         ]);*/
 
 
-=======
             'token' => $activation_code,
         ]);
->>>>>>> bsse0604
         
         $array=['name' => $user->first_name, 'token' => $activation_code];
         Mail::to($user->email)->queue(new EmailVerification($array));
