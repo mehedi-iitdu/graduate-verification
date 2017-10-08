@@ -31,13 +31,18 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
         {{-- MDBootstrap JS --}}
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
+        {{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script> --}}
 
         {{-- Custom js --}}
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
         {{-- Compiled JS --}}
-        <!-- <script type="text/javascript" src="{{asset('js/app.js')}}"></script> -->
+        {{-- <link rel="stylesheet" type="text/css" href="{{asset('js/app.js')}}"> --}}
+
+        @yield('script')
+        <script>
+            $('div.alert').not('.alert-important').delay(10000).fadeOut(350);
+        </script>
     </body>
 </html>

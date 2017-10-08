@@ -64,6 +64,10 @@ Route::prefix('dashboard')-> group(function (){
 	Route::get('manage_university_view', function(){
 		return view('user_dashboard.manage_university_view');
 	});
+
+	Route::get('manage_department_view', function(){
+		return view('user_dashboard.manage_department_view');
+	});
 });
 
 // Route::auth();
