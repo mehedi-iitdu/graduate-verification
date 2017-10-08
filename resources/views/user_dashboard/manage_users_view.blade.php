@@ -11,47 +11,27 @@
 
           <div class="form-row">
               <div class="form-group ml-auto col-md-3">
-                  <a href="/dashboard/manage_users_create" class="btn btn-block btn-primary">Add User</a>
+                  <a href="/add_user" class="btn btn-block btn-primary">Add User</a>
               </div>
           </div>
 
           <div>
             <form>
-              <div class="form-row">
-                  <div class="form-group col-md-3">
-                    <select class="form-control mdb-select" id="user_role">
-                      <option>Select User Role</option>
-                      <option>DU</option>
-                      <option>JU</option>
-                      <option>NSU</option>
-                      <option>PO</option>
-                      <option>DEO</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-3">
-                    <select class="form-control mdb-select" id="user_role">
-                      <option>Select University</option>
-                      <option>DU</option>
-                      <option>JU</option>
-                      <option>NSU</option>
-                      <option>PO</option>
-                      <option>DEO</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-3">
-                    <select class="form-control" id="user_role">
-                      <option>Select Department</option>
-                      <option>DU</option>
-                      <option>JU</option>
-                      <option>NSU</option>
-                      <option>PO</option>
-                      <option>DEO</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-3">
-                    <button type="submit" class="btn btn-block btn-success">Search</button>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-2">{{ Form::label('role_id', 'Role') }}</div>
+                  <div class="col-md-10">{{ Form::select('role_id', $roles, null, ['class' => 'form-control', 'required', 'id' => 'role_id', 'placeholder' => 'Select Role']) }}
                   </div>
                 </div>
+              </div>
+
+              <div id="role_info">
+
+              </div>
+
+              <div class="form-group" align="center">
+                <button id="user_search" class="btn btn-block btn-success col-md-3">Search</button>
+              </div>
             </form>
           </div>
 
@@ -123,4 +103,49 @@
         </main>
       </div>
     </div>
+@endsection
+
+@section('script')
+  <script type="text/javascript">
+      $(document).ready(function(){
+          $.ajaxSetup({
+              headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
+          });
+
+          $('#user_search').on('click', function (){
+
+              var role_name = $('#role_id option:selected').text();
+              var university_id = $('#university_id').val();
+              var department_id = $('#department_id').val();
+
+              $.post("{{ URL::route('user.list') }}",{role_name:role_name, university_id:university_id, department_id:department_id}, function(data){
+                  alert(data);
+              });
+          });
+
+          $('#role_id').on('change', function(){
+
+              var role_name = $('#role_id option:selected').text();
+
+              $.post("{{ URL::route('role_based_info') }}",{role_name:role_name}, function(data){
+
+                  $('#role_info').html(data);
+
+
+                  $('#university_id').on('change', function(){
+
+                      var university_id = $(this).val();
+
+                      $.post("{{ URL::route('department.list') }}",{university_id:university_id}, function(data){
+                          $('#department_id').html(data);
+                      })
+
+                  });
+
+              })
+
+          });
+
+      });
+  </script>
 @endsection

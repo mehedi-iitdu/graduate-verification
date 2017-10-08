@@ -3,13 +3,18 @@
 @section('content')
 
     <div class="container-fluid">
+
       <div class="row">
 
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
           <h2 style="margin-bottom: 40px" class="d-none d-sm-block">Add User</h2>
 
+          <div id="alert" class="text-center">
+            @include('flash::message')
+          </div>
+
           <div class="jumbotron">
-            {!! Form::open() !!}
+            {!! Form::open(array('route' => 'store_user')) !!}
 
 
             <div class="form-group">
@@ -53,7 +58,7 @@
             </div>
 
             <div id="role_info">
-              
+
             </div>
 
 
@@ -74,9 +79,13 @@
         $.ajaxSetup({
               headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
           });
+        
         $('#role_id').on('change', function(){
 
-           var role_name = $('#role_id option:selected').text();
+
+            var role_name = $('#role_id option:selected').text();
+
+            alert(role_name);
            
            $.post("role_based_info",{role_name:role_name}, function(data){
              $('#role_info').html(data);
@@ -98,4 +107,5 @@
 
     });
   </script>
+
 @endsection
