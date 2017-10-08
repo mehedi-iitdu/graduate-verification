@@ -16,63 +16,26 @@
   </div>
 </nav>
 
-
-// Nav sidebar
-<nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
-  <ul class="nav nav-pills flex-column">
-    <li class="nav-item">
-      <a class="nav-link active" href="manage_users_view">Manage Users</a>
-    </li>
-    <li class="nav-item">
-      <div class="dropdown show">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Manage Universities
-        </a>
-
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="manage_university_view">University</a>
-          <a class="dropdown-item" href="#">Department/Institute</a>
-        </div>
-      </div>
-    </li>
-
-    <li class="nav-item">
-      <div class="dropdown show">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Manage Department/Institute
-        </a>
-
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="#">Semester</a>
-          <a class="dropdown-item" href="manage_courses_view">Course</a>
-        </div>
-      </div>
-    </li>
-
-    <li class="nav-item">
-      <div class="dropdown show">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Manage Result
-        </a>
-
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="#">Add Result</a>
-          <a class="dropdown-item" href="#">Edit</a>
-        </div>
-      </div>
-    </li>
-
-    <li class="nav-item">
-      <div class="dropdown show">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Manage Verification
-        </a>
-
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="#">Request</a>
-          <a class="dropdown-item" href="#">Verify</a>
-        </div>
-      </div>
-    </li>
-  </ul>
-</nav>
+{{-- <nav class="mb-1 navbar navbar-expand-lg navbar-dark cyan">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+      <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+              <a class="nav-link waves-effect waves-light" href="#"><i class="fa fa-envelope"></i> Contact <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link waves-effect waves-light" href="#"><i class="fa fa-gear"></i> Settings</a>
+          </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> Profile </a>
+              <div class="dropdown-menu dropdown-menu-right dropdown-cyan" aria-labelledby="navbarDropdownMenuLink-4" style="display: none; position: absolute;">
+                  <a class="dropdown-item waves-effect waves-light" href="#">My account</a>
+                  <a class="dropdown-item waves-effect waves-light" href="#">Log out</a>
+              </div>
+          </li>
+      </ul>
+  </div>
+</nav> --}}
