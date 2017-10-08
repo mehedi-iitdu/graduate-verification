@@ -70,13 +70,24 @@ Route::prefix('dashboard')-> group(function (){
 	});
 });
 
+// activation
+Route::get('user_activation', function(){
+	return view('pages.user_activation');
+});
+
+// reset password
+Route::get('reset_password', function(){
+	return view('pages.reset_password');
+});
+
 // Route::auth();
 Route::get('login', ['uses' => 'Auth\LoginController@showLoginForm', 'as' => 'login']);
 Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout');
 Route::get('add_user', ['uses' => 'Auth\RegisterController@showRegistrationForm', 'as' => 'add_user']);
 Route::post('store_user', ['uses' => 'Auth\RegisterController@store_user', 'as' => 'store_user']);
-Route::get('user/activation/{token}','Auth\RegisterController@userActivation');
+Route::get('user/activation',['uses' => 'Auth\RegisterController@userActivation', 'as' => 'user.activation']);
+Route::get('user/reset_password',['uses' => 'Auth\RegisterController@resetPassword', 'as' => 'user.reset_password']);
 
 Route::post('role_based_info',['uses' => 'RoleController@getRoleBasedInfo', 'as' => 'role_based_info'] );
 Route::post('dipartment/list', ['uses' => 'DepartmentController@get_list', 'as' => 'department.list']);
