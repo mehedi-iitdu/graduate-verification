@@ -143,6 +143,8 @@ class RegisterController extends Controller
 
         $this->sendUserActivationMail($user);
 
+        flash('User successfully added!');
+
         return redirect()->route('add_user');
 
     }
