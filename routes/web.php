@@ -71,7 +71,13 @@ Route::post('store_user', ['uses' => 'Auth\RegisterController@store_user', 'as' 
 Route::get('user/activation/{token}','Auth\RegisterController@userActivation');
 
 Route::post('role_based_info',['uses' => 'RoleController@getRoleBasedInfo', 'as' => 'role_based_info'] );
-Route::post('dipartment/list', ['uses' => 'DepartmentController@get_list', 'as' => 'department.list']);
+
+Route::post('university/list', ['uses' => 'UniversityController@getUniversityList', 'as' => 'university.list']);
+
+Route::post('department/list', ['uses' => 'DepartmentController@get_list', 'as' => 'department.list']);
+
+Route::post('department/semesterList', ['uses' => 'DepartmentController@getSemesterList', 'as' => 'department.semesterList']);
+
 Route::post('user/list',['uses' => 'UsersController@getUserList', 'as' => 'user.list'] );
 
 // Route::get('student', ['uses' => 'StudentController@index', 'as' => 'student.index']);
