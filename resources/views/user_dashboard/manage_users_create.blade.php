@@ -9,7 +9,7 @@
           <h2 style="margin-bottom: 40px" class="d-none d-sm-block">Add User</h2>
 
           <div class="jumbotron">
-            {!! Form::open() !!}
+            {!! Form::open(array('route' => 'store_user')) !!}
 
 
             <div class="form-group">
@@ -53,7 +53,7 @@
             </div>
 
             <div id="role_info">
-              
+
             </div>
 
 
