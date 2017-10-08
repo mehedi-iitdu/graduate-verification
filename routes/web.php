@@ -16,14 +16,6 @@
 Route::get('/signup', 'PagesController@signUp');
 Route::get('/login', 'PagesController@login');*/
 
-/*Route::get('/', function(){
-		Nexmo::message()->send([
-	    'to'   => '+8801521433075',
-	    'from' => 'OGVS',
-	    'text' => 'F**k you Joarder. F**k you IIT.'
-	]);
-});*/
-
 
 Route::get('/', function(){
 	return view('pages.home');
@@ -63,6 +55,10 @@ Route::prefix('dashboard')-> group(function (){
 
 	Route::get('manage_university_view', function(){
 		return view('user_dashboard.manage_university_view');
+	});
+
+	Route::get('manage_department_view', function(){
+		return view('user_dashboard.manage_department_view');
 	});
 });
 
