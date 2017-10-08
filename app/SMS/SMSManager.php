@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\SMS;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-
-class SMSController extends Controller
+class SMSManager
 {
 
 	public function sendSMS($to, $body){
 
 		Nexmo::message()->send([
-	    	'to'   => $to,
+	    	'to'   => '+88'.$to,
 	    	'from' => 'OGVS',
 	    	'text' => $body
 		]);
 	}
 
 }
+
+?>

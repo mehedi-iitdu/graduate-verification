@@ -164,7 +164,7 @@ class RegisterController extends Controller
 
         $smsBody = 'Wellcome, '.$user->first_name.'Your Activation code is'.$activation_code.'</br>Please activate your account http://127.0.0.1/user/actication';
 
-        $smsManager = new SMSManager(); 
+        $smsManager = new SMSManager();
         $smsManager->sendSMS($user->mobile_no, $smsBody);        
     }
 
