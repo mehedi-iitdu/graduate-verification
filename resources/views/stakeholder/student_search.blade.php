@@ -3,7 +3,7 @@
 @section('content')
   <div class="container">
     <div class="row">
-      <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+      <main class="col-sm-12" role="main">
         <h2 style="margin-bottom: 20px" class="d-none d-sm-block">Search Student</h2>
         <hr>
         <div class="jumbotron">
