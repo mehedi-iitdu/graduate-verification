@@ -9,13 +9,9 @@
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
           <h2 style="margin-bottom: 40px" class="d-none d-sm-block">Add User</h2>
 
-          <div id="alert" class="text-center">
-            @include('flash::message')
-          </div>
-
           <div class="jumbotron">
-            {!! Form::open(array('route' => 'store_user')) !!}
-
+            @include('partials._error_message')
+            {!! Form::open(array('route' => 'user.add')) !!}
 
             <div class="form-group">
               <div class="row">
@@ -85,9 +81,7 @@
 
             var role_name = $('#role_id option:selected').text();
 
-            alert(role_name);
-           
-           $.post("role_based_info",{role_name:role_name}, function(data){
+           $.post("{{ URL::route('role_based_info') }}",{role_name:role_name}, function(data){
              $('#role_info').html(data);
 
 
