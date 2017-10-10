@@ -84,9 +84,12 @@ Route::get('reset_password', function(){
 Route::get('login', ['uses' => 'Auth\LoginController@showLoginForm', 'as' => 'login']);
 Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout');
-Route::get('add_user', ['uses' => 'Auth\RegisterController@showRegistrationForm', 'as' => 'add_user']);
-Route::post('store_user', ['uses' => 'Auth\RegisterController@store_user', 'as' => 'store_user']);
-Route::get('user/activation',['uses' => 'Auth\RegisterController@userActivation', 'as' => 'user.activation']);
+Route::get('user/add', ['uses' => 'Auth\RegisterController@showRegistrationForm', 'as' => 'user.add']);
+Route::post('user/add', ['uses' => 'Auth\RegisterController@store_user', 'as' => 'user.add']);
+
+Route::get('user/activation',['uses' => 'Auth\RegisterController@showActivationForm', 'as' => 'user.activation']);
+Route::post('user/activation',['uses' => 'Auth\RegisterController@userActivate', 'as' => 'user.activation']);
+
 Route::get('user/reset_password',['uses' => 'Auth\RegisterController@resetPassword', 'as' => 'user.reset_password']);
 
 Route::post('role_based_info',['uses' => 'RoleController@getRoleBasedInfo', 'as' => 'role_based_info'] );

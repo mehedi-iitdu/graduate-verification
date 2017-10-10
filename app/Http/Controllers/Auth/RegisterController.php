@@ -146,7 +146,7 @@ class RegisterController extends Controller
 
         flash('User successfully added!');
 
-        return redirect()->route('add_user');
+        return redirect()->route('user.add');
 
     }
 
@@ -158,14 +158,26 @@ class RegisterController extends Controller
             'user_id' => $user->id,
             'token' => $activation_code,
         ]);
-        
+
         $array=['name' => $user->first_name, 'token' => $activation_code];
         Mail::to($user->email)->queue(new EmailVerification($array));
-
+        
         $smsBody = 'Welcome, '.$user->first_name.' Your Activation code is'.$activation_code.'. Please activate your account http://127.0.0.1/user/activation. Thank You.';
-
         $smsManager = new SMSManager();
-        $smsManager->sendSMS($user->mobile_no, $smsBody);        
+        // $smsManager->sendSMS($user->mobile_no, $smsBody);        
+
+        
+        
+
+    }
+
+    public function showActivationForm(){
+        return view('auth.user_activation');
+    }
+
+
+    public function userActivate(Request $request){
+
     }
 
     public function checkEmail(Request $request){
