@@ -14,7 +14,7 @@
           </div>
 
           <div class="jumbotron">
-            {!! Form::open(array('route' => 'store_user')) !!}
+            {!! Form::open(array('route' => 'user.add')) !!}
 
 
             <div class="form-group">
@@ -85,9 +85,7 @@
 
             var role_name = $('#role_id option:selected').text();
 
-            alert(role_name);
-           
-           $.post("role_based_info",{role_name:role_name}, function(data){
+           $.post("{{ URL::route('role_based_info') }}",{role_name:role_name}, function(data){
              $('#role_info').html(data);
 
 
