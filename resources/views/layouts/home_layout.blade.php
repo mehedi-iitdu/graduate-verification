@@ -17,7 +17,10 @@
     </head>
         <body>
             @include('home_inc.nav')
-                @yield('content')
+            <div id="alert" class="text-center">
+                @include('flash::message')
+            </div>
+            @yield('content')
             @include('home_inc.footer')
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -32,5 +35,9 @@
         <!-- <link rel="stylesheet" type="text/css" href="{{asset('js/app.js')}}"> -->
 
         @yield('script')
+        <script>
+            $('div.alert').not('.alert-important').delay(10000).fadeOut(350);
+        </script>
     </body>
 </html>
+

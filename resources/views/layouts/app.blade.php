@@ -22,7 +22,11 @@
     	@include('inc.navbar')
         @include('inc.side_navbar')
         <div class="container">
-        	@yield('content')
+        	<div id="alert" class="text-center col-md-6">
+                @include('flash::message')
+            </div>
+            
+            @yield('content')
         </div>
 
         {{-- cdn js --}}
@@ -42,7 +46,7 @@
 
         @yield('script')
         <script>
-            $('div.alert').not('.alert-important').delay(4000).fadeOut(350);
+            $('div.alert').not('.alert-important').delay(10000).fadeOut(350);
         </script>
     </body>
 </html>

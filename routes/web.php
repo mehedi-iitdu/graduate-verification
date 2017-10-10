@@ -81,16 +81,27 @@ Route::get('reset_password', function(){
 });
 
 // Route::auth();
+
+
 Route::get('login', ['uses' => 'Auth\LoginController@showLoginForm', 'as' => 'login']);
-Route::post('login', 'Auth\LoginController@login');
+Route::post('login', ['uses' => 'Auth\LoginController@login', 'as' => 'login']);
 Route::get('logout', 'Auth\LoginController@logout');
 Route::get('user/add', ['uses' => 'Auth\RegisterController@showRegistrationForm', 'as' => 'user.add']);
-Route::post('user/add', ['uses' => 'Auth\RegisterController@store_user', 'as' => 'user.add']);
+Route::post('user/add', ['uses' => 'Auth\RegisterController@storeUser', 'as' => 'user.add']);
 
 Route::get('user/activation',['uses' => 'Auth\RegisterController@showActivationForm', 'as' => 'user.activation']);
 Route::post('user/activation',['uses' => 'Auth\RegisterController@userActivate', 'as' => 'user.activation']);
 
-Route::get('user/reset_password',['uses' => 'Auth\RegisterController@resetPassword', 'as' => 'user.reset_password']);
+Route::get('user/send_activation_code',['uses' => 'Auth\RegisterController@showSendActivationCodeForm', 'as' => 'user.send_activation_code']);
+
+Route::post('user/send_activation_code',['uses' => 'Auth\RegisterController@activationCodeSend', 'as' => 'user.send_activation_code']);
+
+Route::get('user/reset_password/{email}/{token}',['uses' => 'Auth\ResetPasswordController@showResetPasswordForm', 'as' => 'user.reset_password']);
+
+Route::post('user/reset_password',['uses' => 'Auth\ResetPasswordController@resetPassword', 'as' => 'password.reset']);
+
+
+
 
 Route::post('role_based_info',['uses' => 'RoleController@getRoleBasedInfo', 'as' => 'role_based_info'] );
 
