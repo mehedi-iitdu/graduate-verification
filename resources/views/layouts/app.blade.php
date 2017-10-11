@@ -22,7 +22,11 @@
     	@include('inc.navbar')
         @include('inc.side_navbar')
         <div class="container">
-        	@yield('content')
+        	<div id="alert" class="text-center col-md-6">
+                @include('flash::message')
+            </div>
+            
+            @yield('content')
         </div>
 
         {{-- cdn js --}}
