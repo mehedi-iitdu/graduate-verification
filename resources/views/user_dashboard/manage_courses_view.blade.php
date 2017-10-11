@@ -19,36 +19,30 @@
 
                 <div>
                     <form>
+
                         <div class="form-row">
+
                             <div class="form-group col-md-3">
-                                <select class="form-control" id="user_role">
-                                    <option>Select University</option>
-                                    <option>DU</option>
-                                    <option>JU</option>
-                                    <option>NSU</option>
-                                    <option>PO</option>
-                                    <option>DEO</option>
-                                </select>
+                                <div id="university_list">
+                                    <select class="form-control" id="user_role">
+                                        <option>Select University</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <div id="department_list">
+                                    <select class="form-control" id="user_role">
+                                        <option>Select Department</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group col-md-3">
-                                <select class="form-control" id="user_role">
-                                    <option>Select Institute/Department</option>
-                                    <option>IIT</option>
-                                    <option>ISRT</option>
-                                    <option>EEE</option>
-                                    <option>ACCE</option>
-                                    <option>Microbiology</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <select class="form-control" id="user_role">
-                                    <option>Select Semester</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
+                                <div id="semester_list">
+                                    <select class="form-control" id="user_role">
+                                        <option>Select Semester</option>
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="form-group col-md-3">
@@ -117,4 +111,45 @@
             </main>
         </div>
     </div>
+@endsection
+
+@section('script')
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $.ajaxSetup({
+              headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
+          });
+
+        $.post("{{ URL::route('university.list') }}",{},function(data){
+            $('#university_list').html(data);
+
+            $('#university_id').on('change', function(){
+
+
+                var university_id = $(this).val();
+                    
+                $.post("{{ URL::route('department.list') }}",{university_id:university_id}, function(data){
+                      $('#department_list').html(data);
+
+                      $('#department_id').on('change', function(){
+
+                          var department_id = $(this).val();
+                              
+                          $.post("{{ URL::route('department.semesterList') }}",{department_id:department_id}, function(data){
+                                $('#semester_list').html(data);
+                                
+                          })
+
+                      });
+
+                })
+
+            });
+
+        });
+
+    });
+</script>
+
 @endsection
