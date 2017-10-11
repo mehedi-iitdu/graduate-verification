@@ -215,7 +215,7 @@ class RegisterController extends Controller
         $array=['name' => $user->first_name, 'token' => $activation_code];
         Mail::to($user->email)->queue(new EmailVerification($array));
         
-        $smsBody = 'Welcome, '.$user->first_name.' Your Activation code is'.$activation_code.'. Please activate your account http://127.0.0.1/user/activation. Thank You.';
+        $smsBody = 'Welcome, '.$user->first_name.' Your Activation code is '.$activation_code.'. Please activate your account http://127.0.0.1/user/activation. Thank You. ';
         $smsManager = new SMSManager();
         // $smsManager->sendSMS($user->mobile_no, $smsBody);        
 
