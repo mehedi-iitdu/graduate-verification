@@ -1,2 +1,4 @@
-Wellcome, {{ $array['name'] }}
-Please active your account : {{ url('user/activation', $array['token'])}}
+Welcome, {{ $array['name'] }}
+Your activation code is : {{ $array['token'] }}
+Please active your account in this url : {{ url('user/activation')}}.
+Thank You
