@@ -11,51 +11,49 @@
                 <hr>
 
                 <div class="jumbotron">
-                    <form>
+                    @include('partials._error_message')
+                    {!! Form::open(array('route' => 'course.create')) !!}
 
-                        <div id="university_info">
+                    <div id="university_info">
 
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="department">Department</label>
+                        <div id="department_id" class="col-sm-10">
+                            <select class="form-control">
+                                <option>Select Department</option>
+                            </select>
                         </div>
+                    </div>
 
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="department">Department</label>
-                            <div id="department_id" class="col-sm-10">
-                                <select class="form-control">
-                                    <option>Select Department</option>
-                                </select>
-                            </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="semester">Semester</label>
+                        <div id="semester_id" class="col-sm-10">
+                            <select class="form-control">
+                                <option>Select Semester</option>
+                            </select>
                         </div>
+                    </div>
 
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="semester">Semester</label>
-                            <div id="semester_id" class="col-sm-10">
-                                <select class="form-control">
-                                    <option>Select Semester</option>
-                                </select>
-                            </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Course</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Course Name">
                         </div>
+                    </div>
 
-                        <div class="form-group row">
-                            <label for="reg_id" class="col-sm-2 col-form-label">Course</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="name" placeholder="Course Name">
-                            </div>
+                    <div class="form-group row">
+                        <label for="credit" class="col-sm-2 col-form-label">Credit</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="credit" name="credit" placeholder="Course Credit">
                         </div>
+                    </div>
 
-                        <div class="form-group row">
-                            <label for="reg_id" class="col-sm-2 col-form-label">Credit</label>
-                            <div class="col-sm-10">
-                                <input type="number" class="form-control" id="credit" placeholder="Course Credit">
-                            </div>
-                        </div>
+                    {{ Form::submit('Add', ['class' => 'btn btn-block btn-primary']) }}
 
+                    {!! Form::close() !!}
 
-                        <div class="form-group">
-                            <div align="right">
-                                <button type="submit" class="btn btn-success">Submit</button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
             </main>
         </div>
