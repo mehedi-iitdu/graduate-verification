@@ -13,7 +13,7 @@
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <a class="dropdown-item" href="/dashboard/manage_university_view">University</a>
-          <a class="dropdown-item" href="#">Department/Institute</a>
+          <a class="dropdown-item" href="/dashboard/manage_department_view">Department/Institute</a>
         </div>
       </div>
     </li>
