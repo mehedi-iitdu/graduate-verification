@@ -15,7 +15,7 @@ class UsersController extends Controller
 
     public function getUserList(Request $request){
 
-    	
+
 
     }
 
@@ -26,12 +26,12 @@ class UsersController extends Controller
     		return view('profile.student', ['student' => $student]);
     	}
     	if($request -> user() -> isRegistrar()){
-    		$student = Registrar::where('user_id', $request->user()->id)->first();
+    		$registrar = Registrar::where('user_id', $request->user()->id)->first();
 
     		return view('profile.registrar', ['registrar' => $registrar]);
     	}
     	if($request -> user() -> isProgramOffice()){
-    		$student = ProgramOffice::where('user_id', $request->user()->id)->first();
+    		$programOfficer = ProgramOffice::where('user_id', $request->user()->id)->first();
 
     		return view('profile.programOfficer', ['programOfficer' => $programOfficer]);
     	}
