@@ -14,7 +14,8 @@
         "laravelcollective/html": "^5.4.0",
         "nexmo/client": "@beta",
         "nexmo/laravel": "^1.0",
-        "twbs/bootstrap": "^3.3"
+        "twbs/bootstrap": "^3.3",
+        "anouar/paypalpayment": "~2.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
