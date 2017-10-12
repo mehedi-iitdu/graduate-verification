@@ -74,10 +74,28 @@
                   </div>
                 </div>
 
-                <div class="form-group row">
-                  <div class="col-sm-12" align="right">
-                    <button type="submit" class="btn btn-primary">Add</button>
-                  </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2"><label for="registration_no">Registration No.</label></div>
+                        <div class="col-md-10"><input class="form-control" required="" name="registration_no" type="text" id="registration_no">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2"><label for="session_no">Session</label></div>
+                        <div class="col-md-10"><input class="form-control" required="" name="session_no" type="text" id="session_no">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                        </div>
+                    </div>
                 </div>
                 
               {!! Form::open(array('route' => 'student.store')) !!}
