@@ -18,7 +18,7 @@
                         <label class="col-sm-2 col-form-label" for="university_id">University</label>
                         <div id="university_list" class="col-sm-10">
                             <select class="form-control">
-                                <option>Select Department</option>
+                                <option>Select University</option>
                             </select>
                         </div>
                     </div>

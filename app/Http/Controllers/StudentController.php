@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Student;
 use App\Role;
+use App\University;
 use App\Http\Controllers\Auth\RegisterController;
 
 class StudentController extends Controller
@@ -14,6 +15,38 @@ class StudentController extends Controller
 
     public function showStudentAddForm(){
         return view('user_dashboard.manage_add_student');
+    }
+
+    public function searchStudentView() {
+        return view('search_student');
+    }
+
+    public function searchStudent(Request $request) {
+        $student_info = Student::where('registration_no', $request->registration_no)->pluck('user_id', 'university_id', 'department_id', 'regiatration_no', 'session', 'date_of_birth')->first();
+        if($student_info == null) {
+            flash('Registration number does not exist');
+            return redirect()->route('stakeholder.search');
+        }
+
+        $user_info = User::where('id', $student_info->user_id)->pluck('id', 'email')->first();
+        if($user_info == null) {
+            flash('User does not exist');
+            return redirect()->route('stakeholder.search');
+        }
+
+        if ($user_info->email != $request->email) {
+            flash('Email does not match with the Registration Number');
+            return redirect()->route('stakeholder.search');
+        }
+        if ($user_info->date_of_birth != $request->date_of_birth) {
+            flash('Date of Birth does not match with the registration number');
+            return redirect()->route('stakeholder.search');
+        }
+        if ($student_info->university_id != $request->university_id) {
+            flash('University name does not match with the registration number');
+            return redirect()->route('stakeholder.search');
+        }
+        return $student_info;
     }
 
     public function storeStudent(Request $request){
