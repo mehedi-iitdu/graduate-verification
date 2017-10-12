@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Role;
+use App\User_activation;
 
 class User extends Authenticatable
 {
@@ -30,6 +31,11 @@ class User extends Authenticatable
     }
 
 
+    public function user_activation(){
+        return $this->hasOne(User_activation::class);
+    }
+
+
     public function hasRole($roles){
         return in_array($this->role->role_name, $roles);
     }
@@ -38,8 +44,12 @@ class User extends Authenticatable
         return $this->role->role_name == 'UGC';
     }
 
-    public function isRegister(){
-        return $this->role->role_name == 'Register';
+    public function isRegistrar(){
+        return $this->role->role_name == 'Registrar';
+    }
+
+    public function isProgramOffice(){
+        return $this->role->role_name == 'ProgramOffice';
     }
 
     public function isStudent(){
