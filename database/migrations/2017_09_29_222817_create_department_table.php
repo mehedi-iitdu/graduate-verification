@@ -17,6 +17,7 @@ class CreateDepartmentTable extends Migration
             $table->increments('id');
             $table->integer('university_id');
             $table->string('name');
+            $table->integer('num_of_semester');
             $table->timestamps();
         });
     }

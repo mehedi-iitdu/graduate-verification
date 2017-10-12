@@ -14,6 +14,8 @@ class UsersController extends Controller
 
     public function getUserList(Request $request){
 
+    	
+
     }
 
 }
