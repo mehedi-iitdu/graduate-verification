@@ -9,8 +9,7 @@
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
           <h2 style="margin-bottom: 40px" class="d-none d-sm-block">Add Department</h2>
             <div class="jumbotron">
-              @include('partials._error_message')
-              {!! Form::open(array('route' => 'department.add')) !!}
+              <form>
                 <div class="form-group">
                   <div class="row">
                     <div class="col-md-4"><label for="department_name">Department Name</label></div>
@@ -23,11 +22,11 @@
                   <div class="row">
                     <div class="col-md-4"><label for="university">University</label></div>
                     <div class="col-md-8">
-                        <div id="university_list">
-
-
-
-                        </div>
+                      <select class="form-control" required="" id="university" name="university">
+                        <option selected="selected" value="">Select University</option>
+                        <option>DU</option>
+                        <option>JU</option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -46,37 +45,20 @@
                         <option>6</option>
                         <option>7</option>
                         <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
-                        <option>11</option>
-                        <option>12</option>
                       </select>
                     </div>
                   </div>
                 </div>
-                {{ Form::submit('Add', ['class' => 'btn btn-block btn-primary']) }}
 
-                {!! Form::close() !!}
+                <div class="form-group row">
+                  <div class="col-sm-12" align="right">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                  </div>
+                </div>
+              </form>
             </div>
 
         </main>
       </div>
     </div>
-@endsection
-
-@section('script')
-
-<script type="text/javascript">
-      $(document).ready(function(){
-          $.ajaxSetup({
-              headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
-          });
-
-          $.post("{{ URL::route('university.list') }}",{},function(data){
-            $('#university_list').html(data);
-          });
-
-        });
-</script>
-
 @endsection
