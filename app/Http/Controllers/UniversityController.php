@@ -12,10 +12,10 @@ class UniversityController extends Controller
     	$universites = University::pluck('name', 'id');
     	return view('partials._dropdownOptions', ['data' => $universites, 'id' => 'university_id', 'title' => 'University']);
     }
-
-    public function addUniversityView(){
-
-      return view('user_dashboard.manage_university_create');
+  
+    public function showUniversityAddForm(){
+      
+      return view('university.create');
     }
 
     public function storeUniversity(Request $request){

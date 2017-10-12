@@ -89,7 +89,7 @@ class RegisterController extends Controller
             }
         }
 
-        return view('user_dashboard.manage_users_create', ['roles' => $roles]);
+        return view('user.create', ['roles' => $roles]);
     }
 
     public function storeUser(Request $request){
@@ -217,25 +217,8 @@ class RegisterController extends Controller
         
         $smsBody = 'Welcome, '.$user->first_name.' Your Activation code is '.$activation_code.'. Please activate your account http://127.0.0.1/user/activation. Thank You. ';
         $smsManager = new SMSManager();
-        // $smsManager->sendSMS($user->mobile_no, $smsBody);        
+        //$smsManager->sendSMS($user->mobile_no, $smsBody);
 
     }
 
-    public function checkEmail(Request $request){
-
-        if($request->ajax()){
-
-            $user=User::where('email',$request->email)->first();
-
-            if(empty($user))
-                return 'yes';
-
-            return 'no';
-        }
-    }
-
-    public function manageUsersView(Request $request) {
-        $roles = Role::pluck('role_name', 'id');
-        return view('user_dashboard.manage_users_view', ['roles' => $roles]);
-    }
 }
