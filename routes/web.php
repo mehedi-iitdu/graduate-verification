@@ -114,14 +114,19 @@ Route::post('department/add', ['uses' => 'DepartmentController@storeDepartment',
 
 Route::get('course/add',['uses' => 'CourseController@showCourseAddForm', 'as' => 'course.create'] );
 
+
 Route::post('course/add',['uses' => 'CourseController@storeCourse', 'as' => 'course.create'] );
 
 Route::get('university/add',['uses' => 'UniversityController@showUniversityAddForm', 'as' => 'university.add'] );
+
 Route::post('university/add',['uses' => 'UniversityController@storeUniversity', 'as' => 'university.add'] );
 
 Route::get('student/add',['uses' => 'StudentController@showStudentAddForm', 'as' => 'student.add'] );
 
 Route::post('student/add',['uses' => 'StudentController@storeStudent', 'as' => 'student.store'] );
+
+Route::get('department/add',['uses' => 'DepartmentController@addDepartmentView', 'as' => 'department.add'] );
+Route::post('department/add',['uses' => 'DepartmentController@storeDepartment', 'as' => 'department.add'] );
 
 Route::get('stakeholder/search', ['uses' => 'StudentController@searchStudentView', 'as' => 'stakeholder.search']);
 Route::post('stakeholder/search', ['uses' => 'StudentController@searchStudent', 'as' => 'stakeholder.search']);
