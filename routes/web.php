@@ -21,6 +21,10 @@ Route::get('/', function(){
 	return view('pages.home');
 });
 
+Route::get('/report', function(){
+	return view('reports.reportIndex');
+});
+
 Route::prefix('dashboard')-> group(function (){
 
 	Route::get('manage_users_create', function(){
