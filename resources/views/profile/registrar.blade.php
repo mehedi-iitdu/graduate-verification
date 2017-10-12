@@ -17,7 +17,7 @@
           			<div class="jumbotron">
           				<div class="row row-">
           					<div class="col-md-4">Name</div>
-          					<div class="col-md-8">{{$registrar->user->first_name }} {{$student->user->last_name }}</div>
+          					<div class="col-md-8">{{$registrar->user->first_name }} {{$registrar->user->last_name }}</div>
           				</div>
 
           				<div class="row">
