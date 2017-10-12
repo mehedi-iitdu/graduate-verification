@@ -113,6 +113,18 @@ Route::post('department/semesterList', ['uses' => 'DepartmentController@getSemes
 
 Route::post('user/list',['uses' => 'UsersController@getUserList', 'as' => 'user.list'] );
 
+Route::get('course/create',['uses' => 'CourseController@addCourseView', 'as' => 'course.create'] );
+
+Route::post('course/create',['uses' => 'CourseController@storeCourse', 'as' => 'course.create'] );
+
+Route::get('university/add',['uses' => 'UniversityController@addUniversityView', 'as' => 'university.add'] );
+Route::post('university/add',['uses' => 'UniversityController@storeUniversity', 'as' => 'university.add'] );
+
+Route::get('student/add',['uses' => 'StudentController@showStudentAddForm', 'as' => 'student.add'] );
+
+Route::post('student/add',['uses' => 'StudentController@storeStudent', 'as' => 'student.store'] );
+
+
 // Route::get('student', ['uses' => 'StudentController@index', 'as' => 'student.index']);
 // Route::get('register', ['uses' => 'RegisterController@index', 'as' => 'register.index']);
 // Route::get('UGC', ['uses' => 'UGCController@index', 'as' => 'ugc.index']);
