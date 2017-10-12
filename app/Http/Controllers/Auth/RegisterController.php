@@ -204,7 +204,7 @@ class RegisterController extends Controller
     }
 
 
-    protected function sendActivationCode($user)
+    public function sendActivationCode($user)
     {
         $user_activation = ($user->user_activation==null)? new User_activation: $user->user_activation;
         $activation_code = rand(100000, 999999);
