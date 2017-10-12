@@ -45,7 +45,17 @@ class StudentController extends Controller
             flash('University name does not match with the registration number');
             return redirect()->route('stakeholder.search');
         }
-        return $student_info;
+        return redirect()->route('stakeholder.payment_request', ['id' => $student_info]);
+    }
+
+    public function paymentRequestView(Request $request, $id) {
+        $student_info = Student::where('id', $id)->first();
+        $user_info = User::where('id', $student_info->user_id)->first();
+        $university_info = University::where('id', $student_info->university_id)->first();
+        return view('payment_request', [
+            'student' => $student_info,
+            'user' => $user_info,
+            'university' => $university_info]);
     }
 
     public function storeStudent(Request $request){
