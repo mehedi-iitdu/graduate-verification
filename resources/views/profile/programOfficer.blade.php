@@ -17,17 +17,17 @@
           			<div class="jumbotron">
           				<div class="row row-">
           					<div class="col-md-4">Name</div>
-          					<div class="col-md-8">{{$registrar->user->first_name }} {{$student->user->last_name }}</div>
+          					<div class="col-md-8">{{$programOfficer->user->first_name }} {{$programOfficer->user->last_name }}</div>
           				</div>
 
           				<div class="row">
           					<div class="col-md-4">Email</div>
-	          				<div class="col-md-8">{{$registrar->user->email}}</div>
+	          				<div class="col-md-8">{{$programOfficer->user->email}}</div>
           				</div>
 
           				<div class="row">
           					<div class="col-md-4">Mobile No</div>
-	          				<div class="col-md-8">{{$registrar->user->mobile_no}}</div>
+	          				<div class="col-md-8">{{$programOfficer->user->mobile_no}}</div>
           				</div>
           			</div>
           		</div>
