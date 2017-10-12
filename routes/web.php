@@ -23,19 +23,9 @@ Route::get('/', function(){
 
 Route::prefix('dashboard')-> group(function (){
 
-	Route::get('manage_users_create', function(){
-		return view('user_dashboard.manage_users_create');
-	});
+	Route::get('manage_users', ['uses' => 'UsersController@manageUsers', 'as' => 'manage_users']);
 
-	Route::get('manage_users_view', ['uses' => 'Auth\RegisterController@manageUsersView', 'as' => 'manage_users_view']);
-
-	Route::get('manage_add_result', function(){
-		return view('user_dashboard.manage_add_result');
-	});
-
-	Route::get('manage_courses_create', function(){
-		return view('user_dashboard.manage_courses_create');
-	});
+	Route::get('manage_courses', ['uses' => 'CourseController@manageCourses', 'as' => 'manage_courses']);
 
 	Route::get('manage_courses_view', function(){
 		return view('user_dashboard.manage_courses_view');
@@ -86,7 +76,9 @@ Route::get('reset_password', function(){
 Route::get('login', ['uses' => 'Auth\LoginController@showLoginForm', 'as' => 'login']);
 Route::post('login', ['uses' => 'Auth\LoginController@login', 'as' => 'login']);
 Route::get('logout', 'Auth\LoginController@logout');
+
 Route::get('user/add', ['uses' => 'Auth\RegisterController@showRegistrationForm', 'as' => 'user.add']);
+
 Route::post('user/add', ['uses' => 'Auth\RegisterController@storeUser', 'as' => 'user.add']);
 
 Route::get('user/activation',['uses' => 'Auth\RegisterController@showActivationForm', 'as' => 'user.activation']);
@@ -100,6 +92,7 @@ Route::get('user/reset_password/{email}/{token}',['uses' => 'Auth\ResetPasswordC
 
 Route::post('user/reset_password',['uses' => 'Auth\ResetPasswordController@resetPassword', 'as' => 'password.reset']);
 
+Route::post('user/list',['uses' => 'UsersController@getUserList', 'as' => 'user.list'] );
 
 
 
@@ -111,13 +104,15 @@ Route::post('department/list', ['uses' => 'DepartmentController@get_list', 'as' 
 
 Route::post('department/semesterList', ['uses' => 'DepartmentController@getSemesterList', 'as' => 'department.semesterList']);
 
-Route::post('user/list',['uses' => 'UsersController@getUserList', 'as' => 'user.list'] );
+Route::get('department/add', ['uses' => 'DepartmentController@showDepartmentAddForm', 'as' => 'department.add']);
 
-Route::get('course/create',['uses' => 'CourseController@addCourseView', 'as' => 'course.create'] );
+Route::post('department/add', ['uses' => 'DepartmentController@storeDepartment', 'as' => 'department.store']);
 
-Route::post('course/create',['uses' => 'CourseController@storeCourse', 'as' => 'course.create'] );
+Route::get('course/add',['uses' => 'CourseController@showCourseAddForm', 'as' => 'course.create'] );
 
-Route::get('university/add',['uses' => 'UniversityController@addUniversityView', 'as' => 'university.add'] );
+Route::post('course/add',['uses' => 'CourseController@storeCourse', 'as' => 'course.create'] );
+
+Route::get('university/add',['uses' => 'UniversityController@showUniversityAddForm', 'as' => 'university.add'] );
 Route::post('university/add',['uses' => 'UniversityController@storeUniversity', 'as' => 'university.add'] );
 
 Route::get('student/add',['uses' => 'StudentController@showStudentAddForm', 'as' => 'student.add'] );
@@ -125,9 +120,7 @@ Route::get('student/add',['uses' => 'StudentController@showStudentAddForm', 'as'
 Route::post('student/add',['uses' => 'StudentController@storeStudent', 'as' => 'student.store'] );
 
 
-// Route::get('student', ['uses' => 'StudentController@index', 'as' => 'student.index']);
-// Route::get('register', ['uses' => 'RegisterController@index', 'as' => 'register.index']);
-// Route::get('UGC', ['uses' => 'UGCController@index', 'as' => 'ugc.index']);
+
 
 Route::prefix('stakeholder')-> group(function (){
 
