@@ -41,6 +41,8 @@ class StudentController extends Controller
         $student->user_id = $user->id;
         $student->university_id = $request->university_id;
         $student->department_id = $request->department_id;
+        $student->registration_no = $request->registration_no;
+        $student->session = $request->session_no;
 
         $student->save();
 
@@ -49,7 +51,7 @@ class StudentController extends Controller
 
         flash('Student successfully added!')->success();
 
-        return redirect()->route('user_dashboard.manage_add_student');
+        return redirect()->route('student.add');
 
     }
 }
