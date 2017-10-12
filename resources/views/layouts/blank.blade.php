@@ -16,6 +16,10 @@
         <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css"> -->
     </head>
         <body>
+            @include('home_inc.nav')
+            <div id="alert" class="text-center">
+                @include('flash::message')
+            </div>
             @yield('content')
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -28,5 +32,8 @@
         <!-- <link rel="stylesheet" type="text/css" href="{{asset('js/app.js')}}"> -->
 
         @yield('script')
+        <script>
+            $('div.alert').not('.alert-important').delay(10000).fadeOut(350);
+        </script>
     </body>
 </html>
