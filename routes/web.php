@@ -21,6 +21,10 @@ Route::get('/', function(){
 	return view('pages.home');
 });
 
+Route::get('/report', function(){
+	return view('reports.reportIndex');
+});
+
 Route::prefix('dashboard')-> group(function (){
 
 	Route::get('manage_users_create', function(){
@@ -112,6 +116,26 @@ Route::post('department/list', ['uses' => 'DepartmentController@get_list', 'as' 
 Route::post('department/semesterList', ['uses' => 'DepartmentController@getSemesterList', 'as' => 'department.semesterList']);
 
 Route::post('user/list',['uses' => 'UsersController@getUserList', 'as' => 'user.list'] );
+
+Route::get('course/create',['uses' => 'CourseController@addCourseView', 'as' => 'course.create'] );
+
+Route::post('course/create',['uses' => 'CourseController@storeCourse', 'as' => 'course.create'] );
+
+Route::get('university/add',['uses' => 'UniversityController@addUniversityView', 'as' => 'university.add'] );
+Route::post('university/add',['uses' => 'UniversityController@storeUniversity', 'as' => 'university.add'] );
+
+Route::get('student/add',['uses' => 'StudentController@showStudentAddForm', 'as' => 'student.add'] );
+
+Route::post('student/add',['uses' => 'StudentController@storeStudent', 'as' => 'student.store'] );
+
+Route::get('stakeholder/search', ['uses' => 'StudentController@searchStudentView', 'as' => 'stakeholder.search']);
+Route::post('stakeholder/search', ['uses' => 'StudentController@searchStudent', 'as' => 'stakeholder.search']);
+
+Route::get('stakeholder/payment/request/{registration_no}', ['uses' => 'StudentController@paymentRequestView', 'as' => 'stakeholder.payment_request']);
+Route::post('stakeholder/payment/request/{registration_no}', ['uses' => 'StudentController@storePaymentRequest', 'as' => 'stakeholder.payment_request']);
+
+// Route for profile
+Route::get('profile', ['uses' => 'UsersController@getProfile', 'as' => 'profile']);
 
 // Route::get('student', ['uses' => 'StudentController@index', 'as' => 'student.index']);
 // Route::get('register', ['uses' => 'RegisterController@index', 'as' => 'register.index']);
