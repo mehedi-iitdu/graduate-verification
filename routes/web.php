@@ -153,3 +153,9 @@ Route::prefix('stakeholder')-> group(function (){
 			return view('stakeholder.payment_request');
 	});
 });
+
+Route::get('payment/checkout', 'PaymentController@getCheckout');
+
+Route::get('payment/done', 'PaymentController@getDone');
+
+Route::get('payment/cancel', 'PaymentController@getCancel');
