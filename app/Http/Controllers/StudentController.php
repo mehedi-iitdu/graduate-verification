@@ -7,6 +7,8 @@ use App\User;
 use App\Student;
 use App\Role;
 use App\University;
+use App\Stackholder;
+use App\Verification;
 use App\Http\Controllers\Auth\RegisterController;
 
 class StudentController extends Controller
@@ -37,7 +39,7 @@ class StudentController extends Controller
             flash('Email does not match with the Registration Number');
             return redirect()->route('stakeholder.search');
         }
-        if ($user_info->date_of_birth != $request->date_of_birth) {
+        if ($student_info->date_of_birth != $request->date_of_birth) {
             flash('Date of Birth does not match with the registration number');
             return redirect()->route('stakeholder.search');
         }
@@ -45,17 +47,54 @@ class StudentController extends Controller
             flash('University name does not match with the registration number');
             return redirect()->route('stakeholder.search');
         }
-        return redirect()->route('stakeholder.payment_request', ['id' => $student_info]);
+        return redirect()->route('stakeholder.payment_request', ['registration_no' => $student_info->registration_no]);
     }
 
-    public function paymentRequestView(Request $request, $id) {
-        $student_info = Student::where('id', $id)->first();
+    public function paymentRequestView(Request $request, $registration_no) {
+        $student_info = Student::where('registration_no', $registration_no)->first();
         $user_info = User::where('id', $student_info->user_id)->first();
         $university_info = University::where('id', $student_info->university_id)->first();
         return view('payment_request', [
             'student' => $student_info,
             'user' => $user_info,
             'university' => $university_info]);
+    }
+
+    public function storePaymentRequest(Request $request, $registration_no) {
+        $this->validate($request, [
+            'name' => 'required|string|max:30',
+            'institute' => 'required|string|max:50',
+            'designation' => 'required|string|max:20',
+            'email' => 'required|email|max:30',
+            'country' => 'required|string|max:30'
+        ]);
+
+        $student = Student::where('registration_no', $registration_no)->first();
+
+        if($student == null) {
+            flash('User not found');
+            return redirect()->route('stakeholder.search');
+        }
+
+        $stakeholder = new Stackholder;
+        $stakeholder->name = $request->name;
+        $stakeholder->institute = $request->institute;
+        $stakeholder->email = $request->email;
+        $stakeholder->designation = $request->designation;
+        $stakeholder->country = $request->country;
+
+        $stakeholder->save();
+
+        $verification = new Verification;
+        $verification->student_id = $student->id;
+        $verification->stackholder_id = $stakeholder->id;
+        $verification->verification_status = "Requested";
+        $verification->save();
+
+        flash('Successfully requested!')->success();
+
+        return redirect()->route('stakeholder.search');
+
     }
 
     public function storeStudent(Request $request){

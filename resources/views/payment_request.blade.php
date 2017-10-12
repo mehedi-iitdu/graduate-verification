@@ -5,10 +5,13 @@
     <div class="container-fluid">
         <div class="row">
             <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-                <h2 style="margin-bottom: 40px" class="d-none d-sm-block">Request to verify</h2>
 
                 <div class="jumbotron">
-                    <label for="Student" class="col-sm-6"><h3>Student Information</h3></label>
+                    <h2 style="margin-bottom: 40px" class="d-none d-sm-block">Request to verify</h2>
+
+                    <div class="form-group row">
+                        <label for="stakeholder" class="col-sm-6 col-form-label"><h3>Student Information</h3></label>
+                    </div>
 
                     <div class="row">
                         <div for="name" class="col-sm-6">Name</div>
@@ -39,56 +42,55 @@
                 </div>
 
                 <div class="jumbotron">
-                    <form>
-                        <div class="form-group row">
-                            <label for="stakeholder" class="col-sm-6 col-form-label"><h3>Stackholder Information</h3></label>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="name" class="col-sm-6 col-form-label">Name</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="name" placeholder="Name">
-                            </div>
-                        </div>
+                    @include('partials._error_message')
+                    {!! Form::open(array('route' => ['stakeholder.payment_request', $student->registration_no])) !!}
 
-                        <div class="form-group row">
-                            <label for="organization" class="col-sm-6 col-form-label">University/Employer</label>
-                            <div class="col-sm-6">
-                                <select class="form-control" id="university_name">
-                                    <option selected="true" disabled="disabled">Select Stakeholder Type</option>
-                                    <option>University Authority</option>
-                                    <option>Organization Authority</option>
-                                </select>
-                            </div>
-                        </div>
+                    <div class="form-group row">
+                        <label for="stakeholder" class="col-sm-6 col-form-label"><h3>Stackholder Information</h3></label>
+                    </div>
 
-                        <div class="form-group row">
-                            <label for="designation" class="col-sm-6 col-form-label">Designation</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="designation" placeholder="Program Officer">
-                            </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-6 col-form-label">Name</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Name">
                         </div>
+                    </div>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-6 col-form-label">Email</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="email" placeholder="example@gmail.com">
-                            </div>
+                    <div class="form-group row">
+                        <label for="institute" class="col-sm-6 col-form-label">Institute</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="institute" id="institute" placeholder="Institute">
                         </div>
+                    </div>
 
-                        <div class="form-group row">
-                            <label for="country" class="col-sm-6 col-form-label">Country</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="country" placeholder="Bangladesh">
-                            </div>
+                    <div class="form-group row">
+                        <label for="designation" class="col-sm-6 col-form-label">Designation</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="designation" id="designation" placeholder="CTO">
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <div align="right">
-                                <button type="submit" class="btn btn-success">Request</button>
-                            </div>
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-6 col-form-label">Email</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="email" id="email" placeholder="example@gmail.com">
                         </div>
-                    </form>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="country" class="col-sm-6 col-form-label">Country</label>
+                        <div class="col-sm-6">
+                            <select type="text" name="country" class="form-control" id="country">
+                                <option value="Bangladesh">Bangladesh</option>
+                                <option value="India">India</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    {{ Form::submit('Request', ['class' => 'btn btn-block btn-primary']) }}
+                    {!! Form::close() !!}
+
                 </div>
             </main>
         </div>

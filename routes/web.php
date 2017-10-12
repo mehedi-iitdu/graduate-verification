@@ -127,7 +127,8 @@ Route::post('student/add',['uses' => 'StudentController@storeStudent', 'as' => '
 Route::get('stakeholder/search', ['uses' => 'StudentController@searchStudentView', 'as' => 'stakeholder.search']);
 Route::post('stakeholder/search', ['uses' => 'StudentController@searchStudent', 'as' => 'stakeholder.search']);
 
-Route::get('stakeholder/payment/request/{id}', ['uses' => 'StudentController@paymentRequestView', 'as' => 'stakeholder.payment_request']);
+Route::get('stakeholder/payment/request/{registration_no}', ['uses' => 'StudentController@paymentRequestView', 'as' => 'stakeholder.payment_request']);
+Route::post('stakeholder/payment/request/{registration_no}', ['uses' => 'StudentController@storePaymentRequest', 'as' => 'stakeholder.payment_request']);
 
 // Route::get('student', ['uses' => 'StudentController@index', 'as' => 'student.index']);
 // Route::get('register', ['uses' => 'RegisterController@index', 'as' => 'register.index']);
