@@ -22,3 +22,7 @@ public/mix-manifest\.json
 _ide_helper\.php
 
 composer\.lock
+
+.env
+
+/tests
