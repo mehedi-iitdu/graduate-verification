@@ -18,6 +18,7 @@ class CreateCourseTable extends Migration
             $table->integer('department_id');
             $table->integer('semester_no');
             $table->string('name');
+            $table->string('code');
             $table->integer('credit');
             $table->timestamps();
         });

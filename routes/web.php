@@ -31,9 +31,9 @@ Route::prefix('dashboard')-> group(function (){
 
 	Route::get('manage_courses', ['uses' => 'CourseController@manageCourses', 'as' => 'manage_courses']);
 
-	Route::get('manage_courses_view', function(){
-		return view('user_dashboard.manage_courses_view');
-	});
+	Route::get('manage_results', ['uses' => 'ResultController@manageResults', 'as' => 'manage_manage_results']);
+
+
 
 	Route::get('manage_verification_view', function(){
 		return view('user_dashboard.manage_verification_view');
@@ -64,17 +64,6 @@ Route::prefix('dashboard')-> group(function (){
 	});
 });
 
-// activation
-Route::get('user_activation', function(){
-	return view('pages.user_activation');
-});
-
-// reset password
-Route::get('reset_password', function(){
-	return view('pages.reset_password');
-});
-
-// Route::auth();
 
 
 Route::get('login', ['uses' => 'Auth\LoginController@showLoginForm', 'as' => 'login']);
@@ -132,15 +121,7 @@ Route::post('stakeholder/payment/request/{registration_no}', ['uses' => 'Student
 // Route for profile
 Route::get('profile', ['uses' => 'UsersController@getProfile', 'as' => 'profile']);
 
+Route::get('result/add', ['uses' => 'ResultController@showAddResultForm', 'as' => 'result.add']);
 
+// Route::get('')
 
-Route::prefix('stakeholder')-> group(function (){
-
-	Route::get('student_search', function(){
-		return view('stakeholder.student_search');
-	});
-
-	Route::get('payment_request', function(){
-			return view('stakeholder.payment_request');
-	});
-});
