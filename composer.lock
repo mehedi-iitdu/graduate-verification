@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
+    "content-hash": "2a093785501ebb20af68425413d3d7ca",
+=======
     "content-hash": "b4cb7bc56100905db7c766d7c65241fb",
+>>>>>>> dev
     "packages": [
         {
             "name": "cocur/slugify",
@@ -3113,7 +3117,11 @@
                 "constructor",
                 "instantiate"
             ],
+<<<<<<< HEAD
+            "time": "2015-06-14T21:17:01+00:00"
+=======
             "time": "2017-07-22T11:58:36+00:00"
+>>>>>>> dev
         },
         {
             "name": "filp/whoops",
