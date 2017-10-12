@@ -3,7 +3,7 @@
 <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
   <ul class="nav nav-pills flex-column">
     <li class="nav-item">
-      <a class="nav-link active" href="/dashboard/manage_users_view">Manage Users</a>
+      <a class="nav-link active" href="/user/add">Manage Users</a>
     </li>
     <li class="nav-item">
       <div class="dropdown show">

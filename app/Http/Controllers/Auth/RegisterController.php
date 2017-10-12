@@ -89,7 +89,7 @@ class RegisterController extends Controller
             }
         }
 
-        return view('user_dashboard.manage_users_create', ['roles' => $roles]);
+        return view('user.create', ['roles' => $roles]);
     }
 
     public function storeUser(Request $request){
@@ -221,21 +221,4 @@ class RegisterController extends Controller
 
     }
 
-    public function checkEmail(Request $request){
-
-        if($request->ajax()){
-
-            $user=User::where('email',$request->email)->first();
-
-            if(empty($user))
-                return 'yes';
-
-            return 'no';
-        }
-    }
-
-    public function manageUsersView(Request $request) {
-        $roles = Role::pluck('role_name', 'id');
-        return view('user_dashboard.manage_users_view', ['roles' => $roles]);
-    }
 }
