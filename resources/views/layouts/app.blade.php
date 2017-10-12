@@ -32,6 +32,7 @@
             </div>
             
             @yield('content')
+            @yield('css')
         </div>
 
         {{-- cdn js --}}
