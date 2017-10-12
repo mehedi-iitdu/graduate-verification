@@ -13,9 +13,9 @@ class UniversityController extends Controller
     	return view('partials._dropdownOptions', ['data' => $universites, 'id' => 'university_id', 'title' => 'University']);
     }
 
-    public function showUniversityView(){
+    public function showUniversityAddForm(){
 
-      return view('user_dashboard.manage_university_create');
+      return view('university.create');
     }
 
     public function storeUniversity(Request $request){

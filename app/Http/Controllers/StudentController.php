@@ -16,7 +16,7 @@ class StudentController extends Controller
     //
 
     public function showStudentAddForm(){
-        return view('user_dashboard.manage_add_student');
+        return view('student.create');
     }
 
     public function searchStudentView() {
