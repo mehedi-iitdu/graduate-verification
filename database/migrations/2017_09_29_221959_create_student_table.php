@@ -20,7 +20,7 @@ class CreateStudentTable extends Migration
             $table->integer('department_id');
             $table->string('registration_no');
             $table->string('session');
-            $table->string('date_of_birth');
+            $table->date('date_of_birth');
             $table->timestamps();
         });
     }

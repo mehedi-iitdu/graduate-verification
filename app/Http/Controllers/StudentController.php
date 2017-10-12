@@ -57,7 +57,8 @@ class StudentController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'mobile_no' => 'required|string|max:11',
             'university_id' => 'required|integer',
-            'department_id' => 'required|integer'
+            'department_id' => 'required|integer',
+            'date_of_birth' => 'required|date'
         ]);
 
         $user = new User;
