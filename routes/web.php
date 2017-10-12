@@ -117,14 +117,17 @@ Route::get('course/create',['uses' => 'CourseController@addCourseView', 'as' => 
 
 Route::post('course/create',['uses' => 'CourseController@storeCourse', 'as' => 'course.create'] );
 
-<<<<<<< HEAD
+
 Route::get('university/add',['uses' => 'UniversityController@addUniversityView', 'as' => 'university.add'] );
 Route::post('university/add',['uses' => 'UniversityController@storeUniversity', 'as' => 'university.add'] );
-=======
+
 Route::get('student/add',['uses' => 'StudentController@showStudentAddForm', 'as' => 'student.add'] );
 
 Route::post('student/add',['uses' => 'StudentController@storeStudent', 'as' => 'student.store'] );
->>>>>>> dev
+
+Route::get('department/add',['uses' => 'DepartmentController@addDepartmentView', 'as' => 'department.add'] );
+Route::post('department/add',['uses' => 'DepartmentController@storeDepartment', 'as' => 'department.add'] );
+
 
 // Route::get('student', ['uses' => 'StudentController@index', 'as' => 'student.index']);
 // Route::get('register', ['uses' => 'RegisterController@index', 'as' => 'register.index']);
