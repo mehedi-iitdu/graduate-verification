@@ -16,7 +16,7 @@
                     <div class="form-group row">
                         <label for="email" class="col-sm-6 col-form-label">Email</label>
                         <div class="col-sm-6">
-                            <input type="email" class="form-control" id="email" placeholder="example@gmail.com">
+                            <input type="email" name="email" class="form-control" id="email" placeholder="example@gmail.com">
                         </div>
                     </div>
 

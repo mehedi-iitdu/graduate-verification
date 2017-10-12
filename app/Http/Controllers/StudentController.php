@@ -22,13 +22,12 @@ class StudentController extends Controller
     }
 
     public function searchStudent(Request $request) {
-        $student_info = Student::where('registration_no', $request->registration_no)->pluck('user_id', 'university_id', 'department_id', 'regiatration_no', 'session', 'date_of_birth')->first();
+        $student_info = Student::where('registration_no', $request->registration_no)->first();
         if($student_info == null) {
             flash('Registration number does not exist');
             return redirect()->route('stakeholder.search');
         }
-
-        $user_info = User::where('id', $student_info->user_id)->pluck('id', 'email')->first();
+        $user_info = User::where('id', $student_info->user_id)->first();
         if($user_info == null) {
             flash('User does not exist');
             return redirect()->route('stakeholder.search');
