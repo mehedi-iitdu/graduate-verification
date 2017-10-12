@@ -117,6 +117,9 @@ Route::get('course/create',['uses' => 'CourseController@addCourseView', 'as' => 
 
 Route::post('course/create',['uses' => 'CourseController@storeCourse', 'as' => 'course.create'] );
 
+Route::get('university/add',['uses' => 'UniversityController@addUniversityView', 'as' => 'university.add'] );
+Route::post('university/add',['uses' => 'UniversityController@storeUniversity', 'as' => 'university.add'] );
+
 // Route::get('student', ['uses' => 'StudentController@index', 'as' => 'student.index']);
 // Route::get('register', ['uses' => 'RegisterController@index', 'as' => 'register.index']);
 // Route::get('UGC', ['uses' => 'UGCController@index', 'as' => 'ugc.index']);
