@@ -77,6 +77,7 @@ class StudentController extends Controller
         $student->department_id = $request->department_id;
         $student->registration_no = $request->registration_no;
         $student->session = $request->session_no;
+        $student->date_of_birth = $request->date_of_birth;
 
         $student->save();
 
