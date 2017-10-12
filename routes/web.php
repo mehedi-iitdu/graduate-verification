@@ -21,6 +21,10 @@ Route::get('/', function(){
 	return view('pages.home');
 });
 
+Route::get('/report', function(){
+	return view('reports.reportIndex');
+});
+
 Route::prefix('dashboard')-> group(function (){
 
 	Route::get('manage_users_create', function(){
@@ -129,6 +133,9 @@ Route::post('stakeholder/search', ['uses' => 'StudentController@searchStudent', 
 
 Route::get('stakeholder/payment/request/{registration_no}', ['uses' => 'StudentController@paymentRequestView', 'as' => 'stakeholder.payment_request']);
 Route::post('stakeholder/payment/request/{registration_no}', ['uses' => 'StudentController@storePaymentRequest', 'as' => 'stakeholder.payment_request']);
+
+// Route for profile
+Route::get('profile', ['uses' => 'UsersController@getProfile', 'as' => 'profile']);
 
 // Route::get('student', ['uses' => 'StudentController@index', 'as' => 'student.index']);
 // Route::get('register', ['uses' => 'RegisterController@index', 'as' => 'register.index']);
