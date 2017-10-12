@@ -46,11 +46,13 @@
 
                 <div class="form-group">
                   <div class="row">
-                    <div class="col-md-2"><label for="university">University</label></div>
+                    <div class="col-md-2"><label for="university_id">University</label></div>
                     <div class="col-md-10">
                         <div id="university_list">
 
-                      
+                            <select class="form-control" id="university_id">
+                                <option>Select University</option>
+                            </select>
                           
                         </div>
                     </div>
