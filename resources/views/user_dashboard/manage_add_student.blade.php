@@ -38,8 +38,8 @@
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-2"><label for="date_of_birth">Session</label></div>
-                        <div class="col-md-10"><input class="form-control" required="" name="date_of_birth" type="date" id="date_of_birth">
+                        <div class="col-md-2"><label for="date_of_birth">Date of Birth</label></div>
+                        <div class="col-md-10"><input class="form-control" required="" name="date_of_birth" type="text" id="date_of_birth">
                         </div>
                     </div>
                 </div>
@@ -54,11 +54,13 @@
 
                 <div class="form-group">
                   <div class="row">
-                    <div class="col-md-2"><label for="university">University</label></div>
+                    <div class="col-md-2"><label for="university_id">University</label></div>
                     <div class="col-md-10">
                         <div id="university_list">
 
-                      
+                            <select class="form-control" id="university_id">
+                                <option>Select University</option>
+                            </select>
                           
                         </div>
                     </div>
