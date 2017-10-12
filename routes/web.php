@@ -56,8 +56,8 @@ Route::prefix('dashboard')-> group(function (){
 	});
 
 	Route::get('manage_department_create', function(){
-		return view('user_dashboard.manage_department_create');
 	});
+		return view('user_dashboard.manage_department_create');
 
 	Route::get('manage_add_student', function(){
 		return view('user_dashboard.manage_add_student');
