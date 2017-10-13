@@ -82,6 +82,13 @@
          	</div>
 
 
+         	<div class="row">
+         		<div class="col-md-12">
+         			<canvas id="doughnut-chart" width="800" height="450"></canvas>
+         		</div>
+         	</div>
+
+
         	<div class="row">
         		<div class="col-md-12">
         			<div class="table-responsive">
@@ -131,7 +138,7 @@
 
 @section('script')
 
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 	<script type="text/javascript" src="{{asset('js/reportJS/bootstrap.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/reportJS/jquery.metisMenu.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/reportJS/jquery.slimscroll.min.js')}}"></script>
@@ -153,6 +160,27 @@
 
  -->
     <script>
+
+    	new Chart(document.getElementById("doughnut-chart"), {
+		    type: 'doughnut',
+		    data: {
+		      labels: ["Total Student", "Graduated Students", "Requested for Verification", "Verification on Progress", "Verified"],
+		      datasets: [
+		        {
+		          label: "Number of students",
+		          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+		          data: [10000,8000,1000,100,900]
+		        }
+		      ]
+		    },
+		    options: {
+		      title: {
+		        display: true,
+		        text: 'Overview Report of Students'
+		      }
+		    }
+		});
+
         $(document).ready(function(){
 
         	$.ajaxSetup({
