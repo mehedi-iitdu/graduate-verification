@@ -123,5 +123,7 @@ Route::get('profile', ['uses' => 'UsersController@getProfile', 'as' => 'profile'
 
 Route::get('result/add', ['uses' => 'ResultController@showAddResultForm', 'as' => 'result.add']);
 
+Route::post('marks_fields', ['uses' => 'ResultController@getMarksInputField', 'as' => 'marks_fields']);
+
 // Route::get('')
 
