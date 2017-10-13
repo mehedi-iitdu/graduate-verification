@@ -10,11 +10,11 @@ class User_activation extends Model
 {
     protected $table='user_activations';
 
-    protected $fillable=['user_id','token'];
+    protected $fillable=['user_id','token','created_at'];
 
     public $timestamps = false;
 
-    public static function generateActivation($user)
+    /*public static function generateActivation($user)
     {
     	if(User_activation::shouldSend($user)){
     		$token=str_random(40);
@@ -32,5 +32,5 @@ class User_activation extends Model
     public static function shouldSend($user){
         $activation=User_activation::where('user_id',$user->id)->first();
         return $activation === null || strtotime($activation->created_at) + 60*60*24 < time();
-    }
+    }*/
 }
