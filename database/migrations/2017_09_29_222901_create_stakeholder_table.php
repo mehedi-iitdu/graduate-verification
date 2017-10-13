@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStackholderTable extends Migration
+class CreateStakeholderTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateStackholderTable extends Migration
      */
     public function up()
     {
-        Schema::create('stackholder', function (Blueprint $table) {
+        Schema::create('stakeholder', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('institute');

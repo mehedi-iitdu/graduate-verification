@@ -7,9 +7,15 @@ use App\Course;
 
 class CourseController extends Controller
 {
-    public function addCourseView(){
-        return view('course_create');
+    
+    public function manageCourses(){
+        return view('user_dashboard.manage_courses');
     }
+
+    public function showCourseCreateForm(){
+        return view('course.create');
+    }
+
 
     public function storeCourse(Request $request){
 

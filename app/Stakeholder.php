@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Verification;
 
-class Stackholder extends Model
+class Stakeholder extends Model
 {
     protected $table = 'stackholder';
 

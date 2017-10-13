@@ -10,10 +10,15 @@
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
         {{-- cdn css --}}
-        {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"> --}}
+        {{--  --}}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
         {{-- Compiled CSS --}}
+        <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('css/datatables.min.css')}}">
+
+        <link rel="stylesheet" type="text/css" href="{{asset('css/animate.css')}}">
 
         {{-- MD Bootstrap CSS --}}
         <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css"> -->
@@ -21,13 +26,15 @@
     <body>
     	@include('inc.navbar')
         @include('inc.side_navbar')
-        <div class="jumbotron">
-        	<div id="alert" class="text-center col-md-6">
-                @include('flash::message')
-            </div>
-            
+
+    	<div id="alert" class="text-center col-md-6">
+            @include('flash::message')
+        </div>
+        
+        <div class="container-fluid">
             @yield('content')
         </div>
+        @yield('css')
 
         {{-- cdn js --}}
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
