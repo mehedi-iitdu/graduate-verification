@@ -37,12 +37,9 @@ Route::post('role_based_info',['uses' => 'RoleController@getRoleBasedInfo', 'as'
 
 Route::get('profile', ['uses' => 'UsersController@getProfile', 'as' => 'profile']);
 
-<<<<<<< HEAD
+
 	Route::get('manage_results', ['uses' => 'ResultController@manageResults', 'as' => 'manage_manage_results']);
 
-
-=======
->>>>>>> dev
 
 Route::get('login', ['uses' => 'Auth\LoginController@showLoginForm', 'as' => 'login']);
 Route::post('login', ['uses' => 'Auth\LoginController@login', 'as' => 'login']);
@@ -61,14 +58,13 @@ Route::prefix('user')-> group(function (){
 
 	Route::post('send_activation_code',['uses' => 'Auth\RegisterController@activationCodeSend', 'as' => 'user.send_activation_code']);
 
-<<<<<<< HEAD
-=======
+
 	Route::get('reset_password/{email}/{token}',['uses' => 'Auth\ResetPasswordController@showResetPasswordForm', 'as' => 'user.reset_password']);
 
 	Route::post('reset_password',['uses' => 'Auth\ResetPasswordController@resetPassword', 'as' => 'password.reset']);
 
 	Route::post('list',['uses' => 'UsersController@getUserList', 'as' => 'user.list'] );
->>>>>>> dev
+
 
 });
 
@@ -124,12 +120,12 @@ Route::prefix('university')-> group(function (){
 
 Route::get('result/add', ['uses' => 'ResultController@showAddResultForm', 'as' => 'result.add']);
 
-<<<<<<< HEAD
+
 Route::post('marks_fields', ['uses' => 'ResultController@getMarksInputField', 'as' => 'marks_fields']);
 
 // Route::get('')
 
-=======
+
 Route::prefix('payment')-> group(function (){
 
 	Route::get('payment/checkout', 'PaymentController@getCheckout');
@@ -139,4 +135,3 @@ Route::prefix('payment')-> group(function (){
 	Route::get('payment/cancel', 'PaymentController@getCancel');
 
 });
->>>>>>> dev
