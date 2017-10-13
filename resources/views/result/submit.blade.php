@@ -11,7 +11,7 @@
           <hr>
           <div class="jumbotron">
             @include('partials._error_message')
-            {!! Form::open() !!}
+            {!! Form::open(array('route' => 'result.submit')) !!}
             <input type="hidden" name="department_id" id="department_id" value="{{ $department_id }}">
             <div class="row">
               <div class="form-group col-md-6">
@@ -28,8 +28,10 @@
                   <p id="student_registration_no_error" class="error pull-right"></p>
               </div>
             </div>
-            <button class="btn btn-primary pull-right" id='btn-proceed' >Proceed</button>                                                                                                                                                                                                                                                                                                                                 
-
+            <button class="btn btn-primary pull-right" id='btn-proceed' >Proceed</button>    <br><br> <br><br>                                                                                                                                                                  
+            <div id="marks_field">
+                
+            </div>                                                                                                                                          
 
             {!! Form::close() !!}
 
@@ -37,40 +39,7 @@
           </div>
 
           <div>
-            <table class="table table-bordered table-responsive">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Course Name</th>
-                  <th>course Code</th>
-                  <th>Credit</th>
-                  <th>GPA</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Data Science</td>
-                  <td>CSE-803</td>
-                  <td>3</td>
-                  <td>3.6</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Data Science</td>
-                  <td>CSE-803</td>
-                  <td>3</td>
-                  <td>3.6</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Data Science</td>
-                  <td>CSE-803</td>
-                  <td>3</td>
-                  <td>3.6</td>
-                </tr>
-              </tbody>
-            </table>
+            
           </div>
         </main>
       </div>
@@ -96,6 +65,7 @@
         }
         
         $student_registration_no = $('#student_registration_no').val();
+
         if($student_registration_no==''){
           $('#student_registration_no_error').text("Enter student's registration no.");
           return false; 
@@ -104,12 +74,25 @@
           $('#student_registration_no_error').text('');
         }
 
-        $.post("{{ URL::route('marks_fields') }}", {department_id:$('#department_id').val(), semester_no:$semester_no}, function(data){
-          console.log(data);
-
+        $.post("{{ URL::route('marks_fields') }}", {department_id:$department_id, semester_no:$semester_no, student_registration_no:$student_registration_no}, function(data){
+            $('#marks_field').html(data);
         });
         return false;
       });
+
     });
   </script>
+
+  <script type="text/javascript">
+
+
+      function remove(element){
+        if($('#marks_table >tbody >tr').length==1){
+            $('#mark_div').remove();
+            return;
+        }
+        $(element).parent().parent().remove();
+
+      }
+    </script>
 @endsection

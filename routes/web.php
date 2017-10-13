@@ -38,12 +38,12 @@ Route::post('role_based_info',['uses' => 'RoleController@getRoleBasedInfo', 'as'
 Route::get('profile', ['uses' => 'UsersController@getProfile', 'as' => 'profile']);
 
 
-	Route::get('manage_results', ['uses' => 'ResultController@manageResults', 'as' => 'manage_manage_results']);
+Route::get('manage_results', ['uses' => 'ResultController@manageResults', 'as' => 'manage_manage_results']);
 
 
 Route::get('login', ['uses' => 'Auth\LoginController@showLoginForm', 'as' => 'login']);
 Route::post('login', ['uses' => 'Auth\LoginController@login', 'as' => 'login']);
-Route::get('logout', 'Auth\LoginController@logout');
+Route::get('logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'logout']);
 
 Route::prefix('user')-> group(function (){
 
@@ -118,12 +118,15 @@ Route::prefix('university')-> group(function (){
 	Route::post('create',['uses' => 'UniversityController@storeUniversity', 'as' => 'university.store'] );
 });
 
-Route::get('result/add', ['uses' => 'ResultController@showAddResultForm', 'as' => 'result.add']);
+Route::prefix('result')->group(function(){
 
+	Route::get('submit', ['uses' => 'ResultController@showAddResultForm', 'as' => 'result.submit']);
 
-Route::post('marks_fields', ['uses' => 'ResultController@getMarksInputField', 'as' => 'marks_fields']);
+	Route::post('submit', ['uses' => 'ResultController@submitResult', 'as' => 'result.submit']);
 
-// Route::get('')
+	Route::post('marks_fields', ['uses' => 'ResultController@getMarksInputField', 'as' => 'marks_fields']);
+});
+
 
 
 Route::prefix('payment')-> group(function (){
