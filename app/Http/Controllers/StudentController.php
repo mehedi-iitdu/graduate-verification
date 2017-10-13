@@ -137,4 +137,24 @@ class StudentController extends Controller
         return redirect()->route('student.create');
 
     }
+
+    function getDynamicReportStudentData(Request $request) {
+        $students = Student::all();
+        if($request->university_id)
+            $students = $students->where('university_id', $request->university_id);
+        if($request->department_id)
+            $students = $students->where('department_id', $request->department_id);
+        if($request->session_no)
+            $students = $students->where('session', $request->session_no);
+
+        $ids = $students->pluck('id');
+        $filtered = $students->whereIn('id', $ids);
+
+        return array(
+            'num_of_student' => $students->count(),
+            'verification_request' => $filtered->where('verification_status', 'Requested')->count(),
+            'verification_process' => $filtered->where('verification_status', 'In Progress')->count(),
+            'verified' => $filtered->where('verification_status', 'In Progress')->count()
+        );
+    }
 }

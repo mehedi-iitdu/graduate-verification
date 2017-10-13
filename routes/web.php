@@ -92,7 +92,7 @@ Route::prefix('stakeholder')-> group(function (){
 
 Route::prefix('department')-> group(function (){
 
-	Route::post('list', ['uses' => 'DepartmentController@getDepartmentlist', 'as' => 'department.list']);
+	Route::post('list', ['uses' => 'DepartmentController@get_list', 'as' => 'department.list']);
 
 	Route::post('semesterList', ['uses' => 'DepartmentController@getSemesterList', 'as' => 'department.semesterList']);
 
@@ -119,5 +119,11 @@ Route::prefix('payment')-> group(function (){
 	Route::get('payment/done', 'PaymentController@getDone');
 
 	Route::get('payment/cancel', 'PaymentController@getCancel');
+
+});
+
+Route::prefix('dynamic_report')-> group(function (){
+
+    Route::post('student', ['uses' => 'StudentController@getDynamicReportStudentData', 'as' => 'dynamic_report.student']);
 
 });
