@@ -12,9 +12,9 @@ class UniversityController extends Controller
     	$universites = University::pluck('name', 'id');
     	return view('partials._dropdownOptions', ['data' => $universites, 'id' => 'university_id', 'title' => 'University']);
     }
-
-    public function showUniversityAddForm(){
-
+  
+    public function showUniversityCreateForm(){
+      
       return view('university.create');
     }
 
@@ -35,6 +35,6 @@ class UniversityController extends Controller
 
       flash('University added successfully !')->success();
 
-      return redirect()->route('university.show');
+      return redirect()->route('university.create');
     }
 }

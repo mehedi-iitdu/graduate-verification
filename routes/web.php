@@ -21,109 +21,122 @@ Route::get('/', function(){
 	return view('pages.home');
 });
 
-Route::get('/report', function(){
+Route::get('/dashboard', function(){
+	return view('dashboard');
+});
+
+Route::get('report', function(){
 	return view('reports.reportIndex');
 });
 
-Route::prefix('dashboard')-> group(function (){
+Route::get('reportDetails', function(){
+	return view('reports.detailedReport');
+});
 
-	Route::get('manage_users', ['uses' => 'UsersController@manageUsers', 'as' => 'manage_users']);
+Route::post('role_based_info',['uses' => 'RoleController@getRoleBasedInfo', 'as' => 'role_based_info'] );
 
-	Route::get('manage_courses', ['uses' => 'CourseController@manageCourses', 'as' => 'manage_courses']);
+Route::get('profile', ['uses' => 'UsersController@getProfile', 'as' => 'profile']);
 
+<<<<<<< HEAD
 	Route::get('manage_results', ['uses' => 'ResultController@manageResults', 'as' => 'manage_manage_results']);
 
 
-
-	Route::get('manage_verification_view', function(){
-		return view('user_dashboard.manage_verification_view');
-	});
-
-	Route::get('manage_verification_verify', function(){
-		return view('user_dashboard.manage_verification_verify');
-	});
-
-	Route::get('manage_university_create', function(){
-		return view('user_dashboard.manage_university_create');
-	});
-
-	Route::get('manage_university_view', function(){
-		return view('user_dashboard.manage_university_view');
-	});
-
-	Route::get('manage_department_view', function(){
-		return view('user_dashboard.manage_department_view');
-	});
-
-	Route::get('manage_department_create', function(){
-	});
-		return view('user_dashboard.manage_department_create');
-
-	Route::get('manage_add_student', function(){
-		return view('user_dashboard.manage_add_student');
-	});
-});
-
-
+=======
+>>>>>>> dev
 
 Route::get('login', ['uses' => 'Auth\LoginController@showLoginForm', 'as' => 'login']);
 Route::post('login', ['uses' => 'Auth\LoginController@login', 'as' => 'login']);
 Route::get('logout', 'Auth\LoginController@logout');
 
-Route::get('user/add', ['uses' => 'Auth\RegisterController@showRegistrationForm', 'as' => 'user.add']);
+Route::prefix('user')-> group(function (){
 
-Route::post('user/add', ['uses' => 'Auth\RegisterController@storeUser', 'as' => 'user.add']);
+	Route::get('create', ['uses' => 'Auth\RegisterController@showRegistrationForm', 'as' => 'user.create']);
 
-Route::get('user/activation',['uses' => 'Auth\RegisterController@showActivationForm', 'as' => 'user.activation']);
-Route::post('user/activation',['uses' => 'Auth\RegisterController@userActivate', 'as' => 'user.activation']);
+	Route::post('create', ['uses' => 'Auth\RegisterController@storeUser', 'as' => 'user.store']);
 
-Route::get('user/send_activation_code',['uses' => 'Auth\RegisterController@showSendActivationCodeForm', 'as' => 'user.send_activation_code']);
+	Route::get('activation',['uses' => 'Auth\RegisterController@showActivationForm', 'as' => 'user.activation']);
+	Route::post('activation',['uses' => 'Auth\RegisterController@userActivate', 'as' => 'user.activation']);
 
-Route::post('user/send_activation_code',['uses' => 'Auth\RegisterController@activationCodeSend', 'as' => 'user.send_activation_code']);
+	Route::get('send_activation_code',['uses' => 'Auth\RegisterController@showSendActivationCodeForm', 'as' => 'user.send_activation_code']);
 
-Route::get('user/reset_password/{email}/{token}',['uses' => 'Auth\ResetPasswordController@showResetPasswordForm', 'as' => 'user.reset_password']);
+	Route::post('send_activation_code',['uses' => 'Auth\RegisterController@activationCodeSend', 'as' => 'user.send_activation_code']);
 
-Route::post('user/reset_password',['uses' => 'Auth\ResetPasswordController@resetPassword', 'as' => 'password.reset']);
+<<<<<<< HEAD
+=======
+	Route::get('reset_password/{email}/{token}',['uses' => 'Auth\ResetPasswordController@showResetPasswordForm', 'as' => 'user.reset_password']);
 
-Route::post('user/list',['uses' => 'UsersController@getUserList', 'as' => 'user.list'] );
+	Route::post('reset_password',['uses' => 'Auth\ResetPasswordController@resetPassword', 'as' => 'password.reset']);
+
+	Route::post('list',['uses' => 'UsersController@getUserList', 'as' => 'user.list'] );
+>>>>>>> dev
+
+});
 
 
+Route::prefix('student')-> group(function (){
 
-Route::post('role_based_info',['uses' => 'RoleController@getRoleBasedInfo', 'as' => 'role_based_info'] );
+	Route::get('create',['uses' => 'StudentController@showStudentCreateForm', 'as' => 'student.create'] );
 
-Route::post('university/list', ['uses' => 'UniversityController@getUniversityList', 'as' => 'university.list']);
+	Route::post('create',['uses' => 'StudentController@storeStudent', 'as' => 'student.store'] );
 
-Route::post('department/list', ['uses' => 'DepartmentController@get_list', 'as' => 'department.list']);
+});
 
-Route::post('department/semesterList', ['uses' => 'DepartmentController@getSemesterList', 'as' => 'department.semesterList']);
 
-Route::get('department/add', ['uses' => 'DepartmentController@showDepartmentAddForm', 'as' => 'department.add']);
+Route::prefix('course')-> group(function (){
 
-Route::post('department/add', ['uses' => 'DepartmentController@storeDepartment', 'as' => 'department.store']);
+	Route::get('create',['uses' => 'CourseController@showCourseCreateForm', 'as' => 'course.create'] );
+	Route::post('create',['uses' => 'CourseController@storeCourse', 'as' => 'course.store'] );
+});
 
-Route::get('course/add',['uses' => 'CourseController@showCourseAddForm', 'as' => 'course.create'] );
 
-Route::post('course/add',['uses' => 'CourseController@storeCourse', 'as' => 'course.create'] );
+Route::prefix('stakeholder')-> group(function (){
 
-Route::get('university/add',['uses' => 'UniversityController@showUniversityAddForm', 'as' => 'university.add'] );
-Route::post('university/add',['uses' => 'UniversityController@storeUniversity', 'as' => 'university.add'] );
+	Route::get('search', ['uses' => 'StudentController@searchStudentView', 'as' => 'stakeholder.search']);
+	Route::post('search', ['uses' => 'StudentController@searchStudent', 'as' => 'stakeholder.search']);
 
-Route::get('student/add',['uses' => 'StudentController@showStudentAddForm', 'as' => 'student.add'] );
+	Route::get('payment/request/{registration_no}', ['uses' => 'StudentController@paymentRequestView', 'as' => 'stakeholder.payment_request']);
 
-Route::post('student/add',['uses' => 'StudentController@storeStudent', 'as' => 'student.store'] );
+	Route::post('payment/request/{registration_no}', ['uses' => 'StudentController@storePaymentRequest', 'as' => 'stakeholder.payment_request']);
 
-Route::get('stakeholder/search', ['uses' => 'StudentController@searchStudentView', 'as' => 'stakeholder.search']);
-Route::post('stakeholder/search', ['uses' => 'StudentController@searchStudent', 'as' => 'stakeholder.search']);
+});
 
-Route::get('stakeholder/payment/request/{registration_no}', ['uses' => 'StudentController@paymentRequestView', 'as' => 'stakeholder.payment_request']);
-Route::post('stakeholder/payment/request/{registration_no}', ['uses' => 'StudentController@storePaymentRequest', 'as' => 'stakeholder.payment_request']);
 
-// Route for profile
-Route::get('profile', ['uses' => 'UsersController@getProfile', 'as' => 'profile']);
+Route::prefix('department')-> group(function (){
+
+	Route::post('list', ['uses' => 'DepartmentController@getDepartmentlist', 'as' => 'department.list']);
+
+	Route::post('semesterList', ['uses' => 'DepartmentController@getSemesterList', 'as' => 'department.semesterList']);
+
+	Route::get('create', ['uses' => 'DepartmentController@showDepartmentCreateForm', 'as' => 'department.create']);
+
+	Route::post('create', ['uses' => 'DepartmentController@storeDepartment', 'as' => 'department.store']);
+});
+
+
+Route::prefix('university')-> group(function (){
+
+	Route::post('list', ['uses' => 'UniversityController@getUniversityList', 'as' => 'university.list']);
+
+	Route::get('create',['uses' => 'UniversityController@showUniversityCreateForm', 'as' => 'university.create'] );
+
+	Route::post('create',['uses' => 'UniversityController@storeUniversity', 'as' => 'university.store'] );
+});
 
 Route::get('result/add', ['uses' => 'ResultController@showAddResultForm', 'as' => 'result.add']);
 
+<<<<<<< HEAD
 Route::post('marks_fields', ['uses' => 'ResultController@getMarksInputField', 'as' => 'marks_fields']);
 
 // Route::get('')
 
+=======
+Route::prefix('payment')-> group(function (){
+
+	Route::get('payment/checkout', 'PaymentController@getCheckout');
+
+	Route::get('payment/done', 'PaymentController@getDone');
+
+	Route::get('payment/cancel', 'PaymentController@getCancel');
+
+});
+>>>>>>> dev

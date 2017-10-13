@@ -12,7 +12,7 @@
 
           <div class="jumbotron">
             @include('partials._error_message')
-            {!! Form::open(array('route' => 'university.add')) !!}
+            {!! Form::open(array('route' => 'university.create')) !!}
               <div class="form-group row">
                 <label for="name" class="col-sm-4 col-form-label">University Name</label>
                 <div class="col-sm-8">

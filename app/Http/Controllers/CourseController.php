@@ -12,7 +12,7 @@ class CourseController extends Controller
         return view('user_dashboard.manage_courses');
     }
 
-    public function showCourseAddForm(){
+    public function showCourseCreateForm(){
         return view('course.create');
     }
 
