@@ -25,12 +25,10 @@ Route::get('/dashboard', function(){
 	return view('dashboard');
 });
 
-Route::get('report', function(){
-	return view('reports.reportIndex');
-});
+Route::prefix('report')-> group(function (){
 
-Route::get('reportDetails', function(){
-	return view('reports.detailedReport');
+    Route::get('index',['uses' => 'DynamicReportController@indexView', 'as' => 'report.indexView'] );
+    Route::get('details/{query}',['uses' => 'DynamicReportController@detailedView', 'as' => 'report.detailedView'] );
 });
 
 Route::post('role_based_info',['uses' => 'RoleController@getRoleBasedInfo', 'as' => 'role_based_info'] );
