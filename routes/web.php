@@ -29,6 +29,10 @@ Route::get('report', function(){
 	return view('reports.reportIndex');
 });
 
+Route::get('reportDetails', function(){
+	return view('reports.detailedReport');
+});
+
 Route::post('role_based_info',['uses' => 'RoleController@getRoleBasedInfo', 'as' => 'role_based_info'] );
 
 Route::get('profile', ['uses' => 'UsersController@getProfile', 'as' => 'profile']);
