@@ -145,7 +145,7 @@ class RegisterController extends Controller
 
         flash('User successfully added!')->success();
 
-        return redirect()->route('user.add');
+        return redirect()->route('user.create');
 
     }
 

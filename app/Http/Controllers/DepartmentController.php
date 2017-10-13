@@ -8,7 +8,7 @@ use App\Department;
 class DepartmentController extends Controller
 {
 
-    public function showDepartmentAddForm(){
+    public function showDepartmentCreateForm(){
         return view('department.create');
     }
 
@@ -40,7 +40,7 @@ class DepartmentController extends Controller
 
     public function addDepartmentView(){
 
-      return view('user_dashboard.manage_department_create');
+      return view('department.view');
     }
 
     public function storeDepartment(Request $request){
@@ -60,7 +60,7 @@ class DepartmentController extends Controller
 
       flash('Department added successfully !')->success();
 
-      return redirect()->route('department.add');
+      return redirect()->route('department.create');
 
     }
 

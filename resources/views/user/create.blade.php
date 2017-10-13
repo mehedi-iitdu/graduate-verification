@@ -11,7 +11,7 @@
 
           <div class="jumbotron">
             @include('partials._error_message')
-            {!! Form::open(array('route' => 'user.add')) !!}
+            {!! Form::open(array('route' => 'user.create')) !!}
 
             <div class="form-group">
               <div class="row">
