@@ -10,71 +10,35 @@
          			<h2 style="margin-bottom: 40px" class="d-none d-sm-block">Select and search</h2>
 		            <div class="jumbotron">
 
-		              @include('partials._error_message')
-		              {!! Form::open(array('route' => 'student.store')) !!}
-		                
-		                <div class="row">
-		                	<div class="col-md-6 form-group">
-			                  <div class="row">
-			                    <div class="col-md-2"><label for="university">University: </label></div>
-			                    <div class="col-md-10">
-			                        <div id="university_list">
+					{!! Form::open(array('id' => 'search_form')) !!}
 
-			                      
-			                          
-			                        </div>
-			                    </div>
-			                  </div>
-			                </div>
+					<div class="form-group row">
+						<div class="col-md-2"><label for="university_id">University </label></div>
+						<div class="col-md-10" id="university_list" name="university_id">
+							<select class="form-control">
+								<option>Select University</option>
+							</select>
+						</div>
+					</div>
 
-			                <div class="col-md-6 form-group">
-			                  <div class="row">
-			                    <div class="col-md-2"><label for="department">Department: </label></div>
-			                    <div class="col-md-10">
-			                      <div id="department_list">
-			                        
-			                        <select class="form-control" id="user_role">
-			                            <option>Select Department</option>
-			                        </select>
-
-			                      </div>
-			                    </div>
-			                  </div>
-			                </div>
+					<div class="form-group row">
+						<div class="col-md-2"><label for="department_id">Department </label></div>
+						<div class="col-md-10" id="department_list">
+							<select class="form-control" name="department_id">
+								<option>Select Department</option>
+							</select>
+						</div>
+					</div>
 
 
-			                <div class="col-md-6 form-group">
-			                    <div class="row">
-			                        <div class="col-md-2"><label for="session_no">Session: </label></div>
-			                        <div class="col-md-10"><input class="form-control" required="" name="session_no" type="text" id="session_no">
-			                        </div>
-			                    </div>
-			                </div>
+					<div class="form-group row">
+						<div class="col-md-2"><label for="session_no">Session </label></div>
+						<div class="col-md-10"><input class="form-control" name="session_no" type="text" id="session_no">
+						</div>
+					</div>
 
-			                <div class="col-md-6 form-group">
-			                    <div class="row">
-			                        <div class="col-md-2"><label for="year_no">Year: </label></div>
-			                        <div class="col-md-10"><input class="form-control" required="" name="year_no" type="Number" id="year_no">
-			                        </div>
-			                    </div>
-			                </div>
-
-
-			                <div class="col-md-3 col-md-offset-9 form-group">
-			                    <div class="row">
-			                        <div class="col-md-12">
-			                            <button type="submit" class="btn btn-primary btn-block">Search</button>
-			                        </div>
-			                    </div>
-			                </div>
-
-		                </div>
-		                
-		                
-
-		                
-		                
-		              {!! Form::open(array('route' => 'student.store')) !!}
+					{{ Form::submit('Search', ['class' => 'btn btn-block btn-primary']) }}
+					{!! Form::open() !!}
 		            
 		            </div>
          		</div>
@@ -82,14 +46,7 @@
          	</div>
 
 
-         	<div class="row">
-         		<div class="col-md-12">
-         			<canvas id="doughnut-chart" width="800" height="450"></canvas>
-         		</div>
-         	</div>
-
-
-        	<div class="row">
+        	<div class="row" hidden="true" id="data">
         		<div class="col-md-12">
         			<div class="table-responsive">
         				<table class="table table-striped table-bordered table-hover dataTables-example" >
@@ -102,23 +59,19 @@
 	                    <tbody>
 	                    <tr>
 	                        <td>Total Student</td>
-	                        <td class="center">10,000</td>
-	                    </tr>
-	                    <tr>
-	                        <td>Graduated Students</td>
-	                        <td class="center">8,000</td>
+	                        <td class="center" id="num_of_student">10,000</td>
 	                    </tr>
 	                    <tr>
 	                        <td>Requested for Verification</td>
-	                        <td>1,000</td>
+	                        <td id="verification_request">1,000</td>
 	                    </tr>
 	                    <tr>
 	                        <td>Verification on Progress</td>
-	                        <td class="center">100</td>
+	                        <td class="center" id="verification_process">100</td>
 	                    </tr>
 	                    <tr>
 	                        <td>Verified</td>
-	                        <td class="center">900</td>
+	                        <td class="center" id="verified">900</td>
 	                    </tr>
 	                    </tbody>
 	                    </table>
@@ -127,7 +80,11 @@
         		
         	</div>
 
-        
+			<div class="row">
+				<div class="col-md-12">
+					<canvas id="doughnut-chart" width="800" height="450"></canvas>
+				</div>
+			</div>
         
         </main>
 
@@ -139,47 +96,10 @@
 @section('script')
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-	<script type="text/javascript" src="{{asset('js/reportJS/bootstrap.min.js')}}"></script>
-	<script type="text/javascript" src="{{asset('js/reportJS/jquery.metisMenu.js')}}"></script>
-	<script type="text/javascript" src="{{asset('js/reportJS/jquery.slimscroll.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/reportJS/datatables.min.js')}}"></script>
-	<script type="text/javascript" src="{{asset('js/reportJS/inspinia.js')}}"></script>
-	<script type="text/javascript" src="{{asset('js/reportJS/pace.min.js')}}"></script>
 
 
-
-	<!-- 
-
-	<link rel="script" type="text/javascript" href="{{asset('js/reportJS/jquery-3.1.1.min.js')}}">
-	<link rel="script" type="text/javascript" href="{{asset('js/reportJS/bootstrap.min.js')}}">
-    <link rel="script" type="text/javascript" href="{{asset('js/reportJS/jquery.metisMenu.js')}}">
-    <link rel="script" type="text/javascript" href="{{asset('js/reportJS/jquery.slimscroll.min.js')}}">
-    <link rel="script" type="text/javascript" href="{{asset('js/reportJS/datatables.min.js')}}">
-	<link rel="script" type="text/javascript" href="{{asset('js/reportJS/inspinia.js')}}">
-	<link rel="script" type="text/javascript" href="{{asset('js/reportJS/pace.min.js')}}">
-
- -->
     <script>
-
-    	new Chart(document.getElementById("doughnut-chart"), {
-		    type: 'doughnut',
-		    data: {
-		      labels: ["Total Student", "Graduated Students", "Requested for Verification", "Verification on Progress", "Verified"],
-		      datasets: [
-		        {
-		          label: "Number of students",
-		          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-		          data: [10000,8000,1000,100,900]
-		        }
-		      ]
-		    },
-		    options: {
-		      title: {
-		        display: true,
-		        text: 'Overview Report of Students'
-		      }
-		    }
-		});
 
         $(document).ready(function(){
 
@@ -187,9 +107,46 @@
 				headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
 			});
 
-			$(function () {
-				$('#date_of_birth').datepicker({});
-			});
+            $( "#search_form" ).submit(function( event ) {
+                $.post("{{ URL::route('dynamic_report.student') }}",{
+                    university_id: $('#university_id option:selected').val(),
+                    department_id: $('#department_id option:selected').val(),
+                    session_no: $('#session_no').val()
+				},function(data){
+					$("#num_of_student").text(data.num_of_student);
+                    $("#verification_request").text(data.verification_request);
+                    $("#verification_process").text(data.verification_process);
+                    $("#verified").text(data.verified);
+
+                    $('#data').attr('hidden', false);
+
+                    new Chart(document.getElementById("doughnut-chart"), {
+                        type: 'doughnut',
+                        data: {
+                            labels: ["Total Student", "Requested for Verification", "Verification on Progress", "Verified"],
+                            datasets: [
+                                {
+                                    label: "Number of students",
+                                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                                    data: [
+                                        data.num_of_student,
+                                        data.verification_request,
+                                        data.verification_process,
+                                        data.verified
+									]
+                                }
+                            ]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                text: 'Overview Report of Students'
+                            }
+                        }
+                    });
+                });
+                event.preventDefault();
+            });
 
 
 			$.post("{{ URL::route('university.list') }}",{},function(data){
