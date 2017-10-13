@@ -103,7 +103,7 @@
 	                    </tr>
 	                    <tr>
 	                        <td>Requested for Verification</td>
-	                        <td>1000</td>
+	                        <td>1,000</td>
 	                    </tr>
 	                    <tr>
 	                        <td>Verification on Progress</td>
