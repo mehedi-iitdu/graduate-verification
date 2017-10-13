@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Student;
 use App\Registrar;
+use App\Role;
 
 class UsersController extends Controller
 {
@@ -16,7 +17,7 @@ class UsersController extends Controller
     public function getUserList(Request $request){
 
 
-
+    	return "hello";	
     }
 
     public function getProfile(Request $request){
@@ -40,6 +41,11 @@ class UsersController extends Controller
 
     		return view('profile.ugc', ['ugc' => $student]);
     	}*/
+    }
+
+    public function manageUsers(Request $request) {
+        $roles = Role::pluck('role_name', 'id');
+        return view('user_dashboard.manage_users_view', ['roles' => $roles]);
     }
 
 }

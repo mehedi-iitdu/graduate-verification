@@ -16,7 +16,7 @@
         <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css"> -->
     </head>
         <body>
-            @include('home_inc.nav')
+            {{-- @include('home_inc.nav') --}}
             <div id="alert" class="text-center">
                 @include('flash::message')
             </div>

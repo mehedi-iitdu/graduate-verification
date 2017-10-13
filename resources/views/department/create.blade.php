@@ -10,7 +10,7 @@
           <h2 style="margin-bottom: 40px" class="d-none d-sm-block">Add Department</h2>
             <div class="jumbotron">
               @include('partials._error_message')
-              {!! Form::open(array('route' => 'department.add')) !!}
+              {!! Form::open(array('route' => 'department.create')) !!}
                 <div class="form-group">
                   <div class="row">
                     <div class="col-md-4"><label for="department_name">Department Name</label></div>
