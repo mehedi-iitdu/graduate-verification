@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRoleTable extends Migration
+class ActivityLog extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,18 @@ class CreateRoleTable extends Migration
      */
     public function up()
     {
-        Schema::create('role', function (Blueprint $table) {
+        Schema::create('log', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('role_name');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')
+                ->references('id')->on('user')
+                ->ondelete('cascade');
+            $table->string('operation');
+            $table->string('location');
+            $table->integer('table_row');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -27,6 +32,6 @@ class CreateRoleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('role');
+        Schema::dropIfExists('log');
     }
 }
