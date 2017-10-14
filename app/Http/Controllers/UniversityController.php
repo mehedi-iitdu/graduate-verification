@@ -65,9 +65,7 @@ class UniversityController extends Controller{
 
 		return view('partials._table',['theads' => $theads, 'properties' => $properties, 'tds' => $universities])
 			->with('i', ($request->input('page', 1) - 1) * $page_count);
-	}
-
-	//University create
+	} 
 
 	/**
 	 * Display the specified resource.
