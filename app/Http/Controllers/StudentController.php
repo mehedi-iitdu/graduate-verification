@@ -15,12 +15,12 @@ class StudentController extends Controller
 {
     //
 
-    public function showStudentAddForm(){
-        return view('user_dashboard.manage_add_student');
+    public function showStudentCreateForm(){
+        return view('student.create');
     }
 
     public function searchStudentView() {
-        return view('search_student');
+        return view('stakeholder.search_student');
     }
 
     public function searchStudent(Request $request) {
@@ -54,7 +54,7 @@ class StudentController extends Controller
         $student_info = Student::where('registration_no', $registration_no)->first();
         $user_info = User::where('id', $student_info->user_id)->first();
         $university_info = University::where('id', $student_info->university_id)->first();
-        return view('payment_request', [
+        return view('stakeholder.payment_request', [
             'student' => $student_info,
             'user' => $user_info,
             'university' => $university_info]);
@@ -134,7 +134,27 @@ class StudentController extends Controller
 
         flash('Student successfully added!')->success();
 
-        return redirect()->route('student.add');
+        return redirect()->route('student.create');
 
+    }
+
+    function getDynamicReportStudentData(Request $request) {
+        $students = Student::all();
+        if($request->university_id)
+            $students = $students->where('university_id', $request->university_id);
+        if($request->department_id)
+            $students = $students->where('department_id', $request->department_id);
+        if($request->session_no)
+            $students = $students->where('session', $request->session_no);
+
+        $ids = $students->pluck('id');
+        $filtered = $students->whereIn('id', $ids);
+
+        return array(
+            'num_of_student' => $students->count(),
+            'verification_request' => $filtered->where('verification_status', 'Requested')->count(),
+            'verification_process' => $filtered->where('verification_status', 'In Progress')->count(),
+            'verified' => $filtered->where('verification_status', 'In Progress')->count()
+        );
     }
 }

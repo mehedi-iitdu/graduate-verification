@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Student;
 use App\Registrar;
+use App\Role;
 
 class UsersController extends Controller
 {
@@ -15,8 +16,8 @@ class UsersController extends Controller
 
     public function getUserList(Request $request){
 
-    	
 
+    	return "hello";	
     }
 
     public function getProfile(Request $request){
@@ -26,12 +27,12 @@ class UsersController extends Controller
     		return view('profile.student', ['student' => $student]);
     	}
     	if($request -> user() -> isRegistrar()){
-    		$student = Registrar::where('user_id', $request->user()->id)->first();
+    		$registrar = Registrar::where('user_id', $request->user()->id)->first();
 
     		return view('profile.registrar', ['registrar' => $registrar]);
     	}
     	if($request -> user() -> isProgramOffice()){
-    		$student = ProgramOffice::where('user_id', $request->user()->id)->first();
+    		$programOfficer = ProgramOffice::where('user_id', $request->user()->id)->first();
 
     		return view('profile.programOfficer', ['programOfficer' => $programOfficer]);
     	}
@@ -40,6 +41,11 @@ class UsersController extends Controller
 
     		return view('profile.ugc', ['ugc' => $student]);
     	}*/
+    }
+
+    public function manageUsers(Request $request) {
+        $roles = Role::pluck('role_name', 'id');
+        return view('user_dashboard.manage_users_view', ['roles' => $roles]);
     }
 
 }
