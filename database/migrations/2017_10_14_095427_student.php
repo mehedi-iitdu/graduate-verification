@@ -25,7 +25,7 @@ class Student extends Migration
                 ->ondelete('cascade');
             $table->string('registration_no');
             $table->string('session');
-            $table->date('date_of_birth');
+            $table->string('date_of_birth');
             $table->timestamps();
         });
     }

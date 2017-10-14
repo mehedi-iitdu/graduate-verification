@@ -21,6 +21,8 @@ Route::get('/', ['uses' => 'HomeController@getHomeView', 'as' => 'home']);
 
 Route::get('/dashboard', ['uses' => 'DashboardController@dashboardView', 'as' => 'dashboard']);
 
+Route::get('admin/dashboard', ['uses' => 'DashboardController@adminDashboardView', 'as' => 'admin.dashboard']);
+
 Route::prefix('report')-> group(function (){
 
     Route::get('index',['uses' => 'DynamicReportController@indexView', 'as' => 'report.index'] );
