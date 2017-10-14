@@ -55,5 +55,9 @@
         </div>
       </div>
     </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{ URL::route('report.index') }}">Reports</a>
+    </li>
   </ul>
 </nav>

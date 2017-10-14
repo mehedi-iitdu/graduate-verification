@@ -23,8 +23,8 @@ Route::get('/dashboard', ['uses' => 'DashboardController@dashboardView', 'as' =>
 
 Route::prefix('report')-> group(function (){
 
-    Route::get('index',['uses' => 'DynamicReportController@indexView', 'as' => 'report.indexView'] );
-    Route::get('details/{university_id}/{department_id}/{session_no}/{query}',['uses' => 'DynamicReportController@detailedView', 'as' => 'report.detailedView'] );
+    Route::get('index',['uses' => 'DynamicReportController@indexView', 'as' => 'report.index'] );
+    Route::get('details/{university_id}/{department_id}/{session_no}/{query}',['uses' => 'DynamicReportController@detailedView', 'as' => 'report.details'] );
 });
 
 Route::post('role_based_info',['uses' => 'RoleController@getRoleBasedInfo', 'as' => 'role_based_info'] );
