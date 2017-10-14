@@ -27,6 +27,10 @@ class PaymentController extends Controller
 
     }
 
+    public function getVerification()
+    {
+        return view('payment.verification');
+    }
 
     public function getDone(Request $request)
     {

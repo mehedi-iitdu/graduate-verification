@@ -31,14 +31,14 @@ class DepartmentController extends Controller
             $num_of_semester = Department::where('id', $request->department_id)->pluck('num_of_semester')->first();
             $semesters = new \stdClass();
             for($sem = 1; $sem <= $num_of_semester; $sem++)
-                $semesters->{ $sem } = $sem;
+                $semesters->{ $sem } = 'Semester '.$sem;
 
             return view('partials._dropdownOptions', ['data' => $semesters, 'id' => 'semester_id', 'title' => 'Semester']);
 
         }
     }
 
-    public function addDepartmentView(){
+    public function showDepartmentView(){
 
       return view('department.view');
     }
