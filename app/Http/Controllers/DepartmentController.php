@@ -19,7 +19,7 @@ class DepartmentController extends Controller
 
     		$departments = Department::where('university_id', $request->university_id)->pluck('name', 'id');
         
-        return view('partials._dropdownOptions', ['data' => $departments, 'id' => 'department_id', 'title' => 'Department']);
+            return view('partials._dropdownOptions', ['data' => $departments, 'id' => 'department_id', 'title' => 'Department']);
 
     	}
     }

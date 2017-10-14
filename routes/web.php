@@ -25,12 +25,10 @@ Route::get('/dashboard', function(){
 	return view('dashboard');
 });
 
-Route::get('report', function(){
-	return view('reports.reportIndex');
-});
+Route::prefix('report')-> group(function (){
 
-Route::get('reportDetails', function(){
-	return view('reports.detailedReport');
+    Route::get('index',['uses' => 'DynamicReportController@indexView', 'as' => 'report.indexView'] );
+    Route::get('details/{query}',['uses' => 'DynamicReportController@detailedView', 'as' => 'report.detailedView'] );
 });
 
 Route::post('role_based_info',['uses' => 'RoleController@getRoleBasedInfo', 'as' => 'role_based_info'] );
@@ -99,7 +97,7 @@ Route::prefix('stakeholder')-> group(function (){
 
 Route::prefix('department')-> group(function (){
 
-	Route::post('list', ['uses' => 'DepartmentController@getDepartmentlist', 'as' => 'department.list']);
+	Route::post('list', ['uses' => 'DepartmentController@get_list', 'as' => 'department.list']);
 
 	Route::post('semesterList', ['uses' => 'DepartmentController@getSemesterList', 'as' => 'department.semesterList']);
 
@@ -136,5 +134,11 @@ Route::prefix('payment')-> group(function (){
 	Route::get('payment/done', 'PaymentController@getDone');
 
 	Route::get('payment/cancel', 'PaymentController@getCancel');
+
+});
+
+Route::prefix('dynamic_report')-> group(function (){
+
+    Route::post('student', ['uses' => 'StudentController@getDynamicReportStudentData', 'as' => 'dynamic_report.student']);
 
 });
