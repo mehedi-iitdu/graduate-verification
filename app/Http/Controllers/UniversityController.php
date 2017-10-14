@@ -58,15 +58,16 @@ class UniversityController extends Controller{
       return view('university.view'); 
     } 
      
-    public function getUniversityListByLocation(Request $request){ 
-     
-      $universities = University::where('location', $request->location)->get(); 
+    public function getUniversityListByLocation(Request $request){
+
+      $universities = University::where('location', $request->location)->get();
            
       $theads = array('University Name', 'Location', 'Website');
 
       $properties = array('name', 'location', 'website');
-     
-      return view('partials._table',['theads' => $theads, 'properties' => $properties, 'tds' => $universities]); 
+
+	    return view('partials._table',['theads' => $theads, 'properties' => $properties, 'tds' => $universities])
+		    ;
     } 
      
     //University create 
@@ -127,7 +128,9 @@ class UniversityController extends Controller{
 	public function destroy(Request $request, $id)
 	{
 		University::find($id)->delete();
-		return redirect()->route('university.index')
+		$url = $request->input('url');
+
+		return redirect()->back()
 			->with('success','University deleted successfully');
 	}
 }

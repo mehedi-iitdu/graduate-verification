@@ -13,7 +13,7 @@
 							<h2> Show University</h2>
 						</div>
 						<div class="pull-right">
-							<a class="btn btn-primary" href="{{ route('university.index') }}"> Back</a>
+							<a class="btn btn-primary" href="{{ url()->previous() }}"> Back</a>
 						</div>
 					</div>
 				</div>
