@@ -13,7 +13,7 @@
   <tbody>
     @foreach ($tds as $index => $td)
       <tr>
-        <th scope="row">{{$index+1}}</th>
+        <th scope="row">{{++$i}}</th>
         @foreach ($properties as $property)
           <td>{{ $td -> $property }}</td>
         @endforeach
@@ -30,3 +30,5 @@
   </tbody>
 
 </table>
+
+{!! $tds->render() !!}
