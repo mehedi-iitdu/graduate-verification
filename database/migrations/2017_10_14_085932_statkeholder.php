@@ -1,10 +1,8 @@
 <?php
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
-class CreateUsersRegistrar extends Migration
+class CreateStakeholderTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +11,16 @@ class CreateUsersRegistrar extends Migration
      */
     public function up()
     {
-        Schema::create('registrar', function (Blueprint $table) {
+        Schema::create('stakeholder', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('university_id');
+            $table->string('name');
+            $table->string('institute');
+            $table->string('email');
+            $table->string('designation');
+            $table->string('country');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -28,6 +28,6 @@ class CreateUsersRegistrar extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('registrar');
+        Schema::dropIfExists('stackholder');
     }
 }

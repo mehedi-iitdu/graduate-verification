@@ -106,7 +106,8 @@ class StudentController extends Controller
             'mobile_no' => 'required|string|max:11',
             'university_id' => 'required|integer',
             'department_id' => 'required|integer',
-            'date_of_birth' => 'required|date'
+            'date_of_birth' => 'required|date',
+            'registration_no' => 'required|string|unique_with:student,department_id'
         ]);
 
         $user = new User;
@@ -114,7 +115,7 @@ class StudentController extends Controller
         $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->mobile_no = $request->mobile_no;
-        $user->role_id = 2;
+        $user->role_id = Role::where('role_name', 'Student')->first()->id;
         $user->is_activated = false; 
 
         $user->save();
@@ -125,7 +126,7 @@ class StudentController extends Controller
         $student->department_id = $request->department_id;
         $student->registration_no = $request->registration_no;
         $student->session = $request->session_no;
-        $student->date_of_birth = $request->date_of_birth;
+        $student->date_of_birth =date('Y-m-d', strtotime($request->date_of_birth));
 
         $student->save();
 
