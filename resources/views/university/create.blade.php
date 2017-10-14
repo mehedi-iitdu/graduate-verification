@@ -23,7 +23,16 @@
               <div class="form-group row">
                 <label for="university_location" class="col-sm-4 col-form-label">Location</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="university_location" placeholder="Location" name="university_location" required>
+                  <select class="form-control" id="university_location" name="university_location">
+                    <option value="">Select Location</option>
+                    <option value="Dhaka">Dhaka</option>
+                    <option value="Rajshahi">Rajshahi</option>
+                    <option value="Khulna">Khulna</option>
+                    <option value="Chittagong">Chittagong</option>
+                    <option value="Barisal">Barisal</option>
+                    <option value="Rangpur">Rangpur</option>
+                    <option value="Sylhet">Sylhet</option>
+                  </select>
                 </div>
               </div>
 
