@@ -25,7 +25,7 @@
                       <option>Rajshahi</option>
                       <option>Khulna</option>
                       <option>Chittagong</option>
-                      <option>DEO</option>
+                      <option>Barisal</option>
                     </select>
                   </div>
                   <div class="form-group col-md-3">

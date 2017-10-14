@@ -23,9 +23,11 @@ class UniversityController extends Controller
 
       $universities = University::where('location', $request->location)->get();
       
-      $theads = array('#','University Name', 'Location', 'Website', 'Action');
+      $theads = array('University Name', 'Location', 'Website');
 
-      return view('partials._table',['theads' => $theads, 'tds' => $universities]);
+      $properties = array('name', 'location', 'website');
+
+      return view('partials._table',['theads' => $theads, 'tds' => $universities, 'properties' => $properties]);
     }
 
     //University create

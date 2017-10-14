@@ -3,27 +3,25 @@
   <thead>
     <tr>
       <th>#</th>
-      {{$serial = 0}}
       @foreach ($theads as $thead)
           <th>{{ $thead }}</th>
-          {{$serial++}
       @endforeach
       <th>Action</th>
     </tr>
   </thead>
 
   <tbody>
-    {{$serial = 0}}
-    @foreach ($tds as $td)
+    @foreach ($tds as $index => $td)
       <tr>
-        <th scope="row">{{$serial+1}}</th>
-        <td>{{ $td->name }}</th>
-        {{$serial++}}
+        <th scope="row">{{$index+1}}</th>
+        @foreach ($properties as $property)
+          <td>{{ $td -> $property }}</td>
+        @endforeach
+        <td>
+            <button class="btn btn-primary">Edit</button>
+            <button class="btn btn-danger">Delete</button>
+          </td>
     @endforeach
-    <td>
-        <button class="btn btn-primary">Edit</button>
-        <button class="btn btn-danger">Delete</button>
-      </td>
     </tr>
   </tbody>
 
