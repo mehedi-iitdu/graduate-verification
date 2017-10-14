@@ -7,13 +7,13 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="{{ URL::route('message.view') }}">Messages
+        <a class="nav-link" href="#">Profile</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="{{ URL::route('message.view') }}">Messages
           <span class="badge badge-warning" style="padding: 0.3em 0.5em; font-size: 90%;">20</span>
           <span class="sr-only">unread messages</span>
         </a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Profile</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/logout">Logout</a>
