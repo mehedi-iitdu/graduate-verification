@@ -106,11 +106,22 @@ Route::prefix('department')-> group(function (){
 
 Route::prefix('university')-> group(function (){
 
+	Route::get('/'  , ['uses' => 'UniversityController@index', 'as' => 'university.index']);
+
 	Route::post('list', ['uses' => 'UniversityController@getUniversityList', 'as' => 'university.list']);
 
 	Route::get('create',['uses' => 'UniversityController@showUniversityCreateForm', 'as' => 'university.create'] );
 
 	Route::post('create',['uses' => 'UniversityController@storeUniversity', 'as' => 'university.store'] );
+
+	Route::get('edit',['uses' => 'UniversityController@edit', 'as' => 'university.edit'] );
+
+	Route::post('edit',['uses' => 'UniversityController@update', 'as' => 'university.update'] );
+
+	Route::post('delete',['uses' => 'UniversityController@destroy', 'as' => 'university.delete'] );
+
+	Route::get('show',['uses' => 'UniversityController@show', 'as' => 'university.show'] );
+
 });
 
 
