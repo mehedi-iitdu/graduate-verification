@@ -66,8 +66,9 @@ class UniversityController extends Controller{
 
       $properties = array('name', 'location', 'website');
 
-	    return view('partials._table',['theads' => $theads, 'properties' => $properties, 'tds' => $universities])
-		    ;
+      $title = "university";
+
+	    return view('partials._table',['title' => $title, 'theads' => $theads, 'properties' => $properties, 'tds' => $universities]);
     } 
      
     //University create 
