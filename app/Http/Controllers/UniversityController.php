@@ -9,9 +9,28 @@ class UniversityController extends Controller
 {
     public function getUniversityList(Request $request){
 
-    	$universites = University::pluck('name', 'id');
-    	return view('partials._dropdownOptions', ['data' => $universites, 'id' => 'university_id', 'title' => 'University']);
+    	$universities = University::pluck('name', 'id'); 
+      return view('partials._dropdownOptions', ['data' => $universities, 'id' => 'university_id', 'title' => 'University']); 
     }
+
+
+    //University view 
+     
+    public function showUniversityList(){ 
+      return view('university.view'); 
+    } 
+     
+    public function getUniversityListByLocation(Request $request){ 
+     
+      $universities = University::where('location', $request->location)->get(); 
+           
+      $theads = array('University Name', 'Location', 'Website'); 
+     
+       return view('partials._table',['theads' => $theads, 'tds' => $universities]); 
+    } 
+     
+    //University create 
+
   
     public function showUniversityCreateForm(){
       
