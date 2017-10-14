@@ -114,6 +114,10 @@ Route::prefix('university')-> group(function (){
 	Route::get('create',['uses' => 'UniversityController@showUniversityCreateForm', 'as' => 'university.create'] );
 
 	Route::post('create',['uses' => 'UniversityController@storeUniversity', 'as' => 'university.store'] );
+
+	Route::get('view',['uses' => 'UniversityController@showUniversityList', 'as' => 'university.view'] );
+
+	Route::post('view',['uses' => 'UniversityController@getUniversityListByLocation', 'as' => 'university.universityListByLocation'] );
 });
 
 Route::prefix('result')->group(function(){
