@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Student;
-use App\Role;
 use App\University;
 use App\Stackholder;
 use App\Verification;
@@ -102,7 +101,7 @@ class StudentController extends Controller
         $this->validate($request, [
             'first_name' => 'required|string|max:20',
             'last_name' => 'required|string|max:20',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:user',
             'mobile_no' => 'required|string|max:11',
             'university_id' => 'required|integer',
             'department_id' => 'required|integer',
@@ -115,8 +114,8 @@ class StudentController extends Controller
         $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->mobile_no = $request->mobile_no;
-        $user->role_id = Role::where('role_name', 'Student')->first()->id;
-        $user->is_activated = false; 
+        $user->role = "Student";
+        $user->is_activated = false;
 
         $user->save();
 
