@@ -38,6 +38,7 @@
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <a class="dropdown-item" href="{{ URL::route('result.submit') }}">Add Result</a>
+          <a class="dropdown-item" href="{{ URL::route('result.search') }}">Search Result</a>
           <a class="dropdown-item" href="#">Edit</a>
         </div>
       </div>

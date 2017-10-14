@@ -52,13 +52,15 @@ class ResultController extends Controller
     public function getMarksInputField(Request $request){
     	if($request->ajax()){
             $student = Student::where('department_id', $request->department_id)->where('registration_no', $request->student_registration_no)->first();
-            $courses=collect();
+            $courses_to_send=collect();
             if($student){
-                $resulted_course_ids = Marks::where('student_id', $student->id)->pluck('course_id');
-        		    $courses = Course::select('id', 'name', 'code', 'credit')->whereNotIn('id', $resulted_course_ids)->where('department_id', $request->department_id)->where('semester_no', $request->semester_no)->get();
+                $courses = Course::select('id', 'name', 'code', 'credit')->where('department_id', $request->department_id)->where('semester_no', $request->semester_no);
+                $marks = Marks::whereIn('course_id', $courses->pluck('id'))->where('student_id', $student->id)->first();
+                if($marks==null){
+                    $courses_to_send = $courses->get();
+                }
             }
-
-            return view('result._marks_input', ['courses' => $courses]);
+            return view('result._marks_input', ['courses' => $courses_to_send]);
     	}
     }
 
