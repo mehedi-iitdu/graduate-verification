@@ -37,10 +37,10 @@
 						<td>{{ $university->location }}</td>
 						<td>{{ $university->website }}</td>
 						<td>
-							<a class="btn btn-info btn-sm" href="{{--{{ route('$university.show',$university->id) }}--}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
-							<a class="btn btn-primary btn-sm" href="{{--{{ route('$university.edit',$university->id) }}--}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+							<a class="btn btn-info btn-sm" href="{{ route('university.show',$university->id) }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+							<a class="btn btn-primary btn-sm" href="{{ route('university.edit',$university->id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 							</a>
-							{{--{!! Form::open(['method' => 'DELETE','route' => ['$university.destroy', $university->id],'style'=>'display:inline']) !!}--}}
+							{!! Form::open(['method' => 'DELETE','route' => ['university.delete', $university->id],'style'=>'display:inline']) !!}
 							{{ Form::button('  <i class="fa fa-trash-o" aria-hidden="true"></i>', ['class' => 'btn btn-danger btn-sm', 'type' => 'submit']) }}
 							{!! Form::close() !!}
 						</td>
