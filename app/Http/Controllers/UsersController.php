@@ -7,6 +7,7 @@ use App\User;
 use App\Student;
 use App\Registrar;
 use App\Role;
+use App\ProgramOffice;
 
 class UsersController extends Controller
 {

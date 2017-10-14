@@ -33,7 +33,7 @@
                   <input type="text" class="form-control" id="university_website" placeholder="Website" name="university_website" required>
                 </div>
                 </div>
-
+              {{ Form::hidden('url',URL::previous()) }}
               {{ Form::submit('Add', ['class' => 'btn btn-block btn-primary']) }}
 
               {!! Form::close() !!}
