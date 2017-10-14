@@ -129,6 +129,11 @@ Route::prefix('result')->group(function(){
 	Route::post('submit', ['uses' => 'ResultController@submitResult', 'as' => 'result.submit']);
 
 	Route::post('marks_fields', ['uses' => 'ResultController@getMarksInputField', 'as' => 'marks_fields']);
+
+	Route::get('search', ['uses' => 'ResultController@searchResult', 'as' => 'result.search']);
+
+	Route::post('marks_views', ['uses' => 'ResultController@getMarksView', 'as' => 'marks_views']);
+
 });
 
 
