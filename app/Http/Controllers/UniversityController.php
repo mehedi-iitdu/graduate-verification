@@ -50,6 +50,35 @@ class UniversityController extends Controller{
 
       return redirect($url);
     }
+  
+    public function showUniversityCreateFormz
+      
+      return view('university.create');
+    }
+
+
+    //University view 
+     
+    public function showUniversityList(){ 
+      return view('university.view'); 
+    } 
+     
+    public function getUniversityListByLocation(Request $request){ 
+     
+      $universities = University::where('location', $request->location)->get(); 
+           
+      $theads = array('University Name', 'Location', 'Website'); 
+     
+      return view('partials._table',['theads' => $theads, 'tds' => $universities]); 
+    } 
+     
+    //University create 
+
+  
+    public function showUniversityCreateForm(){
+      
+      return view('university.create');
+    }
 
 	/**
 	 * Display the specified resource.

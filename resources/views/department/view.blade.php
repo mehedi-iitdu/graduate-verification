@@ -11,7 +11,7 @@
 
           <div class="form-row">
               <div class="form-group ml-auto col-md-3">
-                  <a href="/dashboard/manage_department_create" class="btn btn-block btn-primary">Add Department</a>
+                  <a href="{{ URL::route('department.create') }}" class="btn btn-block btn-primary">Add Department</a>
               </div>
           </div>
 
@@ -20,9 +20,8 @@
               <div class="form-row">
                   <div class="form-group col-md-9">
                     <select class="form-control" id="university">
-                      <option>University</option>
+                      <option>Select University</option>
                       <option>DU</option>
-                      <option>RU</option>
                     </select>
                   </div>
                   <div class="form-group col-md-3">
@@ -32,26 +31,25 @@
             </form>
           </div>
 
-          <div>
+          <div id="university_table">
             <table class="table table-bordered table-responsive">
+
               <thead>
                 <tr>
                   <th>#</th>
+                  <th>University Name</th>
                   <th>Department Name</th>
-                  <th>No. of Semesters</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
+                  <td>1</td>
+                  <td>DU</td>
                   <td>IIT</td>
-                  <td>8</td>
                   <td>
                     <button class="btn btn-primary">Edit</button>
                     <button class="btn btn-danger">Delete</button>
                   </td>
-                </tr>
               </tbody>
             </table>
           </div>

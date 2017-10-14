@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUniversityTable extends Migration
+class Stakeholder extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreateUniversityTable extends Migration
      */
     public function up()
     {
-        Schema::create('university', function (Blueprint $table) {
+        Schema::create('stakeholder', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('location');
-            $table->string('website');
+            $table->string('institute');
+            $table->string('email');
+            $table->string('designation');
+            $table->string('country');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -29,6 +30,6 @@ class CreateUniversityTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('university');
+        Schema::dropIfExists('stakeholder');
     }
 }

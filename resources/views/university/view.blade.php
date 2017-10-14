@@ -11,7 +11,7 @@
 
           <div class="form-row">
               <div class="form-group ml-auto col-md-3">
-                  <a href="/dashboard/manage_university_create" class="btn btn-block btn-primary">Add University</a>
+                  <a href="{{ URL::route('university.create') }}" class="btn btn-block btn-primary">Add University</a>
               </div>
           </div>
 
@@ -25,7 +25,7 @@
                       <option>Rajshahi</option>
                       <option>Khulna</option>
                       <option>Chittagong</option>
-                      <option>DEO</option>
+                      <option>Barisal</option>
                     </select>
                   </div>
                   <div class="form-group col-md-3">
@@ -35,62 +35,30 @@
             </form>
           </div>
 
-          <div>
-            <table class="table table-bordered table-responsive">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>University Name</th>
-                  <th>Location</th>
-                  <th>Website</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>University of Dhaka</td>
-                  <td>Dhaka</td>
-                  <td>www.du.ac.bd</td>
-                  <td>
-                    <button class="btn btn-primary">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
-                  </td>
-                </tr>
-                 <tr>
-                  <th scope="row">1</th>
-                  <td>University of Dhaka</td>
-                  <td>Dhaka</td>
-                  <td>www.du.ac.bd</td>
-                  <td>
-                    <button class="btn btn-primary">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>University of Dhaka</td>
-                  <td>Dhaka</td>
-                  <td>www.du.ac.bd</td>
-                  <td>
-                    <button class="btn btn-primary">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>University of Dhaka</td>
-                  <td>Dhaka</td>
-                  <td>www.du.ac.bd</td>
-                  <td>
-                    <button class="btn btn-primary">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div id="university_table">
+  
           </div>
+          
         </main>
       </div>
     </div>
+@endsection
+
+
+@section('script')
+
+<script type="text/javascript">
+      $(document).ready(function(){
+          $.ajaxSetup({
+              headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
+          });
+
+          $.post("{{ URL::route('university.universityListByLocation') }}",{location:'Dhaka'}, function(data){
+              $('#university_table').html(data);
+          });
+
+        });
+</script>
+
+
 @endsection

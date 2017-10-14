@@ -8,7 +8,7 @@ use App\Course;
 
 class Marks extends Model
 {
-    protected $table = 'marks';
+    protected $table = 'mark';
 
     public function student(){
         return $this->belongsTo(Student::class);
