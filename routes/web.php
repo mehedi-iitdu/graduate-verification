@@ -159,4 +159,13 @@ Route::prefix('dynamic_report')-> group(function (){
 
 });
 
+
+Route::prefix('message')-> group(function (){
+
+	Route::get('view',['uses' => 'MessageController@showMessage', 'as' => 'message.view'] );
+	Route::get('single',['uses' => 'MessageController@showSingleMessage', 'as' => 'message.single'] );
+
+});
+
 Route::get('logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'auth.logout']);
+
