@@ -127,3 +127,5 @@ Route::prefix('dynamic_report')-> group(function (){
     Route::post('student', ['uses' => 'StudentController@getDynamicReportStudentData', 'as' => 'dynamic_report.student']);
 
 });
+
+Route::get('logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'auth.logout']);
