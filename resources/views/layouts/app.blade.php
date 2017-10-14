@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
         {{-- Compiled CSS --}}
-        <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
+        {{-- <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}"> --}}
         <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('css/datatables.min.css')}}">
 
@@ -25,10 +25,10 @@
     </head>
     <body>
     	@include('inc.navbar')
-        @include('inc.side_navbar')
+        @include('inc.registrar_side_navbar')
  
     	<div id="alert" class="text-center col-md-6">
-            @include('flash::message')                                                              
+            @include('flash::message')                                                            
         </div>
     
     	<div id="alert" class="text-center col-md-6">
