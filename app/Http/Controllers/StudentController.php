@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Student;
 use App\University;
-use App\Stackholder;
+use App\Stakeholder;
 use App\Verification;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -139,8 +139,6 @@ class StudentController extends Controller
 
     function getDynamicReportStudentData(Request $request) {
         $students = Student::all();
-        if($request->university_id)
-            $students = $students->where('university_id', $request->university_id);
         if($request->department_id)
             $students = $students->where('department_id', $request->department_id);
         if($request->session_no)

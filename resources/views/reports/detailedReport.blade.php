@@ -22,46 +22,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Sharafat Ahmed</td>
-                        <td class="center">DU</td>
-                        <td class="center">IIT</td>
-                        <td class="center">2013-14</td>
-                        <td class="center">2013-612-014</td>
-                        <td class="center">Requested</td>
-                    </tr>
-                    <tr>
-                        <td>Sharafat Ahmed</td>
-                        <td class="center">DU</td>
-                        <td class="center">IIT</td>
-                        <td class="center">2013-14</td>
-                        <td class="center">2013-612-014</td>
-                        <td class="center">Requested</td>
-                    </tr>
-                    <tr>
-                        <td>Sharafat Ahmed</td>
-                        <td class="center">DU</td>
-                        <td class="center">IIT</td>
-                        <td class="center">2013-14</td>
-                        <td class="center">2013-612-014</td>
-                        <td class="center">Requested</td>
-                    </tr>
-                    <tr>
-                        <td>Sharafat Ahmed</td>
-                        <td class="center">DU</td>
-                        <td class="center">IIT</td>
-                        <td class="center">2013-14</td>
-                        <td class="center">2013-612-014</td>
-                        <td class="center">Requested</td>
-                    </tr>
-                    <tr>
-                        <td>Sharafat Ahmed</td>
-                        <td class="center">DU</td>
-                        <td class="center">IIT</td>
-                        <td class="center">2013-14</td>
-                        <td class="center">2013-612-014</td>
-                        <td class="center">Requested</td>
-                    </tr>
+                    @foreach ($students as $student)
+                        <tr>
+                            <td>{{ $student->user->first_name." ".$student->user->last_name }}</td>
+                            <td class="center">{{ $student->department->university->name }}</td>
+                            <td class="center">{{ $student->department->name }}</td>
+                            <td class="center">{{ $student->session }}</td>
+                            <td class="center">{{ $student->registration_no }}</td>
+                            <td class="center">fdhkh</td>
+                        </tr>
+                    @endforeach
                     </tbody>
                     </table>
     			</div>
@@ -81,13 +51,7 @@
 @section('script')
 
 
-	<script type="text/javascript" src="{{asset('js/reportJS/bootstrap.min.js')}}"></script>
-	<script type="text/javascript" src="{{asset('js/reportJS/jquery.metisMenu.js')}}"></script>
-	<script type="text/javascript" src="{{asset('js/reportJS/jquery.slimscroll.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/reportJS/datatables.min.js')}}"></script>
-	<script type="text/javascript" src="{{asset('js/reportJS/inspinia.js')}}"></script>
-	<script type="text/javascript" src="{{asset('js/reportJS/pace.min.js')}}"></script>
-
 
 
     <script>
