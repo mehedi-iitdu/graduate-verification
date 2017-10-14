@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\University;
 use App\Department;
 use Illuminate\Http\Request;
 use App\Student;
@@ -15,7 +16,12 @@ class DynamicReportController extends Controller
 
     public function indexView(Request $request){
         if($request->user()->role != "Student"){
-            return view('reports.reportIndex');
+            $user_university_id = $request->user()->university_id;
+            $user_university_name = $request->user()->department->university->name;
+            $user_department_id = $request->user()->department->id;
+            $user_department_name = $request->user()->department->name;
+
+            return view('reports.reportIndex', ['user_university_id' => $university_id, 'user_university_name' => $user_university_name, 'user_department_id' => $user_department_id, 'user_department_name' => $user_department_name]);
         }
         else {
             return view('errors.403');
