@@ -18,7 +18,7 @@ class DepartmentController extends Controller
     	if($request->ajax()){
 
     		$departments = Department::where('university_id', $request->university_id)->pluck('name', 'id');
-        
+
             return view('partials._dropdownOptions', ['data' => $departments, 'id' => 'department_id', 'title' => 'Department']);
 
     	}
@@ -33,7 +33,7 @@ class DepartmentController extends Controller
             for($sem = 1; $sem <= $num_of_semester; $sem++)
                 $semesters->{ $sem } = 'Semester '.$sem;
 
-            return view('partials._dropdownOptions', ['data' => $semesters, 'id' => 'semester_id', 'title' => 'Semester']);
+            return view('partials._dropdownOptions', ['data' => $semesters, 'id' => 'semester_no', 'title' => 'Semester']);
 
         }
     }
