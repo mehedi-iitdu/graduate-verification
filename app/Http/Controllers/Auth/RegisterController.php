@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
-use App\Role;
 use App\Registrar;
 use App\ProgramOffice;
 use App\User_activation;
@@ -44,7 +43,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('auth');
     }
 
     /**
@@ -76,30 +75,24 @@ class RegisterController extends Controller
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'mobile_no' => $data['mobile_no'],
-            
+
         ]);
     }*/
 
     public function showRegistrationForm()
     {
-        $roles = Role::pluck('role_name', 'id');
-        foreach ($roles as $key => $role) {
-            if($role == "Student") {
-                unset($roles[$key]);
-            }
-        }
-
+        $roles = ['UGC' => 'UGC', 'Registrar' => 'Registrar', 'ProgramOffice' => 'ProgramOffice'];
         return view('user.create', ['roles' => $roles]);
     }
 
     public function storeUser(Request $request){
-        
+
         $this->validate($request, [
             'first_name' => 'required|string|max:20',
             'last_name' => 'required|string|max:20',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:user',
             'mobile_no' => 'required|string|max:11',
-            'role_id' => 'required',
+            'role' => 'required',
         ]);
 
         $user = new User;
@@ -107,10 +100,10 @@ class RegisterController extends Controller
         $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->mobile_no = $request->mobile_no;
-        $user->role_id = $request->role_id;
+        $user->role = $request->role;
         $user->is_activated = false;
-        
-        $role_name = Role::find($request->role_id)->role_name;
+
+        $role_name = $user->role;
 
         if($role_name == 'Registrar'){
             $this->validate($request, [
@@ -119,7 +112,7 @@ class RegisterController extends Controller
 
             $registrar = new Registrar;
             $registrar->university_id = $request->university_id;
-            
+
             $user->save();
             $registrar->user_id = $user->id;
             $registrar->save();
@@ -132,7 +125,7 @@ class RegisterController extends Controller
 
             $program_office = new ProgramOffice;
             $program_office->department_id = $request->department_id;
-            
+
             $user->save();
             $program_office->user_id = $user->id;
             $program_office->save();
@@ -145,7 +138,7 @@ class RegisterController extends Controller
 
         flash('User successfully added!')->success();
 
-        return redirect()->route('user.add');
+        return redirect()->route('user.create');
 
     }
 
@@ -179,7 +172,7 @@ class RegisterController extends Controller
         }
 
         return redirect()->route('user.reset_password',[ $user->email, $user_activation->token]);
-        
+
     }
 
     public function showSendActivationCodeForm(){
@@ -211,10 +204,10 @@ class RegisterController extends Controller
         $user_activation->user_id = $user->id;
         $user_activation->token = $activation_code;
         $user_activation->save();
-        
+
         $array=['name' => $user->first_name, 'token' => $activation_code];
         Mail::to($user->email)->queue(new EmailVerification($array));
-        
+
         $smsBody = 'Welcome, '.$user->first_name.' Your Activation code is '.$activation_code.'. Please activate your account http://127.0.0.1/user/activation. Thank You. ';
         $smsManager = new SMSManager();
         //$smsManager->sendSMS($user->mobile_no, $smsBody);

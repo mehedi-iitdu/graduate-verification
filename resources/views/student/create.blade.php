@@ -38,8 +38,8 @@
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-2"><label for="date_of_birth">Session</label></div>
-                        <div class="col-md-10"><input class="form-control" required="" name="date_of_birth" type="date" id="date_of_birth">
+                        <div class="col-md-2"><label for="date_of_birth">Date of Birth</label></div>
+                        <div class="col-md-10"><input class="form-control" required="" name="date_of_birth" type="text" id="date_of_birth">
                         </div>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
           });
 
           $(function () {
-              $('#date_of_birth').datepicker({});
+              $('#date_of_birth').datepicker({ changeYear: true, changeMonth:true, yearRange: "1980:"+new Date().getFullYear() });
           });
 
 

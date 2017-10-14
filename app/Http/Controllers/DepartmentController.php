@@ -8,7 +8,7 @@ use App\Department;
 class DepartmentController extends Controller
 {
 
-    public function showDepartmentAddForm(){
+    public function showDepartmentCreateForm(){
         return view('department.create');
     }
 
@@ -19,7 +19,7 @@ class DepartmentController extends Controller
 
     		$departments = Department::where('university_id', $request->university_id)->pluck('name', 'id');
         
-        return view('partials._dropdownOptions', ['data' => $departments, 'id' => 'department_id', 'title' => 'Department']);
+            return view('partials._dropdownOptions', ['data' => $departments, 'id' => 'department_id', 'title' => 'Department']);
 
     	}
     }
@@ -31,16 +31,16 @@ class DepartmentController extends Controller
             $num_of_semester = Department::where('id', $request->department_id)->pluck('num_of_semester')->first();
             $semesters = new \stdClass();
             for($sem = 1; $sem <= $num_of_semester; $sem++)
-                $semesters->{ $sem } = $sem;
+                $semesters->{ $sem } = 'Semester '.$sem;
 
             return view('partials._dropdownOptions', ['data' => $semesters, 'id' => 'semester_id', 'title' => 'Semester']);
 
         }
     }
 
-    public function addDepartmentView(){
+    public function showDepartmentView(){
 
-      return view('user_dashboard.manage_department_create');
+      return view('department.view');
     }
 
     public function storeDepartment(Request $request){
@@ -60,7 +60,7 @@ class DepartmentController extends Controller
 
       flash('Department added successfully !')->success();
 
-      return redirect()->route('department.add');
+      return redirect()->route('department.create');
 
     }
 
