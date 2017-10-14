@@ -9,6 +9,11 @@ class UniversityController extends Controller{
 
 	public function index(Request $request){
 		$universities = University::orderBy('id','ASC')->paginate(10);
+
+		$theads = array('University Name', 'Location', 'Website');
+
+//		return view('partials._table',['theads' => $theads, 'tds' => $universities]);
+
 		return view('university.index',compact('universities'))
 			->with('i', ($request->input('page', 1) - 1) * 10);
 	}
@@ -52,7 +57,7 @@ class UniversityController extends Controller{
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show($id)
+	public function show(Request $request, $id)
 	{
 		$university = University::find($id);
 		return view('university.show',compact('university'));
@@ -64,7 +69,7 @@ class UniversityController extends Controller{
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit($id)
+	public function edit(Request $request, $id)
 	{
 		$university = University::find($id);
 		return view('university.edit',compact('university'));
@@ -80,9 +85,9 @@ class UniversityController extends Controller{
 	public function update(Request $request, $id)
 	{
 		$this->validate($request, [
-			'university_name' => 'required|string|max:255',
-			'university_location' => 'required|string|max:255',
-			'university_website' => 'required|string|max:255',
+			'name' => 'required|string|max:255',
+			'location' => 'required|string|max:255',
+			'website' => 'required|string|max:255',
 		]);
 
 		University::find($id)->update($request->all());
@@ -99,7 +104,7 @@ class UniversityController extends Controller{
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id)
+	public function destroy(Request $request, $id)
 	{
 		University::find($id)->delete();
 		return redirect()->route('university.index')
