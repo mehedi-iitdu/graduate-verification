@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'dashboard/manage_users_view';
+    protected $redirectTo = 'dashboard/';
 
     /**
      * Create a new controller instance.
@@ -61,7 +61,6 @@ class LoginController extends Controller
 
         return redirect()->route('login');
     }
-
 
 
 }

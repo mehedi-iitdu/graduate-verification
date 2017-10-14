@@ -24,3 +24,7 @@ _ide_helper\.php
 composer\.lock
 
 .env
+
+/tests
+
+/user_dashboard
