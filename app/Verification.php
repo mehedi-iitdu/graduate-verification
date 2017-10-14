@@ -14,7 +14,7 @@ class Verification extends Model
         return $this->belongsTo(Student::class);
     }
 
-    public function stackholder(){
+    public function stakeholder(){
         return $this->belongsTo(Stakeholder::class);
     }
 }
