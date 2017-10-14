@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Student;
-use App\Stackholder;
+use App\Stakeholder;
 
 class Verification extends Model
 {
@@ -14,7 +14,7 @@ class Verification extends Model
         return $this->belongsTo(Student::class);
     }
 
-    public function stackholder(){
-        return $this->belongsTo(Stackholder::class);
+    public function stakeholder(){
+        return $this->belongsTo(Stakeholder::class);
     }
 }

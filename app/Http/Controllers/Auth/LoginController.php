@@ -39,7 +39,7 @@ class LoginController extends Controller
     }
 
     public function username(){
-        
+
         return 'email';
     }
 
@@ -63,7 +63,11 @@ class LoginController extends Controller
     }
 
 
+    public function redirectPath(){
+        return 'profile';
+    }
+
+
 
 }
-
 
