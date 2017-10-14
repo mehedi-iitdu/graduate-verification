@@ -17,13 +17,9 @@ Route::get('/signup', 'PagesController@signUp');
 Route::get('/login', 'PagesController@login');*/
 
 
-Route::get('/', function(){
-	return view('pages.home');
-});
+Route::get('/', ['uses' => 'HomeController@getHomeView', 'as' => 'home']);
 
-Route::get('/dashboard', function(){
-	return view('dashboard');
-});
+Route::get('/dashboard', ['uses' => 'DashboardController@dashboardView', 'as' => 'dashboard']);
 
 Route::prefix('report')-> group(function (){
 
