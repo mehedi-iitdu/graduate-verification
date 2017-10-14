@@ -7,9 +7,9 @@ use App\User;
 
 class ProgramOffice extends Model
 {
-    protected $table = 'po';
+    protected $table = 'program_office';
 
     public function user(){
     	return $this->belongsTo(User::class);
-    } 
+    }
 }
