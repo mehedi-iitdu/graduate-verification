@@ -26,7 +26,7 @@ class UniversityController extends Controller
            
       $theads = array('University Name', 'Location', 'Website'); 
      
-       return view('partials._table',['theads' => $theads, 'tds' => $universities]); 
+      return view('partials._table',['theads' => $theads, 'tds' => $universities]); 
     } 
      
     //University create 
