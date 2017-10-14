@@ -7,7 +7,7 @@ use App\Verification;
 
 class Stakeholder extends Model
 {
-    protected $table = 'stackholder';
+    protected $table = 'stakeholder';
 
     public function verifications(){
     	return $this->hasMany(Verification::class);
