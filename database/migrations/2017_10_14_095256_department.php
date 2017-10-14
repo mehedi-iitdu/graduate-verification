@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVerificationTable extends Migration
+class Department extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,17 @@ class CreateVerificationTable extends Migration
      */
     public function up()
     {
-        Schema::create('verification', function (Blueprint $table) {
+        Schema::create('department', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('student_id');
-            $table->integer('stackholder_id');
-            $table->string('verification_status');
-            $table->string('digital_sign');
+            $table->integer('university_id')->unsigned();
+            $table->foreign('university_id')
+                ->references('id')->on('university')
+                ->ondelete('cascade');
+            $table->string('name');
+            $table->integer('num_of_semester');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -30,6 +31,6 @@ class CreateVerificationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('verification');
+        Schema::dropIfExists('department');
     }
 }

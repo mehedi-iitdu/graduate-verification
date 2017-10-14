@@ -25,12 +25,10 @@ Route::get('/dashboard', function(){
 	return view('dashboard');
 });
 
-Route::get('report', function(){
-	return view('reports.reportIndex');
-});
+Route::prefix('report')-> group(function (){
 
-Route::get('reportDetails', function(){
-	return view('reports.detailedReport');
+    Route::get('index',['uses' => 'DynamicReportController@indexView', 'as' => 'report.indexView'] );
+    Route::get('details/{query}',['uses' => 'DynamicReportController@detailedView', 'as' => 'report.detailedView'] );
 });
 
 Route::post('role_based_info',['uses' => 'RoleController@getRoleBasedInfo', 'as' => 'role_based_info'] );
@@ -38,9 +36,12 @@ Route::post('role_based_info',['uses' => 'RoleController@getRoleBasedInfo', 'as'
 Route::get('profile', ['uses' => 'UsersController@getProfile', 'as' => 'profile']);
 
 
+Route::get('manage_results', ['uses' => 'ResultController@manageResults', 'as' => 'manage_manage_results']);
+
+
 Route::get('login', ['uses' => 'Auth\LoginController@showLoginForm', 'as' => 'login']);
 Route::post('login', ['uses' => 'Auth\LoginController@login', 'as' => 'login']);
-Route::get('logout', 'Auth\LoginController@logout');
+Route::get('logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'logout']);
 
 Route::prefix('user')-> group(function (){
 
@@ -55,11 +56,13 @@ Route::prefix('user')-> group(function (){
 
 	Route::post('send_activation_code',['uses' => 'Auth\RegisterController@activationCodeSend', 'as' => 'user.send_activation_code']);
 
+
 	Route::get('reset_password/{email}/{token}',['uses' => 'Auth\ResetPasswordController@showResetPasswordForm', 'as' => 'user.reset_password']);
 
 	Route::post('reset_password',['uses' => 'Auth\ResetPasswordController@resetPassword', 'as' => 'password.reset']);
 
 	Route::post('list',['uses' => 'UsersController@getUserList', 'as' => 'user.list'] );
+
 
 });
 
@@ -94,7 +97,7 @@ Route::prefix('stakeholder')-> group(function (){
 
 Route::prefix('department')-> group(function (){
 
-	Route::post('list', ['uses' => 'DepartmentController@getDepartmentlist', 'as' => 'department.list']);
+	Route::post('list', ['uses' => 'DepartmentController@get_list', 'as' => 'department.list']);
 
 	Route::post('semesterList', ['uses' => 'DepartmentController@getSemesterList', 'as' => 'department.semesterList']);
 
@@ -111,7 +114,21 @@ Route::prefix('university')-> group(function (){
 	Route::get('create',['uses' => 'UniversityController@showUniversityCreateForm', 'as' => 'university.create'] );
 
 	Route::post('create',['uses' => 'UniversityController@storeUniversity', 'as' => 'university.store'] );
+
+	Route::get('view',['uses' => 'UniversityController@showUniversityList', 'as' => 'university.view'] );
+
+	Route::post('view',['uses' => 'UniversityController@getUniversityListByLocation', 'as' => 'university.universityListByLocation'] );
 });
+
+Route::prefix('result')->group(function(){
+
+	Route::get('submit', ['uses' => 'ResultController@showAddResultForm', 'as' => 'result.submit']);
+
+	Route::post('submit', ['uses' => 'ResultController@submitResult', 'as' => 'result.submit']);
+
+	Route::post('marks_fields', ['uses' => 'ResultController@getMarksInputField', 'as' => 'marks_fields']);
+});
+
 
 
 Route::prefix('payment')-> group(function (){
@@ -123,5 +140,11 @@ Route::prefix('payment')-> group(function (){
 	Route::get('done', ['uses' => 'PaymentController@getDone', 'as' => 'payment.done'] );
 
 	Route::get('cancel', ['uses' => 'PaymentController@getCancel', 'as' => 'payment.cancel'] );
+
+});
+
+Route::prefix('dynamic_report')-> group(function (){
+
+    Route::post('student', ['uses' => 'StudentController@getDynamicReportStudentData', 'as' => 'dynamic_report.student']);
 
 });
