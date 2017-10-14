@@ -6,32 +6,15 @@
       <div class="row">
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
           <div class="list-group">
-            <a href="{{ URL::route('message.single') }}" class="list-group-item list-group-item-action flex-column align-items-start active">
-              <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Request Decline</h5>
-                <small>3 days ago</small>
-              </div>
-              <p class="mb-1">From: <span>Abdul Matin</span></p>
-              <p class="mb-1">Date: <span>03-04-2017</span></p>
-            </a>
-
-            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-              <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Payment Request</h5>
-                <small>15 days ago</small>
-              </div>
-              <p class="mb-1">From: <span>Abdul Matin</span></p>
-              <p class="mb-1">Date: <span>03-04-2017</span></p>
-            </a>
-
-            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-              <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">Confirm Request</h5>
-                <small>3 days ago</small>
-              </div>
-              <p class="mb-1">From: <span>Abdul Matin</span></p>
-              <p class="mb-1">Date: <span>03-04-2017</span></p>
-            </a>
+            @foreach($messages as $message)
+              <a href="{{ URL::route('message.single') }}" class="list-group-item list-group-item-action flex-column align-items-start active">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">{{$message -> verification_status}}</h5>
+                </div>
+                <p class="mb-1">From: <span>{{ $message->stakeholder->name }}</span></p>
+                <p class="mb-1">Date: <span>{{ $message->created_at }}</span></p>
+              </a>
+            @endforeach
           </div>
         </main>
       </div>
