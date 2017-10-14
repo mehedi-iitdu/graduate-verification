@@ -11,7 +11,7 @@
 
           <div class="form-row">
               <div class="form-group ml-auto col-md-3">
-                  <a href="/dashboard/manage_university_create" class="btn btn-block btn-primary">Add University</a>
+                  <a href="{{ URL::route('university.create') }}" class="btn btn-block btn-primary">Add University  </a>
               </div>
           </div>
 

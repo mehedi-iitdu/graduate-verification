@@ -38,7 +38,7 @@ class DepartmentController extends Controller
         }
     }
 
-    public function addDepartmentView(){
+    public function showDepartmentView(){
 
       return view('department.view');
     }

@@ -166,7 +166,7 @@
         	console.log("Outside");
             $('.dataTables-example').DataTable({
             	
-                pageLength: 25,
+                paging: false,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
                 buttons: [
