@@ -35,62 +35,30 @@
             </form>
           </div>
 
-          <div>
-            <table class="table table-bordered table-responsive">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>University Name</th>
-                  <th>Location</th>
-                  <th>Website</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>University of Dhaka</td>
-                  <td>Dhaka</td>
-                  <td>www.du.ac.bd</td>
-                  <td>
-                    <button class="btn btn-primary">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
-                  </td>
-                </tr>
-                 <tr>
-                  <th scope="row">1</th>
-                  <td>University of Dhaka</td>
-                  <td>Dhaka</td>
-                  <td>www.du.ac.bd</td>
-                  <td>
-                    <button class="btn btn-primary">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>University of Dhaka</td>
-                  <td>Dhaka</td>
-                  <td>www.du.ac.bd</td>
-                  <td>
-                    <button class="btn btn-primary">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>University of Dhaka</td>
-                  <td>Dhaka</td>
-                  <td>www.du.ac.bd</td>
-                  <td>
-                    <button class="btn btn-primary">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div id="university_table">
+  
           </div>
+          
         </main>
       </div>
     </div>
+@endsection
+
+
+@section('script')
+
+<script type="text/javascript">
+      $(document).ready(function(){
+          $.ajaxSetup({
+              headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
+          });
+
+          $.post("{{ URL::route('university.universityListByLocation') }}",{location:'Dhaka'}, function(data){
+              $('#university_table').html(data);
+          });
+
+        });
+</script>
+
+
 @endsection
