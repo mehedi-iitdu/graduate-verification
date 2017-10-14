@@ -99,6 +99,8 @@ Route::prefix('department')-> group(function (){
 
 	Route::get('create', ['uses' => 'DepartmentController@showDepartmentCreateForm', 'as' => 'department.create']);
 
+	Route::get('view', ['uses' => 'DepartmentController@showDepartmentCreateForm', 'as' => 'department.view']);
+
 	Route::post('create', ['uses' => 'DepartmentController@storeDepartment', 'as' => 'department.store']);
 });
 
