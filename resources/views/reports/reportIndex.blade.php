@@ -163,6 +163,22 @@
 				});
 			}
 
+			$('#verification_request').on('click', function () {
+                window.location.replace('/report/details/' + $('#university_id').val() + '/' + $('#department_id').val() + '/' + $('#session_no').val() + '/requested');
+            });
+
+            $('#num_of_student').on('click', function () {
+                window.location.replace('/report/details/' + $('#university_id').val() + '/' + $('#department_id').val() + '/' + $('#session_no').val() + '/total');
+            });
+
+            $('#verification_process').on('click', function () {
+                window.location.replace('/report/details/' + $('#university_id').val() + '/' + $('#department_id').val() + '/' + $('#session_no').val() + '/progress');
+            });
+
+            $('#verified').on('click', function () {
+                window.location.replace('/report/details/' + $('#university_id').val() + '/' + $('#department_id').val() + '/' + $('#session_no').val() + '/verified');
+            });
+
         	console.log("Outside");
             $('.dataTables-example').DataTable({
             	
