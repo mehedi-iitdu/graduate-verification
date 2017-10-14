@@ -50,11 +50,6 @@ class UniversityController extends Controller{
 
       return redirect($url);
     }
-  
-    public function showUniversityCreateFormz
-      
-      return view('university.create');
-    }
 
 
     //University view 
@@ -73,12 +68,6 @@ class UniversityController extends Controller{
     } 
      
     //University create 
-
-  
-    public function showUniversityCreateForm(){
-      
-      return view('university.create');
-    }
 
 	/**
 	 * Display the specified resource.
