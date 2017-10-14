@@ -83,9 +83,7 @@
               total_credit += credit;
             });
             var cgpa = total_gpa/total_credit;
-            $('tbody').append('<tr><td colspan="3" align="right">CGPA:</td><td>'+cgpa.toString()+'</td></tr>')
-
-
+            $('tbody').append('<tr><td colspan="3" align="right">CGPA:</td><td>'+cgpa.toString()+'</td></tr>');
         });
         return false;
       });
