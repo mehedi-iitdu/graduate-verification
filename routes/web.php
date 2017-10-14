@@ -23,8 +23,8 @@ Route::get('/dashboard', ['uses' => 'DashboardController@dashboardView', 'as' =>
 
 Route::prefix('report')-> group(function (){
 
-    Route::get('index',['uses' => 'DynamicReportController@indexView', 'as' => 'report.indexView'] );
-    Route::get('details/{university_id}/{department_id}/{session_no}/{query}',['uses' => 'DynamicReportController@detailedView', 'as' => 'report.detailedView'] );
+    Route::get('index',['uses' => 'DynamicReportController@indexView', 'as' => 'report.index'] );
+    Route::get('details/{university_id}/{department_id}/{session_no}/{query}',['uses' => 'DynamicReportController@detailedView', 'as' => 'report.details'] );
 });
 
 Route::post('role_based_info',['uses' => 'RoleController@getRoleBasedInfo', 'as' => 'role_based_info'] );
@@ -137,6 +137,11 @@ Route::prefix('result')->group(function(){
 	Route::post('submit', ['uses' => 'ResultController@submitResult', 'as' => 'result.submit']);
 
 	Route::post('marks_fields', ['uses' => 'ResultController@getMarksInputField', 'as' => 'marks_fields']);
+
+	Route::get('search', ['uses' => 'ResultController@searchResult', 'as' => 'result.search']);
+
+	Route::post('marks_views', ['uses' => 'ResultController@getMarksView', 'as' => 'marks_views']);
+
 });
 
 
@@ -159,4 +164,13 @@ Route::prefix('dynamic_report')-> group(function (){
 
 });
 
+
+Route::prefix('message')-> group(function (){
+
+	Route::get('view',['uses' => 'MessageController@showMessage', 'as' => 'message.view'] );
+	Route::get('single',['uses' => 'MessageController@showSingleMessage', 'as' => 'message.single'] );
+
+});
+
 Route::get('logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'auth.logout']);
+

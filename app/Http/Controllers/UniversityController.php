@@ -10,10 +10,6 @@ class UniversityController extends Controller{
 	public function index(Request $request){
 		$universities = University::orderBy('id','ASC')->paginate(10);
 
-		$theads = array('University Name', 'Location', 'Website');
-
-//		return view('partials._table',['theads' => $theads, 'tds' => $universities]);
-
 		return view('university.index',compact('universities'))
 			->with('i', ($request->input('page', 1) - 1) * 10);
 	}
@@ -48,29 +44,30 @@ class UniversityController extends Controller{
 
 		flash('University added successfully !')->success();
 
-      return redirect($url);
-    }
+		return redirect($url);
+	}
 
 
-    //University view 
-     
-    public function showUniversityList(){ 
-      return view('university.view'); 
-    } 
-     
-    public function getUniversityListByLocation(Request $request){
+	//University view
 
-      $universities = University::where('location', $request->location)->get();
-           
-      $theads = array('University Name', 'Location', 'Website');
+	public function showUniversityList(){
+		return view('university.view');
+	}
 
-      $properties = array('name', 'location', 'website');
+	public function getUniversityListByLocation(Request $request){
 
-	    return view('partials._table',['theads' => $theads, 'properties' => $properties, 'tds' => $universities])
-		    ;
-    } 
-     
-    //University create 
+		$page_count = 5;
+		$universities = University::where('location', $request->location)->paginate($page_count);
+
+		$theads = array('University Name', 'Location', 'Website');
+
+		$properties = array('name', 'location', 'website');
+
+		return view('partials._table',['theads' => $theads, 'properties' => $properties, 'tds' => $universities])
+			->with('i', ($request->input('page', 1) - 1) * $page_count);
+	}
+
+	//University create
 
 	/**
 	 * Display the specified resource.
