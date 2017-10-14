@@ -171,6 +171,10 @@
                 window.location.replace('/report/details/' + $('#university_id').val() + '/' + $('#department_id').val() + '/' + $('#session_no').val() + '/total');
             });
 
+            $('#verification_process').on('click', function () {
+                window.location.replace('/report/details/' + $('#university_id').val() + '/' + $('#department_id').val() + '/' + $('#session_no').val() + '/progress');
+            });
+
         	console.log("Outside");
             $('.dataTables-example').DataTable({
             	
