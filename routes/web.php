@@ -114,13 +114,14 @@ Route::prefix('university')-> group(function (){
 
 	Route::post('create',['uses' => 'UniversityController@storeUniversity', 'as' => 'university.store'] );
 
-	Route::get('edit',['uses' => 'UniversityController@edit', 'as' => 'university.edit'] );
+	Route::get('edit/{id}',['uses' => 'UniversityController@edit', 'as' => 'university.edit'] );
 
-	Route::post('edit',['uses' => 'UniversityController@update', 'as' => 'university.update'] );
+//	Route::match(['put', 'patch'] , 'edit/{id}',['uses' => 'UniversityController@update', 'as' => 'university.update'] );
+	Route::post('edit/{id}',['uses' => 'UniversityController@update', 'as' => 'university.update'] );
 
-	Route::post('delete',['uses' => 'UniversityController@destroy', 'as' => 'university.delete'] );
+	Route::delete('delete/{id}',['uses' => 'UniversityController@destroy', 'as' => 'university.delete'] );
 
-	Route::get('show',['uses' => 'UniversityController@show', 'as' => 'university.show'] );
+	Route::get('show/{id}',['uses' => 'UniversityController@show', 'as' => 'university.show'] );
 
 });
 
