@@ -23,13 +23,15 @@ class CourseController extends Controller
             'department_id' => 'required|integer',
             'semester_id' => 'required|integer',
             'name' => 'required|string|max:255',
+            'code' => 'required|string|max:20',
             'credit' => 'required|integer'
         ]);
 
         $course = new Course;
         $course->department_id = $request->department_id;
-        $course->semester_no = $request->semester_id;
+        $course->semester_no = $request->semester_no;
         $course->name = $request->name;
+        $course->code = $request->code;
         $course->credit = $request->credit;
 
         $course->save();
