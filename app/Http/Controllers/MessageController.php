@@ -20,6 +20,7 @@ class MessageController extends Controller
     		$verifications = Verification::where('student_id', $request->user()->id);
     		return view('message.view', ['messages' => $verifications]);
     	}
+        
     	/*return view('message.view');*/
     }
 
