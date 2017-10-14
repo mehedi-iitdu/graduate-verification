@@ -163,6 +163,10 @@
 				});
 			}
 
+			$('#verification_request').on('click', function () {
+                window.location.replace('/report/details/' + $('#university_id').val() + '/' + $('#department_id').val() + '/' + $('#session_no').val() + '/requested');
+            });
+
         	console.log("Outside");
             $('.dataTables-example').DataTable({
             	
