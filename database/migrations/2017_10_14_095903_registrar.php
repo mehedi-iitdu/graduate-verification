@@ -1,8 +1,10 @@
 <?php
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-class CreateUsersPO extends Migration
+
+class Registrar extends Migration
 {
     /**
      * Run the migrations.
@@ -11,16 +13,16 @@ class CreateUsersPO extends Migration
      */
     public function up()
     {
-        Schema::create('program_office', function (Blueprint $table) {
+        Schema::create('registrar', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
-                  ->references('id')->on('user')
-                  ->ondelete('cascade');
-            $table->integer('department_id')->unsigned();
-            $table->foreign('department_id')
-                  ->references('id')->on('department')
-                  ->ondelete('cascade');
+                ->references('id')->on('user')
+                ->ondelete('cascade');
+            $table->integer('university_id')->unsigned();
+            $table->foreign('university_id')
+                ->references('id')->on('university')
+                ->ondelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +33,6 @@ class CreateUsersPO extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('program_office');
+        Schema::dropIfExists('registrar');
     }
 }

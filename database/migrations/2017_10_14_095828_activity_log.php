@@ -1,8 +1,10 @@
 <?php
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-class CreateUsersRegistrar extends Migration
+
+class ActivityLog extends Migration
 {
     /**
      * Run the migrations.
@@ -11,16 +13,15 @@ class CreateUsersRegistrar extends Migration
      */
     public function up()
     {
-        Schema::create('registrar', function (Blueprint $table) {
+        Schema::create('log', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
-                  ->references('id')->on('user')
-                  ->ondelete('cascade');
-            $table->integer('university_id')->unsigned();
-            $table->foreign('university_id')
-                  ->references('id')->on('university')
-                  ->ondelete('cascade');
+                ->references('id')->on('user')
+                ->ondelete('cascade');
+            $table->string('operation');
+            $table->string('location');
+            $table->integer('table_row');
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateUsersRegistrar extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('registrar');
+        Schema::dropIfExists('log');
     }
 }

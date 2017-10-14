@@ -1,8 +1,10 @@
 <?php
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-class CreateUniversityTable extends Migration
+
+class Department extends Migration
 {
     /**
      * Run the migrations.
@@ -11,11 +13,14 @@ class CreateUniversityTable extends Migration
      */
     public function up()
     {
-        Schema::create('university', function (Blueprint $table) {
+        Schema::create('department', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('university_id')->unsigned();
+            $table->foreign('university_id')
+                ->references('id')->on('university')
+                ->ondelete('cascade');
             $table->string('name');
-            $table->string('location');
-            $table->string('website');
+            $table->integer('num_of_semester');
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ class CreateUniversityTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('university');
+        Schema::dropIfExists('department');
     }
 }
