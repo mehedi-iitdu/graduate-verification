@@ -13,7 +13,7 @@ class DynamicReportController extends Controller
     }
 
     public function indexView(Request $request){
-        if($request->user()->role_id != 2){
+        if($request->user()->role != "Student"){
             return view('reports.reportIndex');
         }
         else {
@@ -22,7 +22,7 @@ class DynamicReportController extends Controller
     }
 
     public function detailedView(Request $request, $university_id, $department_id, $session_no, $query) {
-        if($request->user()->role_id != 2){
+        if($request->user()->role != "Student"){
             $students = Student::all();
             if($university_id)
                 $students = $students->where('university_id', $university_id);
