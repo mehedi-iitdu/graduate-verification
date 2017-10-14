@@ -5,6 +5,7 @@
     <div class="container-fluid">
       <div class="row">
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+          <a href="{{ URL::route('message.view') }}" class="btn btn-outline-dark back">Back</a>
           <div class="message-body">
             <div class="card">
               <div class="card-header">
@@ -34,6 +35,10 @@
     .list-group-item.active{
         background-color: #000034 !important;
         border-color: #000034 !important;
+    }
+
+    .back{
+      margin: 20px 0;
     }
   </style>
 @endsection
