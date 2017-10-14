@@ -150,3 +150,10 @@ Route::prefix('dynamic_report')-> group(function (){
     Route::post('student', ['uses' => 'StudentController@getDynamicReportStudentData', 'as' => 'dynamic_report.student']);
 
 });
+
+Route::prefix('message')-> group(function (){
+
+	Route::get('view',['uses' => 'MessageController@showMessage', 'as' => 'message.view'] );
+	Route::get('single',['uses' => 'MessageController@showSingleMessage', 'as' => 'message.single'] );
+
+});
