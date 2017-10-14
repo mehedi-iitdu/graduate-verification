@@ -129,11 +129,13 @@ Route::prefix('result')->group(function(){
 
 Route::prefix('payment')-> group(function (){
 
-	Route::get('payment/checkout', 'PaymentController@getCheckout');
+	Route::get('verification', ['uses' => 'PaymentController@getVerification', 'as' => 'payment.verification'] );
 
-	Route::get('payment/done', 'PaymentController@getDone');
+	Route::get('checkout', ['uses' => 'PaymentController@getCheckout', 'as' => 'payment.checkout'] );
 
-	Route::get('payment/cancel', 'PaymentController@getCancel');
+	Route::get('done', ['uses' => 'PaymentController@getDone', 'as' => 'payment.done'] );
+
+	Route::get('cancel', ['uses' => 'PaymentController@getCancel', 'as' => 'payment.cancel'] );
 
 });
 
