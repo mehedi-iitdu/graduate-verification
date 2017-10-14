@@ -50,20 +50,20 @@ class ResultController extends Controller
         Marks::insert($marks);
         flash('Marks successfully submitted')->success();
         return redirect()->route('result.submit');
-        
+
 
     }
 
     public function getMarksInputField(Request $request){
     	if($request->ajax()){
             $student = Student::where('department_id', $request->department_id)->where('registration_no', $request->student_registration_no)->first();
-            
-            $courses=collect();;
+
+            $courses=collect();
             if($student){
                 $resulted_course_ids = Marks::where('student_id', $student->id)->pluck('course_id');
         		$courses = Course::select('id', 'name', 'code', 'credit')->whereNotIn('id', $resulted_course_ids)->where('department_id', $request->department_id)->where('semester_no', $request->semester_no)->get();
             }
-            
+
             return view('result._marks_fields', ['courses' => $courses]);
     	}
     }

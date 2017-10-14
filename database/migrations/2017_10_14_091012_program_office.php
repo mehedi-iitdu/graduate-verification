@@ -1,10 +1,8 @@
 <?php
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
-class CreateUserActivationTable extends Migration
+class CreateUsersPO extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +11,19 @@ class CreateUserActivationTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_activations', function (Blueprint $table) {
+        Schema::create('program_office', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
-                  ->references('id')->on('users')
+                  ->references('id')->on('user')
                   ->ondelete('cascade');
-            $table->string('token');
-            $table->timestamp('created_at');
+            $table->integer('department_id')->unsigned();
+            $table->foreign('department_id')
+                  ->references('id')->on('department')
+                  ->ondelete('cascade');
+            $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -31,6 +31,6 @@ class CreateUserActivationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_activation');
+        Schema::dropIfExists('program_office');
     }
 }
