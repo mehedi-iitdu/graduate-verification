@@ -19,14 +19,14 @@
 
     </head>
     <body>
-    	@include('inc.navbar')
+        @include('inc.navbar')
         @include('inc.side_navbar')
  
-    	<div id="alert" class="text-center col-md-6">
+        <div id="alert" class="text-center col-md-6">
             @include('flash::message')                                                            
         </div>
     
-    	<div id="alert" class="text-center col-md-6">
+        <div id="alert" class="text-center col-md-6">
             @include('flash::message')
         </div>
         
