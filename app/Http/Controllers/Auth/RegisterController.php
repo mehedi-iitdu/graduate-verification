@@ -81,7 +81,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        $roles = ['UGC' => 'UGC', 'Registrar' => 'Registrar', 'ProgramOffice' => 'ProgramOffice', 'Student' => 'Student'];        
+        $roles = ['UGC' => 'UGC', 'Registrar' => 'Registrar', 'ProgramOffice' => 'ProgramOffice', 'Student' => 'Student'];
         return view('user.create', ['roles' => $roles]);
     }
 
@@ -92,7 +92,7 @@ class RegisterController extends Controller
             'last_name' => 'required|string|max:20',
             'email' => 'required|string|email|max:255|unique:user',
             'mobile_no' => 'required|string|max:11',
-            'role_id' => 'required',
+            'role' => 'required',
         ]);
 
         $user = new User;
