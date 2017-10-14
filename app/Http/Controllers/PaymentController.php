@@ -48,30 +48,30 @@ class PaymentController extends Controller
         // Clear the shopping cart, write to database, send notifications, etc.
 
         // Thank the user for the purchase
-    	return view('checkout.done');
+    	return view(URL::route('payment.done'));
     }
 
     public function getCancel()
     {
         // Curse and humiliate the user for cancelling this most sacred payment (yours)
-    	return view('checkout.cancel');
+    	return view(URL::route('payment.cancel'));
     }
 
 
-    public function getCheckout()
+    public function getCheckout(Request $request)
     {
     	$payer = PayPal::Payer();
     	$payer->setPaymentMethod('paypal');
 
     	$amount = PayPal:: Amount();
     	$amount->setCurrency('USD');
-    	$amount->setTotal(30); // This is the simple way,
+    	$amount->setTotal(10); // This is the simple way,
     	// you can alternatively describe everything in the order separately;
     	// Reference the PayPal PHP REST SDK for details.
 
     	$transaction = PayPal::Transaction();
     	$transaction->setAmount($amount);
-    	$transaction->setDescription('What are you selling?');
+    	$transaction->setDescription('Payment for verification');
 
     	$redirectUrls = PayPal:: RedirectUrls();
     	$redirectUrls->setReturnUrl(url('payment/done'));

@@ -44,7 +44,7 @@
 
 		<div class="card text-center">
 		  <div class="card-body">
-		    <h4 class="card-text">Amount: <span>39$</span></h4>
+		    <h4 class="card-text">Amount: <span>10$</span></h4>
 		    <button class="btn btn-block btn-primary checkout">Checkout</button>
 		  </div>
 		</div>
