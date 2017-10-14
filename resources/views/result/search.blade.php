@@ -82,7 +82,7 @@
               total_gpa += credit*parseFloat($(this).find('.gpa:first').text());
               total_credit += credit;
             });
-            var cgpa = total_gpa/total_credit;
+            var cgpa = (total_gpa/total_credit).toFixed(2);
             $('tbody').append('<tr><td colspan="3" align="right">CGPA:</td><td>'+cgpa.toString()+'</td></tr>');
         });
         return false;
