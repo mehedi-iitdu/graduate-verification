@@ -69,6 +69,10 @@ Route::prefix('student')-> group(function (){
 
 	Route::post('create',['uses' => 'StudentController@storeStudent', 'as' => 'student.store'] );
 
+	Route::get('view',['uses' => 'StudentController@showStudentView', 'as' => 'student.view'] );
+
+	Route::post('view',['uses' => 'StudentController@getStudentListByDepartment', 'as' => 'student.studentListByDepartment'] );
+
 });
 
 

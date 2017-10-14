@@ -154,4 +154,23 @@ class StudentController extends Controller
             'verified' => $filtered->where('verification_status', 'In Progress')->count()
         );
     }
+
+
+    public function showStudentView() {
+        
+        return view('student.view');
+    }
+
+    public function getUniversityListByLocation(Request $request){
+
+      $students = Student::where('department_id', $request->department_id)->get();
+           
+      $theads = array('Student Name', 'Session', 'Departent');
+
+      $properties = array('name', 'location', 'website');
+
+        return view('partials._table',['theads' => $theads, 'properties' => $properties, 'tds' => $universities])
+            ;
+    } 
+
 }
