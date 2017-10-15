@@ -6,7 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="_token" content="{!! csrf_token() !!}" />
         <title>OGVS</title>
-        <link rel="stylesheet" type="text/css" href="{{asset('css/font-awesome.css')}}">
+
+        {{-- Font awesome cdn --}}
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        {{-- <link rel="stylesheet" type="text/css" href="{{asset('css/font-awesome.css')}}"> --}}
         <link rel="stylesheet" href="{{asset('css/jquery-ui.min.css')}}">
 
         <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
