@@ -31,7 +31,7 @@
                   </div>
 
                   <div class="form-group col-md-4">
-                    <button type="submit" class="btn btn-block btn-success" onclick="search()">Search</button>
+                    <p class="btn btn-block btn-success" id="search">Search</p>
                   </div>
                 </div>
             </form>
@@ -81,19 +81,6 @@
               headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
           });
 
-
-        function search(){
-
-          var university_id = ('#university_id').val();
-          var department_id = ('#department_id').val();
-
-          $.post("{{ URL::route('student.list') }}",{university_id:university_id, department_id:department_id}, function(data){
-
-              $('#student_table').html(data);
-          });
-          
-        }
-
         $.post("{{ URL::route('university.list') }}",{},function(data){
             $('#university_list').html(data);
 
@@ -104,6 +91,16 @@
                     
                 $.post("{{ URL::route('department.list') }}",{university_id:university_id}, function(data){
                       $('#department_list').html(data);
+
+                    $('#search').on('click', function () {
+                        var university_id = $('#university_id').val();
+                        var department_id = $('#department_id').val();
+
+                        $.post("{{ URL::route('student.list') }}",{university_id:university_id, department_id:department_id}, function(data){
+
+                            $('#student_table').html(data);
+                        });
+                    });
 
                 })
 

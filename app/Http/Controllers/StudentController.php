@@ -158,20 +158,23 @@ class StudentController extends Controller
 
 
     public function showStudentView() {
-        
+
         return view('student.view');
     }
 
-    public function getUniversityListByLocation(Request $request){
+    public function getStudentListByDepartment(Request $request){
 
-      $students = Student::where('department_id', $request->department_id)->get();
-           
-      $theads = array('Student Name', 'Session', 'Departent');
+        $students = \DB::table('student')
+            ->select('student.*','user.*')
+            ->join('user','user.id','=','student.user_id')
+            ->where(['student.department_id' => $request->department_id])
+            ->get();
 
-      $properties = array('name', 'location', 'website');
+        $theads = array('Student Name', 'Session', 'Registration No', 'Date of Birth', 'Email', 'Mobile No');
 
-        return view('partials._table',['theads' => $theads, 'properties' => $properties, 'tds' => $universities])
-            ;
-    } 
+        $properties = array('first_name', 'session', 'registration_no', 'date_of_birth', 'email', 'mobile_no');
+
+        return view('partials._table',['theads' => $theads, 'properties' => $properties, 'tds' => $students]);
+    }
 
 }

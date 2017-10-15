@@ -73,7 +73,7 @@ Route::prefix('student')-> group(function (){
 
 	Route::get('view',['uses' => 'StudentController@showStudentView', 'as' => 'student.view'] );
 
-	Route::post('view',['uses' => 'StudentController@getStudentListByDepartment', 'as' => 'student.studentListByDepartment'] );
+	Route::post('view',['uses' => 'StudentController@getStudentListByDepartment', 'as' => 'student.list'] );
 
 });
 
@@ -106,6 +106,8 @@ Route::prefix('department')-> group(function (){
 	Route::get('create', ['uses' => 'DepartmentController@showDepartmentCreateForm', 'as' => 'department.create']);
 
 	Route::get('view', ['uses' => 'DepartmentController@showDepartmentView', 'as' => 'department.view']);
+
+    Route::post('view', ['uses' => 'DepartmentController@departmentListByUniversity', 'as' => 'department.view']);
 
 	Route::post('create', ['uses' => 'DepartmentController@storeDepartment', 'as' => 'department.store']);
 });
