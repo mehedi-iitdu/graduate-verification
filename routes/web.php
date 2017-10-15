@@ -26,7 +26,7 @@ Route::get('admin/dashboard', ['uses' => 'DashboardController@adminDashboardView
 Route::prefix('report')-> group(function (){
 
     Route::get('index',['uses' => 'DynamicReportController@indexView', 'as' => 'report.index'] );
-    Route::get('details/{university_id}/{department_id}/{session_no}/{query}',['uses' => 'DynamicReportController@detailedView', 'as' => 'report.details'] );
+    Route::get('details',['uses' => 'DynamicReportController@detailedView', 'as' => 'report.details'] );
 });
 
 Route::post('role_based_info',['uses' => 'RoleController@getRoleBasedInfo', 'as' => 'role_based_info'] );
@@ -39,7 +39,8 @@ Route::get('manage_results', ['uses' => 'ResultController@manageResults', 'as' =
 
 Route::get('login', ['uses' => 'Auth\LoginController@showLoginForm', 'as' => 'login']);
 Route::post('login', ['uses' => 'Auth\LoginController@login', 'as' => 'login']);
-Route::get('logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'logout']);
+Route::get('auth/logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'logout']);
+Route::get('logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'auth.logout']);
 
 Route::prefix('user')-> group(function (){
 
@@ -180,6 +181,4 @@ Route::prefix('message')-> group(function (){
 	Route::get('single/{id}',['uses' => 'MessageController@showSingleMessage', 'as' => 'message.single'] );
 
 });
-
-Route::get('logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'auth.logout']);
 
