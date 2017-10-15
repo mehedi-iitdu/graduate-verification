@@ -56,8 +56,6 @@
 
                     var university_id = $('#university_id').val();
 
-                    /*alert(university_id);*/
-
                     $.post("{{ URL::route('department.view') }}",{university_id:university_id}, function(data){
                         $('#department_table').html(data);
                     });
