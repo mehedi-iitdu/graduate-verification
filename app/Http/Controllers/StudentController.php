@@ -174,7 +174,7 @@ class StudentController extends Controller
         return view('student.view');
     }
 
-    public function getStudentListByDepartment(Request $request, $id){
+    public function getStudentListByDepartment(Request $request){
 
         $students = \DB::table('student')
             ->select('student.*','user.*')
