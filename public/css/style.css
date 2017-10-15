@@ -8551,3 +8551,7 @@ body.md-skin {
     margin: 0;
   }
 }
+
+p.error{
+  color: red;
+}

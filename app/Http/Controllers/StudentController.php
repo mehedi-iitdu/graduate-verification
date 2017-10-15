@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Student;
+use App\Department;
 use App\University;
 use App\Stakeholder;
 use App\Verification;
@@ -42,7 +43,7 @@ class StudentController extends Controller
             flash('Date of Birth does not match with the registration number');
             return redirect()->route('stakeholder.search');
         }
-        if ($student_info->university_id != $request->university_id) {
+        if ($student_info->department->university->id != $request->university_id) {
             flash('University name does not match with the registration number');
             return redirect()->route('stakeholder.search');
         }
@@ -52,7 +53,7 @@ class StudentController extends Controller
     public function paymentRequestView(Request $request, $registration_no) {
         $student_info = Student::where('registration_no', $registration_no)->first();
         $user_info = User::where('id', $student_info->user_id)->first();
-        $university_info = University::where('id', $student_info->university_id)->first();
+        $university_info = University::where('id', $student_info->department->university->id)->first();
         return view('stakeholder.payment_request', [
             'student' => $student_info,
             'user' => $user_info,
@@ -75,7 +76,7 @@ class StudentController extends Controller
             return redirect()->route('stakeholder.search');
         }
 
-        $stakeholder = new Stackholder;
+        $stakeholder = new Stakeholder;
         $stakeholder->name = $request->name;
         $stakeholder->institute = $request->institute;
         $stakeholder->email = $request->email;
@@ -86,7 +87,7 @@ class StudentController extends Controller
 
         $verification = new Verification;
         $verification->student_id = $student->id;
-        $verification->stackholder_id = $stakeholder->id;
+        $verification->stakeholder_id = $stakeholder->id;
         $verification->verification_status = "Requested";
         $verification->save();
 

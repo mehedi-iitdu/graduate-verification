@@ -38,7 +38,7 @@
                             <select class="form-control" required="">
                                 <option>Select Semester</option>
                             </select>
-                            
+
                         </div>
                     </div>
 
@@ -52,7 +52,7 @@
                     <div class="form-group row">
                         <label for="code" class="col-sm-2 col-form-label">Course Code</label>
                         <div class="col-sm-10">
-                            <input type="text" for="code" required="" class="form-control" id="code" name="name" placeholder="Course Code">
+                            <input type="text" for="code" required="" class="form-control" id="code" name="code" placeholder="Course Code">
                         </div>
                     </div>
 

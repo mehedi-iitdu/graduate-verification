@@ -38,6 +38,7 @@
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <a class="dropdown-item" href="{{ URL::route('result.submit') }}">Add Result</a>
+          <a class="dropdown-item" href="{{ URL::route('result.search') }}">Search Result</a>
           <a class="dropdown-item" href="#">Edit</a>
         </div>
       </div>
@@ -54,6 +55,10 @@
           <a class="dropdown-item" href="#">Verify</a>
         </div>
       </div>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{ URL::route('report.index') }}">Reports</a>
     </li>
   </ul>
 </nav>
