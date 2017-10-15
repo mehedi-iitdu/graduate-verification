@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\University;
-use App\Resistrar;
+use App\Registrar;
 use App\Department;
 use Illuminate\Http\Request;
 use App\Student;
