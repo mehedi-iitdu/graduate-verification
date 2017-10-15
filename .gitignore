@@ -26,5 +26,3 @@ composer.lock
 .env
 
 /tests
-
-/user_dashboard
