@@ -155,11 +155,11 @@ Route::prefix('result')->group(function(){
 
 Route::prefix('payment')-> group(function (){
 
-	Route::get('verification', ['uses' => 'PaymentController@getVerification', 'as' => 'payment.verification'] );
+	Route::get('verification/{id}', ['uses' => 'PaymentController@getVerification', 'as' => 'payment.verification'] );
 
-	Route::get('checkout', ['uses' => 'PaymentController@getCheckout', 'as' => 'payment.checkout'] );
+	Route::get('checkout/{id}', ['uses' => 'PaymentController@getCheckout', 'as' => 'payment.checkout'] );
 
-	Route::get('done', ['uses' => 'PaymentController@getDone', 'as' => 'payment.done'] );
+	Route::get('done/{id}', ['uses' => 'PaymentController@getDone', 'as' => 'payment.done'] );
 
 	Route::get('cancel', ['uses' => 'PaymentController@getCancel', 'as' => 'payment.cancel'] );
 
@@ -175,7 +175,7 @@ Route::prefix('dynamic_report')-> group(function (){
 Route::prefix('message')-> group(function (){
 
 	Route::get('view',['uses' => 'MessageController@showMessage', 'as' => 'message.view'] );
-	Route::get('single',['uses' => 'MessageController@showSingleMessage', 'as' => 'message.single'] );
+	Route::get('single/{id}',['uses' => 'MessageController@showSingleMessage', 'as' => 'message.single'] );
 
 });
 
