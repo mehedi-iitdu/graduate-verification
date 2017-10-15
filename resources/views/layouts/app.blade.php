@@ -40,9 +40,11 @@
         
         <div class="container-fluid">
 
-            <div id="alert" class="text-center col-md-6">
-                @include('flash::message')
-            </div>
+             <div class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+                <div id="alert" class="text-center col-md-6" style="margin: 0 auto;">
+                    @include('flash::message')
+                </div>
+             </div>
 
             @yield('content')
         </div>
@@ -67,7 +69,7 @@
 
         @yield('script')
         <script>
-            $('div.alert').not('.alert-important').delay(10000).fadeOut(350);
+            $('div.alert').not('.alert-important').delay(5000).fadeOut(350);
         </script>
     </body>
 </html>
