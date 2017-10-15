@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+<link rel="stylesheet" type="text/css" href="{{ asset('css/popup.css') }}">
+@endsection
+
 @section('content')
 
     <div class="container-fluid">
@@ -28,14 +32,18 @@
                   <p id="student_registration_no_error" class="error pull-right"></p>
               </div>
             </div>
-            <button class="btn btn-primary pull-right" id='btn-proceed' >Proceed</button>    <br><br> <br><br>
+            <button class="btn btn-primary pull-right" id='btn-proceed' >Proceed</button>    <br><br> <br>
             <div id="marks_field">
 
             </div>
 
             {!! Form::close() !!}
-
-            <div class="modal fade" tabindex="-1" role="dialog" id="requestPermission"></div>
+            <br>
+            <div id="popup" style="display: none;">
+              
+            </div>
+  
+          </div>
 
 
           </div>
@@ -46,11 +54,22 @@
         </main>
       </div>
     </div>
+
 @endsection
 
 @section('script')
+  
   <script type="text/javascript">
+
+
     $(document).ready(function(){
+
+      $("#myBtn").click(function(e){
+        e.preventDefault();
+        $("#myModal").modal('show');
+      });
+
+
       $.ajaxSetup({
         headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
       });
@@ -82,8 +101,9 @@
           $('#marks_field').html(data);
           $('#requestBtn').on('click', function(){
               $.post("{{ URL::route('permission.request_modal') }}", {department_id:$department_id, semester_no:$semester_no, student_registration_no:$student_registration_no}, function(data){
-                $('#requestPermission').html(data);
-                $('#requestPermission').modal();
+                $('#popup').html(data);
+                console.log("hi");
+                div_show();
 
             });
             
@@ -107,5 +127,16 @@
         $(element).parent().parent().remove();
 
       }
+
+
+      function div_show() {
+        document.getElementById('popup').style.display = "block";
+      }
+      //Function to Hide Popup
+      function div_hide(){
+        document.getElementById('popup').style.display = "none";
+      }
+
+
     </script>
 @endsection

@@ -163,7 +163,7 @@ Route::prefix('result')->group(function(){
 
 Route::prefix('permission')-> group(function (){
 
-	Route::get('request', ['uses' => 'ResultController@sendPermissionRequest', 'as' => 'permission.request'] );
+	Route::post('request', ['uses' => 'ResultController@sendPermissionRequest', 'as' => 'permission.request'] );
 
 	Route::post('get_requestModal', ['uses' => 'ResultController@getPermissionRequestModal', 'as' => 'permission.request_modal']);
 
