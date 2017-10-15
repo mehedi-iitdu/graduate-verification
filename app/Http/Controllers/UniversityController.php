@@ -28,7 +28,7 @@ class UniversityController extends Controller{
 	public function storeUniversity(Request $request){
 
 		$this->validate($request, [
-			'university_name' => 'required|string|max:255',
+			'university_name' => 'required|string|min:10|max:255',
 			'university_location' => 'required|string|max:255',
 			'university_website' => 'required|string|max:255',
 		]);
