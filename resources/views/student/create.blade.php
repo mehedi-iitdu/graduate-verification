@@ -123,7 +123,7 @@
           });
 
           $(function () {
-              $('#date_of_birth').datepicker({});
+              $('#date_of_birth').datepicker({ changeYear: true, changeMonth:true, yearRange: "1980:"+new Date().getFullYear() });
           });
 
 

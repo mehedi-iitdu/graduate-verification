@@ -15,14 +15,16 @@ yarn-error.log
 
 /.phpintel
 
-public/js/app\.js
+public/js/app.js
 
 public/mix-manifest\.json
 
 _ide_helper\.php
 
-composer\.lock
+composer.lock
 
 .env
 
 /tests
+
+/user_dashboard

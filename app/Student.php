@@ -18,10 +18,6 @@ class Student extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function university(){
-        return $this->belongsTo(University::class);
-    }
-
     public function department(){
         return $this->belongsTo(Department::class);
     }
@@ -33,5 +29,5 @@ class Student extends Model
     public function verifications(){
     	return $this->hasMany(Verification::class);
     }
-        
+
 }
