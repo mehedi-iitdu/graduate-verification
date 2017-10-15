@@ -18,7 +18,8 @@ class Department extends Migration
             $table->integer('university_id')->unsigned();
             $table->foreign('university_id')
                 ->references('id')->on('university')
-                ->ondelete('cascade');
+                ->ondelete('cascade')
+                ->onUpdate('cascade');
             $table->string('name');
             $table->integer('num_of_semester');
             $table->timestamps();

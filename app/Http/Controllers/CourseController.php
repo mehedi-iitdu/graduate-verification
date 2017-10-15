@@ -7,7 +7,7 @@ use App\Course;
 
 class CourseController extends Controller
 {
-    
+
     public function manageCourses(){
         return view('user_dashboard.manage_courses');
     }
@@ -21,7 +21,7 @@ class CourseController extends Controller
 
         $this->validate($request, [
             'department_id' => 'required|integer',
-            'semester_id' => 'required|integer',
+            'semester_no' => 'required|integer',
             'name' => 'required|string|max:255',
             'code' => 'required|string|max:20',
             'credit' => 'required|integer'

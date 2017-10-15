@@ -24,9 +24,9 @@
                     <tbody>
                     @foreach ($students as $student)
                         <tr>
-                            <td>Sharafat Ahmed</td>
-                            <td class="center">jgfil</td>
-                            <td class="center">kjkf</td>
+                            <td>{{ $student->user->first_name." ".$student->user->last_name }}</td>
+                            <td class="center">{{ $student->department->university->name }}</td>
+                            <td class="center">{{ $student->department->name }}</td>
                             <td class="center">{{ $student->session }}</td>
                             <td class="center">{{ $student->registration_no }}</td>
                             <td class="center">fdhkh</td>
@@ -58,7 +58,7 @@
         $(document).ready(function(){
 
         	$('.dataTables-example').DataTable({
-            	
+            	"order": [],
                 pageLength: 25,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',

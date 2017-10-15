@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Marks;
 use Illuminate\Http\Request;
 use App\User;
 use App\Student;
+use App\Department;
 use App\University;
-use App\Stackholder;
+use App\Stakeholder;
 use App\Verification;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -42,7 +44,7 @@ class StudentController extends Controller
             flash('Date of Birth does not match with the registration number');
             return redirect()->route('stakeholder.search');
         }
-        if ($student_info->university_id != $request->university_id) {
+        if ($student_info->department->university->id != $request->university_id) {
             flash('University name does not match with the registration number');
             return redirect()->route('stakeholder.search');
         }
@@ -52,7 +54,7 @@ class StudentController extends Controller
     public function paymentRequestView(Request $request, $registration_no) {
         $student_info = Student::where('registration_no', $registration_no)->first();
         $user_info = User::where('id', $student_info->user_id)->first();
-        $university_info = University::where('id', $student_info->university_id)->first();
+        $university_info = University::where('id', $student_info->department->university->id)->first();
         return view('stakeholder.payment_request', [
             'student' => $student_info,
             'user' => $user_info,
@@ -75,7 +77,7 @@ class StudentController extends Controller
             return redirect()->route('stakeholder.search');
         }
 
-        $stakeholder = new Stackholder;
+        $stakeholder = new Stakeholder;
         $stakeholder->name = $request->name;
         $stakeholder->institute = $request->institute;
         $stakeholder->email = $request->email;
@@ -86,7 +88,7 @@ class StudentController extends Controller
 
         $verification = new Verification;
         $verification->student_id = $student->id;
-        $verification->stackholder_id = $stakeholder->id;
+        $verification->stakeholder_id = $stakeholder->id;
         $verification->verification_status = "Requested";
         $verification->save();
 
@@ -139,8 +141,6 @@ class StudentController extends Controller
 
     function getDynamicReportStudentData(Request $request) {
         $students = Student::all();
-        if($request->university_id)
-            $students = $students->where('university_id', $request->university_id);
         if($request->department_id)
             $students = $students->where('department_id', $request->department_id);
         if($request->session_no)
@@ -156,4 +156,47 @@ class StudentController extends Controller
             'verified' => $filtered->where('verification_status', 'In Progress')->count()
         );
     }
+
+
+    public function showStudentView() {
+
+        return view('student.view');
+    }
+
+    public function getStudentListByDepartment(Request $request, $id){
+
+        $students = \DB::table('student')
+            ->select('student.*','user.*')
+            ->join('user','user.id','=','student.user_id')
+            ->where(['student.department_id' => $request->department_id])
+            ->get();
+
+        $theads = array('Student Name', 'Session', 'Registration No', 'Date of Birth', 'Email', 'Mobile No');
+
+        $properties = array('first_name', 'session', 'registration_no', 'date_of_birth', 'email', 'mobile_no');
+
+        return view('partials._table',['theads' => $theads, 'properties' => $properties, 'tds' => $students]);
+    }
+
+
+    public function verifyStudentView(Request $request, $registration_no) {
+        $student = Student::where('registration_no', $registration_no)->first();
+        $marks = Marks::where('student_id', $student->id)->get();
+        $all_marks = array();
+
+        $num_of_semester = $student-> department -> num_of_semester;
+        for($sem = 1; $sem <= $num_of_semester; $sem++) {
+            $semester_marks = array();
+            foreach ($marks as $mark)
+                if($mark -> course -> semester_no == $sem)
+                    $semester_marks[] = $mark;
+            $all_marks[] = $semester_marks;
+        }
+        return view('student.verify',
+            [
+                'student' => $student,
+                'all_marks' => $all_marks
+            ]);
+    }
+
 }
