@@ -17,14 +17,15 @@ class MessageController extends Controller
     public function showMessage(Request $request){
 
     	if($request->user()->role == "Student") {
-    		$verifications = Verification::where('student_id', $request->user()->id);
+    		$verifications = Verification::where('student_id', $request->user()->id)->get();
     		return view('message.view', ['messages' => $verifications]);
     	}
         
     	/*return view('message.view');*/
     }
 
-    public function showSingleMessage(){ 
-      return view('message.single');
+    public function showSingleMessage(Request $request, $id){
+        $message = Verification::where('id', $id)->first();
+        return view('message.single', ['message' => $message]);
     }
 }

@@ -9,11 +9,11 @@
           <div class="message-body">
             <div class="card">
               <div class="card-header">
-                  <h3 class="message-heading">Request Decline</h3>
+                  <h3 class="message-heading">{{ $message->verification_status }}</h3>
                 </div>
               <div class="card-body">
-                <h4 class="card-title">From: <span>Abdul Matin</span></h4>
-                <h5 class="card-title">Date: <span>03-04-2017</span></h5>
+                <h4 class="card-title">From: <span>{{ $message->stakeholder->name }}</span></h4>
+                <h5 class="card-title">Date: <span>{{ $message->created_at }}</span></h5>
                 <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                 quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
