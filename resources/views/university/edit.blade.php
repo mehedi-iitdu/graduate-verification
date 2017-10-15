@@ -40,7 +40,9 @@
 					<div class="col-xs-12 col-sm-12 col-md-12">
 						<div class="form-group">
 							<strong>Location:</strong>
-							{!! Form::textarea('location', null, array('placeholder' => 'Location','class' => 'form-control','style'=>'height:100px')) !!}
+							{!! Form::select('location', ['Dhaka' => 'Dhaka', 'Rajshahi' => 'Rajshahi',
+							'Khulna' =>'Khulna', 'Chittagong' => 'Chittagong', 'Barisal' => 'Barisal',
+							'Rangpur' => 'Rangpur', 'Sylhet' =>'Sylhet' ], null, ['class' => 'form-control']) !!}
 						</div>
 					</div>
 
