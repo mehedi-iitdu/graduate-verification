@@ -14,13 +14,25 @@
               <div class="card-body">
                 <h4 class="card-title">From: <span>{{ $message->stakeholder->name }}</span></h4>
                 <h5 class="card-title">Date: <span>{{ $message->created_at }}</span></h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <a href="" class="btn btn-primary">Go this link</a>
+
+                @if($message->verification_status == "Requested")
+                  <p class="card-text">{{ $message->stakeholder->name }} has requested to verify {{ $message->student->user->first_name }} of {{$message->student->department->name}} of the {{$message->student->department->university->name}} Registration no {{ $message->student->registration_no}}. Please go through the following link to pay the verification fee.</p>
+
+                  <a href="{{ URL::route('payment.verification', $message->id) }}" class="btn btn-primary">Go this link</a>
+                @elseif($message->verification_status == "Paid")
+
+                  <p class="card-text">Verification payment has been paid to verify {{ $message->student->user->first_name }} of {{$message->student->department->name}} of the {{$message->student->department->university->name}} Registration no {{ $message->student->registration_no}} requested to verify by {{ $message->stakeholder->name }}.</p>
+
+                  @if($role == "Registrar")
+                    <p>Please go through the following link to verify</p>
+                    <a href="{{ URL::route('verify') }}" class="btn btn-primary">Go this link</a>
+                  @endif
+
+                @elseif($message->verification_status == "Verified")
+                  <p class="card-text">{{ $message->student->user->first_name }} of {{$message->student->department->name}} of the {{$message->student->department->university->name}} Registration no {{ $message->student->registration_no}} has been verified requested to verify by {{ $message->stakeholder->name }}.</p>
+                @elseif($message->verification_status == "Canceled")
+                  <p class="card-text">Verification request has been canceled to verify {{ $message->student->user->first_name }} of {{$message->student->department->name}} of the {{$message->student->department->university->name}} Registration no {{ $message->student->registration_no}} requested to verify by {{ $message->stakeholder->name }}.</p>
+                @endif
               </div>
             </div>
           </div>
