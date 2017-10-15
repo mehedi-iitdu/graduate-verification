@@ -9,6 +9,7 @@ use App\Student;
 class University extends Model
 {
     protected $table = 'university';
+    protected $fillable = ['name' , 'location' , 'website'];
 
     public function departments(){
         return $this->hasMany(Department::class);

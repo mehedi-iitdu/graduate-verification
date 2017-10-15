@@ -7,11 +7,13 @@ use App\User;
 use App\Student;
 use App\Registrar;
 use App\Role;
+use App\ProgramOffice;
 
 class UsersController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('auth', ['only' => ['getProfile']]);
     }
 
     public function getUserList(Request $request){
@@ -21,6 +23,7 @@ class UsersController extends Controller
     }
 
     public function getProfile(Request $request){
+
     	if($request -> user() -> isStudent()){
     		$student = Student::where('user_id', $request->user()->id)->first();
 

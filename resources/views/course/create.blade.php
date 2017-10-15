@@ -17,7 +17,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="university_id">University</label>
                         <div id="university_list" class="col-sm-10">
-                            <select class="form-control">
+                            <select class="form-control" required="required">
                                 <option>Select University</option>
                             </select>
                         </div>
@@ -26,32 +26,40 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="department_id">Department</label>
                         <div id="department_list" class="col-sm-10">
-                            <select class="form-control">
+                            <select class="form-control" required="">
                                 <option>Select Department</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" for="semester_id">Semester</label>
+                        <label class="col-sm-2 col-form-label" for="semester_no">Semester</label>
                         <div id="semester_list" class="col-sm-10">
-                            <select class="form-control">
+                            <select class="form-control" required="">
                                 <option>Select Semester</option>
                             </select>
+
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="name" class="col-sm-2 col-form-label">Course</label>
+                        <label for="name" class="col-sm-2 col-form-label">Course Name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Course Name">
+                            <input type="text" class="form-control" required="" id="name" name="name" placeholder="Course Name">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="code" class="col-sm-2 col-form-label">Course Code</label>
+                        <div class="col-sm-10">
+                            <input type="text" for="code" required="" class="form-control" id="code" name="code" placeholder="Course Code">
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="credit" class="col-sm-2 col-form-label">Credit</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="credit" name="credit" placeholder="Course Credit">
+                            <input type="number" class="form-control" required="" id="credit" name="credit" placeholder="Course Credit">
                         </div>
                     </div>
 

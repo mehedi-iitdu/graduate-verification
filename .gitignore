@@ -15,16 +15,20 @@ yarn-error.log
 
 /.phpintel
 
-public/js/app\.js
+public/js/app.js
 
 public/mix-manifest\.json
 
 _ide_helper\.php
 
-composer\.lock
+composer.lock
 
 .env
 
 /tests
 
+<<<<<<< HEAD
 routes/\.fuse_hidden00002c1900000001
+=======
+/user_dashboard
+>>>>>>> dev
