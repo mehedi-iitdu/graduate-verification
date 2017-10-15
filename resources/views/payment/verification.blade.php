@@ -10,12 +10,20 @@
 		    <table class="table table-responsive">
 		      <tbody>
 		        <tr>
-		          <td colspan="6">Name:</td>
-		          <td>Abdul Bari</td>
+		          <th colspan="6">Name</th>
+		          <td>{{ $verification->stakeholder->name }}</td>
 		        </tr>
 		        <tr>
-		          <td colspan="6">Role:</td>
-		          <td>UGC</td>
+		          <th colspan="6">Institute</th>
+		          <td>{{ $verification->stakeholder->institute }}</td>
+		        </tr>
+		        <tr>
+		          <th colspan="6">Designation</th>
+		          <td>{{ $verification->stakeholder->designation }}</td>
+		        </tr>
+		        <tr>
+		          <th colspan="6">Country</th>
+		          <td>{{ $verification->stakeholder->country }}</td>
 		        </tr>
 		      </tbody>
 		    </table>
@@ -30,12 +38,20 @@
 		    <table class="table table-responsive">
 		      <tbody>
 		        <tr>
-		          <td colspan="6">Name:</td>
-		          <td>Abdul Bari</td>
+		          <th colspan="6">Name</th>
+		          <td>{{ $verification->student->user->first_name }}</td>
 		        </tr>
 		        <tr>
-		          <td colspan="6">Role:</td>
-		          <td>UGC</td>
+		          <th colspan="6">Department</th>
+		          <td>{{ $verification->student->department->name }}</td>
+		        </tr>
+		        <tr>
+		          <th colspan="6">University</th>
+		          <td>{{ $verification->student->department->university->name }}</td>
+		        </tr>
+		        <tr>
+		          <th colspan="6">Registration No.</th>
+		          <td>{{ $verification->student->registration_no }}</td>
 		        </tr>
 		      </tbody>
 		    </table>
@@ -44,8 +60,8 @@
 
 		<div class="card text-center">
 		  <div class="card-body">
-		    <h4 class="card-text">Amount: <span>39$</span></h4>
-		    <button class="btn btn-block btn-primary checkout">Checkout</button>
+		    <h4 class="card-text">Amount <span>10$</span></h4>
+		    <a class="btn btn-block btn-primary checkout" href="{{ URL::route('payment.checkout', $verification->id) }}">Checkout</a>
 		  </div>
 		</div>
 	</div>

@@ -196,9 +196,23 @@
 				});
 			}
 
+			$('#verification_request').on('click', function () {
+                window.location.replace('/report/details?university_id=' + $('#university_id').val() + '&department_id=' + $('#department_id').val() + '&session_no=' + $('#session_no').val() + '&query=' + 'Requested');
+            });
+            $('#num_of_student').on('click', function () {
+                window.location.replace('/report/details?university_id=' + $('#university_id').val() + '&department_id=' + $('#department_id').val() + '&session_no=' + $('#session_no').val() + '&query=' + 'Total');
+            });
+            $('#verification_process').on('click', function () {
+                window.location.replace('/report/details?university_id=' + $('#university_id').val() + '&department_id=' + $('#department_id').val() + '&session_no=' + $('#session_no').val() + '&query=' + 'Paid');
+            });
+            $('#verified').on('click', function () {
+                window.location.replace('/report/details?university_id=' + $('#university_id').val() + '&department_id=' + $('#department_id').val() + '&session_no=' + $('#session_no').val() + '&query=' + 'Verified');
+            });
+
+
         	console.log("Outside");
             $('.dataTables-example').DataTable({
-            	
+            	"order": [],
                 paging: false,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
