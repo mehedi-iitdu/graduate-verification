@@ -155,4 +155,26 @@ class StudentController extends Controller
             'verified' => $filtered->where('verification_status', 'In Progress')->count()
         );
     }
+
+
+    public function showStudentView() {
+
+        return view('student.view');
+    }
+
+    public function getStudentListByDepartment(Request $request){
+
+        $students = \DB::table('student')
+            ->select('student.*','user.*')
+            ->join('user','user.id','=','student.user_id')
+            ->where(['student.department_id' => $request->department_id])
+            ->get();
+
+        $theads = array('Student Name', 'Session', 'Registration No', 'Date of Birth', 'Email', 'Mobile No');
+
+        $properties = array('first_name', 'session', 'registration_no', 'date_of_birth', 'email', 'mobile_no');
+
+        return view('partials._table',['theads' => $theads, 'properties' => $properties, 'tds' => $students]);
+    }
+
 }
