@@ -15,7 +15,7 @@
                 <div class="form-group">
                   <div class="row">
                     <div class="col-md-2"><label for="first_name">First Name</label></div>
-                    <div class="col-md-10"><input class="form-control" required="" name="first_name" type="text" id="first_name">
+                    <div class="col-md-10"><input class="form-control" required="" name="first_name" type="text" id="first_name" pattern="([a-z]*[A-Z]*)*">
                     </div>
                   </div>
                 </div>
@@ -23,7 +23,7 @@
                 <div class="form-group">
                   <div class="row">
                     <div class="col-md-2"><label for="last_name">Last Name</label></div>
-                    <div class="col-md-10"><input class="form-control" required="" name="last_name" type="text" id="last_name">
+                    <div class="col-md-10"><input class="form-control" required="" name="last_name" type="text" id="last_name" pattern="([a-z]*[A-Z]*)*">
                     </div>
                   </div>
                 </div>
@@ -47,7 +47,7 @@
                 <div class="form-group">
                   <div class="row">
                     <div class="col-md-2"><label for="mobile_no">Mobile No.</label></div>
-                    <div class="col-md-10"><input class="form-control" required="" name="mobile_no" type="text" id="mobile_no">
+                    <div class="col-md-10"><input class="form-control" required="" name="mobile_no" type="text" id="mobile_no" pattern="01[0-9]*">
                     </div>
                   </div>
                 </div>
@@ -91,7 +91,7 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-2"><label for="session_no">Session</label></div>
-                        <div class="col-md-10"><input class="form-control" required="" name="session_no" type="text" id="session_no">
+                        <div class="col-md-10"><input class="form-control" required="" name="session_no" type="text" id="session_no" pattern="[0-9]{4}-[0-9]{2}">
                         </div>
                     </div>
                 </div>
