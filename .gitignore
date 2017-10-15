@@ -26,9 +26,3 @@ composer.lock
 .env
 
 /tests
-
-<<<<<<< HEAD
-routes/\.fuse_hidden00002c1900000001
-=======
-/user_dashboard
->>>>>>> dev
