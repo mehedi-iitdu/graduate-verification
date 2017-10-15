@@ -19,18 +19,28 @@
 
     </head>
     <body>
-    	@include('inc.navbar')
-        @include('inc.side_navbar')
- 
-    	<div id="alert" class="text-center col-md-6">
-            @include('flash::message')                                                            
-        </div>
-    
-    	<div id="alert" class="text-center col-md-6">
-            @include('flash::message')
-        </div>
+        @include('inc.navbar')
+
+        @if(Auth::user()->isUGC())
+            @include('inc.ugc_side_navbar')
+
+        @elseif(Auth::user()->isRegistrar())
+            @include('inc.registrar_side_navbar')
+
+        @elseif(Auth::user()->isProgramOffice())
+            @include('inc.po_side_navbar')
+
+        @elseif(Auth::user()->isSystemAdmin())
+            @include('inc.side_navbar')
+        
+        @endif
         
         <div class="container-fluid">
+
+            <div id="alert" class="text-center col-md-6">
+                @include('flash::message')
+            </div>
+
             @yield('content')
         </div>
         @yield('css')
