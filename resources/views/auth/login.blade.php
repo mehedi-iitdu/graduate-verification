@@ -29,7 +29,7 @@
 
         {!! Form::close() !!}
 
-        <div class="pull-right"><a href="#" class="btn btn-link">forgot password?</a></div>
+        <div class="pull-right"><a href="{{ URL::route('user.send_activation_code') }}" class="btn btn-link">Forgot password? Send activation code</a></div>
     </div>
 </div>
 
