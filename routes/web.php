@@ -85,6 +85,9 @@ Route::prefix('course')-> group(function (){
 
 	Route::get('create',['uses' => 'CourseController@showCourseCreateForm', 'as' => 'course.create'] );
 	Route::post('create',['uses' => 'CourseController@storeCourse', 'as' => 'course.store'] );
+    Route::get('view',['uses' => 'CourseController@showCourseList', 'as' => 'course.view'] );
+    Route::post('view',['uses' => 'CourseController@getCourseListByUniversityDeparmentSemester',
+                'as' => 'course.getCourseListByUniversityDeparmentSemester'] );
 });
 
 
@@ -151,6 +154,23 @@ Route::prefix('result')->group(function(){
 	Route::get('search', ['uses' => 'ResultController@searchResult', 'as' => 'result.search']);
 
 	Route::post('marks_views', ['uses' => 'ResultController@getMarksView', 'as' => 'marks_views']);
+
+  	Route::get('edit', ['uses' => 'ResultController@showEditResultForm', 'as' => 'result.edit']);
+
+  	Route::post('edit', ['uses' => 'ResultController@editResult', 'as' => 'result.edit']);
+
+  	Route::post('marks_edit', ['uses' => 'ResultController@getMarksEditField', 'as' => 'marks_edit']);
+
+});
+
+
+Route::prefix('permission')-> group(function (){
+
+	Route::post('request', ['uses' => 'ResultController@sendPermissionRequest', 'as' => 'permission.request'] );
+
+	Route::post('get_requestModal', ['uses' => 'ResultController@getPermissionRequestModal', 'as' => 'permission.request_modal']);
+
+	Route::get('request_list', ['uses' => 'ResultController@showRequestList', 'as' => 'permission.request_list']);
 
 });
 

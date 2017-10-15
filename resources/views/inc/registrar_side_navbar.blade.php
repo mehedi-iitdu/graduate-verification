@@ -8,7 +8,7 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link active" href="{{ URL::route('department.view') }}">Manage Department</a>
+      <a class="nav-link" href="{{ URL::route('department.view') }}">Manage Department</a>
     </li>
 
     <li class="nav-item">
