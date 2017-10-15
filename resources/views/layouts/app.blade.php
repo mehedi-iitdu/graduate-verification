@@ -19,14 +19,10 @@
 
     </head>
     <body>
-    	@include('inc.navbar')
+        @include('inc.navbar')
         @include('inc.side_navbar')
- 
-    	<div id="alert" class="text-center col-md-6">
-            @include('flash::message')                                                            
-        </div>
     
-    	<div id="alert" class="text-center col-md-6">
+        <div id="alert" class="text-center col-md-6">
             @include('flash::message')
         </div>
         
@@ -40,12 +36,14 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
-        {{-- MDBootstrap JS --}}
-        {{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script> --}}
 
         {{-- Custom js --}}
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+        {{-- MDBootstrap JS --}}
+        {{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script> --}}
 
         {{-- Compiled JS --}}
         {{-- <link rel="stylesheet" type="text/css" href="{{asset('js/app.js')}}"> --}}

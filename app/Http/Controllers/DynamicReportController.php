@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\University;
+use App\Resistrar;
 use App\Department;
 use Illuminate\Http\Request;
 use App\Student;
+use App\ProgramOffice;
 
 class DynamicReportController extends Controller
 {
@@ -16,12 +18,31 @@ class DynamicReportController extends Controller
 
     public function indexView(Request $request){
         if($request->user()->role != "Student"){
-            $user_university_id = $request->user()->university_id;
-            $user_university_name = $request->user()->department->university->name;
-            $user_department_id = $request->user()->department->id;
-            $user_department_name = $request->user()->department->name;
+            $role = $request->user()->role;
+            if($role == "UGC"){
+                $university_id = "";
+                $user_university_name = "";
+                $user_department_id = "";
+                $user_department_name = "";
+            }
+            elseif ($role == "Registrar") {
+                $university_id = Registrar::where('user_id', $request->user()->id)->pluck('university_id')->first();
+                $user_university_name = University::where('id', $university_id)->pluck('name')->first();
+                $user_department_id = "";
+                $user_department_name = "";
+            }
+            elseif ($role == "ProgramOffice") {
+                $user_department_id = ProgramOffice::where('user_id', $request->user()->id)->pluck('department_id')->first();
+                $user_department_name = Department::where('id', $user_department_id)->pluck('name')->first();
+                $university_id = Department::where('id', $user_department_id)->pluck('university_id')->first();
+                $user_university_name = University::where('id', $university_id)->pluck('name')->first();
 
-            return view('reports.reportIndex', ['user_university_id' => $university_id, 'user_university_name' => $user_university_name, 'user_department_id' => $user_department_id, 'user_department_name' => $user_department_name]);
+            }
+            else {
+                return view('errors.403');
+            }
+
+            return view('reports.index', ['user_university_id' => $university_id, 'user_university_name' => $user_university_name, 'user_department_id' => $user_department_id, 'user_department_name' => $user_department_name]);
         }
         else {
             return view('errors.403');
