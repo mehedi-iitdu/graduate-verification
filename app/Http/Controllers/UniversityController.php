@@ -7,12 +7,25 @@ use App\University;
 
 class UniversityController extends Controller{
 
-	public function index(Request $request){
+	public function __construct()
+	{
+	    $this->middleware('auth')->only([
+	        'showUniversityCreateForm',
+	        'storeUniversity',
+	        'showUniversityList',
+	        'show',
+	        'edit',
+	        'update',
+	        'destroy'
+	    ]);
+	}
+
+/*	public function index(Request $request){
 		$universities = University::orderBy('id','ASC')->paginate(10);
 
 		return view('university.index',compact('universities'))
 			->with('i', ($request->input('page', 1) - 1) * 10);
-	}
+	}*/
 
 	public function getUniversityList(Request $request){
 
