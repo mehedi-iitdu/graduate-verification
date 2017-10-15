@@ -20,16 +20,18 @@
               <div class="form-row">
                   <div class="form-group col-md-9">
                     <select class="form-control" id="location">
-                      <option>Location</option>
-                      <option>Dhaka</option>
-                      <option>Rajshahi</option>
-                      <option>Khulna</option>
-                      <option>Chittagong</option>
-                      <option>Barisal</option>
+                        <option value="">Select Location</option>
+                        <option value="Dhaka">Dhaka</option>
+                        <option value="Rajshahi">Rajshahi</option>
+                        <option value="Khulna">Khulna</option>
+                        <option value="Chittagong">Chittagong</option>
+                        <option value="Barisal">Barisal</option>
+                        <option value="Rangpur">Rangpur</option>
+                        <option value="Sylhet">Sylhet</option>
                     </select>
                   </div>
                   <div class="form-group col-md-3">
-                    <button type="submit" class="btn btn-block btn-success">Search</button>
+                    <p class="btn btn-block btn-success" id="search">Search</p>
                   </div>
                 </div>
             </form>
@@ -53,11 +55,20 @@
               headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
           });
 
-          $.post("{{ URL::route('university.universityListByLocation') }}",{location:'Dhaka'}, function(data){
-              $('#university_table').html(data);
+
+          $('#search').on('click', function () {
+
+              var location = $('#location').val();
+
+              /*alert(university_id);*/
+
+              $.post("{{ URL::route('university.universityListByLocation') }}",{location:location}, function(data){
+                  $('#university_table').html(data);
+              });
           });
 
-        });
+
+      });
 
       $(window).on('hashchange', function() {
           if (window.location.hash) {

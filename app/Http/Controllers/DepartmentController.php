@@ -40,7 +40,22 @@ class DepartmentController extends Controller
 
     public function showDepartmentView(){
 
-      return view('department.view');
+        return view('department.view');
+    }
+
+    public function departmentListByUniversity(Request $request){
+
+        $page_count = 5;
+
+        $departments = Department::where('university_id', $request->university_id)->get();
+
+        $theads = array('Department Name', 'Number of Semester');
+
+        $properties = array('name','num_of_semester');
+
+        return view('partials._table',['theads' => $theads, 'properties' => $properties, 'tds' => $departments])
+            ->with('i', ($request->input('page', 1) - 1) * $page_count);
+
     }
 
     public function storeDepartment(Request $request){

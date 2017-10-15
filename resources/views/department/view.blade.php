@@ -19,41 +19,87 @@
             <form>
               <div class="form-row">
                   <div class="form-group col-md-9">
-                    <select class="form-control" id="university">
-                      <option>Select University</option>
-                      <option>DU</option>
-                    </select>
+                      <div id="university_list">
+                          <select class="form-control" id="user_role">
+                              <option>Select University</option>
+                          </select>
+                      </div>
                   </div>
                   <div class="form-group col-md-3">
-                    <button type="submit" class="btn btn-block btn-success">Search</button>
+                    <p class="btn btn-block btn-success" id="search">Search</p>
                   </div>
                 </div>
             </form>
           </div>
 
-          <div id="university_table">
-            <table class="table table-bordered table-responsive">
+          <div id="department_table">
 
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>University Name</th>
-                  <th>Department Name</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                  <td>1</td>
-                  <td>DU</td>
-                  <td>IIT</td>
-                  <td>
-                    <button class="btn btn-primary">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
-                  </td>
-              </tbody>
-            </table>
           </div>
         </main>
       </div>
     </div>
+@endsection
+
+
+@section('script')
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $.ajaxSetup({
+                headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
+            });
+
+            $.post("{{ URL::route('university.list') }}",{},function(data){
+                $('#university_list').html(data);
+
+                $('#search').on('click', function () {
+
+                    var university_id = $('#university_id').val();
+
+                    /*alert(university_id);*/
+
+                    $.post("{{ URL::route('department.view') }}",{university_id:university_id}, function(data){
+                        $('#department_table').html(data);
+                    });
+                });
+
+            });
+
+        });
+
+        $(window).on('hashchange', function() {
+            if (window.location.hash) {
+                var page = window.location.hash.replace('#', '');
+                if (page == Number.NaN || page <= 0) {
+                    return false;
+                }else{
+                    getData(page);
+                }
+            }
+        });
+
+        $(document).ready(function()
+        {
+            $(document).on('click', '.pagination a',function(event)
+            {
+                $('li').removeClass('active');
+                $(this).parent('li').addClass('active');
+                event.preventDefault();
+
+                var myurl = $(this).attr('href');
+                var page=$(this).attr('href').split('page=')[1];
+
+                getData(page);
+
+            });
+        });
+
+        function getData(page){
+            $.post("{{ URL::route('university.universityListByLocation') }}",{location:'Dhaka' , page:page}, function(data){
+                $("#university_table").empty().html(data);
+                location.hash = page;
+            });
+
+        }
+    </script>
 @endsection

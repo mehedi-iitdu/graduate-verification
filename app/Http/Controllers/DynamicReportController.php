@@ -33,8 +33,8 @@ class DynamicReportController extends Controller
             }
             elseif ($role == "ProgramOffice") {
                 $user_department_id = ProgramOffice::where('user_id', $request->user()->id)->pluck('department_id')->first();
-                $user_department_name = Department::where('id', $department_id)->pluck('name')->first();
-                $university_id = Department::where('id', $department_id)->pluck('university_id')->first();
+                $user_department_name = Department::where('id', $user_department_id)->pluck('name')->first();
+                $university_id = Department::where('id', $user_department_id)->pluck('university_id')->first();
                 $user_university_name = University::where('id', $university_id)->pluck('name')->first();
 
             }
