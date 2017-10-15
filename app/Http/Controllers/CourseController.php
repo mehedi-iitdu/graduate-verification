@@ -8,6 +8,17 @@ use App\Course;
 class CourseController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth')->only([
+            'showCourseList',
+            'showCourseCreateForm',
+            'storeCourse',
+            'getCourseListByUniversityDeparmentSemester',
+            'manageCourses'
+        ]);
+    }
+
     public function manageCourses(){
         return view('user_dashboard.manage_courses');
     }

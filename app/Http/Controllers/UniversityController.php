@@ -16,8 +16,8 @@ class UniversityController extends Controller{
 
 	public function getUniversityList(Request $request){
 
-		$universites = University::pluck('name', 'id');
-		return view('partials._dropdownOptions', ['data' => $universites, 'id' => 'university_id', 'title' => 'University']);
+		$universities = University::pluck('name', 'id');
+		return view('partials._dropdownOptions', ['data' => $universities, 'id' => 'university_id', 'title' => 'University']);
 	}
 
 	public function showUniversityCreateForm(){
