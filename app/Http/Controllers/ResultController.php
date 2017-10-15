@@ -9,6 +9,7 @@ use App\ProgramOffice;
 use App\Department;
 use App\Course;
 use App\Student;
+use App\Permission;
 
 class ResultController extends Controller
 {
@@ -81,6 +82,29 @@ class ResultController extends Controller
         }
 
         return view('result._marks_view', ['marks' => $marks]);
+      }
+    }
+
+
+    public function showEditResultForm(Request $request){
+      $department_id = ProgramOffice::where('user_id', $request->user()->id)->first()->department_id;
+    	$semesters = $this->getSemesters($department_id);
+    	return view('result.edit', ['department_id' => $department_id, 'semesters' => $semesters]);
+    }
+
+    public function editResult(Request $request){
+
+    }
+
+    public function getPermission(Request $request){
+      if($request->ajax()){
+        $student_id = Student::where('department_id', $request->department_id)->where('registration_no', $request->student_registration_no)->first()->id;
+        //dd($student_id);
+        $permission = Permission::where('user_id', $request->user()->id)->where('student_id', $student_id)->where('semester_no', $request->semester_no)->first();
+        if($permission==null){
+          dd('hi');
+        }
+        dd('hi');
       }
     }
 

@@ -143,6 +143,12 @@ Route::prefix('result')->group(function(){
 
 	Route::post('marks_views', ['uses' => 'ResultController@getMarksView', 'as' => 'marks_views']);
 
+  Route::get('edit', ['uses' => 'ResultController@showEditResultForm', 'as' => 'result.edit']);
+
+  Route::post('edit', ['uses' => 'ResultController@editResult', 'as' => 'result.edit']);
+
+  Route::post('permission', ['uses' => 'ResultController@getPermission', 'as' => 'result.permission']);
+
 });
 
 
@@ -174,4 +180,3 @@ Route::prefix('message')-> group(function (){
 });
 
 Route::get('logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'auth.logout']);
-
