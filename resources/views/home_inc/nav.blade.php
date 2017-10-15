@@ -12,7 +12,7 @@
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="/login">login</a>
+        <a class="nav-link" href="{{URL::route('login')}}">login</a>
       </li>
     </ul>
   </div>
