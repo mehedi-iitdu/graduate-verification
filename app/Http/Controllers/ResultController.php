@@ -85,7 +85,6 @@ class ResultController extends Controller
       }
     }
 
-
     public function showEditResultForm(Request $request){
       $department_id = ProgramOffice::where('user_id', $request->user()->id)->first()->department_id;
     	$semesters = $this->getSemesters($department_id);
@@ -93,19 +92,77 @@ class ResultController extends Controller
     }
 
     public function editResult(Request $request){
+        $this->validate($request, [
+            'department_id' => 'required|integer',
+            'student_registration_no' => 'required|string',
 
+        ]);
+
+        $sem_course_ids = Course::where('department_id', $request->department_id)->where('semester_no', $request->semester_no)->pluck('id');
+        $student_id = Student::where('department_id', $request->department_id)->where('registration_no', $request->student_registration_no)->first()->id;
+        $deleted_marks = Marks::where('student_id', $student_id)->whereIn('course_id', $sem_course_ids);
+        $course_ids = $request->course_ids;
+        $len = count($course_ids);
+        $marks = array();
+        foreach($course_ids as $course_id){
+            $marks[] = array('course_id' => $course_id, 'student_id' => $student_id, 'gpa' => $request['mark_'.$course_id]);
+        }
+        $deleted_marks->delete();
+        Marks::insert($marks);
+        Permission::find($request->permission_id)->delete();
+        
+        flash('Marks successfully updated')->success();
+        return redirect()->route('result.edit');
     }
 
-    public function getPermission(Request $request){
+
+    public function getMarksEditField(Request $request){
       if($request->ajax()){
-        $student_id = Student::where('department_id', $request->department_id)->where('registration_no', $request->student_registration_no)->first()->id;
-        //dd($student_id);
-        $permission = Permission::where('user_id', $request->user()->id)->where('student_id', $student_id)->where('semester_no', $request->semester_no)->first();
-        if($permission==null){
-          dd('hi');
+        $student = Student::where('department_id', $request->department_id)->where('registration_no', $request->student_registration_no)->first();
+        
+        $courses_to_send=collect();
+        if($student){
+            $courses = Course::select('id', 'name', 'code', 'credit')->where('department_id', $request->department_id)->where('semester_no', $request->semester_no);
+            $marks = Marks::where('student_id', $student->id)->whereIn('course_id', $courses->pluck('id'));
+        
+            if(count($marks->get())==0){
+                return '<div class="alert alert-danger">No result found to edit with given information.</div>';
+            }
+            else{
+                
+                $permission = Permission::where('user_id', $request->user()->id)->orWhere('student_id', $student->id)->where('semester_no', $request->semester_no)->first();
+                if($permission==null){
+                    return "<div class='alert alert-danger'>You don't have permission to edit. Please send a request message for permission.</div><button class='btn btn-primary' id='requestBtn' onclick='return false;'>Send permission request</button>";
+                }
+
+                if(!$permission->isApproved){
+                    return '<div class="alert alert-danger">Registrar has not approved your permission request yet</div>';
+                }
+                $remained_courses = $courses->whereNotIn('id', $marks->pluck('course_id'))->get();
+                return view('result._marks_edit', ['marks' => $marks->get(), 'remained_courses' => $remained_courses, 'permission_id' => $permission->id]);
+            }
+
         }
-        dd('hi');
+        return '<div class="alert alert-danger">No result found to edit with given information.</div>';
+        
       }
+    }
+
+    public function getPermissionRequestModal(Request $request){
+        $student_id = Student::where('department_id', $request->department_id)->where('registration_no', $request->student_registration_no)->first()->id;
+        return view('permission._request',['student_id' => $student_id, 'semester_no' => $request->semester_no]);
+    }
+
+    public function sendPermissionRequest(Request $request){
+        $permission = new Permission;
+        $permission->user_id = $request->user()->id;
+        $permission->student_id = $request->student_id;
+        $permission->semester_no = $request->semester_no;
+        $permission->message = $request->message;
+        $permission->isApproved = false;
+        $permission->save();
+        flash("Permission request has been sent to Registrar successfully")->success();
+        return redirect()->route('result.edit');
     }
 
     protected function getSemesters($department_id){
@@ -116,5 +173,10 @@ class ResultController extends Controller
     		$semesters += array($sem => 'Semester-'.$sem);
     	}
       return $semesters;
+    }
+
+    public function showRequestList(){
+        $permissions = Permission::all();
+        return view('permission.request_list', ['permissions' => $permissions]);
     }
 }

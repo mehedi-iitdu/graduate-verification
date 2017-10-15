@@ -143,11 +143,22 @@ Route::prefix('result')->group(function(){
 
 	Route::post('marks_views', ['uses' => 'ResultController@getMarksView', 'as' => 'marks_views']);
 
-  Route::get('edit', ['uses' => 'ResultController@showEditResultForm', 'as' => 'result.edit']);
+  	Route::get('edit', ['uses' => 'ResultController@showEditResultForm', 'as' => 'result.edit']);
 
-  Route::post('edit', ['uses' => 'ResultController@editResult', 'as' => 'result.edit']);
+  	Route::post('edit', ['uses' => 'ResultController@editResult', 'as' => 'result.edit']);
 
-  Route::post('permission', ['uses' => 'ResultController@getPermission', 'as' => 'result.permission']);
+  	Route::post('marks_edit', ['uses' => 'ResultController@getMarksEditField', 'as' => 'marks_edit']);
+
+});
+
+
+Route::prefix('permission')-> group(function (){
+
+	Route::get('request', ['uses' => 'ResultController@sendPermissionRequest', 'as' => 'permission.request'] );
+
+	Route::post('get_requestModal', ['uses' => 'ResultController@getPermissionRequestModal', 'as' => 'permission.request_modal']);
+
+	Route::get('request_list', ['uses' => 'ResultController@showRequestList', 'as' => 'permission.request_list']);
 
 });
 

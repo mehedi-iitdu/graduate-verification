@@ -7,36 +7,18 @@
 
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
           <h2  class="d-none d-sm-block text-center">Edit Result</h2>
-
           <hr>
           <div class="jumbotron">
-            @include('partials._error_message')
-            {!! Form::open(array('route' => 'result.edit')) !!}
-            <input type="hidden" name="department_id" id="department_id" value="{{ $department_id }}">
-            <div class="row">
-              <div class="form-group col-md-6">
-                {{ Form::label('semester_no', 'Semester No.') }}
-
-                {{ Form::select('semester_no', $semesters, null, ['class' =>'form-control', 'placeholder' => 'Select semester', 'id' => 'semester_no' ]) }}
-                <p id="semester_no_error" class="error pull-right"></p>
-              </div>
-
-              <div class="form-group col-md-6">
-                {{ Form::label('student_registration_no', 'Student Registration No.') }}
-
-                  {{ Form::text('student_registration_no', null, ['class' =>'form-control', 'placeholder' => 'Registration No.', 'id' => 'student_registration_no' ]) }}
-                  <p id="student_registration_no_error" class="error pull-right"></p>
-              </div>
-            </div>
-            <button class="btn btn-primary pull-right" id='btn-proceed' >Proceed</button>    <br><br> <br><br>
-            <div id="marks_field">
-
-            </div>
-
-            {!! Form::close() !!}
-
-            <div class="modal fade" tabindex="-1" role="dialog" id="requestPermission"></div>
-
+            <table class="table table-bordered table-responsive">
+              <thead>
+                <tr>
+                  <td>Depatment</td>
+                  <td>Programoffice</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </thead>
+            </table>
 
           </div>
 

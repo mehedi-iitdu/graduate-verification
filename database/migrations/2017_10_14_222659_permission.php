@@ -23,7 +23,7 @@ class Permission extends Migration
           $table->foreign('student_id')
                   ->references('id')->on('student')
                   ->ondelete('cascade');
-          $table->integer('semsester_no')->unsigned();
+          $table->integer('semester_no')->unsigned();
           $table->string('message');
           $table->boolean('isApproved');
           $table->timestamps();
