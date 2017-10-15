@@ -85,6 +85,9 @@ Route::prefix('course')-> group(function (){
 
 	Route::get('create',['uses' => 'CourseController@showCourseCreateForm', 'as' => 'course.create'] );
 	Route::post('create',['uses' => 'CourseController@storeCourse', 'as' => 'course.store'] );
+    Route::get('view',['uses' => 'CourseController@showCourseList', 'as' => 'course.view'] );
+    Route::post('view',['uses' => 'CourseController@getCourseListByUniversityDeparmentSemester',
+                'as' => 'course.getCourseListByUniversityDeparmentSemester'] );
 });
 
 
