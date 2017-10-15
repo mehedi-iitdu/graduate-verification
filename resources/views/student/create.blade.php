@@ -47,7 +47,7 @@
                 <div class="form-group">
                   <div class="row">
                     <div class="col-md-2"><label for="mobile_no">Mobile No.</label></div>
-                    <div class="col-md-10"><input class="form-control" required="" name="mobile_no" type="text" id="mobile_no" pattern="01[0-9]*">
+                    <div class="col-md-10"><input class="form-control" required="" name="mobile_no" type="text" id="mobile_no" pattern="01[0-9]{9}">
                     </div>
                   </div>
                 </div>
@@ -83,7 +83,8 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-2"><label for="registration_no">Registration No.</label></div>
-                        <div class="col-md-10"><input class="form-control" required="" name="registration_no" type="text" id="registration_no">
+                        <div class="col-md-10"><input class="form-control" required="" name="registration_no" type="text" id="registration_no" placeholder="2013-121-121"
+                                                      pattern="[0-9]{4}-[0-9]{3}-[0-9]{3}">
                         </div>
                     </div>
                 </div>

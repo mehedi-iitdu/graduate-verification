@@ -115,7 +115,7 @@ class StudentController extends Controller
             'department_id' => 'required|integer',
             'date_of_birth' => 'required|date',
             'registration_no' => 'required|string|unique_with:student,department_id',
-            'session' => 'required|string|min:7|max:7'
+            'session_no' => 'required|string|min:7|max:7'
         ]);
 
         $user = new User;

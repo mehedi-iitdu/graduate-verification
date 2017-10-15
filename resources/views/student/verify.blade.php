@@ -68,7 +68,7 @@
                                 <td></td>
                                 <td></td>
                                 <th>Calculated GPA</th>
-                                <th>{{ $point / $credit }}</th>
+                                <th>{{ round($point / $credit) }}</th>
                             </tr>
                             @php($tot_credit += $credit)
                             @php($tot_point += $point)
@@ -78,7 +78,7 @@
 
                 @endforeach
 
-                <h4>Calculated CGPA is {{ $tot_point / $tot_credit }}</h4>
+                <h4>Calculated CGPA is {{ round($tot_point / $tot_credit, 2) }}</h4>
 
             </main>
         </div>
