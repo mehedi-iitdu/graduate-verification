@@ -11,6 +11,7 @@ class UniversityController extends Controller{
 
 	public function __construct()
 	{
+		parent::__construct();
 	    $this->middleware('auth')->only([
 	        'showUniversityCreateForm',
 	        'storeUniversity',
@@ -88,6 +89,7 @@ class UniversityController extends Controller{
 	public function getUniversityListByLocation(Request $request){
 
 		$page_count = 5;
+
 		$universities = University::where('location', $request->location)->paginate($page_count);
 
 		$theads = array('University Name', 'Location', 'Website');
