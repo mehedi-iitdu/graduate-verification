@@ -211,11 +211,41 @@ class StudentController extends Controller
                     $semester_marks[] = $mark;
             $all_marks[] = $semester_marks;
         }
+
+        $cum_points = 0;
+        $cum_credit = 0;
+        $gpa = array();
+
+        foreach ($all_marks as $marks) {
+
+            $point_sum = 0;
+            $credit_sum = 0;
+
+            foreach ($marks as $mark) {
+
+                $point_sum += $mark->course->credit * $mark->gpa;
+                $credit_sum += $mark->course->credit;
+
+            }
+
+            if($credit_sum <= 0.0) $gpa[] = -1;
+            else $gpa[] = $point_sum / $credit_sum;
+
+            $cum_points += $point_sum;
+            $cum_credit += $credit_sum;
+
+        }
+
+        if($cum_credit <= 0.0) $cgpa = -1;
+        else $cgpa = $cum_points / $cum_credit;
+
         return view('student.verify',
             [
                 'verification_id' => $id,
                 'student' => $student,
-                'all_marks' => $all_marks
+                'all_marks' => $all_marks,
+                'gpa' => $gpa,
+                'cgpa' => $cgpa
             ]);
     }
 
