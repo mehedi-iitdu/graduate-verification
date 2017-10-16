@@ -86,14 +86,19 @@ class CourseController extends Controller
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'code' => 'required|string|max:255',
-            'credit' => 'required|string|min:1|max:6',
+            'credit' => 'required|integer|between:1,6',
         ]);
 
-        Course::find($id)->update($request->all());
+        try {
+            Course::find($id)->update($request->all());
 
-        $url = $request->input('url');
+            $url = $request->input('url');
 
-        flash('Student updated successfully')->success();
+            flash('Course updated successfully')->success();
+        } catch (Exception $e) {
+            flash('Could not update Course');
+            return redirect()->back();
+        }
 
         return redirect($url);
     }
