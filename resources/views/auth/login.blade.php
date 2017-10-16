@@ -1,7 +1,7 @@
 
 
 
-@extends('layouts.blank')
+@extends('layouts.home_layout')
 
 @section('content')
 
