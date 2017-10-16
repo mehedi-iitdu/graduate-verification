@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-   
+
 <div class="row">
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-         	
+
          	<div class="row">
          		<div class="col-md-12">
          			<h2 style="margin-bottom: 40px" class="d-none d-sm-block">Select and search</h2>
@@ -66,16 +66,16 @@
 
 					<div class="form-group row">
 						<div class="col-md-2"><label for="session_no">Session </label></div>
-						<div class="col-md-10"><input class="form-control" name="session_no" type="text" id="session_no">
+						<div class="col-md-10"><input class="form-control" name="session_no" type="text" id="session_no" pattern="[0-9]{4}-[0-9]{2}">
 						</div>
 					</div>
 
 					{{ Form::submit('Search', ['class' => 'btn btn-block btn-primary']) }}
 					{!! Form::open() !!}
-		            
+
 		            </div>
          		</div>
-         		
+
          	</div>
 
 
@@ -110,7 +110,7 @@
 	                    </table>
         			</div>
         		</div>
-        		
+
         	</div>
 
 			<div class="row">
@@ -118,7 +118,7 @@
 					<canvas id="doughnut-chart" width="800" height="450"></canvas>
 				</div>
 			</div>
-        
+
         </main>
 
  </div>
