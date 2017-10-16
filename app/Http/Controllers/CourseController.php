@@ -86,15 +86,21 @@ class CourseController extends Controller
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'code' => 'required|string|max:255',
-            'credit' => 'required|string|min:1|max:6',
+            'credit' => 'required|integer|between:1,6',
         ]);
 
-        Course::find($id)->update($request->all());
+        try {
+            Course::find($id)->update($request->all());
 
-        $url = $request->input('url');
+            $url = $request->input('url');
 
-        return redirect($url)
-            ->with('success','Course updated successfully');
+            flash('Course updated successfully')->success();
+        } catch (Exception $e) {
+            flash('Could not update Course');
+            return redirect()->back();
+        }
+
+        return redirect($url);
     }
 
 
@@ -106,10 +112,16 @@ class CourseController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        Course::find($id)->delete();
-        $url = $request->input('url');
+        try {
+            Course::find($id)->delete();
+            $url = $request->input('url');
+            
+        } catch (Exception $e) {
+            flash('The course cannot be deleted! If mark exist for this course, delete the mark first')->error();
+            return redirect()->back();
+        }
+        flash('Course deleted successfully');
 
-        return redirect()->back()
-            ->with('success','Course deleted successfully');
+        return redirect()->back();
     }
 }
