@@ -26,7 +26,6 @@ class Verification extends Migration
             $table->string('payment_id')->nullable();
             $table->string('verification_status');
             $table->string('digital_sign')->nullable();
-            $table->boolean('isRead')->nullable();
             $table->timestamps();
         });
     }
