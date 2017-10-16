@@ -62,7 +62,7 @@ class DepartmentController extends Controller
 
         $page_count = 5;
 
-        $departments = Department::where('university_id', $request->university_id)->get();
+        $departments = Department::where('university_id', $request->university_id)->paginate($page_count);
 
         $theads = array('Department Name', 'Number of Semester');
 
