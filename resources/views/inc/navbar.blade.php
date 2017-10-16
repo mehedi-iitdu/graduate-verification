@@ -7,11 +7,11 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="{{ URL::route('profile') }}">Profile</span></a>
+        <a class="nav-link" href="{{ URL::route('profile') }}">Profile</a>
       </li>
       <li class="nav-item">
         <a class="nav-link active" href="{{ URL::route('message.view') }}">Messages
-          <span class="badge badge-warning" style="padding: 0.3em 0.5em; font-size: 90%;">2</span>
+          <span class="badge badge-warning" style="padding: 0.3em 0.5em; font-size: 90%;" id="count">0</span>
           <span class="sr-only">unread messages</span>
         </a>
       </li>

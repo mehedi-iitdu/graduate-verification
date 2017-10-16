@@ -13,13 +13,8 @@ class UsersController extends Controller
 {
     public function __construct()
     {
+       
         $this->middleware('auth', ['only' => ['getProfile']]);
-    }
-
-    public function getUserList(Request $request){
-
-
-    	return "hello";	
     }
 
     public function getProfile(Request $request){
@@ -46,9 +41,9 @@ class UsersController extends Controller
     	}*/
     }
 
-    public function manageUsers(Request $request) {
-        $roles = Role::pluck('role_name', 'id');
-        return view('user_dashboard.manage_users_view', ['roles' => $roles]);
+    public function showUsers(Request $request) {
+        
+        return view('user.view');
     }
 
 }

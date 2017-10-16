@@ -60,8 +60,6 @@
 
               var location = $('#location').val();
 
-              /*alert(university_id);*/
-
               $.post("{{ URL::route('university.universityListByLocation') }}",{location:location}, function(data){
                   $('#university_table').html(data);
               });
@@ -98,7 +96,8 @@
       });
 
       function getData(page){
-          $.post("{{ URL::route('university.universityListByLocation') }}",{location:'Dhaka' , page:page}, function(data){
+          var location = $('#location').val();
+          $.post("{{ URL::route('university.universityListByLocation') }}",{location:location , page:page}, function(data){
               $("#university_table").empty().html(data);
               location.hash = page;
           });

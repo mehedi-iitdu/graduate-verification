@@ -1,17 +1,21 @@
 @extends('layouts.app')
 
+@section('css')
+<link rel="stylesheet" type="text/css" href="{{ asset('css/popup.css') }}">
+@endsection
+
 @section('content')
 
     <div class="container-fluid">
       <div class="row">
 
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-          <h2  class="d-none d-sm-block text-center">Add Result</h2>
+          <h2  class="d-none d-sm-block text-center">Edit Result</h2>
 
           <hr>
           <div class="jumbotron">
             @include('partials._error_message')
-            {!! Form::open(array('route' => 'result.submit')) !!}
+            {!! Form::open(array('route' => 'result.edit')) !!}
             <input type="hidden" name="department_id" id="department_id" value="{{ $department_id }}">
             <div class="row">
               <div class="form-group col-md-6">
@@ -28,12 +32,18 @@
                   <p id="student_registration_no_error" class="error pull-right"></p>
               </div>
             </div>
-            <button class="btn btn-primary pull-right" id='btn-proceed' >Proceed</button>    <br><br> <br><br>
+            <button class="btn btn-primary pull-right" id='btn-proceed' >Proceed</button>    <br><br> <br>
             <div id="marks_field">
 
             </div>
 
             {!! Form::close() !!}
+            <br>
+            <div id="popup" style="display: none;">
+
+            </div>
+
+          </div>
 
 
           </div>
@@ -44,15 +54,27 @@
         </main>
       </div>
     </div>
+
 @endsection
 
 @section('script')
+
   <script type="text/javascript">
+
+
     $(document).ready(function(){
+
+      $("#myBtn").click(function(e){
+        e.preventDefault();
+        $("#myModal").modal('show');
+      });
+
+
       $.ajaxSetup({
         headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
       });
       $('#btn-proceed').on('click', function(){
+
         $department_id = $('#department_id').val();
         $semester_no = $('#semester_no').val();
 
@@ -74,8 +96,19 @@
           $('#student_registration_no_error').text('');
         }
 
-        $.post("{{ URL::route('marks_fields') }}", {department_id:$department_id, semester_no:$semester_no, student_registration_no:$student_registration_no}, function(data){
-            $('#marks_field').html(data);
+        $.post("{{ URL::route('marks_edit') }}", {department_id:$department_id, semester_no:$semester_no, student_registration_no:$student_registration_no}, function(data){
+
+          $('#marks_field').html(data);
+          $('#requestBtn').on('click', function(){
+              $.post("{{ URL::route('permission.request_modal') }}", {department_id:$department_id, semester_no:$semester_no, student_registration_no:$student_registration_no}, function(data){
+                $('#popup').html(data);
+                console.log("hi");
+                div_show();
+
+            });
+
+          });
+
         });
         return false;
       });
@@ -94,5 +127,16 @@
         $(element).parent().parent().remove();
 
       }
+
+
+      function div_show() {
+        document.getElementById('popup').style.display = "block";
+      }
+      //Function to Hide Popup
+      function div_hide(){
+        document.getElementById('popup').style.display = "none";
+      }
+
+
     </script>
 @endsection
