@@ -107,7 +107,6 @@ class StudentController extends Controller
         $verification->student_id = $student->id;
         $verification->stakeholder_id = $stakeholder->id;
         $verification->verification_status = "Requested";
-        $verification->isRead = false;
         $verification->save();
 
         flash('Successfully requested!')->success();
