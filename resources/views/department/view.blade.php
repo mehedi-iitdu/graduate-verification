@@ -93,8 +93,10 @@
         });
 
         function getData(page){
-            $.post("{{ URL::route('university.universityListByLocation') }}",{location:'Dhaka' , page:page}, function(data){
-                $("#university_table").empty().html(data);
+
+            var university_id = $('#university_id').val();
+            $.post("{{ URL::route('department.view') }}",{university_id:university_id , page:page}, function(data){
+                $("#department_table").empty().html(data);
                 location.hash = page;
             });
 
