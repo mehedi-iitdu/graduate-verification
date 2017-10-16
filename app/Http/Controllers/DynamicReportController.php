@@ -79,7 +79,7 @@ class DynamicReportController extends Controller
 
             }
 
-            return view('reports.details', ['students' => $students]);
+            return view('reports.details', ['students' => $students, 'verification_status_of_Students' => $request['query']]);
         }
         else {
             return view('errors.403');
