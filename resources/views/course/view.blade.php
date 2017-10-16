@@ -32,21 +32,21 @@
 
                             <div class="form-group col-md-3">
                                 <div id="department_list">
-                                    <select class="form-control" id="department_id">
+                                    <select class="form-control" id="department_id" name="department_id">
                                         <option>Select Department</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group col-md-3">
                                 <div id="semester_list">
-                                    <select class="form-control" id="semester_no">
+                                    <select class="form-control" id="semester_no" name="semester_no">
                                         <option>Select Semester</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group col-md-3">
-                                <p class="btn btn-block btn-success" id="search">Search</p>
+                                <button class="btn btn-block btn-success" id="search">Search</button>
                             </div>
                         </div>
                     </form>
@@ -76,6 +76,7 @@
                 {university_id:university_id, department_id:department_id, semester_no: semester_no }, function(data){
                 $('#course_table').html(data);
             });
+            return false;
         });
 
         $.post("{{ URL::route('university.list') }}",{},function(data){
