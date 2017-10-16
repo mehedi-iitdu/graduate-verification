@@ -8,4 +8,6 @@
     <h4 class="text-center">Online Graduate Verification System</h4>
   </div>
 </div>
+
+
 @endsection

@@ -43,7 +43,9 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('auth')->only(['showRegistrationForm', 'storeUser']);
+        $this->middleware('guest')->only(['showActivationForm', 'userActivate',
+            'showSendActivationCodeForm', 'activationCodeSend', 'sendActivationCode']);
     }
 
     /**
@@ -189,6 +191,8 @@ class RegisterController extends Controller
             flash('There is no user with your email!')->error();
             return redirect()->route('user.send_activation_code');
         }
+        $user->is_activated = false;
+        $user->save();
 
         $this->sendActivationCode($user);
         flash('Activation code has been successfully sent to your mail and mobile!');

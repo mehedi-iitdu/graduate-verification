@@ -11,7 +11,7 @@
 
           <div class="form-row">
               <div class="form-group ml-auto col-md-3">
-                  <a href="{{ URL::route('university.create') }}" class="btn btn-block btn-primary">Add University</a>
+                  <a href="{{ URL::route('university.create') }}" class="btn btn-block btn-primary">Add University  </a>
               </div>
           </div>
 
@@ -20,16 +20,18 @@
               <div class="form-row">
                   <div class="form-group col-md-9">
                     <select class="form-control" id="location">
-                      <option>Location</option>
-                      <option>Dhaka</option>
-                      <option>Rajshahi</option>
-                      <option>Khulna</option>
-                      <option>Chittagong</option>
-                      <option>Barisal</option>
+                        <option value="">Select Location</option>
+                        <option value="Dhaka">Dhaka</option>
+                        <option value="Rajshahi">Rajshahi</option>
+                        <option value="Khulna">Khulna</option>
+                        <option value="Chittagong">Chittagong</option>
+                        <option value="Barisal">Barisal</option>
+                        <option value="Rangpur">Rangpur</option>
+                        <option value="Sylhet">Sylhet</option>
                     </select>
                   </div>
                   <div class="form-group col-md-3">
-                    <button type="submit" class="btn btn-block btn-success">Search</button>
+                    <p class="btn btn-block btn-success" id="search">Search</p>
                   </div>
                 </div>
             </form>
@@ -53,11 +55,54 @@
               headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
           });
 
-          $.post("{{ URL::route('university.universityListByLocation') }}",{location:'Dhaka'}, function(data){
-              $('#university_table').html(data);
+
+          $('#search').on('click', function () {
+
+              var location = $('#location').val();
+
+              $.post("{{ URL::route('university.universityListByLocation') }}",{location:location}, function(data){
+                  $('#university_table').html(data);
+              });
           });
 
-        });
+
+      });
+
+      $(window).on('hashchange', function() {
+          if (window.location.hash) {
+              var page = window.location.hash.replace('#', '');
+              if (page == Number.NaN || page <= 0) {
+                  return false;
+              }else{
+                  getData(page);
+              }
+          }
+      });
+
+      $(document).ready(function()
+      {
+          $(document).on('click', '.pagination a',function(event)
+          {
+              $('li').removeClass('active');
+              $(this).parent('li').addClass('active');
+              event.preventDefault();
+
+              var myurl = $(this).attr('href');
+              var page=$(this).attr('href').split('page=')[1];
+
+              getData(page);
+
+          });
+      });
+
+      function getData(page){
+          var location = $('#location').val();
+          $.post("{{ URL::route('university.universityListByLocation') }}",{location:location , page:page}, function(data){
+              $("#university_table").empty().html(data);
+              location.hash = page;
+          });
+
+      }
 </script>
 
 
