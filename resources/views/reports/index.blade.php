@@ -131,30 +131,7 @@
 
                     $('#data').attr('hidden', false);
 
-                    $('.dataTables-example').DataTable({
-		            	"order": [],
-		                paging: false,
-		                responsive: true,
-		                dom: '<"html5buttons"B>lTfgitp',
-		                buttons: [
-		                    { extend: 'copy'},
-		                    {extend: 'csv', title: 'Overview Report'},
-		                    {extend: 'excel', title: 'Overview Report'},
-		                    {extend: 'pdf', title: 'Overview Report'},
-
-		                    {extend: 'print',
-		                     customize: function (win){
-		                            $(win.document.body).addClass('white-bg');
-		                            $(win.document.body).css('font-size', '10px');
-
-		                            $(win.document.body).find('table')
-		                                    .addClass('compact')
-		                                    .css('font-size', 'inherit');
-		                    }
-		                    }
-		                ]
-
-		            });
+                    $('.dataTables-example').DataTable();
 
                     new Chart(document.getElementById("doughnut-chart"), {
                         type: 'doughnut',
@@ -183,6 +160,31 @@
                 });
                 event.preventDefault();
             });
+
+            $('.dataTables-example').DataTable({
+		            	"order": [],
+		                paging: false,
+		                responsive: true,
+		                dom: '<"html5buttons"B>lTfgitp',
+		                buttons: [
+		                    { extend: 'copy'},
+		                    {extend: 'csv', title: 'Overview Report'},
+		                    {extend: 'excel', title: 'Overview Report'},
+		                    {extend: 'pdf', title: 'Overview Report'},
+
+		                    {extend: 'print',
+		                     customize: function (win){
+		                            $(win.document.body).addClass('white-bg');
+		                            $(win.document.body).css('font-size', '10px');
+
+		                            $(win.document.body).find('table')
+		                                    .addClass('compact')
+		                                    .css('font-size', 'inherit');
+		                    }
+		                    }
+		                ]
+
+		            });
 
 
 			$.post("{{ URL::route('university.list') }}",{},function(data){
