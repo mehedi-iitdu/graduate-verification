@@ -28,7 +28,7 @@
               <div class="form-group col-md-6">
                 {{ Form::label('student_registration_no', 'Student Registration No.') }}
 
-                  {{ Form::text('student_registration_no', null, ['class' =>'form-control', 'placeholder' => 'Registration No.', 'id' => 'student_registration_no' ]) }}
+                  {{ Form::text('student_registration_no', null, ['class' =>'form-control', 'placeholder' => '2013-121-121', 'id' => 'student_registration_no' ]) }}
                   <p id="student_registration_no_error" class="error pull-right"></p>
               </div>
             </div>
@@ -40,9 +40,9 @@
             {!! Form::close() !!}
             <br>
             <div id="popup" style="display: none;">
-              
+
             </div>
-  
+
           </div>
 
 
@@ -58,7 +58,7 @@
 @endsection
 
 @section('script')
-  
+
   <script type="text/javascript">
 
 
@@ -74,7 +74,7 @@
         headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
       });
       $('#btn-proceed').on('click', function(){
-        
+
         $department_id = $('#department_id').val();
         $semester_no = $('#semester_no').val();
 
@@ -97,7 +97,7 @@
         }
 
         $.post("{{ URL::route('marks_edit') }}", {department_id:$department_id, semester_no:$semester_no, student_registration_no:$student_registration_no}, function(data){
-            
+
           $('#marks_field').html(data);
           $('#requestBtn').on('click', function(){
               $.post("{{ URL::route('permission.request_modal') }}", {department_id:$department_id, semester_no:$semester_no, student_registration_no:$student_registration_no}, function(data){
@@ -106,7 +106,7 @@
                 div_show();
 
             });
-            
+
           });
 
         });
