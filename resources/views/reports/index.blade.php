@@ -13,55 +13,26 @@
 					{!! Form::open(array('id' => 'search_form')) !!}
 
 
-					@if($user_university_name != null)
-
-						<div class="form-group row">
-							<div class="col-md-2"><label for="university_id">University </label></div>
-							<div class="col-md-10" id="university_list" name="university_id">
-								<select class="form-control">
-									<option>{{$user_university_name}}</option>
-								</select>
-							</div>
+					<div class="form-group row">
+						<div class="col-md-2"><label for="university_id">University </label></div>
+						<div class="col-md-10" id="university_list" name="university_id">
+							<select class="form-control">
+								<option>Select University</option>
+							</select>
 						</div>
+					</div>
 
-					@else
 
-						<div class="form-group row">
-							<div class="col-md-2"><label for="university_id">University </label></div>
-							<div class="col-md-10" id="university_list" name="university_id">
-								<select class="form-control">
-									<option>Select University</option>
-								</select>
-							</div>
+				
+					<div class="form-group row">
+						<div class="col-md-2"><label for="department_id">Department </label></div>
+						<div class="col-md-10" id="department_list">
+							<select class="form-control" name="department_id">
+								<option>Select Department</option>
+							</select>
 						</div>
+					</div>
 
-
-					@endif
-
-
-
-					@if($user_department_name != null)
-						<div class="form-group row">
-							<div class="col-md-2"><label for="department_id">Department </label></div>
-							<div class="col-md-10" id="department_list">
-								<select class="form-control" name="department_id">
-									<option>{{$user_department_name}}</option>
-								</select>
-							</div>
-						</div>
-
-
-					@else
-						<div class="form-group row">
-							<div class="col-md-2"><label for="department_id">Department </label></div>
-							<div class="col-md-10" id="department_list">
-								<select class="form-control" name="department_id">
-									<option>Select Department</option>
-								</select>
-							</div>
-						</div>
-
-					@endif
 
 
 					<div class="form-group row">
@@ -197,16 +168,16 @@
 			}
 
 			$('#verification_request').on('click', function () {
-                window.location.replace('/report/details?university_id=' + $('#university_id').val() + '&department_id=' + $('#department_id').val() + '&session_no=' + $('#session_no').val() + '&query=' + 'Requested');
+                window.location.href = '/report/details?university_id=' + $('#university_id').val() + '&department_id=' + $('#department_id').val() + '&session_no=' + $('#session_no').val() + '&query=' + 'Requested';
             });
             $('#num_of_student').on('click', function () {
-                window.location.replace('/report/details?university_id=' + $('#university_id').val() + '&department_id=' + $('#department_id').val() + '&session_no=' + $('#session_no').val() + '&query=' + 'Total');
+                window.location.href = '/report/details?university_id=' + $('#university_id').val() + '&department_id=' + $('#department_id').val() + '&session_no=' + $('#session_no').val() + '&query=' + 'Total';
             });
             $('#verification_process').on('click', function () {
-                window.location.replace('/report/details?university_id=' + $('#university_id').val() + '&department_id=' + $('#department_id').val() + '&session_no=' + $('#session_no').val() + '&query=' + 'Paid');
+                window.location.href = '/report/details?university_id=' + $('#university_id').val() + '&department_id=' + $('#department_id').val() + '&session_no=' + $('#session_no').val() + '&query=' + 'Paid';
             });
             $('#verified').on('click', function () {
-                window.location.replace('/report/details?university_id=' + $('#university_id').val() + '&department_id=' + $('#department_id').val() + '&session_no=' + $('#session_no').val() + '&query=' + 'Verified');
+                window.location.href = '/report/details?university_id=' + $('#university_id').val() + '&department_id=' + $('#department_id').val() + '&session_no=' + $('#session_no').val() + '&query=' + 'Verified';
             });
 
 
