@@ -18,32 +18,8 @@ class DynamicReportController extends Controller
     }
 
     public function indexView(Request $request){
-        if($request->user()->role != "Student"){
-            $role = $request->user()->role;
-            if($role == "UGC"){
-                $university_id = "";
-                $user_university_name = "";
-                $user_department_id = "";
-                $user_department_name = "";
-            }
-            elseif ($role == "Registrar") {
-                $university_id = Registrar::where('user_id', $request->user()->id)->pluck('university_id')->first();
-                $user_university_name = University::where('id', $university_id)->pluck('name')->first();
-                $user_department_id = "";
-                $user_department_name = "";
-            }
-            elseif ($role == "ProgramOffice") {
-                $user_department_id = ProgramOffice::where('user_id', $request->user()->id)->pluck('department_id')->first();
-                $user_department_name = Department::where('id', $user_department_id)->pluck('name')->first();
-                $university_id = Department::where('id', $user_department_id)->pluck('university_id')->first();
-                $user_university_name = University::where('id', $university_id)->pluck('name')->first();
-
-            }
-            else {
-                return view('errors.403');
-            }
-
-            return view('reports.index', ['user_university_id' => $university_id, 'user_university_name' => $user_university_name, 'user_department_id' => $user_department_id, 'user_department_name' => $user_department_name]);
+        if($request->user()->role == "UGC" || $request->user()->role == "SystemAdmin" || $request->user()->role == "Registrar" || $request->user()->role == "ProgramOffice"){
+            return view('reports.index');
         }
         else {
             return view('errors.403');
