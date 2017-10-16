@@ -308,10 +308,22 @@ class StudentController extends Controller
     {
         $student = Student::find($id);
         $user_id = $student->user_id;
-        $student->delete();
-        User::find($user_id)->delete();
-
         $url = $request->input('url');
+        
+        try {
+            if(count($student->marks)==0){
+                $student->marks->delete();
+                $student->delete();
+                User::find($user_id)->delete();    
+            }
+            $student->delete();
+            User::find($user_id)->delete();    
+        }catch(\Exception $e){
+            flash('The student cannot be deleted!')->error();
+            return redirect()->back();
+        }
+
+        flash('Student deleted successfully');
 
         return redirect()->back();
     }
