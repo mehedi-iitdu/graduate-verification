@@ -81,9 +81,17 @@ class RegisterController extends Controller
         ]);
     }*/
 
-    public function showRegistrationForm()
+    public function showRegistrationForm(Request $request)
     {
-        $roles = ['UGC' => 'UGC', 'Registrar' => 'Registrar', 'ProgramOffice' => 'ProgramOffice'];
+        if($request->user()->role == "SystemAdmin"){
+            $roles = ['UGC' => 'UGC', 'Registrar' => 'Registrar', 'ProgramOffice' => 'ProgramOffice'];
+        }
+        elseif ($request->user()->role == "UGC") {
+            $roles = ['Registrar' => 'Registrar', 'ProgramOffice' => 'ProgramOffice'];.
+        }
+        elseif ($request->user()->role == "Registrar") {
+            $roles = ['ProgramOffice' => 'ProgramOffice'];.
+        }
         return view('user.create', ['roles' => $roles]);
     }
 
