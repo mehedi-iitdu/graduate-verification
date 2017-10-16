@@ -17,6 +17,8 @@ class DepartmentController extends Controller
             'showDepartmentView',
             'storeDepartment'
         ]);
+
+        $this->middleware('role:Registrar, SystemAdmin');
     }
 
     public function showDepartmentCreateForm(){

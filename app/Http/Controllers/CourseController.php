@@ -18,6 +18,8 @@ class CourseController extends Controller
             'getCourseListByUniversityDeparmentSemester',
             'manageCourses'
         ]);
+
+        $this->middleware('role:ProgramOffice, SystemAdmin');
     }
 
     public function manageCourses(){

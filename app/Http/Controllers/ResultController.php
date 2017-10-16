@@ -16,7 +16,7 @@ class ResultController extends Controller
     public function __construct(){
     
         $this->middleware('auth');
-        $this->middleware('role:ProgramOffice');
+        $this->middleware('role:ProgramOffice, SystemAdmin');
     }
     public function manageResults(){
 
