@@ -90,7 +90,7 @@ class RegisterController extends Controller
             $roles = ['Registrar' => 'Registrar', 'ProgramOffice' => 'ProgramOffice'];
         }
         elseif ($request->user()->role == "Registrar") {
-            $roles = ['ProgramOffice' => 'ProgramOffice'];.
+            $roles = ['ProgramOffice' => 'ProgramOffice'];
         }
         return view('user.create', ['roles' => $roles]);
     }
