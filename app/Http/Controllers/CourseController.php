@@ -61,9 +61,10 @@ class CourseController extends Controller
 
     public function getCourseListByUniversityDeparmentSemester(Request $request)
     {
-        $page_count = 5;
+        
+        $page_count = 6;
 
-        $course = Course::where('semester_no', $request->semester_no)->paginate($page_count);
+        $course = Course::where('department_id', $request->department_id)->where('semester_no', $request->semester_no)->paginate($page_count);
 
         $theads = array('Course Name', 'Course Code', 'Course Credit');
 
