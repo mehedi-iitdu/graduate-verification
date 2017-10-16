@@ -16,21 +16,23 @@
                     <div class="form-group row">
                         <label for="email" class="col-sm-6 col-form-label">Email</label>
                         <div class="col-sm-6">
-                            <input type="email" name="email" class="form-control" id="email" placeholder="example@gmail.com">
+                            <input type="email" name="email" class="form-control" id="email" placeholder="username@domain.com"
+                            required>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="registration_no" class="col-sm-6 col-form-label">Registration Number</label>
                         <div class="col-sm-6">
-                            <input type="text" name="registration_no" class="form-control" id="registration_no" placeholder="2013-000-111">
+                            <input type="text" name="registration_no" class="form-control" id="registration_no"
+                                   placeholder="2013-000-111" pattern="[0-9]{4}[-][0-9]{3}[-][0-9]{3}" required>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-6 col-form-label" for="date_of_birth">Date of Birth</label>
                         <div class='input-group date col-sm-6'>
-                            <input class="form-control" name="date_of_birth" placeholder="1971-12-16" id='date_of_birth'/>
+                            <input type="text" class="form-control" name="date_of_birth" placeholder="mm/dd/yyyy" id='date_of_birth' required>
                         </div>
                     </div>
 
@@ -57,7 +59,7 @@
     <script type="text/javascript">
 
         $(function () {
-            $('#date_of_birth').datepicker({});
+            $('#date_of_birth').datepicker({ changeYear: true, changeMonth:true, yearRange: "1980:"+new Date().getFullYear() });
         });
 
         $(document).ready(function(){

@@ -23,6 +23,10 @@ class StudentController extends Controller
             'showStudentView',
             'verifyStudent'
         ]);
+        $this->middleware('guest')->only([
+            'storePaymentRequest',
+            'paymentRequestView'
+        ]);
     }
 
     public function showStudentCreateForm(){
