@@ -9,6 +9,7 @@
 
     	<div class="row">
     		<div class="col-md-12">
+                <h2>Detail Report for {{ $verification_status_of_Students }} Students</h2>
     			<div class="table-responsive">
     				<table class="table table-striped table-bordered table-hover dataTables-example" >
                     <thead>
@@ -18,7 +19,6 @@
                         <th class="center">Department</th>
                         <th class="center">Session</th>
                         <th class="center">Registration Number</th>
-                        <th class="center">Verification Status</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -29,7 +29,7 @@
                             <td class="center">{{ $student->department->name }}</td>
                             <td class="center">{{ $student->session }}</td>
                             <td class="center">{{ $student->registration_no }}</td>
-                            <td class="center">fdhkh</td>
+                            
                         </tr>
                     @endforeach
                     </tbody>

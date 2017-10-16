@@ -19,15 +19,21 @@ class StudentController extends Controller
     public function __construct()
     {
         
-        $this->middleware('auth')->only([
+        $this->middleware('role:Registrar, SystemAdmin')->only([
             'showStudentCreateForm',
             'storeStudent',
             'showStudentView',
             'verifyStudent'
         ]);
+
         $this->middleware('guest')->only([
             'storePaymentRequest',
             'paymentRequestView'
+        ]);
+
+        $this->middleware('')->only([
+
+            
         ]);
     }
 
@@ -108,7 +114,6 @@ class StudentController extends Controller
         $verification->student_id = $student->id;
         $verification->stakeholder_id = $stakeholder->id;
         $verification->verification_status = "Requested";
-        $verification->isRead = false;
         $verification->save();
 
         flash('Successfully requested!')->success();
