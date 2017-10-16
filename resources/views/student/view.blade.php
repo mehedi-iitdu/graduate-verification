@@ -38,33 +38,7 @@
           </div>
 
           <div id="student_table">
-            <!-- <table class="table table-bordered table-responsive">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Sudent Name</th>
-                  <th>University Name</th>
-                  <th>Department Name</th>
-                  <th>Registration Number</th>
-                  <th>Session</th>
-                  <th>Date of Birth</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                  <td>1</td>
-                  <td>Mehedi</td>
-                  <td>DU</td>
-                  <td>IIT</td>
-                  <td>2013-312-007</td>
-                  <td>2013-14</td>
-                  <td>07-07-1994</td>
-                  <td>
-                    <button class="btn btn-primary">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
-                  </td>
-              </tbody>
-            </table> -->
+
           </div>
         </main>
       </div>

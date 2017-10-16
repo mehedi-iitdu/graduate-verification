@@ -52,6 +52,10 @@ class User extends Authenticatable
         return $this->role == 'Student';
     }
 
+    public function isSystemAdmin(){
+        return $this->role == 'SystemAdmin';
+    }
+
     public function verifications(){
         return $this->hasMany(Verification::class);
     }

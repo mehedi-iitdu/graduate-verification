@@ -64,7 +64,7 @@ class LoginController extends Controller
 
 
     public function redirectPath(){
-        return 'profile';
+        return 'dashboard';
     }
 
 

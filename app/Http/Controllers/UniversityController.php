@@ -7,17 +7,30 @@ use App\University;
 
 class UniversityController extends Controller{
 
-	public function index(Request $request){
+	public function __construct()
+	{
+	    $this->middleware('auth')->only([
+	        'showUniversityCreateForm',
+	        'storeUniversity',
+	        'showUniversityList',
+	        'show',
+	        'edit',
+	        'update',
+	        'destroy'
+	    ]);
+	}
+
+/*	public function index(Request $request){
 		$universities = University::orderBy('id','ASC')->paginate(10);
 
 		return view('university.index',compact('universities'))
 			->with('i', ($request->input('page', 1) - 1) * 10);
-	}
+	}*/
 
 	public function getUniversityList(Request $request){
 
-		$universites = University::pluck('name', 'id');
-		return view('partials._dropdownOptions', ['data' => $universites, 'id' => 'university_id', 'title' => 'University']);
+		$universities = University::pluck('name', 'id');
+		return view('partials._dropdownOptions', ['data' => $universities, 'id' => 'university_id', 'title' => 'University']);
 	}
 
 	public function showUniversityCreateForm(){
@@ -28,7 +41,7 @@ class UniversityController extends Controller{
 	public function storeUniversity(Request $request){
 
 		$this->validate($request, [
-			'university_name' => 'required|string|max:255',
+			'university_name' => 'required|string|min:10|max:255',
 			'university_location' => 'required|string|max:255',
 			'university_website' => 'required|string|max:255',
 		]);

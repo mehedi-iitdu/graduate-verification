@@ -8,6 +8,17 @@ use App\Course;
 class CourseController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth')->only([
+            'showCourseList',
+            'showCourseCreateForm',
+            'storeCourse',
+            'getCourseListByUniversityDeparmentSemester',
+            'manageCourses'
+        ]);
+    }
+
     public function manageCourses(){
         return view('user_dashboard.manage_courses');
     }
@@ -39,6 +50,23 @@ class CourseController extends Controller
         flash('Course successfully added!')->success();
 
         return redirect()->route('course.create');
+
+    }
+
+    public function showCourseList(){
+
+        return view('course.view');
+    }
+
+    public function getCourseListByUniversityDeparmentSemester(Request $request)
+    {
+        $course = Course::where('semester_no', $request->semester_no)->get();
+
+        $theads = array('Course Name', 'Course Code', 'Course Credit');
+
+        $properties = array('name', 'code', 'credit');
+
+        return view('partials._table',['theads' => $theads, 'properties' => $properties, 'tds' => $course]);
 
     }
 }
