@@ -93,8 +93,9 @@ class CourseController extends Controller
 
         $url = $request->input('url');
 
-        return redirect($url)
-            ->with('success','Course updated successfully');
+        flash('Student updated successfully')->success();
+
+        return redirect($url);
     }
 
 
@@ -106,10 +107,16 @@ class CourseController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        Course::find($id)->delete();
-        $url = $request->input('url');
+        try {
+            Course::find($id)->delete();
+            $url = $request->input('url');
+            
+        } catch (Exception $e) {
+            flash('The course cannot be deleted! If mark exist for this course, delete the mark first')->error();
+            return redirect()->back();
+        }
+        flash('Course deleted successfully');
 
-        return redirect()->back()
-            ->with('success','Course deleted successfully');
+        return redirect()->back();
     }
 }
