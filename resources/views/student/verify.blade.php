@@ -68,7 +68,7 @@
                                 <td></td>
                                 <td></td>
                                 <th>Calculated GPA</th>
-                                <th>{{ $point / $credit }}</th>
+                                <th>{{ round($point / $credit) }}</th>
                             </tr>
                             @php($tot_credit += $credit)
                             @php($tot_point += $point)
@@ -78,7 +78,18 @@
 
                 @endforeach
 
-                <h4>Calculated CGPA is {{ $tot_point / $tot_credit }}</h4>
+                <h4>Calculated CGPA is {{ round($tot_point / $tot_credit, 2) }}</h4>
+
+                {!! Form::open(array('route' => array('student.verify', $student->registration_no), 'files' => 'true')) !!}
+
+                <div class="form-group row" for="signature">
+                    <label for="signature" class="col-sm-4 col-form-label">Upload Signature</label>
+                    <input type="file" name="signature" id="signature" value="Upload signature">
+                </div>
+
+                {{ Form::submit('Verify', ['class' => 'btn btn-block btn-primary']) }}
+
+                {!! Form::close() !!}
 
             </main>
         </div>
@@ -116,5 +127,11 @@
 @endsection
 
 @section('script')
-
+    <script>
+        $(document).ready(function () {
+            $.ajaxSetup({
+                headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
+            });
+        });
+    </script>
 @endsection

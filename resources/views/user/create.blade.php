@@ -16,7 +16,7 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-md-2">{{ Form::label('first_name', 'First Name') }}</div>
-                <div class="col-md-10">{{ Form::text('first_name', null, ['class' => 'form-control', 'required']) }}
+                <div class="col-md-10">{{ Form::text('first_name', null, ['class' => 'form-control', 'required', 'pattern' => '([a-z]*[A-Z]*)*']) }}
                 </div>
               </div>
             </div>
@@ -24,7 +24,7 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-md-2">{{ Form::label('last_name', 'Last Name') }}</div>
-                <div class="col-md-10">{{ Form::text('last_name', null, ['class' => 'form-control', 'required']) }}
+                <div class="col-md-10">{{ Form::text('last_name', null, ['class' => 'form-control', 'required', 'pattern' => '([a-z]*[A-Z]*)*']) }}
                 </div>
               </div>
             </div>
@@ -40,7 +40,7 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-md-2">{{ Form::label('mobile_no', 'Mobile No.') }}</div>
-                <div class="col-md-10">{{ Form::text('mobile_no', null, ['class' => 'form-control', 'required']) }}
+                <div class="col-md-10">{{ Form::text('mobile_no', null, ['class' => 'form-control', 'required', 'pattern' => '01[0-9]*{11}']) }}
                 </div>
               </div>
             </div>
