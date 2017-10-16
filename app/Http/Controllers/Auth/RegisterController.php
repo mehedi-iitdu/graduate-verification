@@ -43,7 +43,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('role:UGC, SystemAdmin, Registrar')->only([
+        $this->middleware('role:UGC,SystemAdmin,Registrar')->only([
             'showRegistrationForm',
             'storeUser'
         ]);
