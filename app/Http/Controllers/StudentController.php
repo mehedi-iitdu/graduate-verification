@@ -11,10 +11,23 @@ use App\University;
 use App\Stakeholder;
 use App\Verification;
 use App\Http\Controllers\Auth\RegisterController;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
-    //
+    public function __construct()
+    {
+        $this->middleware('auth')->only([
+            'showStudentCreateForm',
+            'storeStudent',
+            'showStudentView',
+            'verifyStudent'
+        ]);
+        $this->middleware('guest')->only([
+            'storePaymentRequest',
+            'paymentRequestView'
+        ]);
+    }
 
     public function showStudentCreateForm(){
         return view('student.create');
@@ -25,6 +38,9 @@ class StudentController extends Controller
     }
 
     public function searchStudent(Request $request) {
+
+        $request->date_of_birth = date('Y-m-d', strtotime($request->date_of_birth));
+
         $student_info = Student::where('registration_no', $request->registration_no)->first();
         if($student_info == null) {
             flash('Registration number does not exist');
@@ -101,14 +117,15 @@ class StudentController extends Controller
     public function storeStudent(Request $request){
 
         $this->validate($request, [
-            'first_name' => 'required|string|max:20',
+            'first_name' => 'required|string|min:3|max:20',
             'last_name' => 'required|string|max:20',
             'email' => 'required|string|email|max:255|unique:user',
-            'mobile_no' => 'required|string|max:11',
+            'mobile_no' => 'required|string|min:11|max:11',
             'university_id' => 'required|integer',
             'department_id' => 'required|integer',
             'date_of_birth' => 'required|date',
-            'registration_no' => 'required|string|unique_with:student,department_id'
+            'registration_no' => 'required|string|unique_with:student,department_id',
+            'session_no' => 'required|string|min:7|max:7'
         ]);
 
         $user = new User;
@@ -163,7 +180,7 @@ class StudentController extends Controller
         return view('student.view');
     }
 
-    public function getStudentListByDepartment(Request $request, $id){
+    public function getStudentListByDepartment(Request $request){
 
         $students = \DB::table('student')
             ->select('student.*','user.*')
@@ -179,8 +196,8 @@ class StudentController extends Controller
     }
 
 
-    public function verifyStudentView(Request $request, $registration_no) {
-        $student = Student::where('registration_no', $registration_no)->first();
+    public function verifyStudentView(Request $request, $id) {
+        $student = Verification::where('id', $id)->first()->student;
         $marks = Marks::where('student_id', $student->id)->get();
         $all_marks = array();
 
@@ -194,9 +211,21 @@ class StudentController extends Controller
         }
         return view('student.verify',
             [
+                'verification_id' => $id,
                 'student' => $student,
                 'all_marks' => $all_marks
             ]);
+    }
+
+    function verifyStudent(Request $request, $id) {
+        $path = $request->file('signature')->store('signatures');
+
+        $verification = Verification::where('id', $id)->first();
+        $verification->digital_sign = $path;
+        $verification->verification_status = 'Verified';
+        $verification->save();
+
+        return redirect()->route('student.verify', $id);
     }
 
 }

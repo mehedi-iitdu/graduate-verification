@@ -25,7 +25,7 @@ class Verification extends Migration
                 ->ondelete('cascade');
             $table->string('payment_id')->nullable();
             $table->string('verification_status');
-            $table->string('digital_sign');
+            $table->string('digital_sign')->nullable();
             $table->timestamps();
         });
     }

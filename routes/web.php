@@ -76,7 +76,8 @@ Route::prefix('student')-> group(function (){
 
 	Route::post('view',['uses' => 'StudentController@getStudentListByDepartment', 'as' => 'student.list'] );
 
-	Route::get('verify/{registration_no}', ['uses' => 'StudentController@verifyStudentView', 'as' => 'student.verify']);
+	Route::get('verify/{id}', ['uses' => 'StudentController@verifyStudentView', 'as' => 'student.verify']);
+    Route::post('verify/{id}', ['uses' => 'StudentController@verifyStudent', 'as' => 'student.verify']);
 
 });
 

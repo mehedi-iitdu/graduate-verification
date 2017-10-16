@@ -16,12 +16,6 @@ class UsersController extends Controller
         $this->middleware('auth', ['only' => ['getProfile']]);
     }
 
-    public function getUserList(Request $request){
-
-
-    	return "hello";	
-    }
-
     public function getProfile(Request $request){
 
     	if($request -> user() -> isStudent()){
@@ -45,10 +39,10 @@ class UsersController extends Controller
     		return view('profile.ugc', ['ugc' => $student]);
     	}*/
     }
-
+/*
     public function manageUsers(Request $request) {
         $roles = Role::pluck('role_name', 'id');
         return view('user_dashboard.manage_users_view', ['roles' => $roles]);
-    }
+    }*/
 
 }
