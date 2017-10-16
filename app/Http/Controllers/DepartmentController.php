@@ -97,4 +97,67 @@ class DepartmentController extends Controller
     }
 
 
+    /**
+   * Display the specified resource.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function show(Request $request, $id)
+  {
+    $department = Department::find($id);
+    return view('department.show',compact('department'));
+  }
+
+  /**
+   * Show the form for editing the specified resource.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function edit(Request $request, $id)
+  {
+    $department = Department::find($id);
+    return view('department.edit',compact('department'));
+  }
+
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function update(Request $request, $id)
+  {
+    
+    $this->validate($request, [
+      'name' => 'required|string|max:255',
+      'num_of_semester' => 'required|string|min:1|max:12',
+    ]);
+
+    Department::find($id)->update($request->all());
+
+    $url = $request->input('url');
+
+    return redirect($url)
+      ->with('success','Department updated successfully');
+  }
+
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function destroy(Request $request, $id)
+  {
+    Department::find($id)->delete();
+    $url = $request->input('url');
+
+    return redirect()->back()
+      ->with('success','Department deleted successfully');
+  }
+
+
 }
