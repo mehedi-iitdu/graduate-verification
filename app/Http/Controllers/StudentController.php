@@ -207,6 +207,7 @@ class StudentController extends Controller
         }
         return view('student.verify',
             [
+                'verification_id' => $id,
                 'student' => $student,
                 'all_marks' => $all_marks
             ]);
@@ -215,7 +216,10 @@ class StudentController extends Controller
     function verifyStudent(Request $request, $id) {
         $path = $request->file('signature')->store('signatures');
 
-
+        $verification = Verification::where('id', $id)->first();
+        $verification->digital_sign = $path;
+        $verification->verification_status = 'Verified';
+        $verification->save();
 
         return redirect()->route('student.verify', $id);
     }
