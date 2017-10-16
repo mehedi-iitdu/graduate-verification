@@ -12,7 +12,7 @@ class UniversityController extends Controller{
 	public function __construct()
 	{
 		
-	    $this->middleware('auth')->only([
+	    $this->middleware('role:UGC, SystemAdmin')->only([
 	        'showUniversityCreateForm',
 	        'storeUniversity',
 	        'showUniversityList',
