@@ -22,9 +22,6 @@
                 {{ Form::label('password', 'Password', ['class' => 'form-control-label']) }}
                 {{ Form::password('password', ['class' => 'form-control', 'required','placeholder' => 'Enter Password']) }}
             </div>
-            <div class="form-group">
-                        <label>{{ Form::checkbox('remember') }} Remember Me</label>
-                        </div>
             {{ Form::submit('Login', ['class' => 'btn btn-block btn-primary']) }}
 
         {!! Form::close() !!}
