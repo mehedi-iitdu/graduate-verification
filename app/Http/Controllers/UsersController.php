@@ -13,6 +13,7 @@ class UsersController extends Controller
 {
     public function __construct()
     {
+        parent::__construct();
         $this->middleware('auth', ['only' => ['getProfile']]);
     }
 
@@ -39,10 +40,10 @@ class UsersController extends Controller
     		return view('profile.ugc', ['ugc' => $student]);
     	}*/
     }
-/*
-    public function manageUsers(Request $request) {
-        $roles = Role::pluck('role_name', 'id');
-        return view('user_dashboard.manage_users_view', ['roles' => $roles]);
-    }*/
+
+    public function showUsers(Request $request) {
+        
+        return view('user.view');
+    }
 
 }

@@ -13,55 +13,26 @@
 					{!! Form::open(array('id' => 'search_form')) !!}
 
 
-					@if($user_university_name != null)
-
-						<div class="form-group row">
-							<div class="col-md-2"><label for="university_id">University </label></div>
-							<div class="col-md-10" id="university_list" name="university_id">
-								<select class="form-control">
-									<option>{{$user_university_name}}</option>
-								</select>
-							</div>
+					<div class="form-group row">
+						<div class="col-md-2"><label for="university_id">University </label></div>
+						<div class="col-md-10" id="university_list" name="university_id">
+							<select class="form-control">
+								<option>Select University</option>
+							</select>
 						</div>
+					</div>
 
-					@else
 
-						<div class="form-group row">
-							<div class="col-md-2"><label for="university_id">University </label></div>
-							<div class="col-md-10" id="university_list" name="university_id">
-								<select class="form-control">
-									<option>Select University</option>
-								</select>
-							</div>
+				
+					<div class="form-group row">
+						<div class="col-md-2"><label for="department_id">Department </label></div>
+						<div class="col-md-10" id="department_list">
+							<select class="form-control" name="department_id">
+								<option>Select Department</option>
+							</select>
 						</div>
+					</div>
 
-
-					@endif
-
-
-
-					@if($user_department_name != null)
-						<div class="form-group row">
-							<div class="col-md-2"><label for="department_id">Department </label></div>
-							<div class="col-md-10" id="department_list">
-								<select class="form-control" name="department_id">
-									<option>{{$user_department_name}}</option>
-								</select>
-							</div>
-						</div>
-
-
-					@else
-						<div class="form-group row">
-							<div class="col-md-2"><label for="department_id">Department </label></div>
-							<div class="col-md-10" id="department_list">
-								<select class="form-control" name="department_id">
-									<option>Select Department</option>
-								</select>
-							</div>
-						</div>
-
-					@endif
 
 
 					<div class="form-group row">
@@ -92,19 +63,19 @@
 	                    <tbody>
 	                    <tr>
 	                        <td>Total Student</td>
-	                        <td class="center" id="num_of_student">10,000</td>
+	                        <td class="center" id="num_of_student"></td>
 	                    </tr>
 	                    <tr>
 	                        <td>Requested for Verification</td>
-	                        <td id="verification_request">1,000</td>
+	                        <td id="verification_request"></td>
 	                    </tr>
 	                    <tr>
 	                        <td>Verification on Progress</td>
-	                        <td class="center" id="verification_process">100</td>
+	                        <td class="center" id="verification_process"></td>
 	                    </tr>
 	                    <tr>
 	                        <td>Verified</td>
-	                        <td class="center" id="verified">900</td>
+	                        <td class="center" id="verified"></td>
 	                    </tr>
 	                    </tbody>
 	                    </table>
@@ -151,7 +122,16 @@
                     $("#verification_process").text(data.verification_process);
                     $("#verified").text(data.verified);
 
+                    console.log(data);
+
+                /*    $("#num_of_student").html(data.num_of_student); 
+                    $("#verification_request").innerhtml = data.verification_request; 
+                    $("#verification_process").innerhtml = data.verification_process; 
+                    $("#verified").innerhtml = data.verified;*/
+
                     $('#data').attr('hidden', false);
+
+                    $('.dataTables-example').DataTable();
 
                     new Chart(document.getElementById("doughnut-chart"), {
                         type: 'doughnut',
@@ -181,6 +161,31 @@
                 event.preventDefault();
             });
 
+            $('.dataTables-example').DataTable({
+		            	"order": [],
+		                paging: false,
+		                responsive: true,
+		                dom: '<"html5buttons"B>lTfgitp',
+		                buttons: [
+		                    { extend: 'copy'},
+		                    {extend: 'csv', title: 'Overview Report'},
+		                    {extend: 'excel', title: 'Overview Report'},
+		                    {extend: 'pdf', title: 'Overview Report'},
+
+		                    {extend: 'print',
+		                     customize: function (win){
+		                            $(win.document.body).addClass('white-bg');
+		                            $(win.document.body).css('font-size', '10px');
+
+		                            $(win.document.body).find('table')
+		                                    .addClass('compact')
+		                                    .css('font-size', 'inherit');
+		                    }
+		                    }
+		                ]
+
+		            });
+
 
 			$.post("{{ URL::route('university.list') }}",{},function(data){
 				$('#university_list').html(data);
@@ -197,44 +202,21 @@
 			}
 
 			$('#verification_request').on('click', function () {
-                window.location.replace('/report/details?university_id=' + $('#university_id').val() + '&department_id=' + $('#department_id').val() + '&session_no=' + $('#session_no').val() + '&query=' + 'Requested');
+                window.location.href = '/report/details?university_id=' + $('#university_id').val() + '&department_id=' + $('#department_id').val() + '&session_no=' + $('#session_no').val() + '&query=' + 'Requested';
             });
             $('#num_of_student').on('click', function () {
-                window.location.replace('/report/details?university_id=' + $('#university_id').val() + '&department_id=' + $('#department_id').val() + '&session_no=' + $('#session_no').val() + '&query=' + 'Total');
+                window.location.href = '/report/details?university_id=' + $('#university_id').val() + '&department_id=' + $('#department_id').val() + '&session_no=' + $('#session_no').val() + '&query=' + 'Total';
             });
             $('#verification_process').on('click', function () {
-                window.location.replace('/report/details?university_id=' + $('#university_id').val() + '&department_id=' + $('#department_id').val() + '&session_no=' + $('#session_no').val() + '&query=' + 'Paid');
+                window.location.href = '/report/details?university_id=' + $('#university_id').val() + '&department_id=' + $('#department_id').val() + '&session_no=' + $('#session_no').val() + '&query=' + 'Paid';
             });
             $('#verified').on('click', function () {
-                window.location.replace('/report/details?university_id=' + $('#university_id').val() + '&department_id=' + $('#department_id').val() + '&session_no=' + $('#session_no').val() + '&query=' + 'Verified');
+                window.location.href = '/report/details?university_id=' + $('#university_id').val() + '&department_id=' + $('#department_id').val() + '&session_no=' + $('#session_no').val() + '&query=' + 'Verified';
             });
 
 
-        	console.log("Outside");
-            $('.dataTables-example').DataTable({
-            	"order": [],
-                paging: false,
-                responsive: true,
-                dom: '<"html5buttons"B>lTfgitp',
-                buttons: [
-                    { extend: 'copy'},
-                    {extend: 'csv', title: 'Overview Report'},
-                    {extend: 'excel', title: 'Overview Report'},
-                    {extend: 'pdf', title: 'Overview Report'},
-
-                    {extend: 'print',
-                     customize: function (win){
-                            $(win.document.body).addClass('white-bg');
-                            $(win.document.body).css('font-size', '10px');
-
-                            $(win.document.body).find('table')
-                                    .addClass('compact')
-                                    .css('font-size', 'inherit');
-                    }
-                    }
-                ]
-
-            });
+        	
+            
 
         });
 

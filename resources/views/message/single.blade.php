@@ -25,7 +25,7 @@
 
                   @if($role == "Registrar")
                     <p>Please go through the following link to verify</p>
-                    <a href="{{ URL::route('verify') }}" class="btn btn-primary">Go this link</a>
+                    <a href="{{ URL::route('student.verify', $message->id) }}" class="btn btn-primary">Go this link</a>
                   @endif
 
                 @elseif($message->verification_status == "Verified")
