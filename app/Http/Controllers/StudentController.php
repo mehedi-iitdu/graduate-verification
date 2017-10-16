@@ -12,6 +12,7 @@ use App\Stakeholder;
 use App\Verification;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -184,17 +185,15 @@ class StudentController extends Controller
 
     public function getStudentListByDepartment(Request $request){
 
-        $students = \DB::table('student')
-            ->select('student.*','user.*')
-            ->join('user','user.id','=','student.user_id')
-            ->where(['student.department_id' => $request->department_id])
-            ->get();
+        $page_count = 10;
+
+        $students = Student::select('student.id',DB::raw("CONCAT(user.first_name,' ',user.last_name) as full_name"), 'student.session', 'student.registration_no', 'student.date_of_birth', 'user.email', 'user.mobile_no')->join('user', 'user.id', '=', 'student.user_id')->where('department_id', $request->department_id)->paginate($page_count);
 
         $theads = array('Student Name', 'Session', 'Registration No', 'Date of Birth', 'Email', 'Mobile No');
 
-        $properties = array('first_name', 'session', 'registration_no', 'date_of_birth', 'email', 'mobile_no');
+        $properties = array('full_name', 'session', 'registration_no', 'date_of_birth', 'email', 'mobile_no');
 
-        return view('partials._table',['theads' => $theads, 'properties' => $properties, 'tds' => $students]);
+        return view('partials._table',['theads' => $theads, 'properties' => $properties, 'tds' => $students])->with('i', ($request->input('page', 1) - 1) * $page_count);
     }
 
 
@@ -258,6 +257,58 @@ class StudentController extends Controller
         $verification->save();
 
         return redirect()->route('student.verify', $id);
+    }
+
+    public function show(Request $request, $id){
+        $student = Student::select('user.first_name', 'user.last_name', 'student.department_id', 'student.session', 'student.registration_no', 'student.date_of_birth', 'user.email', 'user.mobile_no')->join('user', 'user.id', '=', 'student.user_id')->where('student.id', $id)->first();
+        $department = Department::find($student->department_id);
+        
+        return view('student.show', ['student' => $student, 'department' => $department]);
+    }
+
+    public function edit(Request $request, $id){
+        $student = Student::find($id);
+        $user = $student->user;
+        return view('student.edit', ['student' => $student, 'user' => $user]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'session' => 'required|string|max:255',
+            'registration_no' => 'required|string|max:255',
+
+        ]);
+
+
+        $student = Student::find($id);
+        $student->session = $request->session;
+        $student->registration_no = $request->registration_no;
+        $student->user->first_name = $request->first_name;
+        $student->user->last_name = $request->last_name;
+        $student->user->save();
+        $student->save();
+
+        $url = $request->input('url');
+
+        flash('Student updated successfully')->success();
+
+        return redirect($url);
+
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        $student = Student::find($id);
+        $user_id = $student->user_id;
+        $student->delete();
+        User::find($user_id)->delete();
+
+        $url = $request->input('url');
+
+        return redirect()->back();
     }
 
 }

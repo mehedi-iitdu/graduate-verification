@@ -81,6 +81,14 @@ Route::prefix('student')-> group(function (){
 	Route::get('verify/{id}', ['uses' => 'StudentController@verifyStudentView', 'as' => 'student.verify']);
     Route::post('verify/{id}', ['uses' => 'StudentController@verifyStudent', 'as' => 'student.verify']);
 
+	Route::get('show/{id}',['uses' => 'StudentController@show', 'as' => 'student.show'] );
+
+	Route::get('edit/{id}',['uses' => 'StudentController@edit', 'as' => 'student.edit'] );
+
+	Route::post('update/{id}',['uses' => 'StudentController@update', 'as' => 'student.update'] );
+
+	Route::delete('delete/{id}',['uses' => 'StudentController@destroy', 'as' => 'student.delete'] );    
+
 });
 
 
