@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-   
+
 <div class="row">
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-         	
+
          	<div class="row">
          		<div class="col-md-12">
          			<h2 style="margin-bottom: 40px" class="d-none d-sm-block">Select and search</h2>
@@ -37,16 +37,16 @@
 
 					<div class="form-group row">
 						<div class="col-md-2"><label for="session_no">Session </label></div>
-						<div class="col-md-10"><input class="form-control" name="session_no" type="text" id="session_no">
+						<div class="col-md-10"><input class="form-control" name="session_no" type="text" id="session_no" pattern="[0-9]{4}-[0-9]{2}">
 						</div>
 					</div>
 
 					{{ Form::submit('Search', ['class' => 'btn btn-block btn-primary']) }}
 					{!! Form::open() !!}
-		            
+
 		            </div>
          		</div>
-         		
+
          	</div>
 
 
@@ -63,25 +63,25 @@
 	                    <tbody>
 	                    <tr>
 	                        <td>Total Student</td>
-	                        <td class="center" id="num_of_student">10,000</td>
+	                        <td class="center" id="num_of_student"></td>
 	                    </tr>
 	                    <tr>
 	                        <td>Requested for Verification</td>
-	                        <td id="verification_request">1,000</td>
+	                        <td id="verification_request"></td>
 	                    </tr>
 	                    <tr>
 	                        <td>Verification on Progress</td>
-	                        <td class="center" id="verification_process">100</td>
+	                        <td class="center" id="verification_process"></td>
 	                    </tr>
 	                    <tr>
 	                        <td>Verified</td>
-	                        <td class="center" id="verified">900</td>
+	                        <td class="center" id="verified"></td>
 	                    </tr>
 	                    </tbody>
 	                    </table>
         			</div>
         		</div>
-        		
+
         	</div>
 
 			<div class="row">
@@ -89,7 +89,7 @@
 					<canvas id="doughnut-chart" width="800" height="450"></canvas>
 				</div>
 			</div>
-        
+
         </main>
 
  </div>
@@ -122,7 +122,16 @@
                     $("#verification_process").text(data.verification_process);
                     $("#verified").text(data.verified);
 
+                    console.log(data);
+
+                /*    $("#num_of_student").html(data.num_of_student); 
+                    $("#verification_request").innerhtml = data.verification_request; 
+                    $("#verification_process").innerhtml = data.verification_process; 
+                    $("#verified").innerhtml = data.verified;*/
+
                     $('#data').attr('hidden', false);
+
+                    $('.dataTables-example').DataTable();
 
                     new Chart(document.getElementById("doughnut-chart"), {
                         type: 'doughnut',
@@ -151,6 +160,31 @@
                 });
                 event.preventDefault();
             });
+
+            $('.dataTables-example').DataTable({
+		            	"order": [],
+		                paging: false,
+		                responsive: true,
+		                dom: '<"html5buttons"B>lTfgitp',
+		                buttons: [
+		                    { extend: 'copy'},
+		                    {extend: 'csv', title: 'Overview Report'},
+		                    {extend: 'excel', title: 'Overview Report'},
+		                    {extend: 'pdf', title: 'Overview Report'},
+
+		                    {extend: 'print',
+		                     customize: function (win){
+		                            $(win.document.body).addClass('white-bg');
+		                            $(win.document.body).css('font-size', '10px');
+
+		                            $(win.document.body).find('table')
+		                                    .addClass('compact')
+		                                    .css('font-size', 'inherit');
+		                    }
+		                    }
+		                ]
+
+		            });
 
 
 			$.post("{{ URL::route('university.list') }}",{},function(data){
@@ -181,31 +215,8 @@
             });
 
 
-        	console.log("Outside");
-            $('.dataTables-example').DataTable({
-            	"order": [],
-                paging: false,
-                responsive: true,
-                dom: '<"html5buttons"B>lTfgitp',
-                buttons: [
-                    { extend: 'copy'},
-                    {extend: 'csv', title: 'Overview Report'},
-                    {extend: 'excel', title: 'Overview Report'},
-                    {extend: 'pdf', title: 'Overview Report'},
-
-                    {extend: 'print',
-                     customize: function (win){
-                            $(win.document.body).addClass('white-bg');
-                            $(win.document.body).css('font-size', '10px');
-
-                            $(win.document.body).find('table')
-                                    .addClass('compact')
-                                    .css('font-size', 'inherit');
-                    }
-                    }
-                ]
-
-            });
+        	
+            
 
         });
 
