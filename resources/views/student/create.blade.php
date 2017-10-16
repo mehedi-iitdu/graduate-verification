@@ -58,8 +58,8 @@
                     <div class="col-md-10">
                         <div id="university_list">
 
-                      
-                          
+
+
                         </div>
                     </div>
                   </div>
@@ -70,7 +70,7 @@
                     <div class="col-md-2"><label for="department">Department</label></div>
                     <div class="col-md-10">
                       <div id="department_list">
-                        
+
                         <select class="form-control" id="user_role">
                             <option>Select Department</option>
                         </select>
@@ -92,7 +92,7 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-2"><label for="session_no">Session</label></div>
-                        <div class="col-md-10"><input class="form-control" required="" name="session_no" type="text" id="session_no" pattern="[0-9]{4}-[0-9]{2}">
+                        <div class="col-md-10"><input class="form-control" required name="session_no" type="text" placeholder="2013-14" id="session_no" pattern="[0-9]{4}-[0-9]{2}">
                         </div>
                     </div>
                 </div>
@@ -104,9 +104,9 @@
                         </div>
                     </div>
                 </div>
-                
+
               {!! Form::open(array('route' => 'student.store')) !!}
-            
+
             </div>
 
         </main>

@@ -23,7 +23,7 @@
               <div class="form-group col-md-6">
                 {{ Form::label('student_registration_no', 'Student Registration No.') }}
 
-                  {{ Form::text('student_registration_no', null, ['class' =>'form-control', 'placeholder' => 'Registration No.', 'id' => 'student_registration_no' ]) }}
+                  {{ Form::text('student_registration_no', null, ['class' =>'form-control', 'placeholder' => '2013-121-121', 'id' => 'student_registration_no' ]) }}
                   <p id="student_registration_no_error" class="error pull-right"></p>
               </div>
             </div>
