@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ProgramOffice;
+use App\Registrar;
 use Illuminate\Http\Request;
 use App\University;
 
@@ -35,7 +36,7 @@ class UniversityController extends Controller{
         }
 
         else if ($request->user()->role == "Registrar"){
-            $university_id = $request->user()->university->id;
+            $university_id = Registrar::where('user_id', $request->user()->id)->first()->university->id;
             $universities = University::where('id', $university_id)->pluck('name', 'id');
         }
 
