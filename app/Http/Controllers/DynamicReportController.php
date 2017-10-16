@@ -28,6 +28,30 @@ class DynamicReportController extends Controller
 
     public function detailedView(Request $request) {
         if($request->user()->role != "Student"){
+
+            if($request->user()->role == "Registrar"){ 
+                $registrar_university_id = Registrar::where('user_id', $request->user()->id)->pluck('university_id')->first(); 
+                if($registrar_university_id != $request->university_id){ 
+                    return view('errors.403'); 
+                } 
+            } 
+            elseif ($request->user()->role == "ProgramOffice") { 
+                $po_university_id = ProgramOffice::where('user_id', $request->user()->id)->pluck('university_id')->first(); 
+                if($po_university_id != $request->university_id){ 
+                    return view('errors.403'); 
+                } 
+
+                $po_department_id = ProgramOffice::where('user_id', $request->user()->id)->pluck('department_id')->first(); 
+                if($po_department_id != $request->department_id){ 
+                    return view('errors.403'); 
+                } 
+            }
+
+            elseif ($request->user()->role != "UGC" && $request->user()->role != "SystemAdmin" ) {
+                return view('errors.403');
+            }
+
+
             $students = Student::all();
             if($request->department_id){
                 //dd($request['department_id']);
