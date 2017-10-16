@@ -8,6 +8,15 @@ use App\Department;
 class DepartmentController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth')->only([
+            'showDepartmentCreateForm',
+            'showDepartmentView',
+            'storeDepartment'
+        ]);
+    }
+
     public function showDepartmentCreateForm(){
         return view('department.create');
     }
@@ -18,7 +27,7 @@ class DepartmentController extends Controller
     	if($request->ajax()){
 
     		$departments = Department::where('university_id', $request->university_id)->pluck('name', 'id');
-        
+
             return view('partials._dropdownOptions', ['data' => $departments, 'id' => 'department_id', 'title' => 'Department']);
 
     	}
@@ -33,14 +42,29 @@ class DepartmentController extends Controller
             for($sem = 1; $sem <= $num_of_semester; $sem++)
                 $semesters->{ $sem } = 'Semester '.$sem;
 
-            return view('partials._dropdownOptions', ['data' => $semesters, 'id' => 'semester_id', 'title' => 'Semester']);
+            return view('partials._dropdownOptions', ['data' => $semesters, 'id' => 'semester_no', 'title' => 'Semester']);
 
         }
     }
 
-    public function addDepartmentView(){
+    public function showDepartmentView(){
 
-      return view('department.view');
+        return view('department.view');
+    }
+
+    public function departmentListByUniversity(Request $request){
+
+        $page_count = 5;
+
+        $departments = Department::where('university_id', $request->university_id)->get();
+
+        $theads = array('Department Name', 'Number of Semester');
+
+        $properties = array('name','num_of_semester');
+
+        return view('partials._table',['theads' => $theads, 'properties' => $properties, 'tds' => $departments])
+            ->with('i', ($request->input('page', 1) - 1) * $page_count);
+
     }
 
     public function storeDepartment(Request $request){

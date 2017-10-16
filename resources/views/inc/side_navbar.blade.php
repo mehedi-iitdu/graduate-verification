@@ -3,7 +3,7 @@
 <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
   <ul class="nav nav-pills flex-column">
     <li class="nav-item">
-      <a class="nav-link active" href="/user/add">Manage Users</a>
+      <a class="nav-link active" href="{{ URL::route('user.create') }}">Manage Users</a>
     </li>
     <li class="nav-item">
       <div class="dropdown show">
@@ -12,8 +12,8 @@
         </a>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="/dashboard/manage_university_view">University</a>
-          <a class="dropdown-item" href="/dashboard/manage_department_view">Department/Institute</a>
+          <a class="dropdown-item" href="{{ URL::route('university.view') }}">University</a>
+          <a class="dropdown-item" href="{{ URL::route('department.view') }}">Department/Institute</a>
         </div>
       </div>
     </li>
@@ -25,8 +25,7 @@
         </a>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="#">Semester</a>
-          <a class="dropdown-item" href="/dashboard/manage_courses_view">Course</a>
+          <a class="dropdown-item" href="{{ URL::route('course.create') }}">Course</a>
         </div>
       </div>
     </li>
@@ -38,8 +37,9 @@
         </a>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="/dashboard/manage_add_result">Add Result</a>
-          <a class="dropdown-item" href="#">Edit</a>
+          <a class="dropdown-item" href="{{ URL::route('result.submit') }}">Add Result</a>
+          <a class="dropdown-item" href="{{ URL::route('result.search') }}">Search Result</a>
+          <a class="dropdown-item" href="{{ URL::route('result.edit') }}">Edit Result</a>
         </div>
       </div>
     </li>
@@ -55,6 +55,10 @@
           <a class="dropdown-item" href="#">Verify</a>
         </div>
       </div>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{ URL::route('report.index') }}">Reports</a>
     </li>
   </ul>
 </nav>

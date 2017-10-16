@@ -17,18 +17,16 @@ Route::get('/signup', 'PagesController@signUp');
 Route::get('/login', 'PagesController@login');*/
 
 
-Route::get('/', function(){
-	return view('pages.home');
-});
+Route::get('/', ['uses' => 'HomeController@getHomeView', 'as' => 'home']);
 
-Route::get('/dashboard', function(){
-	return view('dashboard');
-});
+Route::get('/dashboard', ['uses' => 'DashboardController@dashboardView', 'as' => 'dashboard']);
+
+Route::get('admin/dashboard', ['uses' => 'DashboardController@adminDashboardView', 'as' => 'admin.dashboard']);
 
 Route::prefix('report')-> group(function (){
 
-    Route::get('index',['uses' => 'DynamicReportController@indexView', 'as' => 'report.indexView'] );
-    Route::get('details/{query}',['uses' => 'DynamicReportController@detailedView', 'as' => 'report.detailedView'] );
+    Route::get('index',['uses' => 'DynamicReportController@indexView', 'as' => 'report.index'] );
+    Route::get('details',['uses' => 'DynamicReportController@detailedView', 'as' => 'report.details'] );
 });
 
 Route::post('role_based_info',['uses' => 'RoleController@getRoleBasedInfo', 'as' => 'role_based_info'] );
@@ -41,7 +39,8 @@ Route::get('manage_results', ['uses' => 'ResultController@manageResults', 'as' =
 
 Route::get('login', ['uses' => 'Auth\LoginController@showLoginForm', 'as' => 'login']);
 Route::post('login', ['uses' => 'Auth\LoginController@login', 'as' => 'login']);
-Route::get('logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'logout']);
+Route::get('auth/logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'logout']);
+Route::get('logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'auth.logout']);
 
 Route::prefix('user')-> group(function (){
 
@@ -73,6 +72,13 @@ Route::prefix('student')-> group(function (){
 
 	Route::post('create',['uses' => 'StudentController@storeStudent', 'as' => 'student.store'] );
 
+	Route::get('view',['uses' => 'StudentController@showStudentView', 'as' => 'student.view'] );
+
+	Route::post('view',['uses' => 'StudentController@getStudentListByDepartment', 'as' => 'student.list'] );
+
+	Route::get('verify/{id}', ['uses' => 'StudentController@verifyStudentView', 'as' => 'student.verify']);
+    Route::post('verify/{id}', ['uses' => 'StudentController@verifyStudent', 'as' => 'student.verify']);
+
 });
 
 
@@ -80,6 +86,9 @@ Route::prefix('course')-> group(function (){
 
 	Route::get('create',['uses' => 'CourseController@showCourseCreateForm', 'as' => 'course.create'] );
 	Route::post('create',['uses' => 'CourseController@storeCourse', 'as' => 'course.store'] );
+    Route::get('view',['uses' => 'CourseController@showCourseList', 'as' => 'course.view'] );
+    Route::post('view',['uses' => 'CourseController@getCourseListByUniversityDeparmentSemester',
+                'as' => 'course.getCourseListByUniversityDeparmentSemester'] );
 });
 
 
@@ -103,17 +112,32 @@ Route::prefix('department')-> group(function (){
 
 	Route::get('create', ['uses' => 'DepartmentController@showDepartmentCreateForm', 'as' => 'department.create']);
 
+	Route::get('view', ['uses' => 'DepartmentController@showDepartmentView', 'as' => 'department.view']);
+
+    Route::post('view', ['uses' => 'DepartmentController@departmentListByUniversity', 'as' => 'department.view']);
+
 	Route::post('create', ['uses' => 'DepartmentController@storeDepartment', 'as' => 'department.store']);
 });
 
 
 Route::prefix('university')-> group(function (){
 
+	Route::get('/'  , ['uses' => 'UniversityController@index', 'as' => 'university.index']);
+
 	Route::post('list', ['uses' => 'UniversityController@getUniversityList', 'as' => 'university.list']);
 
 	Route::get('create',['uses' => 'UniversityController@showUniversityCreateForm', 'as' => 'university.create'] );
 
 	Route::post('create',['uses' => 'UniversityController@storeUniversity', 'as' => 'university.store'] );
+
+	Route::get('edit/{id}',['uses' => 'UniversityController@edit', 'as' => 'university.edit'] );
+
+	Route::post('edit/{id}',['uses' => 'UniversityController@update', 'as' => 'university.update'] );
+
+	Route::get('delete/{id}',['uses' => 'UniversityController@destroy', 'as' => 'university.delete'] );
+
+	Route::get('show/{id}',['uses' => 'UniversityController@show', 'as' => 'university.show'] );
+
 
 	Route::get('view',['uses' => 'UniversityController@showUniversityList', 'as' => 'university.view'] );
 
@@ -127,17 +151,41 @@ Route::prefix('result')->group(function(){
 	Route::post('submit', ['uses' => 'ResultController@submitResult', 'as' => 'result.submit']);
 
 	Route::post('marks_fields', ['uses' => 'ResultController@getMarksInputField', 'as' => 'marks_fields']);
+
+	Route::get('search', ['uses' => 'ResultController@searchResult', 'as' => 'result.search']);
+
+	Route::post('marks_views', ['uses' => 'ResultController@getMarksView', 'as' => 'marks_views']);
+
+  	Route::get('edit', ['uses' => 'ResultController@showEditResultForm', 'as' => 'result.edit']);
+
+  	Route::post('edit', ['uses' => 'ResultController@editResult', 'as' => 'result.edit']);
+
+  	Route::post('marks_edit', ['uses' => 'ResultController@getMarksEditField', 'as' => 'marks_edit']);
+
+});
+
+
+Route::prefix('permission')-> group(function (){
+
+	Route::post('request', ['uses' => 'ResultController@sendPermissionRequest', 'as' => 'permission.request'] );
+
+	Route::post('get_requestModal', ['uses' => 'ResultController@getPermissionRequestModal', 'as' => 'permission.request_modal']);
+
+	Route::get('request_list', ['uses' => 'ResultController@showRequestList', 'as' => 'permission.request_list']);
+
 });
 
 
 
 Route::prefix('payment')-> group(function (){
 
-	Route::get('payment/checkout', 'PaymentController@getCheckout');
+	Route::get('verification/{id}', ['uses' => 'PaymentController@getVerification', 'as' => 'payment.verification'] );
 
-	Route::get('payment/done', 'PaymentController@getDone');
+	Route::get('checkout/{id}', ['uses' => 'PaymentController@getCheckout', 'as' => 'payment.checkout'] );
 
-	Route::get('payment/cancel', 'PaymentController@getCancel');
+	Route::get('done/{id}', ['uses' => 'PaymentController@getDone', 'as' => 'payment.done'] );
+
+	Route::get('cancel', ['uses' => 'PaymentController@getCancel', 'as' => 'payment.cancel'] );
 
 });
 
@@ -146,3 +194,12 @@ Route::prefix('dynamic_report')-> group(function (){
     Route::post('student', ['uses' => 'StudentController@getDynamicReportStudentData', 'as' => 'dynamic_report.student']);
 
 });
+
+
+Route::prefix('message')-> group(function (){
+
+	Route::get('view',['uses' => 'MessageController@showMessage', 'as' => 'message.view'] );
+	Route::get('single/{id}',['uses' => 'MessageController@showSingleMessage', 'as' => 'message.single'] );
+
+});
+

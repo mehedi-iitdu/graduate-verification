@@ -7,20 +7,17 @@ use App\User;
 use App\Student;
 use App\Registrar;
 use App\Role;
+use App\ProgramOffice;
 
 class UsersController extends Controller
 {
     public function __construct()
     {
-    }
-
-    public function getUserList(Request $request){
-
-
-    	return "hello";	
+        $this->middleware('auth', ['only' => ['getProfile']]);
     }
 
     public function getProfile(Request $request){
+
     	if($request -> user() -> isStudent()){
     		$student = Student::where('user_id', $request->user()->id)->first();
 
@@ -42,10 +39,10 @@ class UsersController extends Controller
     		return view('profile.ugc', ['ugc' => $student]);
     	}*/
     }
-
+/*
     public function manageUsers(Request $request) {
         $roles = Role::pluck('role_name', 'id');
         return view('user_dashboard.manage_users_view', ['roles' => $roles]);
-    }
+    }*/
 
 }
