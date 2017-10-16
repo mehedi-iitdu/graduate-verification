@@ -91,6 +91,10 @@ Route::prefix('course')-> group(function (){
     Route::get('view',['uses' => 'CourseController@showCourseList', 'as' => 'course.view'] );
     Route::post('view',['uses' => 'CourseController@getCourseListByUniversityDeparmentSemester',
                 'as' => 'course.getCourseListByUniversityDeparmentSemester'] );
+    Route::get('delete/{id}',['uses' => 'CourseController@destroy', 'as' => 'course.delete'] );
+    Route::get('show/{id}',['uses' => 'CourseController@show', 'as' => 'course.show'] );
+    Route::get('edit/{id}',['uses' => 'CourseController@edit', 'as' => 'course.edit'] );
+    Route::post('edit/{id}',['uses' => 'CourseController@update', 'as' => 'course.update'] );
 });
 
 
