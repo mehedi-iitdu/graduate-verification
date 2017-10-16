@@ -47,8 +47,8 @@
 					</tr>
 				@endforeach
 			</table>
-
-			{!! $universities->render() !!}
+			{{ $universities->links('vendor.pagination.custom') }}
+{{--			{!! $universities->render() !!}--}}
 		</main>
 	</div>
 
