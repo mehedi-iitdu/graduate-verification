@@ -60,8 +60,6 @@
 
               var location = $('#location').val();
 
-              /*alert(university_id);*/
-
               $.post("{{ URL::route('university.universityListByLocation') }}",{location:location}, function(data){
                   $('#university_table').html(data);
               });

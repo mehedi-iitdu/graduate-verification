@@ -8,6 +8,15 @@ use App\Department;
 class DepartmentController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth')->only([
+            'showDepartmentCreateForm',
+            'showDepartmentView',
+            'storeDepartment'
+        ]);
+    }
+
     public function showDepartmentCreateForm(){
         return view('department.create');
     }

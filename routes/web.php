@@ -26,7 +26,7 @@ Route::get('admin/dashboard', ['uses' => 'DashboardController@adminDashboardView
 Route::prefix('report')-> group(function (){
 
     Route::get('index',['uses' => 'DynamicReportController@indexView', 'as' => 'report.index'] );
-    Route::get('details/{university_id}/{department_id}/{session_no}/{query}',['uses' => 'DynamicReportController@detailedView', 'as' => 'report.details'] );
+    Route::get('details',['uses' => 'DynamicReportController@detailedView', 'as' => 'report.details'] );
 });
 
 Route::post('role_based_info',['uses' => 'RoleController@getRoleBasedInfo', 'as' => 'role_based_info'] );
@@ -47,6 +47,8 @@ Route::prefix('user')-> group(function (){
 	Route::get('create', ['uses' => 'Auth\RegisterController@showRegistrationForm', 'as' => 'user.create']);
 
 	Route::post('create', ['uses' => 'Auth\RegisterController@storeUser', 'as' => 'user.store']);
+
+	Route::get('view', ['uses' => 'UsersController@showUsers', 'as' => 'user.view']);
 
 	Route::get('activation',['uses' => 'Auth\RegisterController@showActivationForm', 'as' => 'user.activation']);
 	Route::post('activation',['uses' => 'Auth\RegisterController@userActivate', 'as' => 'user.activation']);
@@ -76,6 +78,9 @@ Route::prefix('student')-> group(function (){
 
 	Route::post('view',['uses' => 'StudentController@getStudentListByDepartment', 'as' => 'student.list'] );
 
+	Route::get('verify/{id}', ['uses' => 'StudentController@verifyStudentView', 'as' => 'student.verify']);
+    Route::post('verify/{id}', ['uses' => 'StudentController@verifyStudent', 'as' => 'student.verify']);
+
 });
 
 
@@ -83,6 +88,9 @@ Route::prefix('course')-> group(function (){
 
 	Route::get('create',['uses' => 'CourseController@showCourseCreateForm', 'as' => 'course.create'] );
 	Route::post('create',['uses' => 'CourseController@storeCourse', 'as' => 'course.store'] );
+    Route::get('view',['uses' => 'CourseController@showCourseList', 'as' => 'course.view'] );
+    Route::post('view',['uses' => 'CourseController@getCourseListByUniversityDeparmentSemester',
+                'as' => 'course.getCourseListByUniversityDeparmentSemester'] );
 });
 
 
@@ -149,6 +157,23 @@ Route::prefix('result')->group(function(){
 	Route::get('search', ['uses' => 'ResultController@searchResult', 'as' => 'result.search']);
 
 	Route::post('marks_views', ['uses' => 'ResultController@getMarksView', 'as' => 'marks_views']);
+
+  	Route::get('edit', ['uses' => 'ResultController@showEditResultForm', 'as' => 'result.edit']);
+
+  	Route::post('edit', ['uses' => 'ResultController@editResult', 'as' => 'result.edit']);
+
+  	Route::post('marks_edit', ['uses' => 'ResultController@getMarksEditField', 'as' => 'marks_edit']);
+
+});
+
+
+Route::prefix('permission')-> group(function (){
+
+	Route::post('request', ['uses' => 'ResultController@sendPermissionRequest', 'as' => 'permission.request'] );
+
+	Route::post('get_requestModal', ['uses' => 'ResultController@getPermissionRequestModal', 'as' => 'permission.request_modal']);
+
+	Route::get('request_list', ['uses' => 'ResultController@showRequestList', 'as' => 'permission.request_list']);
 
 });
 
