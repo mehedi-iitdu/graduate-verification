@@ -87,7 +87,7 @@ class RegisterController extends Controller
             $roles = ['UGC' => 'UGC', 'Registrar' => 'Registrar', 'ProgramOffice' => 'ProgramOffice'];
         }
         elseif ($request->user()->role == "UGC") {
-            $roles = ['Registrar' => 'Registrar', 'ProgramOffice' => 'ProgramOffice'];.
+            $roles = ['Registrar' => 'Registrar', 'ProgramOffice' => 'ProgramOffice'];
         }
         elseif ($request->user()->role == "Registrar") {
             $roles = ['ProgramOffice' => 'ProgramOffice'];.
