@@ -18,7 +18,7 @@ class StudentController extends Controller
     public function __construct()
     {
         
-        $this->middleware('auth')->only([
+        $this->middleware('role:ProgramOffice, SystemAdmin')->only([
             'showStudentCreateForm',
             'storeStudent',
             'showStudentView',
@@ -27,6 +27,11 @@ class StudentController extends Controller
         $this->middleware('guest')->only([
             'storePaymentRequest',
             'paymentRequestView'
+        ]);
+
+        $this->middleware('')->only([
+
+            
         ]);
     }
 
