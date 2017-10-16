@@ -11,6 +11,7 @@ use App\University;
 use App\Stakeholder;
 use App\Verification;
 use App\Http\Controllers\Auth\RegisterController;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -19,7 +20,8 @@ class StudentController extends Controller
         $this->middleware('auth')->only([
             'showStudentCreateForm',
             'storeStudent',
-            'showStudentView'
+            'showStudentView',
+            'verifyStudent'
         ]);
     }
 
@@ -190,8 +192,8 @@ class StudentController extends Controller
     }
 
 
-    public function verifyStudentView(Request $request, $registration_no) {
-        $student = Student::where('registration_no', $registration_no)->first();
+    public function verifyStudentView(Request $request, $id) {
+        $student = Verification::where('id', $id)->first()->student;
         $marks = Marks::where('student_id', $student->id)->get();
         $all_marks = array();
 
@@ -208,6 +210,14 @@ class StudentController extends Controller
                 'student' => $student,
                 'all_marks' => $all_marks
             ]);
+    }
+
+    function verifyStudent(Request $request, $id) {
+        $path = $request->file('signature')->store('signatures');
+
+
+
+        return redirect()->route('student.verify', $id);
     }
 
 }
