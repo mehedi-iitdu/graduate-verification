@@ -3,7 +3,6 @@
 @section('content')
     <div class="container-fluid">
       <div class="row">
-      <p>{{count($messages)}}</p>
       <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
         <div class="list-group">
           @foreach ($messages as $index => $message)

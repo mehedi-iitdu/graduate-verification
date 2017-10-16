@@ -43,7 +43,11 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->only(['showRegistrationForm', 'storeUser']);
+        $this->middleware('role:UGC,SystemAdmin,Registrar')->only([
+            'showRegistrationForm',
+            'storeUser'
+        ]);
+
         $this->middleware('guest')->only(['showActivationForm', 'userActivate',
             'showSendActivationCodeForm', 'activationCodeSend', 'sendActivationCode']);
     }
@@ -81,9 +85,17 @@ class RegisterController extends Controller
         ]);
     }*/
 
-    public function showRegistrationForm()
+    public function showRegistrationForm(Request $request)
     {
-        $roles = ['UGC' => 'UGC', 'Registrar' => 'Registrar', 'ProgramOffice' => 'ProgramOffice'];
+        if($request->user()->role == "SystemAdmin"){
+            $roles = ['UGC' => 'UGC', 'Registrar' => 'Registrar', 'ProgramOffice' => 'ProgramOffice'];
+        }
+        elseif ($request->user()->role == "UGC") {
+            $roles = ['Registrar' => 'Registrar'];
+        }
+        elseif ($request->user()->role == "Registrar") {
+            $roles = ['ProgramOffice' => 'ProgramOffice'];
+        }
         return view('user.create', ['roles' => $roles]);
     }
 
