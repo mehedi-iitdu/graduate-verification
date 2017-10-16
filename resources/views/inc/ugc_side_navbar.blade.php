@@ -23,8 +23,8 @@
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <a class="dropdown-item" href="{{ URL::route('university.view') }}">View User</a>
-                  <a class="dropdown-item" href="{{ URL::route('university.create') }}">Add User</a>
+                  <a class="dropdown-item" href="{{ URL::route('university.view') }}">View University</a>
+                  <a class="dropdown-item" href="{{ URL::route('university.create') }}">Add University</a>
                 </div>
               </div>
         </li>
