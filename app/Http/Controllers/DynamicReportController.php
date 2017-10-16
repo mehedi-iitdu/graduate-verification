@@ -32,7 +32,7 @@ class DynamicReportController extends Controller
 
             if($request->user()->role == "Registrar"){ 
                 $registrar_university_id = Registrar::where('user_id', $request->user()->id)->pluck('university_id')->first(); 
-                if($registrar_university_id != $request->university_id){ 
+                if($registrar_university_id != $request->university_id || is_null($request->department_id)){ 
                     return view('errors.403'); 
                 } 
             } 
@@ -52,6 +52,12 @@ class DynamicReportController extends Controller
 
             elseif ($request->user()->role != "UGC" && $request->user()->role != "SystemAdmin" ) {
                 return view('errors.403');
+            }
+
+            if($request->user()->role == "UGC" || $request->user()->role == "SystemAdmin") {
+                if(is_null($request->department_id) || is_null($request->university_id)){
+                    return view('errors.403');
+                }
             }
 
 
@@ -79,7 +85,7 @@ class DynamicReportController extends Controller
 
             }
 
-            return view('reports.details', ['students' => $students]);
+            return view('reports.details', ['students' => $students, 'verification_status_of_Students' => $request['query']]);
         }
         else {
             return view('errors.403');
