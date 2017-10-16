@@ -23,7 +23,7 @@
               <div class="form-group col-md-6">
                 {{ Form::label('student_registration_no', 'Student Registration No.') }}
 
-                  {{ Form::text('student_registration_no', null, ['class' =>'form-control', 'placeholder' => 'Registration No.', 'id' => 'student_registration_no' ]) }}
+                  {{ Form::text('student_registration_no', null, ['class' =>'form-control', 'placeholder' => '2013-121-121', 'id' => 'student_registration_no' ]) }}
                   <p id="student_registration_no_error" class="error pull-right"></p>
               </div>
             </div>
@@ -82,10 +82,8 @@
               total_gpa += credit*parseFloat($(this).find('.gpa:first').text());
               total_credit += credit;
             });
-            var cgpa = total_gpa/total_credit;
-            $('tbody').append('<tr><td colspan="3" align="right">CGPA:</td><td>'+cgpa.toString()+'</td></tr>')
-
-
+            var cgpa = (total_gpa/total_credit).toFixed(2);
+            $('tbody').append('<tr><td colspan="3" align="right">CGPA:</td><td>'+cgpa.toString()+'</td></tr>');
         });
         return false;
       });

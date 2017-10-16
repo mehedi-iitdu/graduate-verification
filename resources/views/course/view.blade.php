@@ -13,7 +13,7 @@
 
                 <div class="form-row">
                     <div class="form-group ml-auto col-md-3">
-                        <a href="/dashboard/manage_courses_create" class="btn btn-block btn-primary">Add Course</a>
+                        <a href="/course/create" class="btn btn-block btn-primary">Add Course</a>
                     </div>
                 </div>
 
@@ -24,7 +24,7 @@
 
                             <div class="form-group col-md-3">
                                 <div id="university_list">
-                                    <select class="form-control" id="user_role">
+                                    <select class="form-control" id="university_id">
                                         <option>Select University</option>
                                     </select>
                                 </div>
@@ -32,80 +32,25 @@
 
                             <div class="form-group col-md-3">
                                 <div id="department_list">
-                                    <select class="form-control" id="user_role">
+                                    <select class="form-control" id="department_id">
                                         <option>Select Department</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group col-md-3">
                                 <div id="semester_list">
-                                    <select class="form-control" id="user_role">
+                                    <select class="form-control" id="semester_no">
                                         <option>Select Semester</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group col-md-3">
-                                <button type="submit" class="btn btn-block btn-success">Search</button>
+                                <p class="btn btn-block btn-success" id="search">Search</p>
                             </div>
                         </div>
                     </form>
-                    <div>
-                        <table class="table table-bordered table-responsive">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>University</th>
-                            <th>Inst./Dept.</th>
-                            <th>Semester</th>
-                            <th>Course Name</th>
-                            <th>Course Code</th>
-                            <th>Course Credit</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>DU</td>
-                            <td>IIT</td>
-                            <td>1</td>
-                            <td>Software Project Management</td>
-                            <td>SE-803</td>
-                            <td>3</td>
-                            <td>
-                                <button class="btn btn-sm btn-primary">Edit</button>
-                                <button class="btn btn-sm btn-danger">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>DU</td>
-                            <td>IIT</td>
-                            <td>1</td>
-                            <td>Software Project Management</td>
-                            <td>SE-803</td>
-                            <td>3</td>
-                            <td>
-                                <button class="btn btn-sm btn-primary">Edit</button>
-                                <button class="btn btn-sm btn-danger">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>DU</td>
-                            <td>IIT</td>
-                            <td>1</td>
-                            <td>Software Project Management</td>
-                            <td>SE-803</td>
-                            <td>3</td>
-                            <td>
-                                <button class="btn btn-sm btn-primary">Edit</button>
-                                <button class="btn btn-sm btn-danger">Delete</button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div id="course_table">
                     </div>
                 </div>
             </main>
@@ -120,6 +65,18 @@
         $.ajaxSetup({
               headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
           });
+
+        $('#search').on('click', function () {
+
+            var university_id = $('#university_id').val();
+            var department_id = $('#department_id').val();
+            var semester_no = $('#semester_no').val();
+
+            $.post("{{ URL::route('course.getCourseListByUniversityDeparmentSemester') }}",
+                {university_id:university_id, department_id:department_id, semester_no: semester_no }, function(data){
+                $('#course_table').html(data);
+            });
+        });
 
         $.post("{{ URL::route('university.list') }}",{},function(data){
             $('#university_list').html(data);

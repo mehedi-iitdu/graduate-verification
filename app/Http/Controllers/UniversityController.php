@@ -2,22 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\ProgramOffice;
+use App\Registrar;
 use Illuminate\Http\Request;
 use App\University;
 
 class UniversityController extends Controller{
 
-	public function index(Request $request){
+	public function __construct()
+	{
+		
+	    $this->middleware('auth')->only([
+	        'showUniversityCreateForm',
+	        'storeUniversity',
+	        'showUniversityList',
+	        'show',
+	        'edit',
+	        'update',
+	        'destroy'
+	    ]);
+	}
+
+/*	public function index(Request $request){
 		$universities = University::orderBy('id','ASC')->paginate(10);
 
 		return view('university.index',compact('universities'))
 			->with('i', ($request->input('page', 1) - 1) * 10);
-	}
+	}*/
 
 	public function getUniversityList(Request $request){
 
-		$universites = University::pluck('name', 'id');
-		return view('partials._dropdownOptions', ['data' => $universites, 'id' => 'university_id', 'title' => 'University']);
+	    if($request->user() == null){
+            $universities = University::pluck('name', 'id');
+        }
+
+        else if ($request->user()->role == "Registrar"){
+            $university_id = Registrar::where('user_id', $request->user()->id)->first()->university->id;
+            $universities = University::where('id', $university_id)->pluck('name', 'id');
+        }
+
+        else if($request->user()->role == "ProgramOffice") {
+            $university_id = ProgramOffice::where('user_id', $request->user()->id)->first()->department->university->id;
+            $universities = University::where('id', $university_id)->pluck('name', 'id');
+        }
+        else {
+            $universities = University::pluck('name', 'id');
+        }
+
+		return view('partials._dropdownOptions', ['data' => $universities, 'id' => 'university_id', 'title' => 'University']);
 	}
 
 	public function showUniversityCreateForm(){
@@ -28,7 +60,7 @@ class UniversityController extends Controller{
 	public function storeUniversity(Request $request){
 
 		$this->validate($request, [
-			'university_name' => 'required|string|max:255',
+			'university_name' => 'required|string|min:10|max:255',
 			'university_location' => 'required|string|max:255',
 			'university_website' => 'required|string|max:255',
 		]);
@@ -57,6 +89,7 @@ class UniversityController extends Controller{
 	public function getUniversityListByLocation(Request $request){
 
 		$page_count = 5;
+
 		$universities = University::where('location', $request->location)->paginate($page_count);
 
 		$theads = array('University Name', 'Location', 'Website');
@@ -65,9 +98,7 @@ class UniversityController extends Controller{
 
 		return view('partials._table',['theads' => $theads, 'properties' => $properties, 'tds' => $universities])
 			->with('i', ($request->input('page', 1) - 1) * $page_count);
-	}
-
-	//University create
+	} 
 
 	/**
 	 * Display the specified resource.

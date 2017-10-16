@@ -1,5 +1,5 @@
 @if ($courses->isEmpty())
-  <div class="alert alert-danger">No courses found with given information.</div>
+  <div class="alert alert-danger">No resultable courses found with given information.</div>
 @else
 <div id='mark_div'>
 <table class="table table-bordered table-responsive" id='marks_table'>
@@ -26,8 +26,8 @@
     @endforeach
   </tbody>
 </table>
-
-    {{ Form::submit('Submit', ['class' => 'btn btn-primary']) }}
-
+<div style="text-align: center">
+    {{ Form::submit('Submit', ['class' => 'btn btn-primary','style'=>'margin: 0 auto;']) }}
+</div>
 </div>
 @endif
