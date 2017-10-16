@@ -116,6 +116,15 @@ class StudentController extends Controller
         $verification->verification_status = "Requested";
         $verification->save();
 
+        $array= $verification->stakeholder->name.' has requested to verify '.$verification->student->user->first_name .' of '.$verification->student->department->name.' of '.$verification->student->department->university->name.' (Registration no: '. $verification->student->registration_no)'. Please go through the following link to pay the verification fee.';
+
+        Mail::to($verification->student->user->email)->queue(new EmailVerification($array));
+        Mail::to($verification->stakeholder->email)->queue(new EmailVerification($array));
+
+        $smsBody = 'Welcome, '.$user->first_name.' Your Activation code is '.$activation_code.'. Please activate your account http://127.0.0.1/user/activation. Thank You. ';
+        $smsManager = new SMSManager();
+        $smsManager->sendSMS($student->user->mobile_no, $smsBody);
+
         flash('Successfully requested!')->success();
 
         return redirect()->route('stakeholder.search');
