@@ -7,7 +7,7 @@
       <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
         <div class="list-group">
           @foreach ($messages as $message)
-            <a href="single/{{$message->id}}" class="list-group-item list-group-item-action flex-column align-items-start active">
+            <a href="single/{{$message->id}}" class="list-group-item list-group-item-action flex-column align-items-start">
               <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">{{$message -> student_id}}</h5>
               </div>
