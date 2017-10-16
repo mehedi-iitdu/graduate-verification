@@ -11,15 +11,13 @@ class CourseController extends Controller
     public function __construct()
     {
         
-        $this->middleware('auth')->only([
+        $this->middleware('role:ProgramOffice, SystemAdmin')->only([
             'showCourseList',
             'showCourseCreateForm',
             'storeCourse',
             'getCourseListByUniversityDeparmentSemester',
             'manageCourses'
         ]);
-
-        $this->middleware('role:ProgramOffice, SystemAdmin');
     }
 
     public function manageCourses(){
