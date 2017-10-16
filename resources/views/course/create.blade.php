@@ -59,7 +59,7 @@
                     <div class="form-group row">
                         <label for="credit" class="col-sm-2 col-form-label">Credit</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" required="" id="credit" name="credit" placeholder="Course Credit">
+                            <input type="number" class="form-control" required="" id="credit" name="credit" placeholder="Course Credit" min="0" max="6">
                         </div>
                     </div>
 

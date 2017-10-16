@@ -48,6 +48,8 @@ Route::prefix('user')-> group(function (){
 
 	Route::post('create', ['uses' => 'Auth\RegisterController@storeUser', 'as' => 'user.store']);
 
+	Route::get('view', ['uses' => 'UsersController@showUsers', 'as' => 'user.view']);
+
 	Route::get('activation',['uses' => 'Auth\RegisterController@showActivationForm', 'as' => 'user.activation']);
 	Route::post('activation',['uses' => 'Auth\RegisterController@userActivate', 'as' => 'user.activation']);
 
@@ -76,7 +78,8 @@ Route::prefix('student')-> group(function (){
 
 	Route::post('view',['uses' => 'StudentController@getStudentListByDepartment', 'as' => 'student.list'] );
 
-	Route::get('verify/{registration_no}', ['uses' => 'StudentController@verifyStudentView', 'as' => 'student.verify']);
+	Route::get('verify/{id}', ['uses' => 'StudentController@verifyStudentView', 'as' => 'student.verify']);
+    Route::post('verify/{id}', ['uses' => 'StudentController@verifyStudent', 'as' => 'student.verify']);
 
 });
 

@@ -4,9 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Department;
+use App\ProgramOffice;
 
 class DepartmentController extends Controller
 {
+
+    public function __construct()
+    {
+       
+        $this->middleware('auth')->only([
+            'showDepartmentCreateForm',
+            'showDepartmentView',
+            'storeDepartment'
+        ]);
+    }
 
     public function showDepartmentCreateForm(){
         return view('department.create');
@@ -15,13 +26,18 @@ class DepartmentController extends Controller
 
     public function get_list(Request $request){
 
-    	if($request->ajax()){
+        if($request->user() == null) {
+            $departments = Department::where('university_id', $request->university_id)->pluck('name', 'id');
+        }
+        else if($request->user()->role == "ProgramOffice") {
+            $department_id = ProgramOffice::where('user_id', $request->user()->id)->first()->department->id;
+            $departments = Department::where('id', $department_id)->pluck('name', 'id');
+        }
+        else {
+            $departments = Department::where('university_id', $request->university_id)->pluck('name', 'id');
+        }
 
-    		$departments = Department::where('university_id', $request->university_id)->pluck('name', 'id');
-
-            return view('partials._dropdownOptions', ['data' => $departments, 'id' => 'department_id', 'title' => 'Department']);
-
-    	}
+        return view('partials._dropdownOptions', ['data' => $departments, 'id' => 'department_id', 'title' => 'Department']);
     }
 
     public function getSemesterList(Request $request){
@@ -47,7 +63,7 @@ class DepartmentController extends Controller
 
         $page_count = 5;
 
-        $departments = Department::where('university_id', $request->university_id)->get();
+        $departments = Department::where('university_id', $request->university_id)->paginate($page_count);
 
         $theads = array('Department Name', 'Number of Semester');
 

@@ -32,10 +32,8 @@
                 </div>
 
                 @php($sem = 0)
-                @php($tot_credit = 0)
-                @php($tot_point = 0)
-                @foreach($all_marks as $marks)
 
+                @foreach($all_marks as $marks)
                 <h2>Results of Semester {{++$sem}}</h2>
                 <div class="jumbotron">
                     <table class="table">
@@ -60,25 +58,32 @@
                                 <td>{{ $mark->course->credit }}</td>
                                 <td>{{ $mark->gpa }}</td>
                             </tr>
-                            @php($point += $mark->course->credit * $mark->gpa)
-                            @php($credit += $mark->course->credit)
                             @endforeach
                             <tr>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                                 <th>Calculated GPA</th>
-                                <th>{{ $point / $credit }}</th>
+                                <th>{{ $gpa[$sem - 1] <= 0.0 ? "[invalid]" : round($gpa[$sem - 1], 2) }}</th>
                             </tr>
-                            @php($tot_credit += $credit)
-                            @php($tot_point += $point)
                         </tbody>
                     </table>
                 </div>
 
                 @endforeach
 
-                <h4>Calculated CGPA is {{ $tot_point / $tot_credit }}</h4>
+                <h4>Calculated CGPA is {{ $cgpa <= 0.0 ? "[invalid]" : round($cgpa, 2) }}</h4>
+
+                {!! Form::open(array('route' => array('student.verify', $student->registration_no), 'files' => 'true')) !!}
+
+                <div class="form-group row" for="signature">
+                    <label for="signature" class="col-sm-4 col-form-label">Upload Signature</label>
+                    <input type="file" name="signature" id="signature" value="Upload signature">
+                </div>
+
+                {{ Form::submit('Verify', ['class' => 'btn btn-block btn-primary']) }}
+
+                {!! Form::close() !!}
 
             </main>
         </div>
@@ -116,5 +121,11 @@
 @endsection
 
 @section('script')
-
+    <script>
+        $(document).ready(function () {
+            $.ajaxSetup({
+                headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
+            });
+        });
+    </script>
 @endsection
