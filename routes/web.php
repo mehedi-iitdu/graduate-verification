@@ -99,6 +99,10 @@ Route::prefix('course')-> group(function (){
     Route::get('view',['uses' => 'CourseController@showCourseList', 'as' => 'course.view'] );
     Route::post('view',['uses' => 'CourseController@getCourseListByUniversityDeparmentSemester',
                 'as' => 'course.getCourseListByUniversityDeparmentSemester'] );
+    Route::get('delete/{id}',['uses' => 'CourseController@destroy', 'as' => 'course.delete'] );
+    Route::get('show/{id}',['uses' => 'CourseController@show', 'as' => 'course.show'] );
+    Route::get('edit/{id}',['uses' => 'CourseController@edit', 'as' => 'course.edit'] );
+    Route::post('edit/{id}',['uses' => 'CourseController@update', 'as' => 'course.update'] );
 });
 
 
@@ -127,6 +131,15 @@ Route::prefix('department')-> group(function (){
     Route::post('view', ['uses' => 'DepartmentController@departmentListByUniversity', 'as' => 'department.view']);
 
 	Route::post('create', ['uses' => 'DepartmentController@storeDepartment', 'as' => 'department.store']);
+
+	Route::get('edit/{id}',['uses' => 'DepartmentController@edit', 'as' => 'department.edit'] );
+
+	Route::post('edit/{id}',['uses' => 'DepartmentController@update', 'as' => 'department.update'] );
+
+	Route::get('delete/{id}',['uses' => 'DepartmentController@destroy', 'as' => 'department.delete'] );
+
+	Route::get('show/{id}',['uses' => 'DepartmentController@show', 'as' => 'department.show'] );
+
 });
 
 

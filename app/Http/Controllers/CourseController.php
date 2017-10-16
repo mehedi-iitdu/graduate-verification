@@ -74,4 +74,42 @@ class CourseController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * $page_count);
 
     }
+
+    public function edit(Request $request, $id)
+    {
+        $course = Course::find($id);
+        return view('course.edit',compact('course'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'code' => 'required|string|max:255',
+            'credit' => 'required|string|min:1|max:6',
+        ]);
+
+        Course::find($id)->update($request->all());
+
+        $url = $request->input('url');
+
+        return redirect($url)
+            ->with('success','Course updated successfully');
+    }
+
+
+    public function show(Request $request, $id)
+    {
+        $course = Course::find($id);
+        return view('course.show',compact('course'));
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        Course::find($id)->delete();
+        $url = $request->input('url');
+
+        return redirect()->back()
+            ->with('success','Course deleted successfully');
+    }
 }
