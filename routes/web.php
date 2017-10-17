@@ -222,7 +222,8 @@ Route::prefix('dynamic_report')-> group(function (){
 Route::prefix('message')-> group(function (){
 
 	Route::get('view',['uses' => 'MessageController@showMessage', 'as' => 'message.view'] );
-	Route::get('single/{id}',['uses' => 'MessageController@showSingleMessage', 'as' => 'message.single'] );
-
+	Route::get('verification/{id}',['uses' => 'MessageController@showSingleMessageVerification', 'as' => 'message.verification'] );
+    Route::get('permission/{id}',['uses' => 'MessageController@showSingleMessagePermission', 'as' => 'message.permission'] );
+    Route::post('permission', ['uses' => 'PermissionController@addPermission', 'as' => 'message.permission']);
 });
 

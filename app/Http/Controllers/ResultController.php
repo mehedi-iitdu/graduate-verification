@@ -15,7 +15,10 @@ class ResultController extends Controller
 {
     public function __construct(){
     
-        $this->middleware('role:ProgramOffice, SystemAdmin');
+        $this->middleware('auth');
+        $this->middleware('role:ProgramOffice,SystemAdmin')->only([
+            'showAddResultForm'
+        ]);
     }
     public function manageResults(){
 
@@ -23,9 +26,19 @@ class ResultController extends Controller
 
     public function showAddResultForm(Request $request){
 
-    	$department_id = ProgramOffice::where('user_id', $request->user()->id)->first()->department_id;
+        if($request->user()->role == "ProgramOffice") {
+            $department_id = ProgramOffice::where('user_id', $request->user()->id)->first()->department_id;
+            $semesters = $this->getSemesters($department_id);
+        }
 
-    	$semesters = $this->getSemesters($department_id);
+        else if($request->user()->role == "SystemAdmin") {
+            $department_ids = Department::pluck('id');
+            $semesters = array();
+            foreach ($department_ids as $department_id) {
+                $to_add_semesters = $this->getSemesters($department_id);
+                $semesters = array_merge($semesters, $to_add_semesters);
+            }
+        }
 
     	return view('result.submit', ['department_id' => $department_id, 'semesters' => $semesters]);
     }

@@ -74,7 +74,7 @@
 
                 <h4>Calculated CGPA is {{ $cgpa <= 0.0 ? "[invalid]" : round($cgpa, 2) }}</h4>
 
-                {!! Form::open(array('route' => array('student.verify', $student->registration_no), 'files' => 'true')) !!}
+                {!! Form::open(array('route' => array('student.verify', $verification_id), 'files' => 'true')) !!}
 
                 <div class="form-group row" for="signature">
                     <label for="signature" class="col-sm-4 col-form-label">Upload Signature</label>
