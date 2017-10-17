@@ -18,6 +18,8 @@ class PermissionController extends Controller
         $permission->isApproved = $request->permission;
         $permission->save();
 
+        flash('Permission approved')->success();
+
         return redirect()->route('message.permission', $request->id);
     }
 }
