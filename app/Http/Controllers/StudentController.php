@@ -119,7 +119,7 @@ class StudentController extends Controller
         $verification->verification_status = "Requested";
         $verification->save();
 
-        $array= $verification->stakeholder->name.' has requested to verify '.$verification->student->user->first_name .' of '.$verification->student->department->name.' of '.$verification->student->department->university->name.' (Registration no: '. $verification->student->registration_no'). Please go through the following link to pay the verification fee.';
+        $array= $verification->stakeholder->name.' has requested to verify '.$verification->student->user->first_name.' of '.$verification->student->department->name.' of '.$verification->student->department->university->name.' (Registration no: '. $verification->student->registration_no.'). Please go through the following link to pay the verification fee. http://127.0.0.1/payment/verification/'.$verification->id;
 
         Mail::to($verification->student->user->email)->queue(new EmailManager($array));
         Mail::to($verification->stakeholder->email)->queue(new EmailManager($array));
@@ -271,6 +271,15 @@ class StudentController extends Controller
         $verification->digital_sign = $path;
         $verification->verification_status = 'Verified';
         $verification->save();
+
+
+        $array= $verification->student->user->first_name.' of '.$verification->student->department->name.' of the '.$verification->student->department->university->name.' (Registration no'.$verification->student->registration_no.' has been verified requested to verify by '.$verification->stakeholder->name;
+
+        Mail::to($verification->student->user->email)->queue(new EmailManager($array));
+        Mail::to($verification->stakeholder->email)->queue(new EmailManager($array));
+
+        $smsManager = new SMSManager();
+        $smsManager->sendSMS($verification->student->user->mobile_no, $array);
 
         return redirect()->route('student.verify', $id);
     }
