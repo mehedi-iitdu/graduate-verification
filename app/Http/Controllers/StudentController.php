@@ -183,13 +183,13 @@ class StudentController extends Controller
             $students = $students->where('session', $request->session_no);
 
         $ids = $students->pluck('id');
-        $filtered = $students->whereIn('id', $ids);
+        $filtered = Verification::whereIn('student_id', $ids);
 
         return array(
             'num_of_student' => $students->count(),
             'verification_request' => $filtered->where('verification_status', 'Requested')->count(),
-            'verification_process' => $filtered->where('verification_status', 'In Progress')->count(),
-            'verified' => $filtered->where('verification_status', 'In Progress')->count()
+            'verification_process' => $filtered->where('verification_status', 'Paid')->count(),
+            'verified' => $filtered->where('verification_status', 'Verified')->count()
         );
     }
 
