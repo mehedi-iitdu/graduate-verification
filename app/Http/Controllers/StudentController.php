@@ -264,6 +264,60 @@ class StudentController extends Controller
             ]);
     }
 
+    public function verifyStudentPublicView(Request $request, $hash) {
+        $verification = Verification::where('hash', $hash)->first();
+        $student = $verification->student;
+        $marks = Marks::where('student_id', $student->id)->get();
+        $all_marks = array();
+
+        $num_of_semester = $student-> department -> num_of_semester;
+        for($sem = 1; $sem <= $num_of_semester; $sem++) {
+            $semester_marks = array();
+            foreach ($marks as $mark)
+                if($mark -> course -> semester_no == $sem)
+                    $semester_marks[] = $mark;
+            $all_marks[] = $semester_marks;
+        }
+
+        $cum_points = 0;
+        $cum_credit = 0;
+        $gpa = array();
+
+        foreach ($all_marks as $marks) {
+
+            $point_sum = 0;
+            $credit_sum = 0;
+
+            foreach ($marks as $mark) {
+
+                $point_sum += $mark->course->credit * $mark->gpa;
+                $credit_sum += $mark->course->credit;
+
+            }
+
+            if($credit_sum <= 0.0) $gpa[] = -1;
+            else $gpa[] = $point_sum / $credit_sum;
+
+            $cum_points += $point_sum;
+            $cum_credit += $credit_sum;
+
+        }
+
+        if($cum_credit <= 0.0) $cgpa = -1;
+        else $cgpa = $cum_points / $cum_credit;
+
+        return view('student.verify_public',
+            [
+                'verification_id' => $verification->id,
+                'student' => $student,
+                'all_marks' => $all_marks,
+                'gpa' => $gpa,
+                'cgpa' => $cgpa,
+                'sign_link' => $verification->digital_sign,
+                'hash' => $verification->hash
+            ]);
+    }
+
     function verifyStudent(Request $request, $id) {
         $path = $request->file('signature')->store('signatures');
 
