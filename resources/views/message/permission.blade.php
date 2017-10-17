@@ -73,7 +73,9 @@
                         id: '<?php echo $message->id ?>'
                     },
                     function(data){
-                        console.log('Updated');
+                        if(data == "OK"){
+                            location.reload();
+                        }
                     }
                 );
             }
