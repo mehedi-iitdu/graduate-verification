@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 namespace App\Http\Controllers;
 
@@ -327,7 +327,7 @@ class StudentController extends Controller
         $verification->save();
 
 
-        $array= $verification->student->user->first_name.' of '.$verification->student->department->name.' of the '.$verification->student->department->university->name.' (Registration no'.$verification->student->registration_no.' has been verified requested to verify by '.$verification->stakeholder->name;
+        $array= $verification->student->user->first_name.' of '.$verification->student->department->name.' of the '.$verification->student->department->university->name.' (Registration no: '.$verification->student->registration_no.' has been verified requested to verify by '.$verification->stakeholder->name;
 
         Mail::to($verification->student->user->email)->queue(new EmailManager($array));
         Mail::to($verification->stakeholder->email)->queue(new EmailManager($array));
