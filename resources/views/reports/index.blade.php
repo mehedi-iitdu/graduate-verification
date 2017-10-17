@@ -57,6 +57,7 @@
 
         	<div class="row" hidden="true" id="data">
         		<div class="col-md-12">
+        			<h2>Click on the data to see detailed report</h2>
         			<div class="table-responsive">
         				<table class="table table-striped table-bordered table-hover dataTables-example" >
 	                    <thead>
