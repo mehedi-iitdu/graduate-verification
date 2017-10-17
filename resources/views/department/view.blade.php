@@ -11,7 +11,7 @@
 
           <div class="form-row">
               <div class="form-group ml-auto col-md-3">
-                  <a href="/dashboard/manage_department_create" class="btn btn-block btn-primary">Add Department</a>
+                  <a href="{{ URL::route('department.create') }}" class="btn btn-block btn-primary">Add Department</a>
               </div>
           </div>
 
@@ -19,43 +19,88 @@
             <form>
               <div class="form-row">
                   <div class="form-group col-md-9">
-                    <select class="form-control" id="university">
-                      <option>University</option>
-                      <option>DU</option>
-                      <option>RU</option>
-                    </select>
+                      <div id="university_list">
+                          <select class="form-control" id="user_role">
+                              <option>Select University</option>
+                          </select>
+                      </div>
                   </div>
                   <div class="form-group col-md-3">
-                    <button type="submit" class="btn btn-block btn-success">Search</button>
+                    <p class="btn btn-block btn-success" id="search">Search</p>
                   </div>
                 </div>
             </form>
           </div>
 
-          <div>
-            <table class="table table-bordered table-responsive">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Department Name</th>
-                  <th>No. of Semesters</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>IIT</td>
-                  <td>8</td>
-                  <td>
-                    <button class="btn btn-primary">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div id="department_table">
+
           </div>
         </main>
       </div>
     </div>
+@endsection
+
+
+@section('script')
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $.ajaxSetup({
+                headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
+            });
+
+            $.post("{{ URL::route('university.list') }}",{},function(data){
+                $('#university_list').html(data);
+
+                $('#search').on('click', function () {
+
+                    var university_id = $('#university_id').val();
+
+                    $.post("{{ URL::route('department.view') }}",{university_id:university_id}, function(data){
+                        $('#department_table').html(data);
+                    });
+                });
+
+            });
+
+        });
+
+        $(window).on('hashchange', function() {
+            if (window.location.hash) {
+                var page = window.location.hash.replace('#', '');
+                if (page == Number.NaN || page <= 0) {
+                    return false;
+                }else{
+                    getData(page);
+                }
+            }
+        });
+
+        $(document).ready(function()
+        {
+            $(document).on('click', '.pagination a',function(event)
+            {
+                $('li').removeClass('active');
+                $(this).parent('li').addClass('active');
+                event.preventDefault();
+
+                var myurl = $(this).attr('href');
+                var page=$(this).attr('href').split('page=')[1];
+
+                getData(page);
+
+            });
+        });
+
+        function getData(page){
+
+            var university_id = $('#university_id').val();
+            
+            $.post("{{ URL::route('department.view') }}",{university_id:university_id , page:page}, function(data){
+                $("#department_table").empty().html(data);
+                location.hash = page;
+            });
+
+        }
+    </script>
 @endsection

@@ -6,12 +6,8 @@
       <div class="row">
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
           	<div class="row">
-          		<div class="col-md-4 img_container">
-          			<img src="default_man_photo.jpg" class="img-responsive" alt="default_man_photo">
-  					<div class="btn btn default" id="btn_pic">Upload</div>
-          		</div>
-
-          		<div class="col-md-8">
+          		<div class="col-md-4"></div>
+              <div class="col-md-8">
           			<h2>Basic Information</h2>
 
           			<div class="jumbotron">

@@ -14,8 +14,8 @@
             <input type="email" name="email" hidden="" value="{{ $email }}">
             <input type="number" name="token" hidden="" value="{{ $token }}">
             <div class="form-group">
-              {{ Form::label('new_password', 'New Password') }}
-              {{ Form::password('new_password', ['class' => 'form-control', 'required']) }}
+              {{ Form::label('new_password', 'New Password')   }}
+              {{ Form::password('new_password', ['class' => 'form-control', 'required','pattern'=>'(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}','title'=>'At least 1 capital letter, 1 small letter, 1 digit and at least 6 characters']) }}
           </div>
 
           <div class="form-group">

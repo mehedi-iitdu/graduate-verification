@@ -8,6 +8,7 @@ class Course extends Model
 {
     //
     protected $table = 'course';
+    protected $fillable = ['name' , 'code' , 'credit'];
 
     public function marks(){
     	return $this->hasMany(Marks::class);
