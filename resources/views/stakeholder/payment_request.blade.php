@@ -47,7 +47,7 @@
                     {!! Form::open(array('route' => ['stakeholder.payment_request', $student->registration_no])) !!}
 
                     <div class="form-group row">
-                        <label for="stakeholder" class="col-sm-6 col-form-label"><h3>Stackholder Information</h3></label>
+                        <label for="stakeholder" class="col-sm-6 col-form-label"><h3>Stakeholder Information</h3></label>
                     </div>
 
                     <div class="form-group row">

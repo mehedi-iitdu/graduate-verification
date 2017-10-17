@@ -11,7 +11,7 @@ use App\Registrar;
 use App\ProgramOffice;
 use App\User_activation;
 use Mail;
-use App\Mail\EmailVesrification;
+use App\Mail\EmailVerification;
 use App\SMS\SMSManager;
 
 class RegisterController extends Controller

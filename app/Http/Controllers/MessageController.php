@@ -24,7 +24,8 @@ class MessageController extends Controller
     public function showMessage(Request $request){
 
     	if($request->user()->role == "Student") {
-    		$verifications = Verification::where('student_id', $request->user()->id)->get();
+            $student = Student::where('user_id', $request->user()->id)->first();
+    		$verifications = Verification::where('student_id', $student->id)->get();
     		return view('message.view', ['messages' => $verifications]);
     	}
 
