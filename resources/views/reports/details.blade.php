@@ -9,7 +9,7 @@
 
     	<div class="row">
     		<div class="col-md-12">
-                <h2>Detail Report for {{ $verification_status_of_Students }} Students</h2>
+                <h2 id="detailedReport">Detail Report for {{ $verification_status_of_Students }} Students</h2>
     			<div class="table-responsive">
     				<table class="table table-striped table-bordered table-hover dataTables-example" >
                     <thead>
@@ -64,9 +64,9 @@
                 dom: '<"html5buttons"B>lTfgitp',
                 buttons: [
                     { extend: 'copy'},
-                    {extend: 'csv', title: 'Detail Report'},
-                    {extend: 'excel', title: 'Detail Report'},
-                    {extend: 'pdf', title: 'Detail Report'},
+                    {extend: 'csv', title: $('#detailedReport').text()},
+                    {extend: 'excel', title: $('#detailedReport').text()},
+                    {extend: 'pdf', title: $('#detailedReport').text()},
 
                     {extend: 'print',
                      customize: function (win){
