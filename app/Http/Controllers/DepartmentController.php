@@ -12,7 +12,7 @@ class DepartmentController extends Controller
     public function __construct()
     {
        
-        $this->middleware('role:Registrar, SystemAdmin')->only([
+        $this->middleware('role:Registrar,SystemAdmin')->only([
             'showDepartmentCreateForm',
             'showDepartmentView',
             'storeDepartment'
