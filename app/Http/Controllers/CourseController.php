@@ -7,7 +7,19 @@ use App\Course;
 
 class CourseController extends Controller
 {
-    
+
+    public function __construct()
+    {
+        
+        $this->middleware('role:ProgramOffice, SystemAdmin')->only([
+            'showCourseList',
+            'showCourseCreateForm',
+            'storeCourse',
+            'getCourseListByUniversityDeparmentSemester',
+            'manageCourses'
+        ]);
+    }
+
     public function manageCourses(){
         return view('user_dashboard.manage_courses');
     }
@@ -21,7 +33,7 @@ class CourseController extends Controller
 
         $this->validate($request, [
             'department_id' => 'required|integer',
-            'semester_id' => 'required|integer',
+            'semester_no' => 'required|integer',
             'name' => 'required|string|max:255',
             'code' => 'required|string|max:20',
             'credit' => 'required|integer'
@@ -40,5 +52,76 @@ class CourseController extends Controller
 
         return redirect()->route('course.create');
 
+    }
+
+    public function showCourseList(){
+
+        return view('course.view');
+    }
+
+    public function getCourseListByUniversityDeparmentSemester(Request $request)
+    {
+        
+        $page_count = 6;
+
+        $course = Course::where('department_id', $request->department_id)->where('semester_no', $request->semester_no)->paginate($page_count);
+
+        $theads = array('Course Name', 'Course Code', 'Course Credit');
+
+        $properties = array('name', 'code', 'credit');
+
+        return view('partials._table',['theads' => $theads, 'properties' => $properties, 'tds' => $course])
+            ->with('i', ($request->input('page', 1) - 1) * $page_count);
+
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $course = Course::find($id);
+        return view('course.edit',compact('course'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'code' => 'required|string|max:255',
+            'credit' => 'required|integer|between:1,6',
+        ]);
+
+        try {
+            Course::find($id)->update($request->all());
+
+            $url = $request->input('url');
+
+            flash('Course updated successfully')->success();
+        } catch (Exception $e) {
+            flash('Could not update Course');
+            return redirect()->back();
+        }
+
+        return redirect($url);
+    }
+
+
+    public function show(Request $request, $id)
+    {
+        $course = Course::find($id);
+        return view('course.show',compact('course'));
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        try {
+            Course::find($id)->delete();
+            $url = $request->input('url');
+            
+        } catch (Exception $e) {
+            flash('The course cannot be deleted! If mark exist for this course, delete the mark first')->error();
+            return redirect()->back();
+        }
+        flash('Course deleted successfully');
+
+        return redirect()->back();
     }
 }

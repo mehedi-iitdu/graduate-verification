@@ -16,7 +16,7 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-md-2">{{ Form::label('first_name', 'First Name') }}</div>
-                <div class="col-md-10">{{ Form::text('first_name', null, ['class' => 'form-control', 'required']) }}
+                <div class="col-md-10">{{ Form::text('first_name', null, ['class' => 'form-control', 'required', 'pattern' => '([a-z]*[A-Z]*)*']) }}
                 </div>
               </div>
             </div>
@@ -24,7 +24,7 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-md-2">{{ Form::label('last_name', 'Last Name') }}</div>
-                <div class="col-md-10">{{ Form::text('last_name', null, ['class' => 'form-control', 'required']) }}
+                <div class="col-md-10">{{ Form::text('last_name', null, ['class' => 'form-control', 'required', 'pattern' => '([a-z]*[A-Z]*)*']) }}
                 </div>
               </div>
             </div>
@@ -40,15 +40,15 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-md-2">{{ Form::label('mobile_no', 'Mobile No.') }}</div>
-                <div class="col-md-10">{{ Form::text('mobile_no', null, ['class' => 'form-control', 'required']) }}
+                <div class="col-md-10">{{ Form::text('mobile_no', null, ['class' => 'form-control', 'required', 'pattern' => '01[0-9]*{11}']) }}
                 </div>
               </div>
             </div>
 
             <div class="form-group">
               <div class="row">
-                <div class="col-md-2">{{ Form::label('role_id', 'Role') }}</div>
-                <div class="col-md-10">{{ Form::select('role_id', $roles, null, ['class' => 'form-control', 'required', 'id' => 'role_id', 'placeholder' => 'Select Role']) }}
+                <div class="col-md-2">{{ Form::label('role', 'Role') }}</div>
+                <div class="col-md-10">{{ Form::select('role', $roles, null, ['class' => 'form-control', 'required', 'id' => 'role_id', 'placeholder' => 'Select Role']) }}
                 </div>
               </div>
             </div>
@@ -62,7 +62,7 @@
             {{ Form::submit('Add', ['class' => 'btn btn-block btn-primary']) }}
 
             {!! Form::close() !!}
-            
+
           </div>
         </main>
       </div>
@@ -75,11 +75,11 @@
         $.ajaxSetup({
               headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
           });
-        
+
         $('#role_id').on('change', function(){
 
 
-            var role_name = $('#role_id option:selected').text();
+            var role_name = $(this).val();
 
            $.post("{{ URL::route('role_based_info') }}",{role_name:role_name}, function(data){
              $('#role_info').html(data);
@@ -88,7 +88,7 @@
              $('#university_id').on('change', function(){
 
                 var university_id = $(this).val();
-                
+
                 $.post("{{ URL::route('department.list') }}",{university_id:university_id}, function(data){
                   $('#department_id').html(data);
                 })

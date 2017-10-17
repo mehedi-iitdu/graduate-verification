@@ -8,7 +8,7 @@ use App\Mail\EmailVerification;
 
 class User_activation extends Model
 {
-    protected $table='user_activations';
+    protected $table='user_activation';
 
     protected $fillable=['user_id','token','created_at'];
 
@@ -18,15 +18,15 @@ class User_activation extends Model
     {
     	if(User_activation::shouldSend($user)){
     		$token=str_random(40);
-        
+
 	        User_activation::updateOrCreate([
 	            'user_id' => $user->id,
 	            'token' => $token,
 	            ]);
 	        $array=['name' => $user->name, 'token' => $token];
-	        Mail::to($user->email)->queue(new EmailVerification($array));	
+	        Mail::to($user->email)->queue(new EmailVerification($array));
     	}
-        
+
     }
 
     public static function shouldSend($user){

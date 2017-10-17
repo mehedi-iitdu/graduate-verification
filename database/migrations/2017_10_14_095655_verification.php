@@ -23,9 +23,10 @@ class Verification extends Migration
             $table->foreign('stakeholder_id')
                 ->references('id')->on('stakeholder')
                 ->ondelete('cascade');
-            $table->string('payment_id');
+            $table->string('payment_id')->nullable();
             $table->string('verification_status');
-            $table->string('digital_sign');
+            $table->string('digital_sign')->nullable();
+            $table->string('hash')->nullable();
             $table->timestamps();
         });
     }
