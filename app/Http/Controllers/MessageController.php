@@ -10,6 +10,7 @@ use App\Department;
 use App\Registrar;
 use App\Student;
 use App\ProgramOffice;
+use App\Permission;
 
 class MessageController extends Controller
 {
@@ -19,10 +20,12 @@ class MessageController extends Controller
 		$this->middleware('auth');
 	}
 
+
     public function showMessage(Request $request){
 
     	if($request->user()->role == "Student") {
-    		$verifications = Verification::where('student_id', $request->user()->id)->get();
+            $student = Student::where('user_id', $request->user()->id)->first();
+    		$verifications = Verification::where('student_id', $student->id)->get();
     		return view('message.view', ['messages' => $verifications]);
     	}
 
@@ -30,8 +33,17 @@ class MessageController extends Controller
             $university = Registrar::where('user_id',$request->user()->id)->first()->university;
             $department_ids = Department::where('university_id', $university->id)->pluck('id');
             $student_ids = Student::whereIn('department_id', $department_ids)->pluck('id');
+            $pos = ProgramOffice::whereIn('department_id', $department_ids)->get();
+
             $verifications = Verification::whereIn('student_id', $student_ids)->get();
-            return view('message.view', ['messages' => $verifications]);
+            $user_ids = array();
+            foreach ($pos as $po)
+                $user_ids[] = $po->user->id;
+            $permissions = Permission::whereIn('user_id', $user_ids)->get();
+            $messages = $verifications;
+            foreach ($permissions as $permission)
+                $messages->push($permission);
+            return view('message.view', ['messages' => $messages]);
         }
 
         elseif($request->user()->role == "ProgramOffice") {
@@ -49,8 +61,13 @@ class MessageController extends Controller
     	/*return view('message.view');*/
     }
 
-    public function showSingleMessage(Request $request, $id){
+    public function showSingleMessageVerification(Request $request, $id){
         $message = Verification::where('id', $id)->first();
-        return view('message.single', ['message' => $message, 'role' => $request->user()->role]);
+        return view('message.verification', ['message' => $message, 'role' => $request->user()->role]);
+    }
+
+    public function showSingleMessagePermission(Request $request, $id){
+        $message = Permission::where('id', $id)->first();
+        return view('message.permission', ['message' => $message, 'role' => $request->user()->role]);
     }
 }

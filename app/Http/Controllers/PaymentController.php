@@ -9,6 +9,9 @@ use App\Verification;
 use App\User;
 use App\Department;
 use App\University;
+use Mail;
+use App\Mail\EmailManager;
+use App\SMS\SMSManager;
 
 class PaymentController extends Controller
 {
@@ -58,6 +61,15 @@ class PaymentController extends Controller
         $verification->payment_id = $payment_id;
         $verification->verification_status = 'Paid';
         $verification->save();
+
+
+        $array= 'Verification payment has been paid to verify '.$verification->student->user->first_name.' of '.$verification->student->department->name.' of the '.$verification->student->department->university->name.' (Registration no '.$verification->student->registration_no.') requested to verify by '.$verification->stakeholder->name;
+
+        Mail::to($verification->student->user->email)->queue(new EmailManager($array));
+        Mail::to($verification->stakeholder->email)->queue(new EmailManager($array));
+
+        $smsManager = new SMSManager();
+        $smsManager->sendSMS($verification->student->user->mobile_no, $array);
 
 
         // Clear the shopping cart, write to database, send notifications, etc.
