@@ -46,4 +46,28 @@ class UsersController extends Controller
         return view('user.view');
     }
 
+    public function getUserList(Request $request){
+
+        $page_count = 10;
+        if($request->user()->role == "UGC"){
+
+            $users = User::where('role', 'UGC')->paginate($page_count);
+
+            $theads = array('First Name', 'Last Name', 'Email', 'Mobile No');
+
+            $properties = array('first_name', 'last_name', 'email', 'mobile_no');
+
+
+        }
+
+        if($request->user()->role == "Registrar"){
+            $users = Registrar::select('registrar.id','user.first_name', 'user.last_name', 'user.email', 'user.mobile_no', 'university.name as university_name')->join('user', 'user.id', '=', 'registrar.user_id')->join('university', 'user.university_id', '=', 'univeersity.id')->paginate($page_count);
+            $theads = array('First Name', 'Last Name', 'University', 'Email', 'Mobile No');
+
+            $properties = array('first_name', 'last_name', 'university_name', 'email', 'mobile_no');
+        }
+
+        return view('partials._table',['theads' => $theads, 'properties' => $properties, 'tds' => $users])->with('i', ($request->input('page', 1) - 1) * $page_count);
+    }
+
 }
