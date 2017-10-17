@@ -9,6 +9,7 @@ use App\Student;
 class Department extends Model
 {
     protected $table = 'department';
+    protected $fillable = ['name', 'num_of_semester'];
 
     public function university(){
         return $this->belongsTo(University::class);

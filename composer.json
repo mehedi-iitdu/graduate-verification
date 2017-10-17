@@ -7,9 +7,13 @@
     "require": {
         "php": ">=7.0.0",
         "cviebrock/eloquent-sluggable": "^4.3",
+        "felixkiss/uniquewith-validator": "^3.1",
         "fideloper/proxy": "~3.3",
+        "laracasts/flash": "^3.0",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
+        "laravelcollective/html": "^5.4.0",
+        "netshell/paypal": "dev-master",
         "nexmo/client": "@beta",
         "nexmo/laravel": "^1.0",
         "twbs/bootstrap": "^3.3"
