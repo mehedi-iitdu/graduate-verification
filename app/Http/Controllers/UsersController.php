@@ -61,6 +61,7 @@ class UsersController extends Controller
         }
 
         if($request->user()->role == "Registrar"){
+            
             $users = Registrar::select('registrar.id','user.first_name', 'user.last_name', 'user.email', 'user.mobile_no', 'university.name as university_name')->join('user', 'user.id', '=', 'registrar.user_id')->join('university', 'user.university_id', '=', 'univeersity.id')->paginate($page_count);
             $theads = array('First Name', 'Last Name', 'University', 'Email', 'Mobile No');
 
