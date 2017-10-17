@@ -13,13 +13,16 @@ use App\Verification;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Mail;
+use App\Mail\EmailManager;
+use App\SMS\SMSManager;
 
 class StudentController extends Controller
 {
     public function __construct()
     {
         
-        $this->middleware('role:Registrar, SystemAdmin')->only([
+        $this->middleware('role:Registrar,SystemAdmin')->only([
             'showStudentCreateForm',
             'storeStudent',
             'showStudentView',
@@ -115,6 +118,14 @@ class StudentController extends Controller
         $verification->stakeholder_id = $stakeholder->id;
         $verification->verification_status = "Requested";
         $verification->save();
+
+        $array= $verification->stakeholder->name.' has requested to verify '.$verification->student->user->first_name.' of '.$verification->student->department->name.' of '.$verification->student->department->university->name.' (Registration no: '. $verification->student->registration_no.'). Please go through the following link to pay the verification fee. http://127.0.0.1/payment/verification/'.$verification->id;
+
+        Mail::to($verification->student->user->email)->queue(new EmailManager($array));
+        Mail::to($verification->stakeholder->email)->queue(new EmailManager($array));
+
+        $smsManager = new SMSManager();
+        $smsManager->sendSMS($student->user->mobile_no, $array);
 
         flash('Successfully requested!')->success();
 
@@ -253,13 +264,77 @@ class StudentController extends Controller
             ]);
     }
 
+    public function verifyStudentPublicView(Request $request, $hash) {
+        $verification = Verification::where('hash', $hash)->first();
+        $student = $verification->student;
+        $marks = Marks::where('student_id', $student->id)->get();
+        $all_marks = array();
+
+        $num_of_semester = $student-> department -> num_of_semester;
+        for($sem = 1; $sem <= $num_of_semester; $sem++) {
+            $semester_marks = array();
+            foreach ($marks as $mark)
+                if($mark -> course -> semester_no == $sem)
+                    $semester_marks[] = $mark;
+            $all_marks[] = $semester_marks;
+        }
+
+        $cum_points = 0;
+        $cum_credit = 0;
+        $gpa = array();
+
+        foreach ($all_marks as $marks) {
+
+            $point_sum = 0;
+            $credit_sum = 0;
+
+            foreach ($marks as $mark) {
+
+                $point_sum += $mark->course->credit * $mark->gpa;
+                $credit_sum += $mark->course->credit;
+
+            }
+
+            if($credit_sum <= 0.0) $gpa[] = -1;
+            else $gpa[] = $point_sum / $credit_sum;
+
+            $cum_points += $point_sum;
+            $cum_credit += $credit_sum;
+
+        }
+
+        if($cum_credit <= 0.0) $cgpa = -1;
+        else $cgpa = $cum_points / $cum_credit;
+
+        return view('student.verify_public',
+            [
+                'verification_id' => $verification->id,
+                'student' => $student,
+                'all_marks' => $all_marks,
+                'gpa' => $gpa,
+                'cgpa' => $cgpa,
+                'sign_link' => $verification->digital_sign,
+                'hash' => $verification->hash
+            ]);
+    }
+
     function verifyStudent(Request $request, $id) {
-        $path = $request->file('signature')->store('signatures');
+        $path = $request->file('signature')->store('public/signatures');
 
         $verification = Verification::where('id', $id)->first();
-        $verification->digital_sign = $path;
+        $verification->digital_sign = substr($path,7);
         $verification->verification_status = 'Verified';
+        $verification->hash = bcrypt($verification->digital_sign);
         $verification->save();
+
+
+        $array= $verification->student->user->first_name.' of '.$verification->student->department->name.' of the '.$verification->student->department->university->name.' (Registration no: '.$verification->student->registration_no.' has been verified requested to verify by '.$verification->stakeholder->name.' Please visit the following link to check http://127.0.0.1:8000/student/verify/public/'.$verification->hash ;
+
+        Mail::to($verification->student->user->email)->queue(new EmailManager($array));
+        Mail::to($verification->stakeholder->email)->queue(new EmailManager($array));
+
+        $smsManager = new SMSManager();
+        $smsManager->sendSMS($verification->student->user->mobile_no, $array);
 
         return redirect()->route('student.verify', $id);
     }

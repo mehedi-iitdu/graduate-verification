@@ -81,6 +81,8 @@ Route::prefix('student')-> group(function (){
 	Route::get('verify/{id}', ['uses' => 'StudentController@verifyStudentView', 'as' => 'student.verify']);
     Route::post('verify/{id}', ['uses' => 'StudentController@verifyStudent', 'as' => 'student.verify']);
 
+    Route::get('verify/public/{hash}', ['uses' => 'StudentController@verifyStudentPublicView', 'as' => 'student.verify_public']);
+
 	Route::get('show/{id}',['uses' => 'StudentController@show', 'as' => 'student.show'] );
 
 	Route::get('edit/{id}',['uses' => 'StudentController@edit', 'as' => 'student.edit'] );
@@ -222,7 +224,8 @@ Route::prefix('dynamic_report')-> group(function (){
 Route::prefix('message')-> group(function (){
 
 	Route::get('view',['uses' => 'MessageController@showMessage', 'as' => 'message.view'] );
-	Route::get('single/{id}',['uses' => 'MessageController@showSingleMessage', 'as' => 'message.single'] );
-
+	Route::get('verification/{id}',['uses' => 'MessageController@showSingleMessageVerification', 'as' => 'message.verification'] );
+    Route::get('permission/{id}',['uses' => 'MessageController@showSingleMessagePermission', 'as' => 'message.permission'] );
+    Route::post('permission', ['uses' => 'PermissionController@addPermission', 'as' => 'message.permission']);
 });
 
