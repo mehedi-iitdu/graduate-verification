@@ -78,9 +78,9 @@ class DynamicReportController extends Controller
             if($request['query'] != "Total"){
                 //dd($request['query']);
                 $student_ids = $students->pluck('id');
-                $verification_student_data = Verification::whereIn('student_id', $student_ids);
+                $verification_student_data = Verification::whereIn('student_id', $student_ids)->get();
                 $verification_student_ids = $verification_student_data->where('verification_status', $request['query'])->pluck('student_id');
-                $students = Student::whereIn('id', $verification_student_ids);
+                $students = Student::whereIn('id', $verification_student_ids)->get();
 
 
             }

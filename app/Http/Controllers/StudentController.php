@@ -183,7 +183,7 @@ class StudentController extends Controller
             $students = $students->where('session', $request->session_no);
 
         $ids = $students->pluck('id');
-        $filtered = $Verification->whereIn('student_id', $ids);
+        $filtered = Verification::whereIn('student_id', $ids);
 
         return array(
             'num_of_student' => $students->count(),
