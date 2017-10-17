@@ -20,6 +20,6 @@ class PermissionController extends Controller
 
         flash('Permission approved')->success();
 
-        return redirect()->route('message.permission', $request->id);
+        return "OK";
     }
 }
