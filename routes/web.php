@@ -81,6 +81,8 @@ Route::prefix('student')-> group(function (){
 	Route::get('verify/{id}', ['uses' => 'StudentController@verifyStudentView', 'as' => 'student.verify']);
     Route::post('verify/{id}', ['uses' => 'StudentController@verifyStudent', 'as' => 'student.verify']);
 
+    Route::get('verify/public/{hash}', ['uses' => 'StudentController@verifyStudentPublicView', 'as' => 'student.verify_public']);
+
 	Route::get('show/{id}',['uses' => 'StudentController@show', 'as' => 'student.show'] );
 
 	Route::get('edit/{id}',['uses' => 'StudentController@edit', 'as' => 'student.edit'] );
