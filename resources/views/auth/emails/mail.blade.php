@@ -1,1 +1,1 @@
-{{ $mailBody }}
+{{ $array }}
