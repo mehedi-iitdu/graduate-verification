@@ -32,7 +32,7 @@ class DynamicReportController extends Controller
 
             if($request->user()->role == "Registrar"){ 
                 $registrar_university_id = Registrar::where('user_id', $request->user()->id)->pluck('university_id')->first(); 
-                if($registrar_university_id != $request->university_id){ 
+                if($registrar_university_id != $request->university_id || is_null($request->department_id)){ 
                     return view('errors.403'); 
                 } 
             } 
@@ -54,6 +54,12 @@ class DynamicReportController extends Controller
                 return view('errors.403');
             }
 
+            if($request->user()->role == "UGC" || $request->user()->role == "SystemAdmin") {
+                if(is_null($request->department_id) || is_null($request->university_id)){
+                    return view('errors.403');
+                }
+            }
+
 
             $students = Student::all();
             if($request->department_id){
@@ -72,14 +78,14 @@ class DynamicReportController extends Controller
             if($request['query'] != "Total"){
                 //dd($request['query']);
                 $student_ids = $students->pluck('id');
-                $verification_student_data = Verification::whereIn('student_id', $student_ids);
+                $verification_student_data = Verification::whereIn('student_id', $student_ids)->get();
                 $verification_student_ids = $verification_student_data->where('verification_status', $request['query'])->pluck('student_id');
-                $students = Student::whereIn('id', $verification_student_ids);
+                $students = Student::whereIn('id', $verification_student_ids)->get();
 
 
             }
 
-            return view('reports.details', ['students' => $students]);
+            return view('reports.details', ['students' => $students, 'verification_status_of_Students' => $request['query']]);
         }
         else {
             return view('errors.403');

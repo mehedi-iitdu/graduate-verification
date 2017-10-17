@@ -81,6 +81,16 @@ Route::prefix('student')-> group(function (){
 	Route::get('verify/{id}', ['uses' => 'StudentController@verifyStudentView', 'as' => 'student.verify']);
     Route::post('verify/{id}', ['uses' => 'StudentController@verifyStudent', 'as' => 'student.verify']);
 
+    Route::get('verify/public/{hash}', ['uses' => 'StudentController@verifyStudentPublicView', 'as' => 'student.verify_public']);
+
+	Route::get('show/{id}',['uses' => 'StudentController@show', 'as' => 'student.show'] );
+
+	Route::get('edit/{id}',['uses' => 'StudentController@edit', 'as' => 'student.edit'] );
+
+	Route::post('update/{id}',['uses' => 'StudentController@update', 'as' => 'student.update'] );
+
+	Route::get('delete/{id}',['uses' => 'StudentController@destroy', 'as' => 'student.delete'] );    
+
 });
 
 
@@ -91,6 +101,10 @@ Route::prefix('course')-> group(function (){
     Route::get('view',['uses' => 'CourseController@showCourseList', 'as' => 'course.view'] );
     Route::post('view',['uses' => 'CourseController@getCourseListByUniversityDeparmentSemester',
                 'as' => 'course.getCourseListByUniversityDeparmentSemester'] );
+    Route::get('delete/{id}',['uses' => 'CourseController@destroy', 'as' => 'course.delete'] );
+    Route::get('show/{id}',['uses' => 'CourseController@show', 'as' => 'course.show'] );
+    Route::get('edit/{id}',['uses' => 'CourseController@edit', 'as' => 'course.edit'] );
+    Route::post('edit/{id}',['uses' => 'CourseController@update', 'as' => 'course.update'] );
 });
 
 
@@ -119,6 +133,15 @@ Route::prefix('department')-> group(function (){
     Route::post('view', ['uses' => 'DepartmentController@departmentListByUniversity', 'as' => 'department.view']);
 
 	Route::post('create', ['uses' => 'DepartmentController@storeDepartment', 'as' => 'department.store']);
+
+	Route::get('edit/{id}',['uses' => 'DepartmentController@edit', 'as' => 'department.edit'] );
+
+	Route::post('edit/{id}',['uses' => 'DepartmentController@update', 'as' => 'department.update'] );
+
+	Route::get('delete/{id}',['uses' => 'DepartmentController@destroy', 'as' => 'department.delete'] );
+
+	Route::get('show/{id}',['uses' => 'DepartmentController@show', 'as' => 'department.show'] );
+
 });
 
 
@@ -201,7 +224,8 @@ Route::prefix('dynamic_report')-> group(function (){
 Route::prefix('message')-> group(function (){
 
 	Route::get('view',['uses' => 'MessageController@showMessage', 'as' => 'message.view'] );
-	Route::get('single/{id}',['uses' => 'MessageController@showSingleMessage', 'as' => 'message.single'] );
-
+	Route::get('verification/{id}',['uses' => 'MessageController@showSingleMessageVerification', 'as' => 'message.verification'] );
+    Route::get('permission/{id}',['uses' => 'MessageController@showSingleMessagePermission', 'as' => 'message.permission'] );
+    Route::post('permission', ['uses' => 'PermissionController@addPermission', 'as' => 'message.permission']);
 });
 

@@ -31,7 +31,7 @@
                   </div>
 
                   <div class="form-group col-md-4">
-                    <p class="btn btn-block btn-success" id="search">Search</p>
+                    <button class="btn btn-block btn-success" id="search">Search</button>
                   </div>
                 </div>
             </form>
@@ -70,11 +70,13 @@
                         var university_id = $('#university_id').val();
                         var department_id = $('#department_id').val();
 
-                        $.post("{{ URL::route('student.list') }}",{university_id:university_id, department_id:department_id}, function(data){
+                        $.post("{{ URL::route('student.list') }}",{department_id:department_id}, function(data){
 
                             $('#student_table').html(data);
                         });
+                        return false;
                     });
+
 
                 })
 

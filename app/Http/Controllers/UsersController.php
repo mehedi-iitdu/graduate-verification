@@ -46,4 +46,27 @@ class UsersController extends Controller
         return view('user.view');
     }
 
+    public function getUserList(Request $request){
+
+        $page_count = 10;
+        if($request->user()->role == "UGC"){
+
+            $users = Registrar::select('registrar.id','user.first_name', 'user.last_name', 'user.email', 'user.mobile_no', 'university.name as university_name')->join('user', 'user.id', '=', 'registrar.user_id')->join('university', 'registrar.university_id', '=', 'university.id')->paginate($page_count);
+            $theads = array('First Name', 'Last Name', 'University', 'Email', 'Mobile No');
+
+            $properties = array('first_name', 'last_name', 'university_name', 'email', 'mobile_no');
+
+
+        }
+
+        if($request->user()->role == "Registrar"){
+            $users = ProgramOffice::select('program_office.id','user.first_name', 'user.last_name', 'user.email', 'user.mobile_no', 'university.name as university_name', 'department.name as department_name')->join('user', 'user.id', '=', 'program_office.user_id')->join('department', 'program_office.department_id', '=', 'department.id')->join('university', 'department.university_id', '=', 'university.id')->paginate($page_count);
+            $theads = array('First Name', 'Last Name','Department', 'University', 'Email', 'Mobile No');
+
+            $properties = array('first_name', 'last_name', 'department_name', 'university_name', 'email', 'mobile_no');
+        }
+
+        return view('partials._table',['theads' => $theads, 'properties' => $properties, 'tds' => $users])->with('i', ($request->input('page', 1) - 1) * $page_count);
+    }
+
 }

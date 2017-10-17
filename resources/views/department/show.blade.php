@@ -10,8 +10,7 @@
 				<div class="row">
 					<div class="col-lg-12 margin-tb">
 						<div class="pull-left">
-							<h2> University Infromation</h2>
-							
+							<h2> Show Department</h2>
 						</div>
 						<div class="pull-right">
 							<a class="btn btn-primary" href="{{ url()->previous() }}"> Back</a>
@@ -24,21 +23,21 @@
 					<div class="col-xs-12 col-sm-12 col-md-12">
 						<div class="form-group">
 							<strong>Name:</strong>
-								{{ $university->name }}
+								{{ $department->name }}
 						</div>
 					</div>
 
 					<div class="col-xs-12 col-sm-12 col-md-12">
 						<div class="form-group">
-							<strong>Location:</strong>
-							{{ $university->location }}
+							<strong>University Name:</strong>
+							{{ $department->university->name }}
 						</div>
 					</div>
 
 					<div class="col-xs-12 col-sm-12 col-md-12">
 						<div class="form-group">
-							<strong>Website:</strong>
-							{{ $university->website }}
+							<strong>Number of Semester:</strong>
+							{{ $department->num_of_semester }}
 						</div>
 					</div>
 
@@ -47,3 +46,4 @@
 		</div>
 	</div>
 @endsection
+

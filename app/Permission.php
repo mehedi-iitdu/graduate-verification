@@ -11,11 +11,11 @@ class Permission extends Model
     protected $table = 'permission';
 
     public function user(){
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function student(){
-        return $this->hasOne(Student::class);
+        return $this->belongsTo(Student::class);
     }
 
 

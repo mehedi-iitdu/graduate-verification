@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.home_layout')
 
 @section('content')
 
@@ -34,10 +34,10 @@
                 @php($sem = 0)
 
                 @foreach($all_marks as $marks)
-                <h2>Results of Semester {{++$sem}}</h2>
-                <div class="jumbotron">
-                    <table class="table">
-                        <thead>
+                    <h2>Results of Semester {{++$sem}}</h2>
+                    <div class="jumbotron">
+                        <table class="table">
+                            <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Course Code</th>
@@ -45,19 +45,19 @@
                                 <th>Total Credit</th>
                                 <th>GPA</th>
                             </tr>
-                        </thead>
-                        <tbody>
+                            </thead>
+                            <tbody>
                             @php($id = 0)
                             @php($point=0)
                             @php($credit=0)
                             @foreach($marks as $mark)
-                            <tr>
-                                <th>{{ ++$id }}</th>
-                                <td>{{ $mark->course->code }}</td>
-                                <td>{{ $mark->course->name }}</td>
-                                <td>{{ $mark->course->credit }}</td>
-                                <td>{{ $mark->gpa }}</td>
-                            </tr>
+                                <tr>
+                                    <th>{{ ++$id }}</th>
+                                    <td>{{ $mark->course->code }}</td>
+                                    <td>{{ $mark->course->name }}</td>
+                                    <td>{{ $mark->course->credit }}</td>
+                                    <td>{{ $mark->gpa }}</td>
+                                </tr>
                             @endforeach
                             <tr>
                                 <td></td>
@@ -66,9 +66,9 @@
                                 <th>Calculated GPA</th>
                                 <th>{{ $gpa[$sem - 1] <= 0.0 ? "[invalid]" : round($gpa[$sem - 1], 2) }}</th>
                             </tr>
-                        </tbody>
-                    </table>
-                </div>
+                            </tbody>
+                        </table>
+                    </div>
 
                 @endforeach
 
@@ -76,14 +76,7 @@
 
                 {!! Form::open(array('route' => array('student.verify', $verification_id), 'files' => 'true')) !!}
 
-                <div class="form-group row" for="signature">
-                    <label for="signature" class="col-sm-4 col-form-label">Upload Signature</label>
-                    <input type="file" name="signature" id="signature" value="Upload signature">
-                </div>
-
-                {{ Form::submit('Verify', ['class' => 'btn btn-block btn-primary']) }}
-
-                {!! Form::close() !!}
+                <img height="40px" width="160px" src="/storage/{{ $sign_link }}">
 
             </main>
         </div>
