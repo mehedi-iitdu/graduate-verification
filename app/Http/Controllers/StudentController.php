@@ -319,15 +319,16 @@ class StudentController extends Controller
     }
 
     function verifyStudent(Request $request, $id) {
-        $path = $request->file('signature')->store('signatures');
+        $path = $request->file('signature')->store('public/signatures');
 
         $verification = Verification::where('id', $id)->first();
-        $verification->digital_sign = $path;
+        $verification->digital_sign = substr($path,7);
         $verification->verification_status = 'Verified';
+        $verification->hash = bcrypt($verification->digital_sign);
         $verification->save();
 
 
-        $array= $verification->student->user->first_name.' of '.$verification->student->department->name.' of the '.$verification->student->department->university->name.' (Registration no: '.$verification->student->registration_no.' has been verified requested to verify by '.$verification->stakeholder->name;
+        $array= $verification->student->user->first_name.' of '.$verification->student->department->name.' of the '.$verification->student->department->university->name.' (Registration no: '.$verification->student->registration_no.' has been verified requested to verify by '.$verification->stakeholder->name.' Please visit the following link to check http://127.0.0.1:8000/student/verify/public/'.$verification->hash ;
 
         Mail::to($verification->student->user->email)->queue(new EmailManager($array));
         Mail::to($verification->stakeholder->email)->queue(new EmailManager($array));
